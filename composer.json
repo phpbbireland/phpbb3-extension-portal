@@ -1,0 +1,30 @@
+{
+	"name": "phpbbireland/portal",
+	"type": "phpbb-extension",
+	"description": "Adds a fully integrated portal to your phpBB 3.1.x site",
+	"homepage": "https://github.com/phpbbireland/phpbb3-extension-portal",
+	"version": "1.1.0",
+	"time": "2013-03-16",
+	"licence": "GPL-2.0",
+	"authors": [
+		{
+			"name": "Michael O'Toole",
+			"email": "phpbbireland@gmail.com",
+			"homepage": "http://phpbbireland.com",
+			"role": "Lead Developer"
+		},
+		{
+			"name": "Tyler",
+			"email": "name@site.com",
+			"homepage": "http://phpbbireland.com",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.3",
+		"phpbb/phpbb": "3.1.*@dev"
+	},
+	"extra": {
+		"display-name": "phpBB 3.1 Portal Extension"
+	}
+}
