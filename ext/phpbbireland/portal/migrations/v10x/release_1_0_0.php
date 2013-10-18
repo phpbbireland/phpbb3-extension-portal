@@ -36,15 +36,6 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				'ACP_CAT_PORTAL',
 			)),
 
-/*
-			array('module_add', array(
-				'acp', 'ACP_CAT_PORTAL', 'ACP_CONFIG',
-				'acp', 'ACP_CAT_PORTAL', 'ACP_BLOCKS',
-				'acp', 'ACP_CAT_PORTAL', 'ACP_MENUS',
-				'acp', 'ACP_CAT_PORTAL', 'ACP_VARIABLES',
-			)),
-*/
-
 			array('module_add', array(
 				'acp', 'ACP_CAT_PORTAL', 'ACP_CONFIG',
 				'acp', 'ACP_CAT_PORTAL', 'ACP_BLOCKS',
@@ -76,40 +67,6 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				),
 			)),
 
-/*
-			array('module.add', array(
-				'acp',
-				'ACP_VARIABLES',
-				array(
-					'module_basename'	=> '\phpbbireland\portal\acp\variables_module',
-					'modes'	=> array('config_variables'),
-				),
-			)),
-*/
-
-/*
-			array('module.add', array(
-				'acp',
-				'ACP_K_CONFIG',
-				array(
-					'module_basename'	=> '\phpbbireland\portal\acp\config_module',
-					'modes'	=> array(
-						'add'      => array('title' => 'ACP_K_BLOCKS_ADD',         'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS')),
-						'edit'     => array('title' => 'ACP_K_BLOCKS_EDIT',        'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS'), 'display' => false),
-						'delete'   => array('title' => 'ACP_K_BLOCKS_DELETE',      'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS'), 'display' => false),
-						'up'       => array('title' => 'ACP_K_UP',                 'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS'), 'display' => false),
-						'down'     => array('title' => 'ACP_K_DOWN',               'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS'), 'display' => false),
-						'reindex'  => array('title' => 'ACP_K_BLOCKS_REINDEX',     'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS'), 'display' => false),
-						'L'        => array('title' => 'ACP_K_PAGE_LEFT_BLOCKS',   'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS')),
-						'C'        => array('title' => 'ACP_K_PAGE_CERTRE_BLOCKS', 'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS')),
-						'R'        => array('title' => 'ACP_K_PAGE_RIGHT_BLOCKS',  'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS')),
-						'manage'   => array('title' => 'ACP_K_BLOCKS_MANAGE',      'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS')),
-						'reset'    => array('title' => 'ACP_K_BLOCKS_RESET',       'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS'))
-					),
-				),
-			)),
-
-*/
 			array('config.add', array('portal_mod_version', '1.0.0')),
 		);
 	}
