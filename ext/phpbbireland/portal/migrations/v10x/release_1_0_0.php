@@ -25,22 +25,21 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 	{
 		return array(
 			array('config.add', array('k_portal_enabled', 1)),
-			array('config.add', array('k_portal_build', '310-001')),
 			array('config.add', array('k_blocks_enabled', 1)),
+			array('config.add', array('k_portal_build', '310-001')),
 			array('config.add', array('k_blocks_width', '190')),
-/*
-			not working???
-			array('permission.add' => array('a_k_portal')),
-			array('permission.add' => array('a_k_tools')),
-			array('permission.add' => array('u_k_tools')),
+
+			array('permission.add', array('a_k_portal')),
+			array('permission.add', array('a_k_tools')),
+			array('permission.add', array('u_k_tools')),
+
 			array('permission.permission_set', array('ROLE_ADMIN_FULL', 'a_k_portal')),
 			array('permission.permission_set', array('ROLE_ADMIN_FULL', 'a_k_tools')),
-*/
+			array('permission.permission_set', array('REGISTERED', 'u_k_tools', 'group')),
 
-// modules are being created successfully however the Portal tab is not showing, neither are the subs
 			array('module.add', array(
 				'acp',
-				0,
+				'',
 				'ACP_PORTAL_TITLE',
 			)),
 
@@ -95,9 +94,9 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 	public function update_schema()
 	{
 		return array(
-			'add_tables'    => array(
+			'add_tables' => array(
 				$this->table_prefix . 'k_blocks' => array(
-					'COLUMNS'    => array(
+					'COLUMNS' => array(
 						'id'				=> array('UINT', NULL, 'auto_increment'),
 						'ndx'				=> array('UINT', '0'),
 						'title'				=> array('VCHAR:50', ''),
@@ -119,11 +118,11 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 						'mod_block_id'		=> array('UINT', '0'),
 						'block_cache_time'	=> array('UINT', '600'),
 					),
-					'PRIMARY_KEY'        => 'id',
+					'PRIMARY_KEY'  => 'id',
 				),
 
 				$this->table_prefix . 'k_menus' => array(
-					'COLUMNS'	=> array(
+					'COLUMNS' => array(
 						'm_id'			=> array('UINT', NULL, 'auto_increment'),
 						'ndx'			=> array('UINT', '0'),
 						'menu_type'		=> array('USINT', '0'),
@@ -138,22 +137,22 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 						'soft_hr'		=> array('BOOL', '0'),
 						'sub_heading'	=> array('BOOL', '0'),
 					),
-					'PRIMARY_KEY'        => 'm_id',
+					'PRIMARY_KEY'  => 'm_id',
 				),
 
 				$this->table_prefix . 'k_blocks_config' => array(
-					'COLUMNS'	=> array(
+					'COLUMNS' => array(
 						'id'					=> array('USINT', NULL, 'auto_increment'),
 						'use_external_files'	=> array('BOOL', '0'),
 						'update_files'			=> array('BOOL', '0'),
 						'layout_default'		=> array('BOOL', '2'),
 						'portal_config'			=> array('VCHAR:10', 'Site'),
 					),
-					'PRIMARY_KEY'	=> 'id',
+					'PRIMARY_KEY'  => 'id',
 				),
 
-				$this->table_prefix . 'k_blocks_config_vars' => array(
-					'COLUMNS'	=> array(
+				$this->table_prefix . 'k_config_vars' => array(
+					'COLUMNS' => array(
 						'config_name'		=> array('VCHAR', ''),
 						'config_value'		=> array('VCHAR', ''),
 						'is_dynamic'		=> array('BOOL', '0'),
@@ -164,7 +163,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				),
 
 				$this->table_prefix . 'k_resources' => array(
-					'COLUMNS'	=> array(
+					'COLUMNS' => array(
 						'id'	=> array('UINT', NULL, 'auto_increment'),
 						'word'	=> array('VCHAR:30', ''),
 						'type'	=> array('CHAR:1', 'V'),
@@ -173,7 +172,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				),
 
 				$this->table_prefix . 'k_pages' => array(
-					'COLUMNS'	=> array(
+					'COLUMNS' => array(
 						'page_id'	=> array('UINT', NULL, 'auto_increment'),
 						'page_name'	=> array('VCHAR_UNI:100', ''),
 					),
