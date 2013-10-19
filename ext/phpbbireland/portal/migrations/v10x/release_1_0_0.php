@@ -24,46 +24,66 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		return array(
-
-			array('config_add', array('k_portal_enabled', 1)),
+			array('config.add', array('k_portal_enabled', 1)),
 			array('config.add', array('k_portal_build', '310-001')),
 			array('config.add', array('k_blocks_enabled', 1)),
 			array('config.add', array('k_blocks_width', '190')),
+/*
+			not working???
+			array('permission.add' => array('a_k_portal')),
+			array('permission.add' => array('a_k_tools')),
+			array('permission.add' => array('u_k_tools')),
+			array('permission.permission_set', array('ROLE_ADMIN_FULL', 'a_k_portal')),
+			array('permission.permission_set', array('ROLE_ADMIN_FULL', 'a_k_tools')),
+*/
 
-			array('module_add', array(
+// modules are being created successfully however the Portal tab is not showing, neither are the subs
+			array('module.add', array(
 				'acp',
-				'',
-				'ACP_CAT_PORTAL',
-			)),
-
-			array('module_add', array(
-				'acp', 'ACP_CAT_PORTAL', 'ACP_CONFIG',
-				'acp', 'ACP_CAT_PORTAL', 'ACP_BLOCKS',
-				'acp', 'ACP_CAT_PORTAL', 'ACP_MENUS',
+				0,
+				'ACP_PORTAL_TITLE',
 			)),
 
 			array('module.add', array(
 				'acp',
-				'ACP_CONFIG',
+				'ACP_PORTAL_TITLE',
+				'ACP_CONFIG_TITLE',
+			)),
+			array('module.add', array(
+				'acp',
+				'ACP_PORTAL_TITLE',
+				'ACP_BLOCKS_TITLE',
+			)),
+			array('module.add', array(
+				'acp',
+				'ACP_PORTAL_TITLE',
+				'ACP_MENUS_TITLE',
+			)),
+
+
+			array('module.add', array(
+				'acp',
+				'ACP_CONFIG_TITLE',
 				array(
-					'module_basename'	=> '\phpbbireland\portal\acp\config_module',
-					'modes'	=> array('config'),
+					'module_basename' => '\phpbbireland\portal\acp\config_module',
+					'modes'           => array('config_portal'),
+				),
+			)),
+
+			array('module.add', array(
+				'acp',
+				'ACP_BLOCKS_TITLE',
+				array(
+					'module_basename' => '\phpbbireland\portal\acp\blocks_module',
+					'modes'           => array('add', 'edit', 'delete', 'up', 'down', 'reindex', 'L', 'C', 'R', 'manage', 'reset'),
 				),
 			)),
 			array('module.add', array(
 				'acp',
-				'ACP_BLOCKS',
+				'ACP_MENUS_TITLE',
 				array(
-					'module_basename'	=> '\phpbbireland\portal\acp\blocks_module',
-					'modes'	=> array('add', 'edit', 'delete', 'up', 'down', 'reindex', 'L', 'C', 'R', 'manage', 'reset'),
-				),
-			)),
-			array('module.add', array(
-				'acp',
-				'ACP_MENUS',
-				array(
-					'module_basename'	=> '\phpbbireland\portal\acp\menus_module',
-					'modes'	=> array('add', 'nav', 'sub', 'link', 'edit', 'delete', 'up', 'down', 'all', 'unalloc'),
+					'module_basename' => '\phpbbireland\portal\acp\menus_module',
+					'modes'           => array('add', 'nav', 'sub', 'link', 'edit', 'delete', 'up', 'down', 'all', 'unalloc'),
 				),
 			)),
 
