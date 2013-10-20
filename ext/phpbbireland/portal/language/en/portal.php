@@ -248,9 +248,17 @@ $lang = array_merge($lang, array(
 	'ACP_K_DONATIONS_ADD'      => 'Add a donation',
 	'ACP_K_DONATIONS_BROWSE'   => 'Browse all donations',
 	'DONATIONS_CREATED'        => 'Donation added',
-))
 
-$lang = array_merge($lang, array(
+// module install
 	'ACP_PORTAL_TITLE'		=> 'Portal',
-	'ACP_PORTAL_CONFIG'		=> 'Portal settings',
+	'ACP_CONFIG_TITLE'		=> 'Portal settings',
+	'ACP_BLOCKS_TITLE'		=> 'Blocks',
+	'ACP_MENUS_TITLE'		=> 'Menus',
+
+	'K_PORTAL_ENABLED'		=> 'Enable portal',
+	'K_PORTAL_BUILD'		=> 'Portal build',
+	'K_BLOCKS_ENABLED'		=> 'Enable blocks',
+	'K_BLOCKS_WIDTH'		=> 'Block width',
+	'PORTAL_CONFIG'			=> 'Portal config',
+	'ACP_PORTAL_CONFIG'		=> 'Configure portal',
 ));

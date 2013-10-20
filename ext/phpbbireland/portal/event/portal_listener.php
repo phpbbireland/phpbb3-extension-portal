@@ -24,7 +24,7 @@ if (!defined('IN_PHPBB'))
 */
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class main_listener implements EventSubscriberInterface
+class portal_listener implements EventSubscriberInterface
 {
 	static public function getSubscribedEvents()
 	{

@@ -1,12 +1,13 @@
 <?php
 /**
 *
-* @package acp Kiss Portal Engine
-* @version $Id$
-* @copyright (c) 2005-2013 phpbbireland
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @package Portal Extension
+* @copyright (c) 2013 phpbbireland
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
+
+namespace phpbbireland\portal\acp;
 
 /**
 * @ignore
@@ -16,29 +17,27 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-/**
-* @package acp
-*/
-
-class menus
+class menus_module
 {
-	var $u_action = '';
+	var $u_action;
 
 	function main($id, $mode)
 	{
-		global $db, $user, $auth, $template, $cache;
+		global $db, $user, $auth, $template, $cache, $request;
 		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx;
+
+		$user->add_lang('acp/common');
+		$this->tpl_name = 'menus_body';
+		$this->page_title = $user->lang['ACP_MENUS'];
+		add_form_key('menus');
+
 
 		include($phpbb_root_path . 'includes/sgp_functions_admin.'.$phpEx);
 
 		$store = '';
 
-		$user->add_lang('acp/k_menus');
-		$this->tpl_name = 'acp_k_menus';
-		$this->page_title = 'ACP_MENUS';
 
-		$form_key = 'acp_k_menus';
-		add_form_key($form_key);
+
 
 		//$action	= request_var('action', '');
 		$submit = (isset($_POST['submit'])) ? true : false;

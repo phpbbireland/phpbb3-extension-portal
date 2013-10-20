@@ -1,28 +1,29 @@
 <?php
 /**
 *
-* @package acp (Kiss Portal Engine)
-* @version $Id$
-* @copyright (c) 2005-2013 phpbbireland
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @package Portal Extension
+* @copyright (c) 2013 phpbbireland
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
 
+namespace phpbbireland\portal\acp;
+
+/**
+* @ignore
+*/
 if (!defined('IN_PHPBB'))
 {
 	exit;
 }
 
-/**
-* @package module_install
-*/
 class menus_info
 {
 	function module()
 	{
 		return array(
 			'filename'	=> '\phpbbireland\portal\acp\menus_module',
-			'title'		=> 'ACP_K_MENUS',
+			'title'		=> 'ACP_MENUS_TITLE',
 			'version'	=> '1.0.0',
 			'modes'		=> array(
 				'add'       => array('title' => 'ACP_K_MENU_ADD',         'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_MENUS')),
@@ -38,7 +39,4 @@ class menus_info
 			),
 		);
 	}
-
 }
-
-?>

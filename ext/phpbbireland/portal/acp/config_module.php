@@ -1,12 +1,13 @@
 <?php
 /**
 *
-* @package acp Kiss Portal Engine
-* @version $Id$
-* @copyright (c) 2005-2013 phpbbireland
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @package Portal Extension
+* @copyright (c) 2013 phpbbireland
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
+
+namespace phpbbireland\portal\acp;
 
 /**
 * @ignore
@@ -16,11 +17,7 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-/**
-* @package acp
-*/
-
-class config
+class config_module
 {
 	var $u_action;
 
@@ -29,44 +26,75 @@ class config
 		global $db, $user, $auth, $template, $cache, $request;
 		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
-		$user->add_lang('acp/common');
-		$this->tpl_name = 'config';
-		$this->page_title = $user->lang['PORTAL_CONFIG'];
+		$user->add_lang_ext('phpbbireland/portal', 'k_config');
+		$this->tpl_name = 'k_config';
+		$this->page_title = $user->lang['ACP_CONFIG'];
 		add_form_key('config');
-
 
 		$action = request_var('action', '');
 		$mode	= request_var('mode', '');
 		$generate = request_var('generate', '');
 
-		include($phpbb_root_path . '\phpbbireland\portal\controller\functions_admin.'. $phpEx );
-
-		$data = check_version();
+		$data = $this->check_version();
 
 		$submit = (isset($_POST['submit'])) ? true : false;
 
 		$forum_id   = request_var('f', 0);
 		$forum_data = $errors = array();
 
-		if ($submit && !check_form_key($form_key))
+
+
+		if ($request->is_set_post('submit'))
 		{
-			trigger_error($user->lang['FORM_INVALID']);
+			if (!check_form_key('config'))
+			{
+				trigger_error('FORM_INVALID');
+			}
 		}
 
-		$blocks_width 	= $config['blocks_width'];
-		$blocks_enabled = $config['blocks_enabled'];
-		$portal_version	= $config['portal_version'];
-		$portal_build	= $config['portal_build'];
+		$blocks_width 	= $config['k_blocks_width'];
+		$blocks_enabled = $config['k_blocks_enabled'];
+		$portal_version	= $config['k_portal_version'];
+		$portal_build	= $config['k_portal_build'];
+
+
+/*
+		if ($request->is_set_post('submit'))
+		{
+			if (!check_form_key('config'))
+			{
+				trigger_error('FORM_INVALID');
+			}
+
+			$config->set('news_char_limit',			max(100, $request->variable('news_char_limit', 0)));
+			$config->set('news_forums',				implode(',', $request->variable('news_forums', array(0))));
+			$config->set('news_number',				max(1, $request->variable('news_number', 0)));
+			$config->set('news_pages',				max(1, $request->variable('news_pages', 0)));
+			$config->set('news_post_buttons',		$request->variable('news_post_buttons', 0));
+			$config->set('news_user_info',			$request->variable('news_user_info', 0));
+			$config->set('news_shadow',				$request->variable('news_shadow_show', 0));
+			$config->set('news_attach_show',		$request->variable('news_attach_show', 0));
+			$config->set('news_cat_show',			$request->variable('news_cat_show', 0));
+			$config->set('news_archive_per_year',	$request->variable('news_archive_per_year', 0));
+
+
+			$config->set('blocks_width', $blocks_width);
+			$config->set('blocks_enabled', $blocks_enabled);
+			$config->set('portal_build', $portal_build);
+
+			trigger_error($user->lang['NEWS_SAVED'] . adm_back_link($this->u_action));
+		}
+*/
 
 		if ($data['version'])
 		{
 			$template->assign_vars(array(
 				'MOD_ANNOUNCEMENT'     => $data['announcement'][0],
-				'MOD_CURRENT_VERSION'  => $config['portal_version'],
+				'MOD_CURRENT_VERSION'  => $config['k_portal_version'],
 				'MOD_DOWNLOAD'         => $data['download'][0],
 				'MOD_LATEST_VERSION'   => $data['version'],
 				'MOD_TITLE'            => $data['title'][0],
-				'S_UP_TO_DATE'         => ($data['version'] > $config['portal_version']) ? false : true,
+				'S_UP_TO_DATE'         => ($data['version'] > $config['k_portal_version']) ? false : true,
 			));
 
 		}
@@ -94,14 +122,9 @@ class config
 		{
 			case 'save':
 			{
-
-				$blocks_width    = request_var('blocks_width', '');
-				$blocks_enabled  = request_var('blocks_enabled', '');
-				$portal_build    = request_var('portal_build', '');
-
-				set_config('blocks_width', $blocks_width);
-				set_config('blocks_enabled', $blocks_enabled);
-				set_config('portal_build', $portal_build);
+				$config->set('blocks_width',	$request->variable('blocks_width', 180));
+				$config->set('blocks_enabled',	$request->variable('blocks_enabled', 1));
+				$config->set('portal_build',	$request->variable('portal_build', 301100));
 
 				$mode='reset';
 
@@ -117,6 +140,39 @@ class config
 			break;
 		}
 	}
-}
+	public function check_version()
+	{
+		global $db, $template;
 
-?>
+		$url = 'phpbbireland.com';
+		$sub = 'kiss2/updates';
+		$file = 'portal.xml';
+
+		$errstr = '';
+		$errno = 0;
+
+		$data = array();
+
+		$data_read = get_remote_file($url, '/' . $sub, $file, $errstr, $errno);
+
+		$mod = @simplexml_load_string(str_replace('&', '&amp;', $data_read));
+
+		if (isset($mod->version_check))
+		{
+			$row = $mod->version_check;
+
+			$version = $row->version->major[0] . '.' . $row->version->minor[0] . '.' . $row->version->revision[0];
+
+			$data = array(
+				'title'			=> $row->title[0],
+				'description'	=> $row->description[0],
+				'download'		=> $row->download,
+				'announcement'	=> $row->announcement,
+				'version'       => $version,
+			);
+			return($data);
+		}
+		return(null);
+	}
+
+}

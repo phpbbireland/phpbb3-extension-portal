@@ -10,7 +10,7 @@
 
 namespace phpbbireland\portal;
 
-class newspage
+class portal
 {
 	protected $num_pagination_items = 0;
 
@@ -438,7 +438,7 @@ class newspage
 	}
 
 	/**
-	* Get a list of the forums we use for the newspage
+	* Get a list of the forums we use for the portal
 	*
 	* @param	int		$limit_category		Limit the list to a given category
 	* @return	array		Array with the forum ids that should be taken into account

@@ -14,6 +14,12 @@
 			"role": "Lead Developer"
 		},
 		{
+			"name": "John",
+			"email": "name@site.com",
+			"homepage": "http://phpbbireland.com",
+			"role": "Developer"
+		},
+		{
 			"name": "Tyler",
 			"email": "name@site.com",
 			"homepage": "http://phpbbireland.com",

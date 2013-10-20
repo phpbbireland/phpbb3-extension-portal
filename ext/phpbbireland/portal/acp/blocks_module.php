@@ -1,12 +1,13 @@
 <?php
 /**
 *
-* @package acp Kiss Portal Engine
-* @version $Id$
-* @copyright (c) 2005-2013 phpbbireland
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @package Portal Extension
+* @copyright (c) 2013 phpbbireland
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
+
+namespace phpbbireland\portal\acp;
 
 /**
 * @ignore
@@ -16,18 +17,19 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-/**
-* @package acp
-*/
-
-class blocks
+class blocks_module
 {
-	var $u_action = '';
+	var $u_action;
 
 	function main($id, $mode)
 	{
-		global $db, $user, $auth, $template, $cache;
-		global $config, $k_config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $SID;
+		global $db, $user, $auth, $template, $cache, $request;
+		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx, $k_config;
+
+		$user->add_lang('acp/blocks');
+		$this->tpl_name = 'blocks_body';
+		$this->page_title = $user->lang['ACP_BLOCKS'];
+		add_form_key('blocks');
 
 		$error = array();
 
@@ -35,12 +37,8 @@ class blocks
 
 		// Define Switches for html file //
 
-		$user->add_lang('acp/k_blocks');
-		$this->tpl_name = 'acp_k_blocks';
-		$this->page_title = 'ACP_BLOCKS';
 
-		$form_key = 'acp_k_blocks';
-		add_form_key($form_key);
+
 
 		$action	= request_var('action', '');
 		$submit = (isset($_POST['submit'])) ? true : false;

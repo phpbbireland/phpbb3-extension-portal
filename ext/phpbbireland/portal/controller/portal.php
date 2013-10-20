@@ -10,7 +10,7 @@
 
 namespace phpbbireland\portal\controller;
 
-class main
+class portal
 {
 	/* @var \phpbb\config */
 	protected $config;
@@ -78,7 +78,7 @@ class main
 	public function portal($page)
 	{
 
-		$this->set_start(($page) * $this->config['portal_number']);
+		//$this->set_start(($page) * $this->config['portal_number']);
 
 		return $this->base();
 	}
