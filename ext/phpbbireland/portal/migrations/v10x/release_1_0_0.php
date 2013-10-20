@@ -87,6 +87,24 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				),
 			)),
 
+			array('module.add', array(
+				'acp',
+				'ACP_PAGES_TITLE',
+				array(
+					'module_basename' => '\phpbbireland\portal\acp\pages_module',
+					'modes'           => array('add', 'delete', 'land', 'namange'),
+				),
+			)),
+
+			array('module.add', array(
+				'acp',
+				'ACP_RESOURCES_TITLE',
+				array(
+					'module_basename' => '\phpbbireland\portal\acp\resources_module',
+					'modes'           => array('select'),
+				),
+			)),
+
 			array('config.add', array('portal_mod_version', '1.0.0')),
 		);
 	}
