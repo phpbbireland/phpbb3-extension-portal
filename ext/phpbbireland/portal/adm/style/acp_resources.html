@@ -1,0 +1,110 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<h1>{L_TITLE}</h1>
+<p>{L_TITLE_EXPLAIN}</p>
+
+<script type="text/javascript">
+// <![CDATA[
+function switchMarks(status)
+{
+	for (var i=0; i < document.acp_k_words.length; i++)
+	{
+		if (document.acp_k_words.elements[i].type == 'checkbox')
+		{
+			document.acp_k_words.elements[i].checked = status;
+		}
+	}
+}
+function IsMarked()
+{
+	for (var i=0; i < document.acp_k_words.length; i++)
+	{
+		if (document.acp_k_words.elements[i].type == 'checkbox' && document.acp_k_words.elements[i].checked)
+		{
+			return true;
+		}
+	}
+	alert("{LA_NO_ITEMS_MARKED}");
+	return false;
+}
+function confirmOperation()
+{
+	return(IsMarked() && confirm("{LA_PLEASE_CONFIRM_DELETE}"));
+}
+function confirmAdd()
+{
+	return(confirm("{LA_PLEASE_CONFIRM_ADD}"));
+}
+function confirmUpdate()
+{
+	return(confirm("{LA_PLEASE_CONFIRM_UPDATE}"));
+}
+// ]]>
+</script>
+
+
+<form id="acp_k_words" name="acp_k_words" method="post" action="{U_ACTION_COLUMN}">
+
+<table width="100%" cellpadding="4" cellspacing="1" border="0" class="forumline">
+	<tr>
+		<th class="thHead" colspan="6">{L_TITLE}</th>
+	</tr>
+	<tr>
+		<td class="row2" align="center" valign="middle"><span class="gen"><strong>{L_ID}</strong></span></td>
+		<td class="row2" align="center" valign="middle"><span class="gen"><strong>{L_VAR}</strong></span></td>
+		<td class="row2" align="center" valign="middle"><span class="gen"><strong>{L_VAR_NAME}</strong></span></td>
+		<td class="row2" align="center" valign="middle"><span class="gen"><strong>{L_VALUE}</strong></span></td>
+		<td class="row2" align="center" valign="middle"><span class="gen"><strong>{L_TABLE}</strong></span></td>
+		<td class="row2" align="center" valign="middle"><span class="gen"><strong>{L_DELETE}</strong></span></td>
+	</tr>
+	<!-- BEGIN wordrow -->
+	<tr>
+		<td class="row3" align="left" valign="middle"><span class="genmed">{wordrow.ID}</span></td>
+		<td class="row3" align="center" valign="middle"><span class="genmed"><input type="text" maxlength="255" size="30" name="word" value="{wordrow.WORD}" class="post" /></span></td>
+		<td class="row3" align="center" valign="middle"><span class="genmed">{wordrow.NAME}</span></td>
+		<td class="row3" align="center" valign="middle"><span class="genmed">{wordrow.VALUE}</span></td>
+		<td class="row3" align="center" valign="middle"><span class="genmed">{wordrow.TABLE}</span></td>
+		<td class="row3" align="center" valign="middle"><input type="checkbox" name="id_list[]" value="{wordrow.ID}" /></td>
+	</tr>
+	<!-- END wordrow -->
+</table>
+
+
+<fieldset>
+	<legend>{L_OPTIONS}</legend>
+		<dl>
+			<dt>
+				<input type="button" name="mark_all" value="{L_MARK_ALL}" class="button1" onclick="switchMarks(true);" /> &nbsp;
+				<input type="button" name="unmark_all" value="{L_UNMARK_ALL}" class="button1" onclick="switchMarks(false);" />  &nbsp;
+				<input type="submit" name="delete" value="{L_DELETE_MARKED}" class="button2" onclick="return confirmOperation();" /> &nbsp;
+				{S_FORM_TOKEN}
+			</dt>
+		</dl>
+</fieldset>
+
+<table width="100%" cellpadding="5" cellspacing="1" border="0" class="forumline">
+	<tr>
+		<th class="thHead" colspan="3">{L_TITLE_ADD}</th>
+	</tr>
+	<tr>
+		<td class="row2" align="center" valign="middle"><span class="gen"><strong>{L_ID}</strong></span></td>
+		<td class="row2" align="center" valign="middle"><span class="gen"><strong>{L_VAR}</strong></span></td>
+		<td class="row2" align="right" valign="middle"><span class="gen"><strong>{L_OPTION}</strong></span></td>
+	</tr>
+	<tr>
+		<td class="row3">&nbsp;</td>
+		<td class="row3"><input type="text" maxlength="30" size="29" id="new_word" name="new_word" value="{S_NEW_WORD}" class="post" /></td>
+		<td class="row3" align="right" valign="middle"><input type="submit" name="add" value="{L_ADD}" class="button2" onclick="return confirmAdd();" /> &nbsp; &nbsp;</td>
+	</tr>
+</table>
+
+
+</form>
+<fieldset>
+	<legend>{L_REPORT}</legend>
+	{L_PROCESS_REPORT}
+</fieldset>
+
+<!-- INCLUDE overall_footer.html -->

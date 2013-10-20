@@ -1,0 +1,43 @@
+<fieldset>
+	<legend>{L_MEMBERS_AVATARS_SETTINGS}</legend>
+	<dl>
+		<dt><label for="k_ma_max_avatars">{L_K_MA_MAX_AVATARS}:</label><br /><span>{L_K_MA_MAX_AVATARS_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="5" id="k_ma_max_avatars" name="k_ma_max_avatars" value="{S_K_MA_MAX_AVATARS}" type="text" /></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="k_ma_avatar_max_width">{L_K_MA_AVATAR_MAX_WIDTH}:</label></dt>
+		<dd><label><input class="post" size="3" maxlength="5" id="k_ma_avatar_max_width" name="k_ma_avatar_max_width" value="{S_K_MA_AVATAR_MAX_WIDTH}" type="text" /></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="k_ma_columns">{L_K_MA_COLUMNS}:</label></dt>
+		<dd><label><input class="post" size="3" maxlength="3" id="k_ma_columns" name="k_ma_columns" value="{S_K_MA_COLUMNS}" type="text" /></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="k_ma_rows">{L_K_MA_ROWS}:</label></dt>
+		<dd><label><input class="post" size="3" maxlength="3" id="k_ma_rows" name="k_ma_rows" value="{S_K_MA_ROWS}" type="text" /></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="k_ma_display_logged_in_only">{L_K_MA_SHOW_LOGGED_IN_ONLY}:</label></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="k_ma_display_logged_in_only" value="1"<!-- IF S_K_MA_DISPLAY_LOGGED_IN_ONLY --> checked="checked" id="k_ma_display_logged_in_only"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="k_ma_display_logged_in_only" value="0"<!-- IF not S_K_MA_DISPLAY_LOGGED_IN_ONLY --> checked="checked" id="k_ma_display_logged_in_only"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="k_ma_user_has_posted">{L_K_MA_USER_HAS_POSTED}:</label></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="k_ma_user_has_posted" value="1"<!-- IF S_K_MA_USER_HAS_POSTED --> checked="checked" id="k_ma_user_has_posted"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="k_ma_user_has_posted" value="0"<!-- IF not S_K_MA_USER_HAS_POSTED --> checked="checked" id="k_ma_user_has_posted"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="k_ma_user_active">{L_K_MA_USER_ACTIVE}:</label></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="k_ma_user_active" value="1"<!-- IF S_K_MA_USER_ACTIVE --> checked="checked" id="k_ma_user_active"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="k_ma_user_active" value="0"<!-- IF not S_K_MA_USER_ACTIVE --> checked="checked" id="k_ma_user_active"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+
+
+
+</fieldset>

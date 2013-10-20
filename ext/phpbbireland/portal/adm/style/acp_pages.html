@@ -1,0 +1,102 @@
+<!-- INCLUDE overall_header.html -->
+<a name="maincontent"></a>
+
+<script type="text/javascript">
+// <![CDATA[
+// Not very elegant but it works Mike //
+function set_ids(list_index, tag_id)
+{
+	if (tag_id)
+	{
+	    document.getElementById(tag_id).value = list_index;
+	}
+}
+// ]]>
+</script>
+
+<h1>{L_TITLE_PAGES}</h1>
+<p>{L_TITLE_EXPLAIN_PAGES}</p>
+
+<form id="acp_k_modules" method="post" action="{U_ACTION}">
+
+<!-- IF S_OPTION == 'manage' || S_OPTION == 'delete' -->
+
+<fieldset>
+	<legend>{S_PAGE_NAME}</legend>
+		<strong>{L_PAGE_NAME}:</strong><br />{L_PAGE_NAME_EXPLAIN}<br /><br /><br /><strong>{L_LANDING_PAGE}</strong><br />{L_LAND}
+		<table style="width: 55%; float: right; margin-top: -125px;">
+			<tr>
+			<th style="width: 40%;">{L_FILENAME}</th>
+			<th style="width: 20%; text-align: center;">{L_DELETE}</th>
+			<th style="width: 20%; text-align: center;">{L_LANDING_PAGE}</th></tr>
+			<!-- BEGIN phpbbpages -->
+			<tr>
+				<td style="padding-top: 0; padding-bottom: 0;">{phpbbpages.S_PAGE_NAME}</td>
+				<td style="text-align: center; padding-top: 0; padding-bottom: 0;"><a href="{phpbbpages.U_DELETE}"><img src="images/icon_delete.gif" title="{L_DELETE_FROM_LIST}" alt="{L_DELETE}" /></a></td>
+				<td style="text-align: center; padding-top: 0; padding-bottom: 0;">
+					<a href="{phpbbpages.U_LAND}">
+						<!-- IF phpbbpages.S_PAGE_NAME == 'index'  or phpbbpages.S_PAGE_NAME == 'portal' -->
+							<!-- IF phpbbpages.S_PAGE_NAME == S_PAGE -->
+							<img src="images/icon_landing.gif" title="{L_LANDING_PAGE_EXPLAIN}" alt="{L_LAND}" />
+							<!-- ELSE -->
+							<img src="images/icon_landing_off.gif" title="{L_LANDING_PAGE_EXPLAIN}" alt="{L_LAND}" />
+							<!-- ENDIF -->
+						<!-- ENDIF -->
+					</a>
+				</td>
+			</tr>
+			<!-- END phpbbpages -->
+		</table>
+</fieldset>
+<fieldset>
+	<dl>
+		<dt><label for="k_mod_folders">{L_MOD_FOLDERS}:</label><br />{L_MOD_FOLDERS_EXPLAIN}</dt>
+		<dd><input type="text" class="post" size="120" maxlength="254" name="k_mod_folders" id="mod_folders" value="{K_MOD_FOLDERS}" /></dd>
+	</dl>
+</fieldset>
+<fieldset>
+	<dl>
+		<dt></dt>
+		<dd><input type="hidden" class="post" size="30" maxlength="100" name="tag_id" id="tag_id" value="{S_NEW_FILE}" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="phpbb_files">{L_PAGE_NEW_FILENAME}:</label><br />{L_PAGE_NEW_FILENAME_EXPLAIN}</dt>
+		<dd><br />
+		<!-- IF S_FILES_FOUND -->
+			<select id="phpbb_files" name="phpbb_files" class="post" onchange="set_ids(this.options[this.selectedIndex].value, 'tag_id'); ">{S_PHPBB_FILES}</select>
+		<!-- ELSE -->
+			{L_NO_FILES_FOUND}
+		<!-- ENDIF -->
+		</dd>
+	</dl>
+</fieldset>
+<!-- ENDIF -->
+
+<!-- IF  S_OPTION == '' -->
+<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+<!-- ENDIF -->
+
+<!-- show messages -->
+<!-- IF MESSAGE or SEARCH_MESSAGE -->
+<dl>
+	<legend>
+		<div style="float: left;"><br />&nbsp;<!-- IF MESSAGE --><strong>{MESSAGE}</strong><br /><!-- ENDIF --></div>
+		<div style="float: left;"><br />&nbsp;{SEARCH_MESSAGE}</div>
+	</legend>
+</dl>
+<!-- ENDIF -->
+
+<!-- hide buttons on submit -->
+<!-- IF S_OPTION != 'processing' -->
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	<input type="hidden" name="new_file" value="{S_NEW_FILE}" />
+	<input type="hidden" value="{S_ID}" />
+	{S_FORM_TOKEN}
+</fieldset>
+<!-- ENDIF -->
+</form>
+
+
+<!-- INCLUDE overall_footer.html -->

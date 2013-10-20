@@ -1,0 +1,517 @@
+<!-- INCLUDE overall_header.html -->
+
+<script type="text/javascript" src="{PORTAL_JS}"></script>
+<script type="text/javascript">
+// <![CDATA[
+	function set_list_image(data)
+	{
+		if (data != '')
+		{
+			document.getElementById('img_file_name').value=data;
+			document.getElementById("bimage").innerHTML = "<img alt='' align='absmiddle' src='{IMG_PATH}" + data + "' />"
+		}
+	}
+	function display_block_image(myForm)
+	{
+		var bimage = myForm.img_file_name;
+
+		if (bimage != '')
+		{
+			document.getElementById("bimage").innerHTML = "<img alt='' align='absmiddle' src='{IMG_PATH}" + bimage.value + "' />"
+		}
+	}
+
+	function switchMarks(status)
+	{
+		for (var i=0; i < document.acp_blocks.length; i++)
+		{
+			if (document.acp_blocks.elements[i].type == 'checkbox')
+			{
+				document.acp_blocks.elements[i].checked = status;
+			}
+		}
+	}
+
+	function ShowHide(id1)
+	{
+		var onoff = expMenu(id1);
+	}
+
+	function expMenu(id)
+	{
+		var element = null;
+		if (document.getElementById)
+		{
+			element = document.getElementById(id);
+		}
+		else if (document.all)
+		{
+			element = document.all[id];
+		}
+		else if (document.layers)
+		{
+			element = document.layers[id];
+		}
+
+		if (!element)
+		{
+			// do nothing
+		}
+		else if (element.style)
+		{
+			if (element.style.display == "none")
+			{
+				element.style.display = "block";
+				return 1;
+			}
+			else
+			{
+				element.style.display = "none";
+				return 1;
+			}
+		}
+		else
+		{
+			element.visibility = "show";
+			return 1;
+		}
+	}
+
+	// Not very elegant but it works Mike //
+	function set_ids(data, view)
+	{
+		var mydata;
+
+		mydata = document.getElementById(view).value;
+
+		if (data == '0')
+		{
+			mydata = '';
+			data = '';
+		}
+		else if (mydata)
+		{
+			mydata = mydata + ',';
+		}
+
+		document.getElementById(view).value = mydata + data;
+	}
+// ]]>
+</script>
+
+<!--
+	switches to display appropriate code
+	S_OPTIONS = add, edit, delete, manage
+-->
+
+<a name="maincontent"></a>
+<h1>{L_BLOCKS_TITLE}</h1>
+<p>{L_BLOCKS_TITLE_EXPLAIN}</p>
+
+<form id="acp_blocks" name="acp_blocks" method="post" action="{U_ACTION}">
+
+<!-- IF S_OPTIONS  == 'manage' || S_OPTIONS  == 'l' || S_OPTIONS  == 'r' || S_OPTIONS  == 'c' -->
+<table cellspacing="1" border="0">
+	<thead>
+		<tr><th colspan="13">{L_BLOCKS_HEADER_ADMIN}</th></tr>
+		<tr>
+			<th>{L_ID}</th>
+			<th>{L_BLOCK_NDX}</th>
+			<th>{L_ACTIVE}</th>
+			<th>{L_BLOCK_TITLE}</th>
+			<th>{L_POSITION}</th>
+			<th>{L_BLOCK_FNAME_H}</th>
+			<th><div style="text-align: center;">{L_BLOCK_FNAME_I}</div></th>
+			<th><div style="text-align: center;">{L_VIEW_BY}</div></th>
+			<th><div style="text-align: center;">{L_OPTIONS}</div></th>
+		</tr>
+	</thead>
+	<tbody>
+		<!-- BEGIN bdata -->
+		<tr<!-- IF bdata.S_ID == ADM_BLOCK --> style="font-weight: bold;"<!-- ENDIF -->>
+			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" >{bdata.S_ID}</td>
+			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" >{bdata.S_NDX}</td>
+			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" ><!-- IF bdata.S_ACTIVE == 1 -->{L_ACTIVE}<!-- ELSE -->{L_DISABLED}<!-- ENDIF --></td>
+			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" >{bdata.S_TITLE}</td>
+			<td class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->">
+				<!-- IF bdata.S_POSITION === "L" -->{L_PAGE_LEFT}<!-- ENDIF -->
+				<!-- IF bdata.S_POSITION === "C" -->{L_PAGE_CENTRE}<!-- ENDIF -->
+				<!-- IF bdata.S_POSITION === "R" -->{L_PAGE_RIGHT}<!-- ENDIF -->
+				<!-- IF bdata.S_POSITION === "l" -->{L_LEFT_OF_CENTRE}<!-- ENDIF -->
+				<!-- IF bdata.S_POSITION === "r" -->{L_RIGHT_OF_CENTRE}<!-- ENDIF -->
+			</td>
+			<td align="left" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" > {bdata.S_FNAME_H}</td>
+			<td class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->"><div style="text-align: center;"><img src="{IMG_PATH}{bdata.S_FNAME_I}" alt="" /></div></td>
+			<td class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" ><div style="text-align: center;"><!-- IF bdata.S_VIEW_ALL -->{L_ALL_GROUPS}<!-- ELSEIF bdata.S_VIEW_GROUPS -->{bdata.S_VIEW_GROUPS}<!-- ELSE -->{L_DISABLED}<!-- ENDIF --></div></td>
+			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" colspan="5">
+				<div style="text-align: center;">
+					<!-- IF bdata.S_FIRST_ROW or bdata.S_NDX == '1' -->
+						{ICON_MOVE_UP_DISABLED}
+						<a href="{bdata.U_DOWN}"><img src="images/icon_down.gif" title="{L_MOVE_DOWN}" alt="{L_BLOCK_DOWN}" /></a>
+					<!-- ELSEIF bdata.S_NDX == S_LBL and bdata.S_POSITION == 'L' or bdata.S_NDX == S_RBL and bdata.S_POSITION == 'R' or bdata.S_NDX == S_CBL and bdata.S_POSITION == 'C'  -->
+						{ICON_MOVE_DOWN_DISABLED}
+						<a href="{bdata.U_UP}"><img src="images/icon_up.gif" title="{L_MOVE_UP}" alt="{L_BLOCK_UP}" /></a>
+					<!-- ELSE -->
+						<a href="{bdata.bdata.U_UP}"><img src="images/icon_up.gif" title="{L_MOVE_UP}" alt="{L_BLOCK_UP}" /></a>
+						<a href="{bdata.bdata.U_DOWN}"><img src="images/icon_down.gif" title="{L_MOVE_DOWN}" alt="{L_BLOCK_DOWN}" /></a>
+					<!-- ENDIF -->
+					<a href="{bdata.U_EDIT2}"><img src="images/icon_edit.gif" title="{L_EDIT_BLOCK}" alt="{L_EDIT}" /></a>
+					<!-- IF bdata.S_FNAME_H != 'block_welcome_message.html' -->
+					<a href="{bdata.U_DELETE}"><img src="images/icon_delete.gif" title="{L_DELETE_THIS_BLOCK}" alt="{L_DELETE}" /></a>
+					<!-- ELSE -->
+					{ICON_DELETE_DISABLED}
+					<!-- ENDIF -->
+					<!-- IF bdata.S_HAS_VARS -->
+						<!-- IF bdata.S_FNAME_H == "block_welcome.html" -->
+						<a href="{bdata.U_SET_VARS_W}"><img src="images/vars_edit.gif" title="{L_SET_VARIABLES_IN_MINI-MODULES}" alt="{L_VARS_HAS_EDIT}" /></a>
+						<!-- ELSE -->
+						<a href="{bdata.U_SET_VARS}"><img src="images/vars_edit.gif" title="{L_VARS_HAS_EDIT}" alt="" /></a>
+						<!-- ENDIF -->
+					<!-- ELSE -->
+					<img src="images/vars_no_edit.gif" title="{L_VARS_NO_EDIT}" alt="" />
+					<!-- ENDIF -->
+				</div>
+			</td>
+		</tr>
+		<!-- BEGINELSE -->
+		<tr><td></td></tr>
+		<!-- END bdata -->
+	</tbody>
+</table>
+<!-- ENDIF -->
+
+<!-- IF S_OPTIONS == 'edit'-->
+<fieldset>
+	<legend>{L_BLOCKS_HEADER_ADMIN}</legend>
+	<input type="hidden" name="id" value="{S_ID}" />
+	<dl>
+		<dt><label for="id">{L_ID}</label>&nbsp; {L_DO_NOT_EDIT}</dt>
+		<dd><input type="text" maxlength="3" size="5" id="id" name="id" value="{S_ID}" class="post" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="ndx">{L_BLOCK_NDX}</label>&nbsp; {L_BLOCK_INDEX}</dt>
+		<dd><input type="text" maxlength="3" size="5" id="ndx" name="ndx" value="{S_NDX}" class="post" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="title">{L_BLOCK_TITLE}:</label></dt>
+		<dd><input type="text" maxlength="60" size="24" id="title" name="title" value="{S_TITLE}" class="post" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="position" >{L_POSITION}:</label><br /></dt>
+		<dd><select id="position" name="position" class="post">
+				<option value="L"<!-- IF S_POSITION === "L" --> selected="selected"<!-- ENDIF -->>{L_PAGE_LEFT}</option>
+				<option value="C"<!-- IF S_POSITION === "C" --> selected="selected"<!-- ENDIF -->>{L_PAGE_CENTRE}</option>
+				<option value="R"<!-- IF S_POSITION === "R" --> selected="selected"<!-- ENDIF -->>{L_PAGE_RIGHT}</option>
+				<option value="l"<!-- IF S_POSITION === "l" --> selected="selected"<!-- ENDIF -->>{L_LEFT_OF_CENTRE}</option>
+				<option value="r"<!-- IF S_POSITION === "r" --> selected="selected"<!-- ENDIF -->>{L_RIGHT_OF_CENTRE}</option>
+			</select>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="active">{L_BLOCK_ACTIVE}:</label></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="active" value="1"<!-- IF S_ACTIVE --> checked="checked" id="active"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="active" value="0"<!-- IF not S_ACTIVE --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+
+	<dl>
+		<dt><label for="html_file_name">{L_BLOCK_FNAME_H_BIG}:</label><br />{L_BLOCK_FNAME_EXPLAIN}</dt>
+		<dd>
+			<select id="html_file_name" name="html_file_name" class="post">
+			<!-- BEGIN html_file_name -->
+				<option value="{html_file_name.S_BLOCK_FILE_HTML}"<!-- IF html_file_name.S_BLOCK_FILE_HTML == S_FNAME_H --> selected="selected"<!-- ENDIF -->>{html_file_name.S_BLOCK_FILE_HTML}</option>
+			<!-- END html_file_name -->
+			</select>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="img_file_name">{L_BLOCK_FNAME_I_BIG}:</label><br /><span>{L_BLOCK_FNAME_I_EXPLAIN}</span></dt>
+		<dd>
+			<select id="img_file_name" name="img_file_name" class="post" onchange="display_block_image(this.form); return false;">
+			<!-- BEGIN img_file_name -->
+				<option value="{img_file_name.S_BLOCK_FILE_I}" <!-- IF img_file_name.S_BLOCK_FILE_I == S_FNAME_I -->selected="selected" <!-- ENDIF -->>{img_file_name.S_BLOCK_FILE_I}</option>
+			<!-- END img_file_name -->
+			</select>
+			<span id='bimage'><img src='{IMG_PATH}{S_FNAME_I}' alt='{S_FNAME_I}' /> </span>
+		</dd>
+	</dl>
+	<dl>
+		<dt><strong>{L_BLOCK_FNAME_IS_BIG}:</strong><br />{L_BLOCK_FNAME_IS_BIG2}</dt>
+		<dd class="imageline block_img">
+			<!-- BEGIN img_file_name -->
+				<!-- IF img_file_name.S_BLOCK_FILE_I -->
+					<a href="#" onclick="set_list_image('{img_file_name.S_BLOCK_FILE_I}'); return false;">
+						<img id="{img_file_name.S_BLOCK_FILE_I}" src='{IMG_PATH}{img_file_name.S_BLOCK_FILE_I}' title='{img_file_name.S_BLOCK_FILE_I}' alt="" width="16" height="16" />
+					</a>
+				<!-- ENDIF -->
+			<!-- END img_file_name -->
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="scroll">{L_BLOCK_SCROLL_BIG}:</label><br /><span>{L_BLOCK_SCROLL_BIG_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" class="radio" name="scroll" value="1"<!-- IF S_SCROLL --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="scroll" value="0"<!-- IF not S_SCROLL --> checked="checked" id="scroll"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><strong>{L_VIEW_PAGES}:</strong><br /><span>{L_VIEW_PAGES_EXPLAIN}</span></dt>
+		<dd style="padding: 5px; min-height: 12px; border: solid 1px #D7D7D7;">{S_VIEW_PAGES}</dd>
+	</dl>
+	<dl>
+		<dt><label for="view_page_id[]">{L_VIEW_PAGE2}</label><br />{L_VIEW_PAGE_EXPLAIN2}</dt>
+		<dd>
+			<!-- BEGIN pages -->
+				<input type="checkbox" style="cursor: pointer;" name="view_page_id[]" value="{pages.PAGE_ID}"<!-- IF pages.IS_CHECKED --> checked="checked" id="view_page_id[]"<!-- ENDIF --> /> ({pages.PAGE_ID}) {pages.PAGE_NAME}<br />
+				<!-- IF pages.PAGE_ID == 11 || pages.PAGE_ID == 21 --><hr/><!-- ENDIF -->
+			<!-- END pages -->
+		</dd>
+	</dl>
+	<dl>
+		<dt><a href="{U_MANAGE_PAGES}" type="button" name="allpages" class="button1">{L_MANAGE_PAGES}</a></dt>
+		<dd style="float: left;">
+			<input type="button" name="mark_all" value="{L_MARK_ALL}" class="button1" onclick="switchMarks(true, '');" />&nbsp;
+			<input type="button" name="unmark_all" value="{L_UNMARK_ALL}" class="button1" onclick="switchMarks(false,'');" />&nbsp;
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="view_groups">{L_BLOCK_VIEW_GROUPS}:</label><br /><span>{L_BLOCK_VIEW_GROUPS_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input class="post" size="26" maxlength="100" id="view_groups" name="view_groups" value="{S_VIEW_GROUPS}" type="text" /></label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="view_by">{L_BLOCK_VIEW_BY}:</label><br /><span>{L_BLOCK_VIEW_BY_EXPLAIN}</span></dt>
+		<dd><br />
+			<select id="view_by" name="view_by" class="post" onchange="set_ids(this.options[this.selectedIndex].value, 'view_groups'); ">
+			<!-- BEGIN groups -->
+				<option value="{groups.GROUP_ID}"<!-- IF groups.GROUP_ID == S_VIEW_GROUPS --> selected="selected"<!-- ENDIF -->>{groups.GROUP_ID} ({groups.GROUP_NAME})</option>
+			<!-- END groups -->
+			</select>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="view_all">{L_BLOCK_VIEW_ALL}:</label><br /><span>{L_BLOCK_VIEW_ALL_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" class="radio" name="view_all" value="1"<!-- IF S_VIEW_ALL --> checked="checked" id="view_all"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="view_all" value="0"<!-- IF not S_VIEW_ALL --> checked="checked" id="view_all"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="has_vars">{L_HAS_VARS}:</label><br />{L_HAS_VARS_EXPLAIN}</dt>
+		<dd>
+			<label><input onclick="ShowHide('vars');" type="radio" class="radio" name="has_vars" value="1"<!-- IF S_HAS_VARS --> checked="checked" id="has_vars"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input onclick="ShowHide('vars');" type="radio" class="radio" name="has_vars" value="0"<!-- IF not S_HAS_VARS --> checked="checked" id="has_vars"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<div style="display:<!-- IF not S_HAS_VARS --> none<!-- ELSE --> block<!-- ENDIF -->;" id="vars">
+ 	<dl>
+		<dt>{L_BLOCK_VAR_FILE}:{L_BLOCK_VAR_FILE_EXPLAIN}</dt>
+		<dd>
+		<select name="var_file_name" class="post">
+			<!-- BEGIN var_file_name -->
+				<option value="{var_file_name.S_VAR_FILE_NAME}"<!-- IF var_file_name.S_VAR_FILE_NAME == S_FNAME_V --> selected="selected"<!-- ENDIF -->>{var_file_name.S_VAR_FILE_NAME}</option>
+			<!-- END var_file_name -->
+		</select>
+		</dd>
+	</dl>
+	</div>
+	<hr />
+	<dl>
+		<dt><label for="block_cache_time">{L_BLOCK_CACHE_TIME}:</label><br />{L_BLOCK_CACHE_TIME_EXPLAIN}</dt>
+		<dd><input type="text" maxlength="10" size="6" id="block_cache_time" name="block_cache_time" value="{BLOCK_CACHE_TIME}" class="post" /></dd>
+	</dl>
+</fieldset>
+<!-- ENDIF -->
+
+
+<!-- IF S_OPTIONS == 'add' -->
+<fieldset>
+	<legend>{L_BLOCKS_ADD_HEADER}</legend>
+	<dl>
+		<dt><label for="title">{L_BLOCK_TITLE}:</label></dt>
+		<dd><label><input type="text" maxlength="60" size="24" id="title" name="title" value="" class="post" /></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="position">{L_POSITION}:</label></dt>
+		<dd>
+			<select id="position" name="position" class="post">
+				<option value="L"<!-- IF bdata.S_POSITION === "L" or  bdata.S_POSITION === "" --> selected="selected" id="position"<!-- ENDIF -->>{L_PAGE_LEFT}</option>
+				<option value="C"<!-- IF bdata.S_POSITION === "C" --> selected="selected" id="position"<!-- ENDIF -->>{L_PAGE_CENTRE}</option>
+				<option value="R"<!-- IF bdata.S_POSITION === "R" --> selected="selected" id="position"<!-- ENDIF -->>{L_PAGE_RIGHT}</option>
+				<option value="l"<!-- IF bdata.S_POSITION === "l" --> selected="selected" id="position"<!-- ENDIF -->>{L_LEFT_OF_CENTRE}</option>
+				<option value="r"<!-- IF bdata.S_POSITION === "r" --> selected="selected" id="position"<!-- ENDIF -->>{L_RIGHT_OF_CENTRE}</option>
+			</select>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="active" >{L_BLOCK_ACTIVE}:</label></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="active" value="1"<!-- IF S_ACTIVE --> checked="checked" id="active"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="active" value="0"<!-- IF not S_ACTIVE --> checked="checked" id="active"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+
+	<dl>
+		<dt><label for="html_file_name">{L_BLOCK_FNAME_H_BIG}:</label></dt>
+		<dd>
+			<select id="html_file_name" name="html_file_name" class="post">
+				<!-- BEGIN html_file_name -->
+				<option value="{html_file_name.S_BLOCK_FILE_HTML}"> {html_file_name.S_BLOCK_FILE_HTML}</option>
+				<!-- END html_file_name -->
+			</select>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="img_file_name">{L_BLOCK_FNAME_I_BIG}:</label><br />{L_BLOCK_FNAME_I_EXPLAIN}</dt>
+		<dd>
+			<select id="img_file_name" name="img_file_name" class="post" onchange="display_block_image(this.form); return false;">
+			<!-- BEGIN img_file_name -->
+				<option value="{img_file_name.S_BLOCK_FILE_I}"<!-- IF img_file_name.S_BLOCK_FILE_I == S_FNAME_I --> selected="selected"<!-- ENDIF -->>{img_file_name.S_BLOCK_FILE_I}</option>
+			<!-- END img_file_name -->
+			</select>
+			<span id='bimage'><img src='{IMG_PATH}{S_FNAME_I}' alt="{S_FNAME_I}" /></span>
+		</dd>
+	</dl>
+	<dl>
+		<dt><strong>{L_BLOCK_FNAME_IS_BIG}:</strong><br />{L_BLOCK_FNAME_IS_BIG2}</dt>
+		<dd class="imageline block_img">
+			<!-- BEGIN img_file_name -->
+				<!-- IF img_file_name.S_BLOCK_FILE_I -->
+					<a href="#" onclick="set_list_image('{img_file_name.S_BLOCK_FILE_I}'); return false;">
+						<img src='{IMG_PATH}{img_file_name.S_BLOCK_FILE_I}' title='{img_file_name.S_BLOCK_FILE_I}' alt="" width="16" height="16" />
+					</a>
+				<!-- ENDIF -->
+			<!-- END img_file_name -->
+		</dd>
+	</dl>
+
+	<dl>
+		<dt><label for="view_groups">{L_BLOCK_VIEW_GROUPS}:</label><br />{L_BLOCK_VIEW_GROUPS_EXPLAIN}</dt>
+		<dd><br />
+			<input class="post" size="26" maxlength="100" id="view_groups" name="view_groups" value="{S_VIEW_GROUPS}" type="text" />
+		</dd>
+	</dl>
+
+	<dl>
+		<dt><label for="view_by">{L_BLOCK_VIEW_BY_EXPLAIN}</label></dt>
+		<dd>
+			<select id="view_by" name="view_by" class="post" onchange="set_ids(this.options[this.selectedIndex].value, 'view_groups'); ">
+			<!-- BEGIN groups -->
+				<option value="{groups.GROUP_ID}"<!-- IF groups.GROUP_ID == S_VIEW_BY --> selected="selected"<!-- ENDIF -->>{groups.GROUP_ID} ({groups.GROUP_NAME})</option>
+			<!-- END groups -->
+			</select>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="view_all">{L_BLOCK_VIEW_ALL}:</label><br /><span>{L_BLOCK_VIEW_ALL_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input name="view_all" type="radio" class="radio" value="1"<!-- IF S_VIEW_ALL --> checked="checked" id="view_all"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input name="view_all" type="radio" class="radio" value="0"<!-- IF not S_VIEW_ALL --> checked="checked" id="view_all"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+
+	<hr />
+	<dl>
+		<dt><label for="scroll">{L_BLOCK_SCROLL_BIG}:</label><span>{L_BLOCK_SCROLL_BIG_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" class="radio" name="scroll" value="1"<!-- IF S_SCROLL --> checked="checked" id="scroll"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="scroll" value="0"<!-- IF not S_SCROLL --> checked="checked" id="scroll"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+
+
+	<dl>
+		<dt><strong>{L_VIEW_PAGES}:</strong><br /><span>{L_VIEW_PAGES_EXPLAIN}</span></dt>
+		<dd style="padding: 5px; min-height: 12px; border: solid 1px #D7D7D7;">{S_VIEW_PAGES}</dd>
+	</dl>
+	<dl>
+		<dt><label for="view_page_id[]">{L_VIEW_PAGE2}</label><br />{L_VIEW_PAGE_EXPLAIN2}</dt>
+		<dd>
+			<!-- BEGIN pages -->
+				<input type="checkbox" style="cursor: pointer;" name="view_page_id[]" value="{pages.PAGE_ID}"<!-- IF pages.IS_CHECKED --> checked="checked" id="view_page_id[]"<!-- ENDIF --> /> ({pages.PAGE_ID}) {pages.PAGE_NAME}<br />
+				<!-- IF pages.PAGE_ID == 11 || pages.PAGE_ID == 21 --><hr/><!-- ENDIF -->
+			<!-- END pages -->
+		</dd>
+	</dl>
+	<dl>
+		<dt></dt>
+		<dd style="float: left;">
+			<input type="button" name="mark_all" value="{L_MARK_ALL}" class="button1" onclick="switchMarks(true, '');" />&nbsp;
+			<input type="button" name="unmark_all" value="{L_UNMARK_ALL}" class="button1" onclick="switchMarks(false,'');" />&nbsp;
+		</dd>
+	</dl>
+
+	<hr />
+	<dl>
+		<dt><label for="has_vars">{L_HAS_VARS}:</label><br />{L_HAS_VARS_EXPLAIN}</dt>
+		<dd>
+			<label><input onclick="ShowHide('vars');" type="radio" class="radio" name="has_vars" value="1"<!-- IF S_HAS_VARS --> checked="checked" id="has_vars"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input onclick="ShowHide('vars');" type="radio" class="radio" name="has_vars" value="0"<!-- IF not S_HAS_VARS --> checked="checked" id="has_vars"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<div style="display:<!-- IF not S_HAS_VARS --> none<!-- ELSE --> block<!-- ENDIF -->;" id="vars">
+ 	<dl>
+		<dt>{L_BLOCK_VAR_FILE}:{L_BLOCK_VAR_FILE_EXPLAIN}</dt>
+		<dd>
+		<select name="var_file_name" class="post">
+			<!-- BEGIN var_file_name -->
+				<option value="{var_file_name.S_VAR_FILE_NAME}"<!-- IF var_file_name.S_VAR_FILE_NAME == S_FNAME_V --> selected="selected"<!-- ENDIF -->>{var_file_name.S_VAR_FILE_NAME}</option>
+			<!-- END var_file_name -->
+		</select>
+		</dd>
+	</dl>
+	</div>
+	<hr />
+	<dl>
+		<dt><label for="block_cache_time">{L_BLOCK_CACHE_TIME}:</label><br />{L_BLOCK_CACHE_TIME_EXPLAIN}</dt>
+		<dd><input type="text" maxlength="10" size="6" id="block_cache_time" name="block_cache_time" value="{BLOCK_CACHE_TIME}" class="post" /></dd>
+	</dl>
+
+
+
+</fieldset>
+<!-- ENDIF -->
+
+<!-- IF S_OPTIONS  == 'tools' -->
+	<strong><a href="{U_BACK}">{L_TOOLS_1}.</a></strong><br />
+	<strong>{L_TOOLS_2}.</strong><br />
+	<tr><td>&nbsp;<br /></td></tr>
+<!-- ENDIF -->
+
+<!-- IF BLOCK_REPORT -->
+	<strong>{BLOCK_REPORT}</strong><br />
+<!-- ELSE -->
+	<!-- IF S_OPTIONS == 'edit' or S_OPTIONS == 'add' -->
+	<fieldset class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		{S_FORM_TOKEN}
+	</fieldset>
+	<!-- ENDIF -->
+<!-- ENDIF -->
+
+<!-- IF S_OPTIONS != 'edit' -->
+	<!-- IF S_OPTIONS == 'manage' and S_TYPE != ''  -->
+	<p class="quick" style="text-align: center;">
+		<input class="button2" name="add_block" type="submit" value="{L_BLOCKS_ADD_HEADER}" />
+		<input type="hidden" name="mode" value="add" />
+		{S_FORM_TOKEN}
+	</p>
+	<!-- ELSEIF S_OPTIONS == 'manage' -->
+	<p class="quick" style="text-align: center;">
+		<input class="button2" name="reindex" type="submit" value="{L_BLOCKS_REINDEX}" />
+		<input type="hidden" name="mode" value="reindex" />
+		{S_FORM_TOKEN}
+	</p>
+	<!-- ENDIF -->
+<!-- ENDIF -->
+
+
+</form>
+<!-- INCLUDE overall_footer.html -->

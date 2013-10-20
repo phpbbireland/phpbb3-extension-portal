@@ -1,0 +1,393 @@
+<!-- INCLUDE overall_header.html -->
+
+<script type="text/javascript">
+// <![CDATA[
+	function set_image(data)
+	{
+		document.getElementById('menu_icon').value=data;
+		document.getElementById("pip").innerHTML = " <img alt='' align='absmiddle' src='{IMG_PATH}" + data + "' />"
+	}
+
+	function display_pip(myForm)
+	{
+		var pip = myForm.menu_icon;
+		document.getElementById("pip").innerHTML = " <img alt=''align='absmiddle' src='{IMG_PATH}" + pip.value + "' />"
+	}
+
+	function set_ids(data, view)
+	{
+		var mydata;
+		mydata = document.getElementById(view).value;
+		if (data == '0')
+		{
+			mydata = '';
+			data = '';
+		}
+		else if (mydata)
+		{
+			mydata = mydata + ',';
+		}
+		document.getElementById(view).value = mydata + data;
+	}
+// ]]>
+</script>
+
+<a name="maincontent"></a><h1>{L_TITLE}</h1>
+<div>
+	<!-- IF  S_OPTIONS == 'icons' -->
+	<p>{L_TITLE_ICON_EXPLAIN}</p>
+	<!-- ELSE -->
+	<p>{L_TITLE_EXPLAIN}</p>
+	<!-- ENDIF -->
+</div>
+
+<form id="acp_menus" method="post" action="{U_ACTION}">
+<!-- IF S_OPTIONS == 'nav' || S_OPTIONS == 'sub' || S_OPTIONS == 'link' || S_OPTIONS == 'all' || S_OPTIONS == 'unalloc' -->
+<table cellspacing="1" border="0">
+	<thead>
+		<tr>
+			<th colspan="11" style="text-align: center; color: #FFFF33;">
+			<!-- IF S_OPTIONS == 'nav' -->{L_NAV_MENU}<!-- ENDIF -->
+			<!-- IF S_OPTIONS == 'sub' -->{L_SUB_MENU}<!-- ENDIF -->
+			<!-- IF S_OPTIONS == 'link' -->{L_LINKS_MENU}<!-- ENDIF -->
+			<!-- IF S_OPTIONS == 'all' -->{L_ALL_MENUS}<!-- ENDIF -->
+			<!-- IF S_OPTIONS == 'unalloc' -->{L_UNALLOC}<!-- ENDIF -->
+			</th>
+		</tr>
+		<tr>
+			<th>{L_MENUID}</th>
+			<th>{L_MENU_NDX}</th>
+			<th>{L_MENU}</th>
+			<th>{L_MENU_APPEND_SID}</th>
+			<th>{L_MENU_APPEND_UID}</th>
+			<th>{L_ICON}</th>
+			<th>{L_MENU_ITEM_NAME_SHORT}</th>
+			<th>{L_MENU_LINK}</th>
+			<th>{L_MENU_EXTERN_SHORT}</th>
+			<th>{L_MENU_VIEW_BY_SHORT}</th>
+			<th style="text-align: center;">{L_OPTIONS}</th>
+		</tr>
+	</thead>
+	<tbody>
+
+	<!-- BEGIN mdata -->
+	<tr>
+		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->">{mdata.S_MENUID}</td>
+		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->">{mdata.S_MENU_NDX}</td>
+		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->">
+			<!-- IF mdata.S_MENU_TYPE == '1' --> {L_NAV}
+			<!-- ELSEIF mdata.S_MENU_TYPE == '2' --> {L_SUB}
+			<!-- ELSEIF mdata.S_MENU_TYPE == '5' --> {L_LINKS}
+			<!-- ELSEIF mdata.S_MENU_TYPE == '99' --> {L_UNALLOC}
+			<!-- ENDIF -->
+		</td>
+		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->">{mdata.S_MENU_APPEND_SID}</td>
+		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->">{mdata.S_MENU_APPEND_UID}</td>
+		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><img src='{IMG_PATH}{mdata.S_MENU_ICON}' alt="" /></td>
+		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->">{mdata.S_MENU_ITEM_NAME}</td>
+		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><!-- IF mdata.S_SUB_HEADING == '1' -->{L_SUB_HEADING}<!-- ELSE -->{mdata.S_MENU_LINK}<!-- ENDIF --></td>
+		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><!-- IF not mdata.S_SUB_HEADING --><!-- IF mdata.S_MENU_EXTERN == '0' -->{L_NO}<!-- ELSEIF mdata.S_MENU_EXTERN == '1' -->{L_YES}<!-- ELSEIF mdata.S_MENU_EXTERN == '2' -->{L_YES}<!-- ENDIF --><!-- ENDIF --></td>
+		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><!-- IF mdata.S_VIEW_ALL -->{L_ALL_GROUPS}<!-- ELSEIF mdata.S_VIEW_GROUPS -->{mdata.S_VIEW_GROUPS}<!-- ELSE -->{L_DISABLED}<!-- ENDIF --></td>
+		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->" align="center">
+			<div style="text-align: center;">
+			<!-- IF mdata.S_FIRST_ROW && not mdata.S_LAST_ROW -->
+				{ICON_MOVE_UP_DISABLED}
+				<a href="{mdata.U_DOWN}"><img src="images/icon_down.gif" alt="" /></a>
+			<!-- ELSEIF not mdata.S_FIRST_ROW && not mdata.S_LAST_ROW-->
+				<a href="{mdata.U_UP}"><img src="images/icon_up.gif" alt="" /></a>
+				<a href="{mdata.U_DOWN}"><img src="images/icon_down.gif" alt="" /></a>
+			<!-- ELSEIF mdata.S_LAST_ROW && not mdata.S_FIRST_ROW -->
+				<a href="{mdata.U_UP}"><img src="images/icon_up.gif" alt="" /></a>
+				{ICON_MOVE_DOWN_DISABLED}
+			<!-- ELSE -->
+				{ICON_MOVE_UP_DISABLED}
+				{ICON_MOVE_DOWN_DISABLED}
+			<!-- ENDIF -->
+				<a href="{mdata.U_EDIT}"><img src="images/icon_edit.gif" alt="" /></a>
+				<a href="{mdata.U_DELETE}"><img src="images/icon_delete.gif" alt="" /></a>
+			</div>
+		</td>
+	</tr>
+	<!-- BEGINELSE -->
+		<tr><td></td></tr>
+	<!-- END mdata -->
+	</tbody>
+</table>
+<!-- ENDIF -->
+
+<!-- IF S_OPTIONS == 'add' -->
+<fieldset>
+	<legend>{L_MENUS_ADD_HEADER}</legend>
+	<dl>
+		<dt><label>{L_MENU_TYPE}:</label><br /><span>{L_MENU_TYPE_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" class="radio" name="menu_type" value="1"<!-- IF S_MENU_TYPE == 'nav' --> checked="checked" id="menu_type"<!-- ENDIF --> /> {L_MENU_TYPE_NAV}</label>
+			<label><input type="radio" class="radio" name="menu_type" value="2"<!-- IF S_MENU_TYPE == 'sub' --> checked="checked" id="menu_type"<!-- ENDIF --> /> {L_MENU_TYPE_SUB}</label>
+			<label><input type="radio" class="radio" name="menu_type" value="5"<!-- IF S_MENU_TYPE == 'link' --> checked="checked" id="menu_type"<!-- ENDIF --> /> {L_MENU_TYPE_LINKS}</label>
+			<label><input type="radio" class="radio" name="menu_type" value="99"<!-- IF S_MENU_TYPE == 'unalloc' --> checked="checked" id="menu_type"<!-- ENDIF --> /> {L_MENU_TYPE_UNALLOC}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="name">{L_MENU_ITEM_NAME}:</label><br /><span>{L_MENU_ITEM_NAME_EXPLAIN}</span></dt>
+		<dd>
+			<input type="text" maxlength="255" size="50" id="name" name="name" value="{S_MENU_ITEM_NAME}" class="post" />
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="link_to">{L_MENU_LINK_BIG}:</label><br /><span>{L_MENU_LINK_EXPLAIN}</span></dt>
+		<dd><input type="text" maxlength="255" size="60" id="link_to" name="link_to" value="{S_MENU_LINK}" class="post" /></dd>
+	</dl>
+
+	<dl>
+		<dt><label for="menu_icon">{L_MENU_ICON}:</label></dt>
+		<dd>
+			<select name="menu_icon" id="menu_icon" class="post" onchange="display_pip(this.form); return false;">
+			<!-- BEGIN menuicons -->
+				<option value="{menuicons.S_MENU_ICONS}" <!-- IF menuicons.S_MENU_ICONS == S_MENU_ICON -->selected="selected" <!-- ENDIF -->>{menuicons.S_MENU_ICONS}</option>
+			<!-- END menuicons -->
+			</select>
+			<span id='pip'><img src='{IMG_PATH}{S_MENU_ICON}' alt="" /></span>
+		</dd>
+	</dl>
+	<dl>
+		<dt><strong>{L_MENU_ICONS}:</strong><br />{L_MENU_ICONS_L}</dt>
+		<dd>
+			<div class="imageline block_img" style="padding: 5px; border: solid 1px #D7D7D7;">
+			<!-- BEGIN menuicons -->
+				<!-- IF menuicons.S_MENU_ICONS -->
+					<a href="#" onclick="set_image('{menuicons.S_MENU_ICONS}', true, true); return false;">
+						<img src='{IMG_PATH}{menuicons.S_MENU_ICONS}' title='{menuicons.S_MENU_ICONS}' alt="" />
+					</a>
+				<!-- ENDIF -->
+			<!-- END menuicons -->
+			</div>
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="append_sid">{L_MENU_APPEND_SID_BIG}:</label><br /><span>{L_MENU_APPEND_SID_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" class="radio" name="append_sid" value="1"<!-- IF S_MENU_APPEND_SID --> checked="checked" id="append_sid"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="append_sid" value="0"<!-- IF not S_MENU_APPEND_SID --> checked="checked" id="append_sid"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="append_uid">{L_MENU_APPEND_UID_BIG}:</label><br /><span>{L_MENU_APPEND_UID_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" class="radio" name="append_uid" value="1"<!-- IF S_MENU_APPEND_UID --> checked="checked" id="append_uid"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="append_uid" value="0"<!-- IF not S_MENU_APPEND_UID --> checked="checked" id="append_uid"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="extern">{L_MENU_EXTERN}:</label><br /><span>{L_MENU_EXTERN_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" class="radio" name="extern" value="1"<!-- IF S_MENU_EXTERN --> checked="checked" id="extern"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="extern" value="0"<!-- IF not S_MENU_EXTERN --> checked="checked" id="extern"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="sub_heading">{L_SUB_HEADING}:</label><br /><span>{L_SUB_HEADING_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" class="radio" name="sub_heading" value="1"<!-- IF S_SUB_HEADING --> checked="checked" id="sub_heading"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="sub_heading" value="0"<!-- IF not S_SUB_HEADING --> checked="checked" id="sub_heading"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="soft_hr">{L_SOFT_HR}:</label><br /><span>{L_SOFT_HR_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" class="radio" name="soft_hr" value="1"<!-- IF S_SOFT_HR --> checked="checked" id="soft_hr"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="soft_hr" value="0"<!-- IF not S_SOFT_HR --> checked="checked" id="soft_hr"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="view_groups">{L_MENU_VIEW_GROUPS}:</label><br /><span>{L_MENU_VIEW_GROUPS_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="26" maxlength="100" id="view_groups" name="view_groups" value="{S_VIEW_GROUPS}" type="text" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="view_by">{L_MENU_VIEW_BY}:</label><br /><span>{L_MENU_VIEW_BY_EXPLAIN}</span></dt>
+		<dd><br />
+			<select name="view_by" id="view_by" class="post" onchange="set_ids(this.options[this.selectedIndex].value, 'view_groups');">
+			<!-- BEGIN groups -->
+			<option value="{groups.GROUP_ID}">{groups.GROUP_ID} ({groups.GROUP_NAME})</option>
+			<!-- END groups -->
+			</select>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="view_all">{L_MENU_VIEW_ALL}:</label><br /><span>{L_MENU_VIEW_ALL_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" class="radio" name="view_all" value="1" <!-- IF S_VIEW_ALL -->checked="checked" id="view_all"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="view_all" value="0" <!-- IF not S_VIEW_ALL -->checked="checked" id="view_all"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+<!-- ENDIF -->
+
+<!-- IF S_OPTIONS == 'edit' -->
+<fieldset>
+	<input type="hidden" name="m_id" value="{S_MENUID}" />
+	<legend>{L_MENUS_EDIT}</legend>
+	<dl>
+		<dt>{L_MENU_ID}:</dt>
+		<dd>{S_MENUID}</dd>
+	</dl>
+	<dl>
+		<dt><label for="ndx">{L_MENU_NDX}:</label><span>{L_MENU_NDX_BIG}</span></dt>
+		<dd><input type="text" maxlength="2" size="5" name="ndx" id="ndx" value="{S_MENU_NDX}" class="post" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="menu_type">{L_MENU_TYPE}:</label><br /><span>{L_MENU_TYPE_EXPLAIN}</span></dt>
+		<dd><br />
+		<label><input type="radio" class="radio" name="menu_type" value="1"<!-- IF S_MENU_TYPE == '1' --> checked="checked" id="menu_type"<!-- ENDIF --> /> {L_MENU_TYPE_NAV} </label>
+		<label><input type="radio" class="radio" name="menu_type" value="2"<!-- IF S_MENU_TYPE == '2' --> checked="checked" id="menu_type"<!-- ENDIF --> /> {L_MENU_TYPE_SUB}</label>
+		<label><input type="radio" class="radio" name="menu_type" value="5"<!-- IF S_MENU_TYPE == '5' --> checked="checked" id="menu_type"<!-- ENDIF --> /> {L_MENU_TYPE_LINKS}</label>
+		<label><input type="radio" class="radio" name="menu_type" value="99"<!-- IF S_MENU_TYPE == '99' --> checked="checked" id="menu_type"<!-- ENDIF --> /> {L_MENU_TYPE_UNALLOC}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="name">{L_MENU_ITEM_NAME}:</label><br /><span>{L_MENU_ITEM_NAME_EXPLAIN}</span></dt>
+		<dd><input type="text" maxlength="255" size="50" id="name" name="name" value="{S_MENU_ITEM_NAME}" class="post" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="menu_icon">{L_MENU_ICON}:</label></dt>
+		<dd>
+			<select name="menu_icon" id="menu_icon" class="post" onchange="display_pip(this.form); return false;">
+			<!-- BEGIN menuicons -->
+				<option value="{menuicons.S_MENU_ICONS}" <!-- IF menuicons.S_MENU_ICONS == S_MENU_ICON -->selected="selected" <!-- ENDIF -->>{menuicons.S_MENU_ICONS}</option>
+			<!-- END menuicons -->
+			</select>
+			<span id='pip'><img src='{IMG_PATH}{S_MENU_ICON}' alt="" /></span>
+		</dd>
+	</dl>
+	<dl>
+		<dt><strong>{L_MENU_ICONS}:</strong><br />{L_MENU_ICONS_L}</dt>
+		<dd>
+			<div class="imageline block_img" style="padding: 5px; border: solid 1px #D7D7D7;">
+			<!-- BEGIN menuicons -->
+				<!-- IF menuicons.S_MENU_ICONS -->
+					<a href="#" onclick="set_image('{menuicons.S_MENU_ICONS}', true, true); return false;">
+						<img src='{IMG_PATH}{menuicons.S_MENU_ICONS}' title='{menuicons.S_MENU_ICONS}' alt="" />
+					</a>
+				<!-- ENDIF -->
+			<!-- END menuicons -->
+			</div>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="link_to">{L_MENU_LINK_BIG}:</label><br /><span>{L_MENU_LINK_EXPLAIN}</span></dt>
+		<dd><br /><input type="text" maxlength="255" size="60" id="link_to" name="link_to" value="{S_MENU_LINK}" class="post" /></dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="append_sid">{L_MENU_APPEND_SID_BIG}:</label><br /><span>{L_MENU_APPEND_SID_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" class="radio" name="append_sid" value="1"<!-- IF S_MENU_APPEND_SID --> checked="checked" id="append_sid"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="append_sid" value="0"<!-- IF not S_MENU_APPEND_SID --> checked="checked" id="append_sid"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="append_uid">{L_MENU_APPEND_UID_BIG}:</label><br /><span>{L_MENU_APPEND_UID_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" class="radio" name="append_uid" value="1" <!-- IF S_MENU_APPEND_UID -->checked="checked" id="append_uid"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="append_uid" value="0" <!-- IF not S_MENU_APPEND_UID -->checked="checked" id="append_uid"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="extern">{L_MENU_EXTERN}:</label><br /><span>{L_MENU_EXTERN_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" class="radio" name="extern" value="1"<!-- IF S_MENU_EXTERN == '1' --> checked="checked" id="extern"<!-- ENDIF --> /> {L_MENU_EXTERN_TAB}</label>
+			<label><input type="radio" class="radio" name="extern" value="2"<!-- IF S_MENU_EXTERN == '2' --> checked="checked" id="extern"<!-- ENDIF --> /> {L_MENU_EXTERN_WINDOW}</label>
+			<label><input type="radio" class="radio" name="extern" value="0"<!-- IF S_MENU_EXTERN == '0' --> checked="checked" id="extern"<!-- ENDIF --> /> {L_MENU_EXTERN_NORMAL}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="soft_hr">{L_SOFT_HR}:</label><br /><span>{L_SOFT_HR_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" class="radio" name="soft_hr" value="1"<!-- IF S_SOFT_HR --> checked="checked" id="soft_hr"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="soft_hr" value="0"<!-- IF not S_SOFT_HR --> checked="checked" id="soft_hr"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="sub_heading">{L_SUB_HEADING}:</label><br /><span>{L_SUB_HEADING_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" class="radio" name="sub_heading" value="1" <!-- IF S_SUB_HEADING -->checked="checked" id="sub_heading"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="sub_heading" value="0" <!-- IF not S_SUB_HEADING -->checked="checked" id="sub_heading"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="view_groups">{L_MENU_VIEW_GROUPS}:</label><br /><span>{L_MENU_VIEW_GROUPS_EXPLAIN}</span></dt>
+		<dd><br />
+			<input class="post" size="60" maxlength="100" id="view_groups" name="view_groups" value="{S_VIEW_GROUPS}" type="text" />
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="view_by">{L_MENU_VIEW_BY}:</label><br /><span>{L_MENU_VIEW_BY_EXPLAIN}</span></dt>
+		<dd><br />
+			<select name="view_by" id="view_by" class="post" onchange="set_ids(this.options[this.selectedIndex].value, 'view_groups');">
+			<!-- BEGIN groups -->
+			<option value="{groups.GROUP_ID}">{groups.GROUP_ID} ({groups.GROUP_NAME})</option>
+			<!-- END groups -->
+			</select>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="view_all">{L_MENU_VIEW_ALL}:</label><br /><span>{L_MENU_VIEW_ALL_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" class="radio" name="view_all" value="1" <!-- IF S_VIEW_ALL -->checked="checked" id="view_all"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="view_all" value="0" <!-- IF not S_VIEW_ALL -->checked="checked" id="view_all"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+<!-- ENDIF -->
+
+<!-- IF S_OPTIONS  == 'icons' -->
+<table cellspacing="1" border="0">
+	<thead>
+		<tr><th colspan="4">{L_MANAGE_MENU_ICONS} &nbsp; {L_MENU_ICON_COUNT} {S_MENU_ICON_COUNT} </th></tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN menuicons -->
+	<tr>
+		<td align="right" class="row3" style="width: 30px;">{L_ICON}</td>
+		<td align="left" class="row4" style="width: 20px;"><img src="{IMG_PATH}{menuicons.S_MENU_ICONS}" alt="" /></td>
+		<td align="center" class="row2" style="width: auto;">{menuicons.S_MENU_ICONS}</td>
+		<td align="center" class="row4" style="width: 100px;">
+			 &nbsp; <a href="#{mdata.S_MENUID}"><img src="images/icon_delete.gif" alt="" /></a>
+			 &nbsp; <a href="#{mdata.S_MENUID}"><img src="images/file_up_to_date.gif" alt="" /></a>
+			 &nbsp; <a href="#{mdata.S_MENUID}"><img src="images/file_new.gif" alt="" /></a>
+		</td>
+	</tr>
+	<!-- END menuicons -->
+	<tr><td></td></tr>
+	</tbody>
+</table>
+<fieldset>
+	{L_SOURCE_DIRECTORY}<br />
+	{L_ICONS_REPORT}
+</fieldset>
+<!-- ENDIF -->
+
+<!-- IF L_MENU_REPORT -->
+<strong>{L_MENU_REPORT}<br /></strong>
+<!-- ENDIF -->
+
+<!-- IF S_OPTIONS == 'add' || S_OPTIONS == 'edit' -->
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	{S_FORM_TOKEN}
+</fieldset>
+<!-- ENDIF -->
+
+<!-- IF S_OPTIONS == 'nav' || S_OPTIONS == 'sub' || S_OPTIONS == 'link' || S_OPTIONS == 'all' -->
+<p class="quick" style="text-align: center;">
+	<input class="button2" name="add_menu_option" type="submit" value="{L_MENU_ADD_NEW}" />
+	<input type="hidden" name="mode" value="add" />
+	<input type="hidden" name="menutype" value="{S_OPTIONS}" />
+</p>
+<!-- ENDIF -->
+
+</form>
+<!-- INCLUDE overall_footer.html -->

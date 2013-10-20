@@ -1,0 +1,76 @@
+<script type="text/javascript">
+// <![CDATA[
+	function set_ids(data, view)
+	{
+		var mydata;
+
+		mydata = document.getElementById(view).value;
+
+		if (data == '0')
+		{
+			mydata = '';
+			data = '';
+		}
+		else if(mydata)
+		{
+			mydata = mydata + ',';
+		}
+
+		document.getElementById(view).value = mydata + data;
+	}
+
+	function set_list_item(data)
+	{
+	alert(data);
+		document.getElementById('teams_sort').value=data;
+	}
+
+// ]]>
+</script>
+
+<fieldset>
+	<legend>{L_THE_TEAM_SETTINGS}</legend>
+	<dl>
+		<dt><label for="k_teams">{L_K_TEAMS}:</label><br /><span>{L_K_TEAMS_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="26" maxlength="100" id="k_teams" name="k_teams" value="{S_K_TEAMS}" type="text" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="k_teams">{L_K_BLOCK_TEAMS}:</label><br /><span>{L_K_BLOCK_TEAMS_EXPLAIN}</span></dt>
+		<dd><label><br />
+			<select name="teams" id="team" class="post" onchange="set_ids(this.options[this.selectedIndex].value, 'k_teams');">{S_TEAMS}
+			<!-- BEGIN groups -->
+				<option value="{groups.GROUP_ID}">{groups.GROUP_ID} ({groups.GROUP_NAME})</option>
+			<!-- END groups -->
+			</select>
+			</label>
+		</dd>
+	</dl>
+
+	<dl>
+		<dt><label for="k_teampage_memberships">{L_TEAMPAGE_MEMBERSHIPS}:</label></dt>
+		<dd>
+			<label><input type="radio" name="k_teampage_memberships" class="radio" value="0"<!-- IF S_K_TEAMPAGE_MEMBERSHIPS == 0 --> checked="checked" id="k_teampage_memberships"<!-- ENDIF --> /> {L_TEAMPAGE_DISP_DEFAULT}</label><br />
+			<label><input type="radio" name="k_teampage_memberships" class="radio" value="1"<!-- IF S_K_TEAMPAGE_MEMBERSHIPS == 1 --> checked="checked" id="k_teampage_memberships"<!-- ENDIF --> /> {L_TEAMPAGE_DISP_ALL}</label>
+		</dd>
+	</dl>
+
+	<dl>
+		<dt><label for="k_teams_sort">{L_K_BLOCK_TEAMS_SORT}:</label><br /><span>{L_K_BLOCK_TEAMS_SORT_EXPLAIN}</span></dt>
+		<dd><label><br />
+			<select name="k_teams_sort" id="k_teams_sort" class="post" onchange="set_list_item(this.options[this.selectedIndex].value, 'k_teams_sort';)">{S_TEAMS_SORT}
+			<!-- BEGIN teams_sort -->
+				<option value="{teams_sort.SORT_OPTION}" <!-- IF teams_sort.SORT_OPTION == S_K_TEAMS_SORT -->selected="selected" <!-- ENDIF -->>{teams_sort.SORT_OPTION}</option>
+			<!-- END teams_sort -->
+			</select>
+			</label>
+		</dd>
+	</dl>
+
+</fieldset>
+<fieldset>
+	<legend>{L_THE_TEAM_SETTINGS_2}</legend>
+	<dl>
+		<dt><label for="k_teams_display_this_many">{L_K_TEAMS_DISPLAY_THIS_MANY}:</label><br /><span>{L_K_TEAMS_DISPLAY_THIS_MANY_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="2" id="k_teams_display_this_many" name="k_teams_display_this_many" value="{S_K_TEAMS_DISPLAY_THIS_MANY}" type="text" /></label></dd>
+	</dl>
+</fieldset>

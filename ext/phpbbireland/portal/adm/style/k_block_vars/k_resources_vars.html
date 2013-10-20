@@ -1,0 +1,42 @@
+<script type="text/javascript">
+// <![CDATA[
+function set_ids(data)
+{
+	var mydata;
+	mydata = document.getElementById("reserved_words").value;
+    document.getElementById("reserved_word").value = mydata;
+}
+function clear_me(data)
+{
+	var mydata;
+	mydata = document.getElementById(data).value;
+    document.getElementById(data).value = '';
+}
+// ]]>
+</script>
+
+
+<fieldset>
+	<dl>
+		<dt><label>{L_RESERVED}</label></dt>
+		<!-- BEGIN reserved_words -->
+		<dd>
+			<input type="text" maxlength="30" size="29" id="{reserved_words.RESERVED_WORDS}" name="{reserved_words.RESERVED_WORDS}" value="{reserved_words.RESERVED_WORDS}" class="post" />
+			<a href="#" onclick="clear_me('{reserved_words.RESERVED_WORDS}')" class="post" >{L_DELETE_CURRENT}</a>
+		</dd>
+		<!-- END reserved_words -->
+
+		<div style="text-align: right;">
+			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		</div>
+		<br /><hr />
+
+		<dt><label>{L_NEW_WORD}</label></dt>
+		<dd>
+			<label><input type="text" maxlength="30" size="29" id="new_word" name="new_word" value="{NEW_WORD}" class="post" /></label>
+		</dt>
+	</dl>
+	<div style="text-align: right;">
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_ADD_NEW_WORD}" />
+	</div>
+</fieldset>

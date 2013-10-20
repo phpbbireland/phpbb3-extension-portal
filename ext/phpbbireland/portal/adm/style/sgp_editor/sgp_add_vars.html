@@ -1,0 +1,25 @@
+<script type="text/javascript">
+// <![CDATA[
+function set_data()
+{
+	var mydata;
+	mydata = document.getElementById("adm_vars").value;
+	insert_text(mydata, true);
+}
+// ]]>
+</script>
+
+<div id="vars-box" style="width:100%;">
+	<strong style="padding:8px;">{L_VARIABLES}</strong><br />
+	<select name="adm_vars" id="adm_vars" class="post">
+		<!-- BEGIN adm_vars -->
+			<option value="{adm_vars.VAR}">{adm_vars.VAR}</option>
+		<!-- END adm_smiley -->
+	</select>
+</div>
+ <div style="text-align:center; padding-top:3px;">
+	<input name="info" id="info" class="button2" type="button" onclick="set_data(); return false;" value="{L_SHOW_VARS}" />
+</div>
+ <div style="text-align:center; padding-top:3px;">
+	<br /><a href="{U_ADD_VARS}" type="button" name="add_vars" value="{L_ADD_VARS}" title="{L_ADD_VARS}" class="button2" />{L_ADD_VARS}</a>
+</div>

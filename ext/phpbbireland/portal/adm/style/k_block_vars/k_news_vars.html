@@ -1,0 +1,26 @@
+<fieldset>
+	<legend>{L_NEWS_SETTINGS}</legend>
+	<dl>
+		<dt><label for="k_news_items_to_display">{L_K_NEWS_ITEMS_TO_DISPLAY}:</label><br /><span>{L_K_NEWS_ITEMS_TO_DISPLAY_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="2" id="k_news_items_to_display" name="k_news_items_to_display" value="{S_K_NEWS_ITEMS_TO_DISPLAY}" type="text" /></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="k_news_item_max_length">{L_K_NEWS_ITEM_MAX_LENGTH}:</label><br /><span>{L_K_NEWS_ITEM_MAX_LENGTH_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="5" maxlength="4" id="k_news_item_max_length" name="k_news_item_max_length" value="{S_K_NEWS_ITEM_MAX_LENGTH}" type="text" /></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="k_news_type">{L_K_NEWS_TYPE}:</label><br /><span>{L_K_NEWS_TYPE_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="k_news_type" value="4" <!-- IF S_K_NEWS_TYPE == 4 -->checked="checked" id="k_news_type"<!-- ENDIF --> /> {L_LOCAL_NEWS}</label>
+			<label><input type="radio" class="radio" name="k_news_type" value="5" <!-- IF S_K_NEWS_TYPE == 5 -->checked="checked" id="k_news_type"<!-- ENDIF --> /> {L_GLOBAL_NEWS}</label>
+			<label><input type="radio" class="radio" name="k_news_type" value="0" <!-- IF S_K_NEWS_TYPE == 0 -->checked="checked" id="k_news_type"<!-- ENDIF --> /> {L_BOTH}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="k_news_allow">{L_K_NEWS_ALLOW}:</label><br /><span>{L_K_NEWS_ALLOW_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="k_news_allow" value="1" <!-- IF S_K_NEWS_ALLOW -->checked="checked" id="k_news_allow"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="k_news_allow" value="0" <!-- IF not S_K_NEWS_ALLOW -->checked="checked" id="k_news_allow"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>

@@ -1,0 +1,34 @@
+<fieldset>
+	<legend>{L_SGP_QR_SETTINGS}</legend>
+	<dl>
+		<dt><label for="k_quick_reply">{L_SGP_QR}:</label><br /><span>{L_SGP_QR_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="k_quick_reply" value="1" <!-- IF S_K_QUICK_REPLY -->checked="checked" id="k_quick_reply"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="k_quick_reply" value="0" <!-- IF not S_K_QUICK_REPLY -->checked="checked" id="k_quick_reply"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="k_smilies_show">{L_K_SMILIES_SHOW}:</label><br /><span>{L_K_SMILIES_SHOW_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="k_smilies_show" value="1" <!-- IF S_K_SMILIES_SHOW -->checked="checked" id="k_smilies_show"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="k_smilies_show" value="0" <!-- IF not S_K_SMILIES_SHOW -->checked="checked" id="k_smilies_show"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+<fieldset>
+	<legend>{L_TOOLTIPS}</legend>
+	<dl>
+		<dt><label for="k_tooltips_active">{L_ALLOW_TOOLTIPS}:</label></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="k_tooltips_active" value="1" <!-- IF S_K_TOOLTIPS_ACTIVE -->checked="checked" id="k_tooltips_active"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="k_tooltips_active" value="0" <!-- IF not S_K_TOOLTIPS_ACTIVE -->checked="checked" id="k_tooltips_active"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="k_tooltips_active">{L_K_TOOLTIPS_WHICH}:</label></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="k_tooltips_which" value="1" <!-- IF S_K_TOOLTIPS_WHICH -->checked="checked" id="k_tooltips_which"<!-- ENDIF --> /> {L_FIRST}</label>
+			<label><input type="radio" class="radio" name="k_tooltips_which" value="0" <!-- IF not S_K_TOOLTIPS_WHICH -->checked="checked" id="k_tooltips_which"<!-- ENDIF --> /> {L_LAST}</label>
+		</dd>
+	</dl>
+</fieldset>

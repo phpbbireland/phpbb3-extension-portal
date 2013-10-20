@@ -1,0 +1,18 @@
+<fieldset>
+	<legend>{L_YOUTUBE}</legend>
+	<dl>
+		<dt><label for="k_yourtube_link">{L_YOUTUBE_LINK}:</label><br /><span>{L_YOUTUBE_LINK_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="60" maxlength="255" name="k_yourtube_link" value="{S_K_YOURTUBE_LINK}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="k_yourtube_link_limit">{L_YOUTUBE_LINK_LIMIT}:</label></span></dt>
+		<dd><label><input class="post" size="5" maxlength="4" name="k_yourtube_link_limit" value="{S_K_YOURTUBE_LINK_LIMIT}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="k_yourtube_auto">{L_YOUTUBE_AUTO}:</label><br /><span>{L_YOUTUBE_AUTO_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="k_yourtube_auto" name="k_yourtube_auto" value="1" <!-- IF S_K_YOURTUBE_AUTO --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="k_yourtube_auto" value="0" <!-- IF not S_K_YOURTUBE_AUTO --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>

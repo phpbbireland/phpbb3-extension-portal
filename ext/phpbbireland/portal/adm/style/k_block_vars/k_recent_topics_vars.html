@@ -1,0 +1,26 @@
+<fieldset>
+	<legend>{L_RECENT_TOPICS_SETTINGS}</legend>
+	<dl>
+		<dt><label for="k_recent_topics_to_display">{L_K_RECENT_TOPICS_TO_DISPLAY}:</label><br /><span>{L_K_RECENT_TOPICS_TO_DISPLAY_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="3" id="k_recent_topics_to_display" name="k_recent_topics_to_display" value="{S_K_RECENT_TOPICS_TO_DISPLAY}" type="text" /></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="k_recent_topics_per_forum">{L_K_RECENT_TOPICS_PER_FORUM}:</label><br /><span>{L_K_RECENT_TOPICS_PER_FORUM_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="3" id="k_recent_topics_per_forum" name="k_recent_topics_per_forum" value="{S_K_RECENT_TOPICS_PER_FORUM}" type="text" /></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="k_recent_search_days">{L_K_RECENT_SEARCH_DAYS}:</label><br /><span>{L_K_RECENT_SEARCH_DAYS_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="5" id="k_recent_search_days" name="k_recent_search_days" value="{S_K_RECENT_SEARCH_DAYS}" type="text" /></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="k_post_types">{L_POSTS_TYPES}:</label><br /><span>{L_POSTS_TYPES_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="k_post_types" value="1" <!-- IF S_K_POST_TYPES -->checked="checked" id="k_post_types"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="k_post_types" value="0" <!-- IF not S_K_POST_TYPES -->checked="checked" id="k_post_types"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="k_recent_topics_search_exclude">{L_EXCLUDE}:</label><br /><span>{L_EXCLUDE_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="30" maxlength="60" name="k_recent_topics_search_exclude" id="k_recent_topics_search_exclude" value="{S_K_RECENT_TOPICS_SEARCH_EXCLUDE}" type="text" /></label></dd>
+	</dl>
+</fieldset>

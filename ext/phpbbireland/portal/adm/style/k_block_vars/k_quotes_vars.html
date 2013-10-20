@@ -1,0 +1,12 @@
+<fieldset>
+	<legend>{L_QUOTES_SETTINGS}</legend>
+	<dl>
+		<dt><label for="load_from_file">{L_LOAD_FROM_FILE}:</label><br /><span>{L_FILE_TO_USE_EXPLAIN}</span></dt>
+		<input type="radio" class="radio" name="load_from_quote_file" id="load_from_quote_file" value="1"<!-- IF S_LOAD_FROM_QUOTE_FILE --> checked="checked" <!-- ENDIF --> />{L_YES}
+		<input type="radio" class="radio" name="load_from_quote_file" id="load_from_quote_file" value="0"<!-- IF not S_LOAD_FROM_QUOTE_FILE --> checked="checked" <!-- ENDIF --> />{L_NO}
+	</dl>
+	<dl>
+		<dt><label for="file_to_use">{L_FILE_TO_USE}:</label><br /><span>{L_FILE_TO_USE_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="60" maxlength="255" name="load_from_file" value="{S_LOAD_FROM_FILE}" type="text"></label></dd>
+	</dl>
+</fieldset>

@@ -1,0 +1,77 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<h1>{L_TITLE}</h1>
+
+<p>{L_TITLE_EXPLAIN}</p>
+
+<!-- IF S_MOD_DATA -->
+<fieldset>
+	<p style="font-weight: bold; font-size: 16px; text-align:center; color: <!-- IF S_UP_TO_DATE -->#228822<!-- ELSE -->#BC2A4D<!-- ENDIF -->;">
+		<!-- IF S_UP_TO_DATE -->{L_IS_UP_TO_DATE}<!-- ELSE -->{L_IS_NOT_UP_TO_DATE}<!-- ENDIF -->
+	</p>
+</fieldset>
+<fieldset>
+	<legend>{L_KISS_VERSION_STATUS}</legend>
+	<dl>
+		<dt><label>{L_INSTALLED_VERSION}:</label></dt>
+		<dd><strong>{MOD_CURRENT_VERSION}</strong></dd>
+	</dl>
+	<dl>
+		<dt><label>{L_LATEST_VERSION}:</label></dt>
+		<dd><strong>{MOD_LATEST_VERSION}</strong></dd>
+	</dl>
+	<!-- IF not S_UP_TO_DATE -->
+		<dl>
+			<dt><label>{L_DOWNLOAD_LATEST}:</label></dt>
+			<dd><strong><a href="{MOD_DOWNLOAD}">{L_DOWNLOAD} {MOD_TITLE} {MOD_LATEST_VERSION}</a></strong></dd>
+		</dl>
+		<dl>
+			<dt><label>{L_ANNOUNCEMENT_TOPIC}:</label></dt>
+			<dd><strong><a href="{MOD_ANNOUNCEMENT}">{L_RELEASE_ANNOUNCEMENT}</a></strong></dd>
+		</dl>
+	<!-- ENDIF -->
+</fieldset>
+<!-- ELSE -->
+<fieldset>
+	<strong>{L_DATA_NOT_AVAILABLE}</strong>
+</fieldset>
+<!-- ENDIF -->
+
+<form id="acp_k_config" method="post" action="{U_ACTION}">
+
+<!-- IF S_OPT  == "configure" -->
+<fieldset>
+	<legend>{L_BLOCKS_CONFIGURE}</legend>
+
+	<dl>
+		<dt><label for="portal_build">{L_PORTAL_BUILD}:</label><br /><span>{L_PORTAL_BUILD_EXPLAIN}</span></dt>
+		<dd><input class="post" size="10" maxlength="10" name="portal_build" id="portal_build" value="{S_PORTAL_BUILD}" type="text" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="blocks_width">{L_PORTAL_BLOCKS_WIDTH}:</label><br /><span>{L_PORTAL_BLOCKS_WIDTH_EXPLAIN}</span></dt>
+		<dd><input class="post" size="4" maxlength="3" name="blocks_width" id="blocks_width" value="{S_BLOCKS_WIDTH}" type="text" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="blocks_enabled">{L_PORTAL_BLOCKS_ENABLED}:</label><br /><span>{L_PORTAL_BLOCKS_ENABLED_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="blocks_enabled" value="1" <!-- IF S_BLOCKS_ENABLED --> checked="checked" id="blocks_enabled" <!-- ENDIF --> />{L_YES}</label>
+			<label><input type="radio" class="radio" name="blocks_enabled" value="0" <!-- IF not S_BLOCKS_ENABLED --> checked="checked" id="blocks_enabled" <!-- ENDIF --> />{L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+<!-- ENDIF -->
+
+<!-- IF S_OPT == 'save'-->
+	<strong>{L_CONFIG_SAVED}<br /></strong>
+<!-- ELSEIF S_OPT != "" -->
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />&nbsp;
+	{S_FORM_TOKEN}
+</fieldset>
+<!-- ENDIF -->
+
+</form>
+<!-- INCLUDE overall_footer.html -->
