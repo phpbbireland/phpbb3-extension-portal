@@ -100,14 +100,16 @@ if (!function_exists('sgp_acp_set_config'))
 	{
 		global $db, $cache, $k_config;
 
-		$sql = 'UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . "
+		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
+
+		$sql = 'UPDATE ' . K_VARIABLES_TABLE . "
 			SET config_value = '" . $db->sql_escape($config_value) . "'
 			WHERE config_name = '" . $db->sql_escape($config_name) . "'";
 		$db->sql_query($sql);
 
 		if (!$db->sql_affectedrows() && !isset($k_config[$config_name]))
 		{
-			$sql = 'INSERT INTO ' . K_BLOCKS_CONFIG_VAR_TABLE . ' ' . $db->sql_build_array('INSERT', array(
+			$sql = 'INSERT INTO ' . K_VARIABLES_TABLE . ' ' . $db->sql_build_array('INSERT', array(
 				'config_name'   => $config_name,
 				'config_value'  => $config_value,
 				'is_dynamic'    => ($is_dynamic) ? 1 : 0));
@@ -136,7 +138,7 @@ if (!function_exists('get_k_config_var'))
 		}
 
 		$sql = 'SELECT config_name, config_value
-			FROM ' . K_BLOCKS_CONFIG_VAR_TABLE . '
+			FROM ' . K_VARIABLES_TABLE . '
 			WHERE config_name = ' . (int)$item;
 
 		$row = $db->sql_fetchrow($result);
@@ -431,28 +433,6 @@ if (!function_exists('get_menu_lang_name'))
 		return($block_title);
 	}
 }
-
-/**
-* Takes a phpBB $page name and position (left/right/centre)...
-* Returns true/false if the block should be displayed on a giveb page...
-**/
-/***
-if (!function_exists('show_blocks'))
-{
-	function show_blocks($page, $position)
-	{
-		global $k_config;
-
-		$page_id = get_page_id($page);
-
-		if ($position == 'L' || $position == 'R' || $position == 'C')
-		{
-			return(true);
-		}
-		return(false);
-	}
-}
-***/
 
 if (!function_exists('s_get_vars_array'))
 {

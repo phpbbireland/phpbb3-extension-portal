@@ -36,7 +36,7 @@ class pages_module
 		$user->add_lang_ext('phpbbireland/portal', 'k_pages');
 		$this->tpl_name = 'acp_pages';
 		$this->page_title = $user->lang['ACP_PAGES'];
-		add_form_key('pages')
+		add_form_key('pages');
 
 		include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.'.$phpEx);
 

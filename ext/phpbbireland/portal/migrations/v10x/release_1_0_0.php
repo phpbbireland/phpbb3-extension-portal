@@ -103,7 +103,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				'ACP_PAGES_TITLE',
 				array(
 					'module_basename' => '\phpbbireland\portal\acp\pages_module',
-					'modes'           => array('add', 'delete', 'land', 'namange'),
+					'modes'           => array('add', 'delete', 'land', 'manage'),
 				),
 			)),
 
