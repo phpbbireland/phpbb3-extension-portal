@@ -60,6 +60,17 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				'ACP_MENUS_TITLE',
 			)),
 
+			array('module.add', array(
+				'acp',
+				'ACP_PORTAL_TITLE',
+				'ACP_PAGES_TITLE',
+			)),
+			array('module.add', array(
+				'acp',
+				'ACP_PORTAL_TITLE',
+				'ACP_RESOURCES_TITLE',
+			)),
+
 
 			array('module.add', array(
 				'acp',
@@ -159,7 +170,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 					'PRIMARY_KEY'  => 'm_id',
 				),
 
-				$this->table_prefix . 'k_blocks_config' => array(
+				$this->table_prefix . 'k_config' => array(
 					'COLUMNS' => array(
 						'id'					=> array('USINT', NULL, 'auto_increment'),
 						'use_external_files'	=> array('BOOL', '0'),
@@ -170,7 +181,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 					'PRIMARY_KEY'  => 'id',
 				),
 
-				$this->table_prefix . 'k_config_vars' => array(
+				$this->table_prefix . 'k_vars' => array(
 					'COLUMNS' => array(
 						'config_name'		=> array('VCHAR', ''),
 						'config_value'		=> array('VCHAR', ''),
