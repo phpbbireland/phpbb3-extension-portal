@@ -27,7 +27,7 @@ class config_module
 		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
 		$user->add_lang_ext('phpbbireland/portal', 'k_config');
-		$this->tpl_name = 'k_config';
+		$this->tpl_name = 'acp_config';
 		$this->page_title = $user->lang['ACP_CONFIG'];
 		add_form_key('config');
 

@@ -24,41 +24,44 @@ class menus_module
 	function main($id, $mode)
 	{
 		global $db, $user, $auth, $template, $cache, $request;
-		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx;
+		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx, $table_prefix;
 
-		$user->add_lang('acp/common');
-		$this->tpl_name = 'menus_body';
+		define('K_MENUS_TABLE',	$table_prefix . 'k_menus');
+		$img_path = $phpbb_root_path. 'ext/phpbbireland/portal/images/block_images/menu/';
+
+		$user->add_lang_ext('phpbbireland/portal', 'k_menus');
+		$this->tpl_name = 'acp_menus';
 		$this->page_title = $user->lang['ACP_MENUS'];
 		add_form_key('menus');
 
 
-		include($phpbb_root_path . 'includes/sgp_functions_admin.'.$phpEx);
+		include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.'.$phpEx);
 
 		$store = '';
 
 
-
-
-		//$action	= request_var('action', '');
-		$submit = (isset($_POST['submit'])) ? true : false;
-
-		if ($submit && !check_form_key($form_key))
+		if ($request->is_set_post('submit'))
 		{
-			$submit = false;
-			$mode = '';
-			trigger_error($user->lang['FORM_INVALID'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . $user->lang['LINE'] . __LINE__);
+			if (!check_form_key('menus'))
+			{
+				$submit = false;
+				$mode = '';
+				trigger_error('FORM_INVALID');
+			}
+			$submit = ture;
 		}
 
-		$menuitem	= request_var('menuitem', '');
+		$menuitem	= $request->variable('menuitem', '');
 
 		$template->assign_vars(array(
-			'U_BACK'	=> append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_menus&amp;mode=nav"),
+			'U_BACK'    => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_menus&amp;mode=nav"),
+			'IMG_PATH'  => $img_path,
 		));
 
-		$mode     = request_var('mode', '');
-		$menu     = request_var('menu', 0);
-		$menuitem = request_var('menuitem', '');
-		$menutype = request_var('menutype', '');
+		$mode     = $request->variable('mode', '');
+		$menu     = $request->variable('menu', 0);
+		$menuitem = $request->variable('menuitem', '');
+		$menutype = $request->variable('menutype', '');
 
 		$u_action = append_sid("{$phpbb_admin_path}index.$phpEx" , "i=$id&amp;mode=$mode");
 
@@ -87,20 +90,20 @@ class menus_module
 			{
 				if ($submit)
 				{
-					$m_id           = request_var('m_id', 0);
-					$ndx            = request_var('ndx', 0);
-					$menu_type      = request_var('menu_type', '');
-					$menu_icon      = request_var('menu_icon', '');
-					$name           = utf8_normalize_nfc(request_var('name', '', true));
-					$link_to        = request_var('link_to', '');
-					$append_sid     = request_var('append_sid', 0);
-					$append_uid     = request_var('append_uid', 0);
-					$extern         = request_var('extern', 0);
-					$soft_hr        = request_var('soft_hr', 0);
-					$sub_heading    = request_var('sub_heading', 0);
-					$view           = request_var('view', 1);
-					$view_all       = request_var('view_all', 1);
-					$view_groups    = request_var('view_groups', '');
+					$m_id           = $request->variable('m_id', 0);
+					$ndx            = $request->variable('ndx', 0);
+					$menu_type      = $request->variable('menu_type', '');
+					$menu_icon      = $request->variable('menu_icon', '');
+					$name           = utf8_normalize_nfc($request->variable('name', '', true));
+					$link_to        = $request->variable('link_to', '');
+					$append_sid     = $request->variable('append_sid', 0);
+					$append_uid     = $request->variable('append_uid', 0);
+					$extern         = $request->variable('extern', 0);
+					$soft_hr        = $request->variable('soft_hr', 0);
+					$sub_heading    = $request->variable('sub_heading', 0);
+					$view           = $request->variable('view', 1);
+					$view_all       = $request->variable('view_all', 1);
+					$view_groups    = $request->variable('view_groups', '');
 
 					if ($view_all)
 					{
@@ -369,19 +372,19 @@ class menus_module
 			{
 				if ($submit)
 				{
-					//$m_id     = request_var('m_id', '');
-					//$ndx      = request_var('ndx', '');
-					$menu_type     = request_var('menu_type', '');
-					$menu_icon     = request_var('menu_icon', '');
-					$name          = utf8_normalize_nfc(request_var('name', '', true));
-					$link_to       = request_var('link_to', '');
-					$append_sid    = request_var('append_sid', 0);
-					$append_uid    = request_var('append_uid', 0);
-					$extern        = request_var('extern', 0);
-					$soft_hr       = request_var('soft_hr', 0);
-					$sub_heading   = request_var('sub_heading', 0);
-					$view_all      = request_var('view_all', 1);
-					$view_groups   = request_var('view_groups', '');
+					//$m_id     = $request->variable('m_id', '');
+					//$ndx      = $request->variable('ndx', '');
+					$menu_type     = $request->variable('menu_type', '');
+					$menu_icon     = $request->variable('menu_icon', '');
+					$name          = utf8_normalize_nfc($request->variable('name', '', true));
+					$link_to       = $request->variable('link_to', '');
+					$append_sid    = $request->variable('append_sid', 0);
+					$append_uid    = $request->variable('append_uid', 0);
+					$extern        = $request->variable('extern', 0);
+					$soft_hr       = $request->variable('soft_hr', 0);
+					$sub_heading   = $request->variable('sub_heading', 0);
+					$view_all      = $request->variable('view_all', 1);
+					$view_groups   = $request->variable('view_groups', '');
 
 					if ($menu_type == NULL || $name == NULL)
 					{
@@ -460,8 +463,7 @@ class menus_module
 					'L_ICONS_REPORT'     => '',
 					'S_MENU_ICON_COUNT'  => $i,
 					'S_MENU_ICONS_LIST'  => $dirslist,
-					)
-				);
+				));
 				break;
 			}
 
@@ -584,11 +586,10 @@ function get_menu_icons()
 
 	$dirslist = ' ';
 
-	$dirs = dir($phpbb_root_path. 'images/block_images/menu');
+	$dirs = dir($phpbb_root_path. 'ext/phpbbireland/portal/images/block_images/menu');
 
 	while ($file = $dirs->read())
 	{
-		//if (stripos($file, "enu") || stripos($file, ".gif") || stripos($file, ".png") && stripos($file ,"ogo_"))
 		if (stripos($file, ".gif") || stripos($file, ".png"))
 		{
 			$dirslist .= "$file ";

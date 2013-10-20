@@ -24,29 +24,43 @@ class blocks_module
 	function main($id, $mode)
 	{
 		global $db, $user, $auth, $template, $cache, $request;
-		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx, $k_config;
+		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx, $k_config, $table_prefix;
 
-		$user->add_lang('acp/blocks');
-		$this->tpl_name = 'blocks_body';
+		define('K_BLOCKS_TABLE',	$table_prefix . 'k_blocks');
+		define('K_CONFIG_VAR_TABLE',	$table_prefix . 'k_config_vars');
+		define('K_PAGES_TABLE',	$table_prefix . 'k_pages');
+
+
+		$img_path  = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/block/';
+		$portal_js = $phpbb_root_path . 'ext/phpbbireland/portal/js/portal.js';
+
+
+		$user->add_lang_ext('phpbbireland/portal', 'k_blocks');
+		$this->tpl_name = 'acp_blocks';
 		$this->page_title = $user->lang['ACP_BLOCKS'];
 		add_form_key('blocks');
 
+
 		$error = array();
 
-		include($phpbb_root_path . 'includes/sgp_functions_admin.'.$phpEx);
+		include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.'.$phpEx);
 
 		// Define Switches for html file //
 
 
+		$action	= $request->variable('action', '');
 
-
-		$action	= request_var('action', '');
-		$submit = (isset($_POST['submit'])) ? true : false;
-
-		if ($submit && !check_form_key($form_key))
+		if ($request->is_set_post('submit'))
 		{
-			$error[] = $user->lang['FORM_INVALID'];
+			if (!check_form_key('blocks'))
+			{
+				$submit = false;
+				$mode = '';
+				trigger_error('FORM_INVALID');
+			}
+			$submit = ture;
 		}
+
 		// Do not write values if there is an error
 		if (sizeof($error))
 		{
@@ -55,28 +69,30 @@ class blocks_module
 		}
 
 		// Can not use append_sid here, the $block_id is assigned to the html but unknow to this code //
-		// Would require I add a form element and use request_var to retrieve it //
+		// Would require I add a form element and use $request->variable to retrieve it //
 		// The global $SID is available so I make use of it...?
 
 		$template->assign_vars(array(
 			'U_BACK'			=> $this->u_action,
+			'PORTAL_JS'         => $portal_js,
+			'IMG_PATH'          => $img_path,
 			'U_MANAGE_PAGES'	=> append_sid("{$phpbb_admin_path}index.$phpEx" , "i=k_pages&amp;mode=manage"),
 		));
 
 		// Set up general vars
-		$mode	= request_var('mode', '');
-		$block	= request_var('block', 0);
+		$mode	= $request->variable('mode', '');
+		$block	= $request->variable('block', 0);
 
 		// bold current row text so things are easier to follow when moving/editing etc... //
 		if (($block) ? $block : 0)
 		{
-			$sql = 'UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . (int)$block . ' WHERE config_name = "k_adm_block"';
+			$sql = 'UPDATE ' . K_CONFIG_VAR_TABLE . ' SET config_value = ' . (int)$block . ' WHERE config_name = "k_adm_block"';
 			$db->sql_query($sql);
 		}
 		else
 		{
 			$sql = 'SELECT config_name, config_value
-				FROM ' . K_BLOCKS_CONFIG_VAR_TABLE . "
+				FROM ' . K_CONFIG_VAR_TABLE . "
 				WHERE config_name = 'k_adm_block'";
 
 			$result = $db->sql_query($sql);
@@ -315,7 +331,7 @@ class blocks_module
 			{
 				if ($submit)
 				{
-					if (request_var('html_file_name','') == "" || request_var('title', '') == "")
+					if ($request->variable('html_file_name','') == "" || $request->variable('title', '') == "")
 					{
 						$message = $user->lang['MISSING_BLOCK_DATA'];
 
@@ -325,21 +341,21 @@ class blocks_module
 						return;
 					}
 
-					$title             = utf8_normalize_nfc(request_var('title', '', true));
-					$position          = request_var('position', '');
-					$active            = request_var('active', 1);
-					$type              = request_var('type', '');
-					$scroll            = request_var('scroll', 0);
-					$view_groups       = request_var('view_groups', '');
-					$view_all          = request_var('view_all', 1);
-					$view_pages        = request_var('view_pages', '');
-					$html_file_name    = request_var('html_file_name', '');
-					$var_file_name     = request_var('var_file_name', '');
-					$img_file_name     = request_var('img_file_name', '');
-					$has_vars          = request_var('has_vars', 0);
-					$minimod_based     = request_var('minimod_based', 0);
-					$mod_block_id      = request_var('mod_block_id', 0);
-					$block_cache_time  = request_var('block_cache_time', 600);
+					$title             = utf8_normalize_nfc($request->variable('title', '', true));
+					$position          = $request->variable('position', '');
+					$active            = $request->variable('active', 1);
+					$type              = $request->variable('type', '');
+					$scroll            = $request->variable('scroll', 0);
+					$view_groups       = $request->variable('view_groups', '');
+					$view_all          = $request->variable('view_all', 1);
+					$view_pages        = $request->variable('view_pages', '');
+					$html_file_name    = $request->variable('html_file_name', '');
+					$var_file_name     = $request->variable('var_file_name', '');
+					$img_file_name     = $request->variable('img_file_name', '');
+					$has_vars          = $request->variable('has_vars', 0);
+					$minimod_based     = $request->variable('minimod_based', 0);
+					$mod_block_id      = $request->variable('mod_block_id', 0);
+					$block_cache_time  = $request->variable('block_cache_time', 600);
 
 					if ($html_file_name == '...')
 					{
@@ -354,7 +370,7 @@ class blocks_module
 						$mod_block_id = '0';
 					}
 
-					$view_page_id = request_var('view_page_id', array(0));
+					$view_page_id = $request->variable('view_page_id', array(0));
 
 					for ($i = 0; $i < count($view_page_id); $i++)
 					{
@@ -426,9 +442,7 @@ class blocks_module
 
 					$dirslist = '... '; // use ... for empty //
 
-					$block_folder = $phpbb_root_path . 'styles/_portal_common/template/blocks/index.html';
-
-					$dirs = dir_file_exists($phpbb_root_path . 'styles/_portal_common/template/blocks');
+					$dirs = dir_file_exists($phpbb_root_path . 'ext/phpbbireland/portal/styles/common/template/blocks');
 
 					while ($file = $dirs->read())
 					{
@@ -453,7 +467,7 @@ class blocks_module
 
 					$dirslist = ''; // use ... for empty //
 
-					$dirs = dir_file_exists($phpbb_root_path . 'images/block_images/block');
+					$dirs = dir_file_exists($phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/block');
 
 					while ($file = $dirs->read())
 					{
@@ -468,7 +482,7 @@ class blocks_module
 					$dirslist = explode(" ", $dirslist);
 					sort($dirslist);
 
-					for ($i=0; $i < sizeof($dirslist); $i++)
+					for ($i = 0; $i < sizeof($dirslist); $i++)
 					{
 						if ($dirslist[$i] != '')
 						{
@@ -491,25 +505,25 @@ class blocks_module
 			{
 				if ($submit)
 				{
-					$id                = request_var('id', 0);
-					$ndx               = request_var('ndx', 0);
-					$title             = utf8_normalize_nfc(request_var('title', '', true));
-					$position          = request_var('position', '');
-					$type              = request_var('type', '');
-					$active            = request_var('active', 1);
-					$view_groups       = request_var('view_groups', '');
-					$view_all          = request_var('view_all', 1);
-					$view_pages        = request_var('view_pages', '');
-					$scroll            = request_var('scroll', 0);
-					$has_vars          = request_var('has_vars', 0);
-					$minimod_based     = request_var('minimod_based', 0);
-					$mod_block_id      = request_var('mod_block_id', 0);
-					$html_file_name    = request_var('html_file_name', '');
-					$var_file_name     = request_var('var_file_name', '');
-					$img_file_name     = request_var('img_file_name', '');
-					$block_cache_time  = request_var('block_cache_time', 600);
+					$id                = $request->variable('id', 0);
+					$ndx               = $request->variable('ndx', 0);
+					$title             = utf8_normalize_nfc($request->variable('title', '', true));
+					$position          = $request->variable('position', '');
+					$type              = $request->variable('type', '');
+					$active            = $request->variable('active', 1);
+					$view_groups       = $request->variable('view_groups', '');
+					$view_all          = $request->variable('view_all', 1);
+					$view_pages        = $request->variable('view_pages', '');
+					$scroll            = $request->variable('scroll', 0);
+					$has_vars          = $request->variable('has_vars', 0);
+					$minimod_based     = $request->variable('minimod_based', 0);
+					$mod_block_id      = $request->variable('mod_block_id', 0);
+					$html_file_name    = $request->variable('html_file_name', '');
+					$var_file_name     = $request->variable('var_file_name', '');
+					$img_file_name     = $request->variable('img_file_name', '');
+					$block_cache_time  = $request->variable('block_cache_time', 600);
 
-					$view_page_id = request_var('view_page_id', array(0));
+					$view_page_id = $request->variable('view_page_id', array(0));
 
 					for ($i = 0; $i < count($view_page_id); $i++)
 					{
@@ -618,7 +632,7 @@ class blocks_module
 
 				$dirslist = '... '; // use ... for empty //
 
-				$dirs = dir_file_exists($phpbb_root_path . 'styles/_portal_common/template/blocks');
+				$dirs = dir_file_exists($phpbb_root_path . 'ext/phpbbireland/portal/styles/common/template/blocks');
 
 				while ($file = $dirs->read())
 				{
@@ -644,7 +658,7 @@ class blocks_module
 
 				$dirslist = '';
 
-				$dirs = dir_file_exists($phpbb_root_path . 'images/block_images/block');
+				$dirs = dir_file_exists($phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/block');
 
 				while ($file = $dirs->read())
 				{
@@ -1033,8 +1047,7 @@ function get_all_pages($id)
 			'PAGE_NAME'  => $page_name,
 			'PAGE_ID'    => $page_id,
 			'IS_CHECKED' => ($id) ? (in_array($page_id, $arr)) ? true : false : '',
-			)
-		);
+		));
 	}
 	$db->sql_freeresult($result);
 }
@@ -1066,11 +1079,11 @@ function which_group($id)
 
 function get_all_vars_files($block)
 {
-	global $template, $user, $phpbb_admin_path;
+	global $template, $user, $phpbb_admin_path, $phpbb_root_path;
 
 	$dirslist = ' '; // use ... for empty //
 
-	$dirs = dir_file_exists($phpbb_admin_path . '/style/k_block_vars');
+	$dirs = dir_file_exists($phpbb_root_path . 'ext/phpbbireland/portal/adm/style/k_block_vars');
 
 	while ($file = $dirs->read())
 	{
@@ -1100,6 +1113,7 @@ function get_all_vars_files($block)
 
 function delete_this_block_cached_file($thisfile)
 {
+	return;
 	global $cache, $phpbb_root_path, $user;
 
 	$thisfile .= '.php';
@@ -1122,6 +1136,7 @@ function delete_this_block_cached_file($thisfile)
 
 function delete_all_block_cached_files()
 {
+	return;
 	global $cache, $phpbb_root_path, $user;
 
 	$dirslist = '';
