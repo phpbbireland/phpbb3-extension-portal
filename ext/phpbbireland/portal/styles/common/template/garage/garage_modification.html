@@ -1,0 +1,279 @@
+<!-- INCLUDE overall_header.html -->
+<script type="text/javascript" src="{T_TEMPLATE_PATH}/garage/garage_ajax.js"></script>
+<script type="text/javascript">
+var ajax = new sack();
+
+//Function To Build Product Dropdown
+function get_product_list(sel)
+{
+	//Setup Form Object
+	var modification = document.getElementById("modification");
+
+	//Get Selected Product Manufacturer
+	var manufacturer_id = sel.options[sel.selectedIndex].value;
+
+	//We Need To Make Sure A Category Is Selected
+	var category_id = document.getElementById("category_id");
+	if (category_id.value < 1)
+	{
+		formErrors = "{L_EMPTY_TITLE}";
+		if (formErrors) 
+		{
+			//We Need To Set Manufaucture Dropdown Back To Select Message
+			// PLACE CODE HERE ;)
+			alert(formErrors);
+		} 
+	}
+
+	//Since We Know We Have A Valid Category Selected Save It
+	var category_id_value = category_id.value;
+
+	//Set The Product List To Empty Ready To Recieve Options
+	document.getElementById('product_id').options.length = 0;
+
+	//Call Script To Run Products Based On Category & Manufacturer
+	ajax.requestFile = 'garage.php?mode=get_product_list&category_id='+category_id_value+'&manufacturer_id='+manufacturer_id;
+	ajax.onCompletion = build_product_list;
+	ajax.runAJAX();
+}
+
+//Function Used For Inital Page Display On Editting Modification To Build Correctly Selected Dropdowns
+function update_product_list(category_id, manufacturer_id, product_id)
+{
+
+	document.getElementById('product_id').options.length = 0;
+	ajax.requestFile = 'garage.php?mode=get_product_list&category_id='+category_id+'&manufacturer_id='+manufacturer_id+'&product_id='+product_id;
+	ajax.onCompletion = build_product_list;
+	ajax.runAJAX();
+}
+
+//Update Product List If Manufacturer Is Valid To Show Products For New Category
+function category_change(sel)
+{
+	var category_id = sel.options[sel.selectedIndex].value;
+	var manufacturer_id = document.getElementById("manufacturer_id");
+	var manufacturer_id_value = manufacturer_id.value;
+
+	//If We Have Two Valid Selections Update Prouct List
+	if (category_id > 0 && manufacturer_id_value > 0)
+	{
+
+		document.getElementById('product_id').options.length = 0;
+		ajax.requestFile = 'garage.php?mode=get_product_list&category_id='+category_id+'&manufacturer_id='+manufacturer_id_value;
+		ajax.onCompletion = build_product_list;
+		ajax.runAJAX();
+	}
+	else
+	{
+		document.getElementById('product_id').options.length = 0;
+	}
+
+
+}
+
+//Actually Build The Product Listed Based On Returned Values
+function build_product_list()
+{
+	var obj = document.getElementById('product_id');
+	eval(ajax.response);
+} 
+</script>
+
+<!-- IF U_MCP -->
+	<div id="pageheader">
+		<p class="linkmcp">[ <a href="{U_MCP}">{L_MCP}</a> ]</p>
+	</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE garage/garage_header.html -->
+
+<!-- INCLUDE garage/garage_menu.html -->
+
+<div id="garage-main">
+	<div class="panel">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+	
+			<div id="gtabs">
+				<ul>
+					<li class="garage_tab" id="tab000"><a href="#data" onclick="swap_options('0','0','0');"><span class="tabbg">{L_MODIFICATION}</span></a></li>
+					<!-- IF U_MANAGE_GALLERY --><li class="garage_tab" id="tab001"><a href="#images" onclick="swap_options('0','0','1');"><span class="tabbg">{L_IMAGES}</span></a></li><!-- ENDIF -->
+				</ul>
+			</div>
+
+			<div class="panel bg3">
+				<div class="inner">
+					<span class="corners-top"><span></span></span>
+
+					<div id="options000" style="display: none;">
+						<div class="panel">
+							<div class="inner">
+								<span class="corners-top"><span></span></span>
+
+								<form id="modification" enctype="multipart/form-data" method="post" action="{S_MODE_ACTION}">
+								<h3>{L_TITLE}</h3>
+								<fieldset>
+									<dl>
+										<dt><b>{L_CATEGORY}</b>&nbsp;<span style="color:#FF0000">[{L_REQUIRED}]</span></dt>
+										<dd><select id="category_id" name="category_id" onchange="category_change(this)" ><option value="">{L_SELECT_CATEGORY}</option><option value="">------</option><!-- BEGIN category--><option value="{category.VALUE}" <!-- IF category.S_SELECTED -->selected="selected"<!-- ENDIF -->>{category.TEXT}</option><!-- END category --></select>&nbsp;</dd>
+									</dl>
+									<dl>
+										<dt><b>{L_MANUFACTURER}</b>&nbsp;<span style="color:#FF0000">[{L_REQUIRED}]</span></dt>
+										<dd><select id="manufacturer_id" name="manufacturer_id" onchange="get_product_list(this)" ><option value="">{L_SELECT_MANUFACTURER}</option><option value="">------</option><!-- BEGIN manufacturer--><option value="{manufacturer.VALUE}" <!-- IF manufacturer.S_SELECTED -->selected="selected"<!-- ENDIF -->>{manufacturer.TEXT}</option><!-- END manufacturer --></select>&nbsp;{L_NOT_LISTED_YET}<a href="{U_SUBMIT_BUSINESS_PRODUCT}">{L_HERE}</a></dd>
+									</dl>
+									<dl>
+										<dt><b>{L_PRODUCT}</b>&nbsp;<span style="color:#FF0000">[{L_REQUIRED}]</span></dt>
+										<dd><select id="product_id" name="product_id"><option value="">{L_SELECT_PRODUCT}</option><option value="">------</option></select>&nbsp;&nbsp;{L_NOT_LISTED_YET}<a href="{U_SUBMIT_PRODUCT}">{L_HERE}</a>&nbsp;&nbsp;&nbsp;<b>{L_RATING}</b>&nbsp;<select id="product_rating" name="product_rating"><option value="">{L_SELECT_RATING}</option><option value="">------</option><!-- BEGIN product_rating --><option value="{product_rating.VALUE}" <!-- IF product_rating.S_SELECTED -->selected="selected"<!-- ENDIF -->>{product_rating.TEXT}</option><!-- END product_rating --></select></dd>
+									</dl>
+									<dl>
+										<dt><b>{L_PURCHASED_FROM}</b>&nbsp;<span style="color:#FF0000">[{L_REQUIRED}]</span></dt>
+									  	<dd><select id="shop_id" name="shop_id"><option value="">{L_SELECT_SHOP}</option><option value="">------</option><!-- BEGIN shop --><option value="{shop.VALUE}" <!-- IF shop.S_SELECTED -->selected="selected"<!-- ENDIF -->>{shop.TEXT}</option><!-- END shop --></select>&nbsp;{L_NOT_LISTED_YET}<a href="{U_SUBMIT_BUSINESS_SHOP}">{L_HERE}</a></dd>
+									</dl>
+									<dl>
+										<dt><b>{L_PURCHASED_PRICE}</b></dt>
+										<dd>{CURRENCY}{L_COLEN}<input name="price" type="text" class="inputbox percision6" maxlength="8" value="{PRICE}" />{L_DECIMAL_SEPERATOR}<input name="price_decimal" type="text" class="inputbox percision2" maxlength="2" value="{PRICE_DECIMAL}" />&nbsp;<b>{L_PURCHASE_RATING}</b>&nbsp;<select id="purchase_rating" name="purchase_rating"><option value="">{L_SELECT_RATING}</option><option value="">------</option><!-- BEGIN purchase_rating --><option value="{purchase_rating.VALUE}" <!-- IF purchase_rating.S_SELECTED -->selected="selected"<!-- ENDIF -->>{purchase_rating.TEXT}</option><!-- END purchase_rating --></select></dd>
+									</dl>	
+									<dl>
+										<dt><b>{L_INSTALLED_BY}</b>&nbsp;<span style="color:#FF0000">[{L_REQUIRED}]</span></dt>
+									  	<dd><select id="installer_id" name="installer_id"><option value="">{L_SELECT_GARAGE}</option><option value="">------</option><!-- BEGIN garage --><option value="{garage.VALUE}" <!-- IF garage.S_SELECTED -->selected="selected"<!-- ENDIF -->>{garage.TEXT}</option><!-- END garage --></select>&nbsp;{L_NOT_LISTED_YET}<a href="{U_SUBMIT_BUSINESS_GARAGE}">{L_HERE}</a></dd>
+									</dl>
+									<dl>
+										<dt><b>{L_INSTALLATION_PRICE}</b></dt>
+										<dd>{CURRENCY}{L_COLEN}<input name="install_price" type="text" class="inputbox percision6" maxlength="8" value="{INSTALL_PRICE}" />{L_DECIMAL_SEPERATOR}<input name="install_price_decimal" type="text" class="inputbox percision2" maxlength="2" value="{INSTALL_PRICE_DECIMAL}" />&nbsp;<b>{L_INSTALLATION_RATING}</b>&nbsp;<select id="install_rating" name="install_rating"><option value="">{L_SELECT_RATING}</option><option value="">------</option><!-- BEGIN install_rating --><option value="{install_rating.VALUE}" <!-- IF install_rating.S_SELECTED -->selected="selected"<!-- ENDIF -->>{install_rating.TEXT}</option><!-- END install_rating --></select></dd>
+									</dl>
+									<dl>
+										<dt><b>{L_DESCRIPTION}</b></dt>
+										<dd><textarea name="comments" cols="60" rows="4" class="inputbox">{COMMENTS}</textarea></dd>
+									</dl>
+									<dl>
+										<dt><b>{L_INSTALL_COMMENTS}</b><br />{L_ONLY_SHOW_IN_REVIEW}</dt>
+										<dd><textarea name="install_comments" cols="60" rows="4" class="inputbox">{INSTALL_COMMENTS}</textarea></dd>
+									</dl>
+
+									<!-- IF ! MID -->
+										<!-- INCLUDE garage/garage_image_attach.html -->
+									<!-- ENDIF -->
+
+								</fieldset>
+
+								<fieldset>
+									<input type="hidden" value="" name="redirect" />
+									<input type="hidden" value="{VID}" name="VID" />
+									<input type="hidden" value="{MID}" name="MID" />
+									<input type="hidden" value="" name="primary" />
+									<input type="hidden" value="" name="secondary" />
+									<input type="hidden" value="" name="tertiary" />
+								</fieldset>
+	
+								<fieldset class="submit-buttons">
+									<input type="reset" value="{L_RESET}" name="reset" class="button2" />&nbsp; 
+									<input type="submit" name="submit2" value="{L_BUTTON}" class="button1" />
+								</fieldset>
+								{S_FORM_TOKEN}
+								</form>
+								<span class="corners-bottom"><span></span></span>
+							</div>
+						</div>
+					</div>
+
+					<!-- IF MID -->
+					<div id="options001" style="display: none;">
+						<div class="panel">
+							<div class="inner">
+								<span class="corners-top"><span></span></span>
+								<!-- INCLUDE garage/garage_manage_gallery.html -->
+								<span class="corners-bottom"><span></span></span>
+							</div>
+						</div>
+					</div>
+					<!-- ENDIF -->
+					<span class="corners-bottom"><span></span></span>
+				</div>
+			</div>
+		</div>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+
+<script type="text/javascript">
+<!--
+//Fill The Product Dropdown If We Are Editing + Select Correct One
+update_product_list('{CATEGORY_ID}', '{MANUFACTURER_ID}', '{PRODUCT_ID}');
+
+function add_manufacturer ( tertiary )
+{
+	var modification = document.getElementById("modification");
+	modification.action = '{S_MODE_USER_SUBMIT}';
+	modification.primary.value = 'modification' ;
+	modification.secondary.value = 'manufacturer' ;
+	modification.tertiary.value = tertiary ;
+	modification.submit() ;
+}
+
+function add_product ( tertiary )
+{
+	var modification = document.getElementById("modification");
+	modification.action = '{S_MODE_USER_SUBMIT}';
+	modification.primary.value = 'modification' ;
+	modification.secondary.value = 'product' ;
+	modification.tertiary.value = tertiary ;
+	modification.submit() ;
+}
+
+function add_shop ( tertiary )
+{
+	var modification = document.getElementById("modification");
+	modification.action = '{S_MODE_USER_SUBMIT}';
+	modification.primary.value = 'modification' ;
+	modification.secondary.value = 'shop' ;
+	modification.tertiary.value = tertiary ;
+	modification.submit() ;
+}
+
+function add_garage ( tertiary )
+{
+	var modification = document.getElementById("modification");
+	modification.action = '{S_MODE_USER_SUBMIT}';
+	modification.primary.value = 'modification' ;
+	modification.secondary.value = 'garage' ;
+	modification.tertiary.value = tertiary ;
+	modification.submit() ;
+}
+
+
+//-->
+</script>
+
+<script type="text/javascript">
+<!--
+	var lowest_tab = '0';
+	var active_pmask = '0';
+	var active_fmask = '0';
+	if (document.location.hash == "")
+	{
+		active_cat = lowest_tab;
+		dE('options00' + lowest_tab , 0)
+		var active_tab = document.getElementById("tab00" + lowest_tab);
+	}
+	else if (document.location.hash == "#data")
+	{
+		active_cat = '0';
+		dE('options000', 0)
+		var active_tab = document.getElementById("tab000");
+	}
+	else if (document.location.hash == "#images")
+	{
+		active_cat = '1';
+		dE('options001', 0)
+		var active_tab = document.getElementById("tab001");
+	}
+
+	var id = '000';
+	active_tab.setAttribute("class", "garage_tab activetab");
+
+//-->
+</script>
+
+<!-- INCLUDE garage/garage_footer.html -->
+
+<!-- INCLUDE overall_footer.html -->

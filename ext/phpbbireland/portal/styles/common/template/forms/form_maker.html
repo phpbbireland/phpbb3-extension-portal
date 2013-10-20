@@ -1,0 +1,79 @@
+<link rel="stylesheet" type="text/css" href="{T_THEME_PATH}/form_mod.css" />
+<script type="text/javascript">
+// <![CDATA[
+
+/* Copyrignt phpbbireland.com 2013 */
+
+function postform_check()
+{
+	if (document.forms.postform.subject.value == '')
+	{
+		alert('{LA_SUBJECT_REQUIRED}');
+		document.forms.postform.subject.focus();
+		return(false);
+	}
+}
+
+// ]]>
+</script>
+
+<!-- IF MODE == 'post' -->
+<div id="thisform" style="display:none; width:auto; margin-left:auto; margin-right:auto; margin-top:10px; border-radius: 5px;" class="post bg1">
+
+	<div  style="width:auto; margin-left:auto; margin-right:auto; margin-top:10px; margin-bottom:10px; border-radius: 5px; text-align:left; padding: 5px" class="post bg1">
+		<p style="text-align:center"><span class="mandatory">*</span> {L_MANDATORY}</p>
+		<fieldset class="fields2" style="border-radius: 5px;">
+			<!-- BEGIN form_apptemplate -->
+			<dl>
+				<dt><label for="templatefield_{form_apptemplate.NAME}">{form_apptemplate.NAME}:</label>{form_apptemplate.MANDATORY}</dt>
+				<dd>{form_apptemplate.TYPE}</dd>
+			</dl>
+			<!-- END form_apptemplate -->
+		</fieldset>
+	</div>
+
+	<div style="width:auto; margin-left:auto; margin-right:auto; margin-top:10px; margin-bottom:10px; border-radius: 5px; text-align:center; padding: 5px" class="post bg1">
+		{L_CHECKBOX_MSG}<br />{L_MOREINFO_MSG}
+	</div>
+
+	<div style="width:auto; margin-left:auto; margin-right:auto; margin-top:10px; margin-bottom:10px; border-radius: 5px; text-align:left;" class="post bg1">
+		<fieldset class="submit-buttons">
+			<input type="submit" tabindex="5" title="{L_FORM_MOD_PREVIEW}" name="preview" value="{L_PREVIEW}" class="button1"<!-- IF not S_PRIVMSGS --> onclick="document.getElementById('postform').action += '#preview';"<!-- ENDIF --> />&nbsp;
+			<input type="submit" accesskey="s" title="{L_FORM_MOD_SUBMIT}" name="post" value="{L_SUBMIT}" class="button1 default-submit-action" onclick="return postform_check();" />&nbsp;
+			<input type="reset" name="reset" value="{L_RESET}" class="button1" />
+			{S_FORM_TOKEN}
+			<input type="button" class="button2" accesskey="f" name="useform" value="{L_CLOSE_FORM}" style="font-weight:normal; width: 50px" onclick="toggle_validation();ShowHide('thisform','message-box');ShowHide('form_hide','format-buttons');ShowHide('smiley-box');" title="{L_CLOSE_FORM_EXPLAIN}" />
+		</fieldset>
+	</div>
+</div>
+<br />
+<div id="lblValues"></div>
+
+<script type="text/javascript">
+// <![CDATA[
+
+	function toggle_validation()
+	{
+		/*
+			Turn off postform html5 validation so we can switch on/off for our new form...
+			Otherwise posting for new topics (in this forum) will only work if the new form is used...
+		*/
+
+		var $_hidden = 0;
+		var $_empty = 0;
+		var myform = 'postform';
+
+		$_hidden = is_hidden('thisform');
+
+		if ($_hidden == 0)
+		{
+			document.forms.postform.noValidate=true;
+		}
+		else
+		{
+			document.forms.postform.noValidate=false;
+		}
+	}
+// ]]>
+</script>
+<!-- ENDIF -->

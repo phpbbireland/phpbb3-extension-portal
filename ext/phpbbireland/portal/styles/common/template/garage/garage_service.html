@@ -1,0 +1,99 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- IF U_MCP -->
+	<div id="pageheader">
+		<p class="linkmcp">[ <a href="{U_MCP}">{L_MCP}</a> ]</p>
+	</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE garage/garage_header.html -->
+
+<!-- INCLUDE garage/garage_menu.html -->
+
+<div id="garage-main">
+	<div class="panel">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+	
+			<div id="gtabs">
+				<ul>
+					<li class="garage_preset_yes activetab" id="tab000"><a href="#data"><span class="tabbg">{L_SERVICE}</span></a></li>
+				</ul>
+			</div>
+
+			<div class="panel bg3">
+				<div class="inner">
+					<span class="corners-top"><span></span></span>
+
+					<div id="options000" style="display: block;">
+						<div class="panel">
+							<div class="inner">
+								<span class="corners-top"><span></span></span>
+								<form id="service" enctype="multipart/form-data" method="post" action="{S_MODE_ACTION}">
+								<h3>{L_TITLE}</h3>
+								<fieldset>
+									<dl>
+										<dt><b>{L_SERVICED_BY}</b>&nbsp;<span style="color:#FF0000">[{L_REQUIRED}]</span></dt>
+								  		<dd><select id="garage_id" name="garage_id"><option value="">{L_SELECT_GARAGE}</option><option value="">------</option><!-- BEGIN garage --><option value="{garage.VALUE}" <!-- IF garage.S_SELECTED -->selected="selected"<!-- ENDIF -->>{garage.TEXT}</option><!-- END garage --></select>&nbsp;<span class="gensmall">{L_NOT_LISTED_YET}<a href="{U_SUBMIT_BUSINESS_GARAGE}">{L_HERE}</a></span></dd>
+									</dl>
+									<dl>
+										<dt><b>{L_SERVICE_TYPE}</b>&nbsp;<span style="color:#FF0000">[{L_REQUIRED}]</span></dt>
+							  			<dd><select id="type_id" name="type_id"><option value="">{L_SELECT_SERVICE_TYPE}</option><option value="">------</option><!-- BEGIN service_type --><option value="{service_type.VALUE}" <!-- IF service_type.S_SELECTED -->selected="selected"<!-- ENDIF -->>{service_type.TEXT}</option><!-- END service_type --></select></dd>
+									</dl>
+									<dl>
+										<dt><b>{L_SERVICE_PRICE}</b></dt>
+										<dd>{CURRENCY}{L_COLEN}<input name="price" type="text" class="inputbox percision6" maxlength="8" value="{PRICE}" />{L_DECIMAL_SEPERATOR}<input name="price_decimal" type="text" class="inputbox percision2" maxlength="2" value="{PRICE_DECIMAL}" /></dd>
+									</dl>
+									<dl>
+										<dt><b>{L_SERVICE_RATING}</b></dt>
+										<dd><select id="rating" name="rating"><option value="">{L_SELECT_RATING}</option><option value="">------</option><!-- BEGIN rating --><option value="{rating.VALUE}" <!-- IF rating.S_SELECTED -->selected="selected"<!-- ENDIF -->>{rating.TEXT}</option><!-- END rating --></select></dd>
+									</dl>
+									<dl>
+										<dt><b>{L_MILEAGE_AT_SERVICE}</b>&nbsp;<span style="color:#FF0000">[{L_REQUIRED}]</span></dt>
+										<dd><input name="mileage" type="text" class="inputbox autowidth" size="10" value="{MILEAGE}" /></dd>
+									</dl>
+								</fieldset>
+		
+								<fieldset>
+									<input type="hidden" value="{VID}" name="VID" />
+									<input type="hidden" value="{SVID}" name="SVID" />
+									<input type="hidden" value="" name="primary" />
+									<input type="hidden" value="" name="secondary" />
+									<input type="hidden" value="" name="tertiary" />
+								</fieldset>
+
+								<fieldset class="submit-buttons">
+									<input type="reset" value="{L_RESET}" name="reset" class="button2" />&nbsp; 
+									<input type="submit" name="submit2" value="{L_BUTTON}" class="button1" />
+								</fieldset>
+								{S_FORM_TOKEN}
+								</form>
+								<span class="corners-bottom"><span></span></span>
+							</div>
+						</div>
+					</div>
+					<span class="corners-bottom"><span></span></span>
+				</div>
+			</div>
+		</div>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+
+<script type="text/javascript">
+<!--
+function add_garage ( tertiary )
+{
+	var service = document.getElementById("service");
+	service.action = '{S_MODE_USER_SUBMIT}';
+	service.primary.value = 'service' ;
+	service.secondary.value = '' ;
+	service.tertiary.value = tertiary ;
+	service.submit() ;
+}
+-->
+</script>
+
+<!-- INCLUDE garage/garage_footer.html -->
+
+<!-- INCLUDE overall_footer.html -->

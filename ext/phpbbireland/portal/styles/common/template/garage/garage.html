@@ -1,0 +1,59 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- IF U_MCP -->
+<div id="pageheader">
+	<p class="linkmcp">[ <a href="{U_MCP}">{L_MCP}</a> ]</p>
+</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE garage/garage_header.html -->
+
+<!-- INCLUDE garage/garage_menu.html -->
+
+<div id="garage-main">
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+
+			<h3>{L_WELCOME}</h3>
+			<table width="100%" border="0" cellspacing="1" cellpadding="4" class="tablebg">
+				<tr>
+					<!-- IF S_FEATURED_VEHICLE -->
+					<td class="row1" align="center">
+						<table cellpadding="3" cellspacing="1" border="0" class="tablebg">
+						<tr>
+							<th class="thHead" align="center" colspan="2">{L_FEATURED_VEHICLE}</th>
+						</tr>
+						<tr>
+							<td class="row1" align="center">{FEATURED_DESCRIPTION}<br /><!-- IF U_VIEW_IMAGE --><a href="{U_VIEW_IMAGE}" rel="lightbox" title="{IMAGE_TITLE}"><img src="{FEATURED_THUMB}" alt="" /></a><br /><!-- ENDIF --><a href="{U_VIEW_VEHICLE}">{VEHICLE}</a><br />{L_OWNER}{L_COLEN}<b><a href="{U_VIEW_PROFILE}" <!-- IF USERNAME_COLOUR --> style="color: {USERNAME_COLOUR}"<!-- ENDIF -->>{USERNAME}</a></b></td>
+						</tr>
+						</table>
+					</td>
+					<td class="row1">{L_WELCOME_TEXT}<br /><br />{L_TOTAL_VEHICLES}{L_COLEN}<b>{TOTAL_VEHICLES}</b><br />{L_TOTAL_MODIFICATIONS}{L_COLEN}<b>{TOTAL_MODIFICATIONS}</b><br />{L_TOTAL_COMMENTS}{L_COLEN}<b>{TOTAL_COMMENTS}</b><br />{L_TOTAL_VIEWS}{L_COLEN}<b>{TOTAL_VIEWS}</b></td>
+					<!-- ELSE -->
+					<td class="row1">{L_WELCOME_TEXT}<br /><br />{L_TOTAL_VEHICLES}{L_COLEN}<b>{TOTAL_VEHICLES}</b><br />{L_TOTAL_MODIFICATIONS}{L_COLEN}<b>{TOTAL_MODIFICATIONS}</b><br />{L_TOTAL_COMMENTS}{L_COLEN}<b>{TOTAL_COMMENTS}</b><br />{L_TOTAL_VIEWS}{L_COLEN}<b>{TOTAL_VIEWS}</b></td>
+					<!-- ENDIF -->
+				</tr>
+			</table>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<!-- IF S_INDEX_COLUMNS == 1 -->
+<!-- INCLUDE garage/garage_column_1.html -->
+<!-- ENDIF -->
+<!-- IF S_INDEX_COLUMNS == 2 -->
+<!-- INCLUDE garage/garage_column_2.html -->
+<!-- ENDIF -->
+<!-- IF S_INDEX_COLUMNS == 3 -->
+<!-- INCLUDE garage/garage_column_3.html -->
+<!-- ENDIF -->
+<!-- IF S_INDEX_COLUMNS == 4 -->
+<!-- INCLUDE garage/garage_column_4.html -->
+<!-- ENDIF -->
+
+</div>
+<div class="clear"/>
+
+<!-- INCLUDE garage/garage_footer.html -->
+
+<!-- INCLUDE overall_footer.html -->

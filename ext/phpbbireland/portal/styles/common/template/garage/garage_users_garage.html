@@ -1,0 +1,40 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- IF U_MCP -->
+	<div id="pageheader">
+		<p class="linkmcp">[ <a href="{U_MCP}">{L_MCP}</a> ]</p>
+	</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE garage/garage_header.html -->
+
+<!-- INCLUDE garage/garage_menu.html -->
+
+<div id="garage-main">
+	<div class="panel">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+			<table width="100%" cellpadding="2" cellspacing="1" border="0" class="tablebg">
+			<thead>
+				<tr>
+					<th>{L_MY_VEHICLES}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- IF S_GARAGE_DISPLAY_CREATE_VEHICLE -->
+				<tr>
+					<td class="row1" align="center"><span class="genmed"><a href="{U_GARAGE_CREATE_VEHICLE}">{CREATE_VEHICLE}</a></span></td>
+				</tr>
+				<!-- ENDIF -->
+				<!-- BEGIN user_vehicles -->
+				<tr>
+					<td class="row1" align="left"><span class="genmed"><a href="{user_vehicles.U_VIEW_VEHICLE}">{user_vehicles.VEHICLE}</a></span></td>
+				</tr>
+				<!-- END user_vehicles -->
+			</tbody>
+			</table>
+		</td>
+
+<!-- INCLUDE garage/garage_footer.html -->
+
+<!-- INCLUDE overall_footer.html -->

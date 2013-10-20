@@ -1,0 +1,54 @@
+			<form enctype="multipart/form-data" method="post" id="manage_gallery" action="{S_IMAGE_MODE_ACTION}">
+				<fieldset>
+					<!-- INCLUDE garage/garage_image_attach.html -->
+				</fieldset>
+
+				<fieldset>
+					<input type="hidden" value="{VID}" name="VID" /><input type="hidden" value="{MID}" name="MID" /><input type="hidden" value="{QMID}" name="QMID" /><input type="hidden" value="{DID}" name="DID" /><input type="hidden" value="{LID}" name="LID" />
+				</fieldset>
+
+				<fieldset class="submit-buttons">
+					<input type="submit" name="add_file" value="{L_ADD_NEW_IMAGE}" class="button1" />
+				</fieldset>
+
+
+				<div class="forabg">
+					<div class="inner">
+						<span class="corners-top"><span></span></span>
+						<ul class="topiclist">
+							<li class="header">
+								<dl>
+									<dd class="index_block_header">{L_IMAGE}</dd>
+									<dd class="index_block_header">{L_REMOVE_IMAGE}</dd>
+									<dd class="index_block_header">{L_HILITE_IMAGE}</dd>
+								</dl>
+							</li>
+						</ul>
+						<ul class="topiclist forums">
+							<!-- BEGIN pic_row -->
+							<!-- IF pic_row.S_ROW_COUNT is even --><li class="row bg1"><!-- ELSE --><li class="row bg2"><!-- ENDIF -->
+								<dl>
+									<dd class="index_block"><a href="{pic_row.U_IMAGE}" rel="lightbox" title="{pic_row.IMAGE_TITLE}"><img src="{pic_row.IMAGE}" alt="" /></a></dd>
+									<dd class="index_block"><a href="{pic_row.U_REMOVE_IMAGE}">{L_REMOVE_IMAGE}</a></dd>
+									<!-- IF pic_row.U_SET_HILITE -->
+									<dd class="index_block"><a href="{pic_row.U_SET_HILITE}">{L_SET_HILITE_IMAGE}</a></dd>
+									<!-- ELSE -->
+									<dd class="index_block"><i>{L_CURRENT_HILITE_IMAGE}</i></dd>
+									<!-- ENDIF -->
+								</dl>
+							</li>
+							<!-- BEGINELSE -->
+							<li class="row bg1">
+								<dl>
+									<dd class="index_block"><strong>{L_NO_ITEM_TO_LIST}</strong></dd>
+								</dl>
+							</li>
+							<!-- END pic_row -->
+						</ul>
+
+						<span class="corners-bottom"><span></span></span>
+					</div>
+				</div>
+
+			{S_FORM_TOKEN}
+			</form>

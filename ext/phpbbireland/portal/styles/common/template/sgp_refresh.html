@@ -1,0 +1,90 @@
+<!-- INCLUDE overall_header.html -->
+<!-- IF S_IS_ADMIN -->
+<br />
+<div class="wrapper" style="width:90%; margin:0 auto;">
+	<div class="inner"><span class="corners-top"><span></span></span>
+
+		<div class="block_header" style="text-align:center;"><h3>{L_SGP_REFRESH_ALL}</h3></div>
+
+		<div style="margin-top:10px; margin-bottom:10px;">
+			<div class="box" style="text-align:center;">{L_REFRESHING_TEMPLATES}</div>
+
+			<!-- BEGIN template_row -->
+				<!-- IF not template_row.S_SGPRA_TEMPLATE -->
+					<div class="bg1" >{template_row.SGPRA_TEMPLATE_ERROR}</div>
+				<!-- ENDIF -->
+				<!-- IF not template_row.S_SGPRA_TEMPLATE_DATA -->
+					<div class="bg1" >{template_row.SGPRA_TEMPLATE_DATA_ERROR}</div>
+				<!-- ENDIF -->
+				<!-- IF template_row.S_SGPRA_TEMPLATE -->
+					<div class="bg3" >{template_row.SGRA_TEMPLATE_REFRESHED}</div>
+				<!-- ENDIF -->
+			<!-- END template_row -->
+
+			<div class="bg3" ><br /></div>
+			<div class="box" style="text-align:center;">{L_REFRESHING_THEMES}</div>
+
+			<!-- BEGIN theme_row -->
+				<!-- IF not theme_row.S_SGPRA_THEME -->
+					<div class="bg1" >{theme_row.SGPRA_THEME_ERROR}</div>
+				<!-- ENDIF -->
+				<!-- IF not theme_row.S_SGPRA_THEME_TABLE -->
+					<div class="bg1" >{theme_row.SGPRA_THEME_TABLE_ERROR}</div>
+				<!-- ENDIF -->
+				<!-- IF theme_row.S_SGPRA_THEME -->
+					<div class="bg3" >{theme_row.SGRA_THEME_REFRESHED}</div>
+				<!-- ENDIF -->
+			<!-- END theme_row -->
+
+			<div class="bg3" ><br /></div>
+			<div class="box" style="text-align:center;">{L_REFRESHING_IMAGESETS}</div>
+
+			<div class="bg3" > &nbsp;&#187;&nbsp; {L_DISABLED} - {L_TIME_BEING}</div>
+			<!--  disabled for the time being -->
+			<!-- BEGIN imageset_row -->
+				<!-- IF not imageset_row.S_SGPRA_IMAGESET -->
+				<div class="bg1" >{imageset_row.SGPRA_IMAGESET_ERROR}</div>
+				<!-- ENDIF -->
+				<!-- IF not imageset_row.S_SGPRA_IMAGESET_DATA -->
+				<div class="bg1" >{imageset_row.SGPRA_IMAGESET_DATA_ERROR}</div>
+				<!-- ENDIF -->
+				<!-- IF not imageset_row.S_SGPRA_IMAGESET_LANG -->
+				<div class="bg1" >{imageset_row.SGPRA_IMAGESET_LANG_ERROR}</div>
+				<!-- ENDIF -->
+				<!-- IF imageset_row.S_SGPRA_IMAGESET -->
+				<div class="bg3" >{imageset_row.SGRA_IMAGESET_REFRESHED}</div>
+				<!-- ENDIF -->
+			<!-- END imageset_row -->
+			<!-- now continue -->
+
+			<div class="bg3" ><br /></div>
+			<div class="box" style="text-align:center;">{L_PURGING_CACHE}</div>
+
+			<!-- IF S_PURGE_CACHE -->
+				<div class="bg3" >{L_CACHE_PURGED}</div>
+			<!-- ENDIF -->
+
+			<div class="bg3" ><br /></div>
+			<br />
+		</div>
+
+	<span class="corners-bottom"><span></span></span></div>
+</div>
+
+<div class="block_bg" style="width:100%; margin-top:10px;">
+	<div class="inner"><span class="corners-top"><span></span></span>
+		<div style="text-align:center;">
+			<!-- IF S_NO_EXEPTIONS -->
+			<p>{L_SGPRA_NO_ERRORS}</p>
+			<!-- ENDIF -->
+			<!-- IF not S_NO_EXEPTIONS -->
+			<p>{L_SGPRA_EXEPTIONS}</p>
+			<!-- ENDIF -->
+		</div>
+	<span class="corners-bottom"><span></span></span></div>
+</div>
+
+<!-- ELSE -->
+<div class="box" style="text-align:center;"><p>{L_SGPRA_NO_ADMIN}</p></div>
+<!-- ENDIF -->
+<!-- INCLUDE overall_footer.html -->

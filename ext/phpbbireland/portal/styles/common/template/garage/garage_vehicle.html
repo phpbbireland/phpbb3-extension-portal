@@ -1,0 +1,231 @@
+<!-- INCLUDE overall_header.html -->
+
+<script type="text/javascript" src="{T_TEMPLATE_PATH}/garage/garage_ajax.js"></script>
+<script type="text/javascript">
+var ajax = new sack();
+
+function get_model_list(sel)
+{
+	var make_id = sel.options[sel.selectedIndex].value;
+	document.getElementById('model_id').options.length = 0;
+	ajax.requestFile = 'garage.php?mode=get_model_list&make_id='+make_id;
+	ajax.onCompletion = build_model_list;
+	ajax.runAJAX();
+}
+
+function update_model_list(make_id, model_id)
+{
+	document.getElementById('model_id').options.length = 0;
+	ajax.requestFile = 'garage.php?mode=get_model_list&model_id='+model_id+'&make_id='+make_id;
+	ajax.onCompletion = build_model_list;
+	ajax.runAJAX();
+}
+
+function build_model_list()
+{
+	var obj = document.getElementById('model_id');
+	eval(ajax.response);
+} 
+</script>
+
+<!-- IF U_MCP -->
+	<div id="pageheader">
+		<p class="linkmcp">[ <a href="{U_MCP}">{L_MCP}</a> ]</p>
+	</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE garage/garage_header.html -->
+
+<!-- INCLUDE garage/garage_menu.html -->
+
+<script type="text/javascript" src="{T_TEMPLATE_PATH}/garage/garage_functions.js"></script>
+
+<div id="garage-main">
+	<div class="panel">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+	
+			<div id="gtabs">
+				<ul>
+					<li class="garage_tab" id="tab000"><a href="#data" onclick="swap_options('0','0','0');"><span class="tabbg">{L_VEHICLE}</span></a></li>
+					<!-- IF U_MANAGE_GALLERY --><li class="garage_tab" id="tab001"><a href="#images" onclick="swap_options('0','0','1');"><span class="tabbg">{L_IMAGES}</span></a></li><!-- ENDIF -->
+				</ul>
+			</div>
+
+			<div class="panel bg3">
+				<div class="inner">
+					<span class="corners-top"><span></span></span>
+	
+					<div id="options000" style="display: none;">
+
+						<div class="panel">
+							<div class="inner">
+								<span class="corners-top"><span></span></span>
+
+								<form id="vehicle" enctype="multipart/form-data" method="post" action="{S_MODE_ACTION}">
+									<h3>{L_TITLE}</h3>
+									<fieldset>
+										<dl>
+											<dt><b>{L_YEAR}</b>&nbsp;<span style="color:#FF0000">[{L_REQUIRED}]</span></dt>
+											<dd><select id="made_year" name="made_year"><option value="">{L_SELECT_YEAR}</option><option value="">------</option><!-- BEGIN year --><option value="{year.VALUE}" <!-- IF year.S_SELECTED -->selected="selected"<!-- ENDIF -->>{year.TEXT}</option><!-- END year --></select></dd>
+										</dl>
+										<dl>
+											<dt><b>{L_MAKE}</b>&nbsp;<span style="color:#FF0000">[{L_REQUIRED}]</span></dt>
+											<dd><select id="make_id" name="make_id" onchange="get_model_list(this)" ><option value="">{L_SELECT_MAKE}</option><option value="">------</option><!-- BEGIN make --><option value="{make.VALUE}" <!-- IF make.S_SELECTED -->selected="selected"<!-- ENDIF -->>{make.TEXT}</option><!-- END make --></select>
+												<!-- IF S_DISPLAY_SUBMIT_MAKE -->
+													&nbsp;<span class="gensmall">{L_NOT_LISTED_YET}<a href="{U_USER_SUBMIT_MAKE}">{L_HERE}</a></span>
+												<!-- ENDIF -->
+											</dd>
+										</dl>
+										<dl>
+											<dt><b>{L_MODEL}</b>&nbsp;<span style="color:#FF0000">[{L_REQUIRED}]</span></dt>
+											<dd><select id="model_id" name="model_id"><option value="">------</option></select>
+											<!-- IF S_DISPLAY_SUBMIT_MODEL -->
+												&nbsp;<span class="gensmall">{L_NOT_LISTED_YET}<a href="{U_USER_SUBMIT_MODEL}">{L_HERE}</a></span>
+											<!-- ENDIF -->
+											</dd>
+										</dl>
+										<dl>
+											<dt><b>{L_ENGINE_TYPE}</b></dt>
+											<dd><select id="engine_type" name="engine_type"><option value="">{L_SELECT_ENGINE_TYPE}</option><option value="">------</option><!-- BEGIN engine --><option value="{engine.VALUE}" <!-- IF engine.S_SELECTED -->selected="selected"<!-- ENDIF -->>{engine.TEXT}</option><!-- END engine --></select></dd>
+										</dl>
+										<dl>
+											<dt><b>{L_COLOUR}</b></dt>
+											<dd><input name="colour" type="text" class="inputbox autowidth" value="{COLOUR}" /></dd>
+										</dl>
+										<dl>
+											<dt><b>{L_MILEAGE}</b></dt>
+											<dd><input name="mileage" type="text" class="inputbox percision6" maxlength="8" value="{MILEAGE}" />&nbsp;<select id="mileage_units" name="mileage_units"><option value="">{L_SELECT_MILEAGE_UNIT}</option><option value="">------</option><!-- BEGIN mileage --><option value="{mileage.VALUE}" <!-- IF mileage.S_SELECTED -->selected="selected"<!-- ENDIF -->>{mileage.TEXT}</option><!-- END mileage --></select></dd>
+										</dl>
+										<dl>
+											<dt><b>{L_PURCHASED_PRICE}</b></dt>
+											<dd><input name="price" type="text" class="inputbox percision6" maxlength="8" value="{PRICE}" />{L_DECIMAL_SEPERATOR}<input name="price_decimal" type="text" class="inputbox autowidth percision2" value="{PRICE_DECIMAL}" />&nbsp;{L_CURRENCY}{L_COLEN}&nbsp;<select id="currency" name="currency"><option value="">{L_SELECT_CURRENCY_UNIT}</option><option value="">------</option><!-- BEGIN currency --><option value="{currency.VALUE}" <!-- IF currency.S_SELECTED -->selected="selected"<!-- ENDIF -->>{currency.TEXT}</option><!-- END currency --></select></dd>
+										</dl>
+										<dl>
+											<dt><b>{L_DESCRIPTION}</b></dt>
+											<dd><textarea name="comments" cols="60" rows="5" class="inputbox" >{COMMENTS}</textarea></dd>
+										</dl>
+		
+										<!-- IF ! VID -->
+											<!-- INCLUDE garage/garage_image_attach.html -->
+										<!-- ENDIF -->
+									</fieldset>
+
+									<fieldset>
+										<input type="hidden" value="{VID}" name="VID" />
+										<input type="hidden" value="" name="primary" />
+										<input type="hidden" value="" name="secondary" />
+										<input type="hidden" value="" name="tertiary" />
+										<input type="hidden" value="{REDIRECT}" name="redirect" />
+									</fieldset>
+
+									<fieldset class="submit-buttons">
+										<input type="reset" value="{L_RESET}" name="reset" class="button2" />&nbsp; 
+										<input type="submit" name="submit2" value="{L_BUTTON}" class="button1" />
+									</fieldset>
+								{S_FORM_TOKEN}
+								</form>
+
+								<span class="corners-bottom"><span></span></span>
+							</div>
+						</div>
+					</div>
+
+					<!-- IF VID -->
+					<div id="options001" style="display: none;">
+
+						<div class="panel">
+							<div class="inner">
+								<span class="corners-top"><span></span></span>
+								<!-- INCLUDE garage/garage_manage_gallery.html -->
+								<span class="corners-bottom"><span></span></span>
+							</div>
+						</div>
+					</div>
+					<!-- ENDIF -->
+					<span class="corners-bottom"><span></span></span>
+				</div>
+			</div>
+		</div>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+
+<script type="text/javascript">
+<!--
+var make_id = document.getElementById("make_id");
+var model_id = document.getElementById("model_id");
+//Update Model List If Only Make ID Available
+if (make_id.value > 0 && model_id.value == "" && '{MODEL_ID}' == "" )
+{
+	document.getElementById('model_id').options.length = 0;
+	ajax.requestFile = 'garage.php?mode=get_model_list&make_id='+make_id.value;
+	ajax.onCompletion = build_model_list;
+	ajax.runAJAX();
+}
+//Update Model List If Both Make And Model ID Are Available
+else if ('{MAKE_ID}' > 0 && '{MODEL_ID}' > 0)
+{
+	update_model_list('{MAKE_ID}', '{MODEL_ID}');
+}
+//Update Model Even Though Neither Make Or Model ID Are Available
+else
+{
+	update_model_list('', '');
+}
+
+function add_model ( tertiary )
+{
+	var vehicle = document.getElementById("vehicle");
+	vehicle.action = '{S_MODE_USER_SUBMIT}';
+	vehicle.primary.value = 'vehicle' ;
+	vehicle.secondary.value = 'model' ;
+	vehicle.tertiary.value = tertiary ;
+	vehicle.submit() ;
+}
+
+function add_make ( tertiary )
+{
+	var vehicle = document.getElementById("vehicle");
+	vehicle.action = '{S_MODE_USER_SUBMIT}';
+	vehicle.primary.value = 'vehicle' ;
+	vehicle.secondary.value = 'make' ;
+	vehicle.tertiary.value = tertiary ;
+	vehicle.submit();
+}
+-->
+</script>
+
+<script type="text/javascript">
+<!--
+	var lowest_tab = '0';
+	var active_pmask = '0';
+	var active_fmask = '0';
+	if (document.location.hash == "")
+	{
+		active_cat = lowest_tab;
+		dE('options00' + lowest_tab , 0)
+		var active_tab = document.getElementById("tab00" + lowest_tab);
+	}
+	else if (document.location.hash == "#data")
+	{
+		active_cat = '0';
+		dE('options000', 0)
+		var active_tab = document.getElementById("tab000");
+	}
+	else if (document.location.hash == "#images")
+	{
+		active_cat = '1';
+		dE('options001', 0)
+		var active_tab = document.getElementById("tab001");
+	}
+
+	var id = '000';
+	active_tab.setAttribute("class", "garage_tab activetab");
+
+//-->
+</script>
+
+<!-- INCLUDE garage/garage_footer.html -->
+
+<!-- INCLUDE overall_footer.html -->

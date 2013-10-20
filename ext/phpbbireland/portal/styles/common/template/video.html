@@ -1,0 +1,104 @@
+<div class="wrapper">
+	<!-- BEGIN video_loop_row -->
+	<div id="_{video_loop_row.VIDEO_LINK}" class="mini-panel sections" style="width: 420px; text-align:center; margin: 0 auto; padding-top:1px;">
+		<div class="tleft bg2" style="display:none; width:auto; text-align:center;" id="{video_loop_row.VIDEO_LINK}">
+			<div id="vid_{video_loop_row.VIDEO_LINK}" style="margin: 0 auto; padding:8px;">
+				<object type="application/x-shockwave-flash" style="width:416px; height:337px;" data="http://www.youtube.com/{VIDEO_PATH}{video_loop_row.VIDEO_LINK}{S_AUTOPLAY}">
+					<param name="movie" value="{VIDEO_PATH}{video_loop_row.VIDEO_LINK}" />
+				</object>
+			</div><a href="javascript:ShowHide('_{video_loop_row.VIDEO_LINK}');"><img style="float:right;" src="js/highslide/graphics/close.png" title="{L_CLOSE_VIDEO}" alt="" /></a>
+		</div>
+	</div>
+	<!-- END video_loop_row -->
+
+	<div class="tcontainer">
+	<!-- BEGIN video_loop_row -->
+		<!-- IF video_loop_row.S_ROW_COUNT == 0 -->
+		<div class="trow">
+			<span class="tleft" style="padding:1px; padding-top:2px; padding-bottom:2px; width:25%;"><strong>{L_TITLE}</strong></span>
+			<span class="tleft" style="padding:1px; padding-top:2px; padding-bottom:2px; width:25%;"><strong>{L_VIDEO_WHO}</strong></span>
+			<span class="tleft" style="padding:1px; padding-top:2px; padding-bottom:2px; width:22%;"><strong>{L_CATEGORY}</strong></span>
+			<span class="tleft" style="padding:1px; padding-top:2px; padding-bottom:2px; width:22%;"><strong>{L_POSTER}</strong></span>
+			<span class="tleft" style="padding:1px; padding-top:2px; padding-bottom:2px; width:6%;"><strong>{L_RATING}</strong></span>
+		</div>
+		<!-- ENDIF -->
+
+		<!-- IF video_loop_row.S_UNIQUE_W -->
+		</div>
+		<div class="tcontainer">
+			<div class="trow">
+				<span class="bg3 tleft" style="padding:1px; text-align:left; width:100%;">
+					<strong>{video_loop_row.VIDEO_CAT}</strong>
+				</span>
+			</div>
+		</div>
+		<div class="tcontainer">
+		<!-- ENDIF -->
+
+		<!-- IF video_loop_row.S_ROW_COUNT is even -->
+		<div class="trow">
+			<span class="tleft bg2" style="width:25%; padding:1px; padding-top:6px;">
+				<a href="javascript: ShowHide('{video_loop_row.VIDEO_LINK}'); ShowHide('image_hide');" title="">{video_loop_row.VIDEO_TITLE}</a>
+			</span>
+			<span class="tleft bg2" style="width:24%; padding:1px; padding-top:6px;">{video_loop_row.VIDEO_WHO} </span>
+			<span class="tleft bg2" style="width:22%; padding:1px; padding-top:6px;">{video_loop_row.VIDEO_CAT}</span>
+			<span class="tleft bg2" style="width:22%; padding:1px; padding-top:6px;">{video_loop_row.VIDEO_POSTER}</span>
+			<span class="tleft bg2" style="width: 6%; padding:1px; padding-top:6px;">{video_loop_row.VIDEO_RATING}</span>
+			<span class="tleft bg2 ximg" style="width: auto; height: 15px; padding:1px; text-align:right;">
+				<a href="javascript: ShowHide('{video_loop_row.VIDEO_LINK}'); ShowHide('image_hide');" title="{video_loop_row.VIDEO_WHO}: {video_loop_row.VIDEO_TITLE}">
+					<img src="http://img.youtube.com/vi/{video_loop_row.VIDEO_LINK}/default.jpg" alt="" width="15" height="15" />
+				</a>
+			</span>
+		</div>
+
+
+<!-- IF EXX -->
+		</div>
+		<div class="tcontainer">
+			<div class="tleft bg2" style="width:100%; padding:1px;">
+				<span class="tleft" style="padding:1px; padding-top:2px; padding-bottom:2px; width:99%;"><strong>{video_loop_row.VIDEO_COMMENT}</strong></span>
+			</div>
+		</div>
+		<div class="tcontainer">
+<!-- ENDIF -->
+
+
+		<!-- ELSE -->
+		<div class="trow">
+			<span class="tleft bg1" style="width:25%; padding:1px; padding-top:6px;">
+				<a href="javascript: ShowHide('{video_loop_row.VIDEO_LINK}'); ShowHide('image_hide');" title="">{video_loop_row.VIDEO_TITLE}</a>
+			</span>
+			<span class="tleft bg1" style="width:24%; padding:1px; padding-top:6px;">{video_loop_row.VIDEO_WHO} </span>
+			<span class="tleft bg1" style="width:22%; padding:1px; padding-top:6px;">{video_loop_row.VIDEO_CAT}</span>
+			<span class="tleft bg1" style="width:22%; padding:1px; padding-top:6px;">{video_loop_row.VIDEO_POSTER}</span>
+			<span class="tleft bg1" style="width: 6%; padding:1px; padding-top:6px;">{video_loop_row.VIDEO_RATING} </span>
+			<span class="tleft bg1 ximg" style="width: auto; height: 15px; padding:1px; text-align:right;">
+				<a href="javascript: ShowHide('{video_loop_row.VIDEO_LINK}'); ShowHide('image_hide');" title="{video_loop_row.VIDEO_WHO}: {video_loop_row.VIDEO_TITLE}">
+					<img src="http://img.youtube.com/vi/{video_loop_row.VIDEO_LINK}/default.jpg" alt="" width="15" height="15" />
+				</a>
+			</span>
+		</div>
+
+
+<!-- IF EXX -->
+		</div>
+		<div class="tcontainer">
+			<div class="tleft bg1" style="width:100%; padding:1px;">
+				<span class="tleft" style="padding:1px; padding-top:2px; padding-bottom:2px; width:99%;"><strong>{video_loop_row.VIDEO_COMMENT}</strong></span>
+			</div>
+		</div>
+		<div class="tcontainer">
+<!-- ENDIF -->
+
+
+		<!-- ENDIF -->
+	<!-- END video_loop_row -->
+	</div>
+
+	<div class="mini-panel sections" style="width: 420px; text-align:center; margin: 0 auto; padding-top:8px;">
+	</div>
+
+	<div style="text-align:center;"><!-- IF S_AUTOPLAY -->{L_AUTOPLAY_ON}<!-- ELSE -->{L_AUTOPLAY_OFF}<!-- ENDIF --> {video_loop_row.L_YOUTUBE_LIMIT}</div>
+
+</div>
+<!-- IDTAG block_web_utube ends 11 November 2009 -->

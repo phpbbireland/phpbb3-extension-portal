@@ -1,0 +1,75 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- IF U_MCP -->
+	<div id="pageheader">
+		<p class="linkmcp">[ <a href="{U_MCP}">{L_MCP}</a> ]</p>
+	</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE garage/garage_header.html -->
+
+<!-- INCLUDE garage/garage_menu.html -->
+
+<div id="garage-main">
+	<div class="panel">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+			<h3>{VEHICLE} {L_DYNORUN}</h3>
+			<fieldset>
+				<dl>
+                  			<dt><b>{L_VEHICLE}</b></dt>
+                     			<dd>{YEAR} {MAKE} {MODEL}</dd>
+				</dl>
+				<dl>
+                	        	<dt><b>{L_OWNER}</b></dt>
+								<dd>{AVATAR_IMG}</dd>
+                        		<dd><b><a href="{U_VIEW_PROFILE}" <!-- IF USERNAME_COLOUR --> style="color: {USERNAME_COLOUR}"<!-- ENDIF -->>{USERNAME}</a></b></dd>
+				</dl>
+				<dl>
+					<dt><b>{L_DYNOCENTRE}</b></dt>
+					<dd><a>{DYNOCENTRE}</a></dd>
+				</dl>
+				<dl>
+					<dt><b>{L_BHP}</b></dt>
+					<dd>{BHP}&nbsp;</dd>
+				</dl>
+				<dl>
+					<dt><b>{L_TORQUE}</b></dt>
+					<dd>{TORQUE}&nbsp;{TORQUE_UNIT}</dd>
+				</dl>
+				<dl>
+					<dt><b>{L_BOOST}</b></dt>
+					<dd>{BOOST}&nbsp;{BOOST_UNIT}</dd>
+				</dl>
+				<dl>
+					<dt><b>{L_NITROUS}</b></dt>
+					<dd>{NITROUS}</dd>
+				</dl>
+				<dl>
+					<dt><b>{L_PEAKPOINT}</b></dt>
+					<dd>{PEAKPOINT}</dd>
+				</dl>
+			</fieldset>
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+
+	<!-- IF S_DISPLAY_GALLERIES -->
+	<div class="panel">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+			<h3>{L_DYNORUN_PICTURES}</h3>
+			<div class="garage-image-gallery">
+				<!-- BEGIN dynorun_image -->
+				<a href="{dynorun_image.U_IMAGE}" rel="lightbox"><img hspace="5" vspace="5" name="{dynorun_image.IMAGE_NAME}" src="{dynorun_image.IMAGE_SOURCE}" /></a>
+				<!-- END dynorun_image -->
+	    		</div>
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+	<!-- ENDIF -->
+</div>
+
+<!-- INCLUDE garage/garage_footer.html -->
+
+<!-- INCLUDE overall_footer.html -->

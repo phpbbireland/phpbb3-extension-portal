@@ -1,0 +1,94 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- IF U_MCP -->
+	<div id="pageheader">
+		<p class="linkmcp">[ <a href="{U_MCP}">{L_MCP}</a> ]</p>
+	</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE garage/garage_header.html -->
+
+<!-- INCLUDE garage/garage_menu.html -->
+
+<div id="garage-main">
+	<div class="panel">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+			<h3>{VEHICLE} {L_MODIFICATION}</h3>
+			<fieldset>
+				<dl>
+                  			<dt><b>{L_VEHICLE}</b></dt>
+                     			<dd>{YEAR} {MAKE} {MODEL}</dd>
+				</dl>
+				<dl>
+                	        	<dt><b>{L_OWNER}</b></dt>
+                        		<dd><b><a href="{U_VIEW_PROFILE}" <!-- IF USERNAME_COLOUR --> style="color: {USERNAME_COLOUR}"<!-- ENDIF -->>{USERNAME}</a></b></dd>
+				</dl>
+				<dl>
+                  			<dt><b>{L_MODIFICATION}</b></dt>
+					<dd>{MANUFACTURER} {TITLE}</dd>
+				</dl>
+				<dl>
+                  			<dt><b>{L_PRODUCT_RATING}</b></dt>
+                     			<dd>{PRODUCT_RATING}</dd>
+				</dl>
+				<dl>
+                  			<dt><b>{L_CATEGORY}</b></dt>
+                     			<dd>{CATEGORY}</dd>
+				</dl>
+				<dl>
+                  			<dt><b>{L_UPDATED}</b></dt>
+					<dd>{DATE_UPDATED}</dd>
+				</dl>
+				<dl>
+                  			<dt><b>{L_PURCHASED_FROM}</b></dt>
+					<dd><a href="{U_VIEW_SHOP_BUSINESS}">{BUSINESS_NAME}</a></dd>
+				</dl>
+				<dl>
+                  			<dt><b>{L_PURCHASED_PRICE}</b></dt>
+					<dd>{PRICE} {CURRENCY}</dd>
+				</dl>
+				<dl>
+                  			<dt><b>{L_PURCHASE_RATING}</b></dt>
+					<dd>{PURCHASE_RATING}</dd>
+				</dl>
+				<dl>
+                  			<dt><b>{L_INSTALLED_BY}</b></dt>
+					<dd><a href="{U_VIEW_GARAGE_BUSINESS}">{BUSINESS}</a></dd>
+				</dl>
+				<dl>
+                  			<dt><b>{L_INSTALLATION_PRICE}</b></dt>
+					<dd>{INSTALL_PRICE} {CURRENCY}</dd>
+				</dl>
+				<dl>
+                  			<dt><b>{L_INSTALLATION_RATING}</b></dt>
+					<dd>{INSTALL_RATING}</dd>
+				</dl>
+				<dl>
+                  			<dt><b>{L_COMMENTS}</b></dt>
+					<dd>{COMMENTS}</dd>
+				</dl>
+			</fieldset>
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+
+	<!-- IF S_DISPLAY_GALLERIES -->
+	<div class="panel">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+			<h3>{L_MODIFICATION_PICTURES}</h3>
+			<div class="garage-image-gallery">
+				<!-- BEGIN modification_image -->
+				<a href="{modification_image.U_IMAGE}"><img hspace="5" vspace="5" name="{modification_image.IMAGE_NAME}" src="{modification_image.IMAGE_SOURCE}" /></a>
+				<!-- END modification_image -->
+    			</div>
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+	<!-- ENDIF -->
+</div>
+
+<!-- INCLUDE garage/garage_footer.html -->
+
+<!-- INCLUDE overall_footer.html -->

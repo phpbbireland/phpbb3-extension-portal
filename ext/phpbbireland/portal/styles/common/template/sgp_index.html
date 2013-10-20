@@ -1,0 +1,34 @@
+<!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
+	<!-- INCLUDE blocks/blocks_header_left.html -->
+	<a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a><!-- IF S_REGISTER_ENABLED -->&nbsp; &bull; &nbsp;<a href="{U_REGISTER}">{L_REGISTER}</a><!-- ENDIF -->
+	<!-- INCLUDE blocks/blocks_header_right.html -->
+	<div class="row1 bg1" style="padding: 5px;">
+	<form method="post" action="{S_LOGIN_ACTION}">
+		<fieldset class="quick-login">
+			<label for="username">{L_USERNAME}:</label>&nbsp;<input type="text" name="username" id="username" size="10" class="inputbox" title="{L_USERNAME}" />
+			<label for="password">{L_PASSWORD}:</label>&nbsp;<input type="password" name="password" id="password" size="10" class="inputbox" title="{L_PASSWORD}" />
+			<!-- IF S_AUTOLOGIN_ENABLED -->
+				| <label for="autologin">{L_LOG_ME_IN} <input type="checkbox" name="autologin" id="autologin" /></label>
+			<!-- ENDIF -->
+			<input type="submit" name="login" value="{L_LOGIN}" class="button2" />
+			{S_LOGIN_REDIRECT}
+		</fieldset>
+		{S_FORM_TOKEN}
+	</form>
+	</div>
+	<!-- INCLUDE blocks/blocks_footer.html -->
+<!-- ENDIF -->
+
+<!-- IF STARGATE -->
+	<!-- IF S_DISPLAY_ONLINE_LIST -->
+		<!-- INCLUDE blocks/block_whos_on_line.html -->
+	<!-- ENDIF -->
+
+	<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
+		<!-- INCLUDE blocks/block_birthday.html -->
+	<!-- ENDIF -->
+
+	<!-- IF NEWEST_USER -->
+		<!-- INCLUDE blocks/block_stats.html -->
+	<!-- ENDIF -->
+<!-- ENDIF -->

@@ -1,0 +1,68 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- IF U_MCP -->
+	<div id="pageheader">
+		<p class="linkmcp">[ <a href="{U_MCP}">{L_MCP}</a> ]</p>
+	</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE garage/garage_header.html -->
+
+<!-- INCLUDE garage/garage_menu.html -->
+
+<div id="garage-main">
+	<div class="panel">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+			<h3>{VEHICLE} {L_LAP_TIME}</h3>
+			<fieldset>
+				<dl>
+                  			<dt><b>{L_VEHICLE}</b></dt>
+                     			<dd>{YEAR} {MAKE} {MODEL}</dd>
+				</dl>
+				<dl>
+                	        	<dt><b>{L_OWNER}</b></dt>
+								<dd>{AVATAR_IMG}</dd>
+                        		<dd><b><a href="{U_VIEW_PROFILE}" <!-- IF USERNAME_COLOUR --> style="color: {USERNAME_COLOUR}"<!-- ENDIF -->>{USERNAME}</a></b></dd>
+				</dl>
+				<dl>
+                	        	<dt><b>{L_TRACK}</b></dt>
+					<dd><a href="{U_VIEW_TRACK}">{TRACK}</a></dd>
+				</dl>
+				<dl>
+                	        	<dt><b>{L_TRACK_CONDITION}</b></dt>
+					<dd>{CONDITION}</dd>
+				</dl>
+				<dl>
+					<dt><b>{L_LAP_TYPE}</b></dt>
+					<dd>{TYPE}</dd>
+				</dl>
+				<dl>
+					<dt><b>{L_LAP_TIME}</b>&nbsp;(M:S:MS)</dt>
+					<dd>{MINUTE}.{SECOND}.{MILLISECOND}</dd>
+				</dl>
+			</fieldset>
+			<br />
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+
+	<!-- IF S_DISPLAY_GALLERIES -->
+	<div class="panel">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+			<h3>{L_LAP_PICTURES}</h3>
+			<div class="garage-image-gallery">
+				<!-- BEGIN lap_image -->
+				<a href="{lap_image.U_IMAGE}" rel="lightbox"><img hspace="5" vspace="5" name="{lap_image.IMAGE_NAME}" src="{lap_image.IMAGE_SOURCE}"/></a>
+				<!-- END lap_image -->
+    			</div>
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+	<!-- ENDIF -->
+</div>
+
+<!-- INCLUDE garage/garage_footer.html -->
+
+<!-- INCLUDE overall_footer.html -->

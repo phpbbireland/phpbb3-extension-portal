@@ -1,0 +1,154 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- IF U_MCP -->
+	<div id="pageheader">
+		<p class="linkmcp">[ <a href="{U_MCP}">{L_MCP}</a> ]</p>
+	</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE garage/garage_header.html -->
+
+<!-- INCLUDE garage/garage_menu.html -->
+
+<div id="garage-main">
+	<div class="panel">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+	
+			<div id="gtabs">
+				<ul>
+					<li class="garage_tab" id="tab000"><a href="#data" onclick="swap_options('0','0','0');"><span class="tabbg">{L_DYNORUN}</span></a></li>
+					<!-- IF U_MANAGE_GALLERY --><li class="garage_tab" id="tab001"><a href="#images" onclick="swap_options('0','0','1');"><span class="tabbg">{L_IMAGES}</span></a></li><!-- ENDIF -->
+				</ul>
+			</div>
+
+			<div class="panel bg3">
+				<div class="inner">
+					<span class="corners-top"><span></span></span>
+
+					<div id="options000" style="display: none;">
+						<div class="panel">
+							<div class="inner">
+								<span class="corners-top"><span></span></span>
+
+								<form enctype="multipart/form-data" method="post" id="dynorun" action="{S_MODE_ACTION}">
+								<h3>{L_TITLE}</h3>
+								<fieldset>
+									<dl>
+										<dt><b>{L_DYNOCENTRE}</b></dt>
+										<dd><select id="dynocentre_id" name="dynocentre_id"><option value="">{L_SELECT_DYNOCENTRE}</option><option value="">------</option><!-- BEGIN dynocentre--><option value="{dynocentre.VALUE}" <!-- IF dynocentre.S_SELECTED -->selected="selected"<!-- ENDIF -->>{dynocentre.TEXT}</option><!-- END dynocentre --></select>&nbsp;<span style="color:#FF0000">[{L_REQUIRED}]</span>&nbsp;{L_NOT_LISTED_YET}<a href="{U_SUBMIT_BUSINESS_DYNOCENTRE}">{L_HERE}</a></dd>
+									</dl>
+									<dl>
+										<dt>{L_BHP_EXPLAIN}</dt>
+										<dd><input name="bhp" type="text" class="inputbox percision4" maxlength="4" value ="{BHP}" />{L_DECIMAL_SEPERATOR}<input name="bhp_decimal" type="text" class="inputbox percision2" maxlength="2" value="{BHP_DECIMAL}" />&nbsp;<select id="bhp_unit" name="bhp_unit"><option value="">{L_SELECT_A_OPTION}</option><option value="">------</option><!-- BEGIN bhp_unit --><option value="{bhp_unit.VALUE}" <!-- IF bhp_unit.S_SELECTED -->selected="selected"<!-- ENDIF -->>{bhp_unit.TEXT}</option><!-- END bhp_unit --></select>&nbsp;<span style="color:#FF0000">[{L_REQUIRED}]</span></dd>
+									</dl>
+									<dl>
+										<dt>{L_TORQUE_EXPLAIN}</dt>
+										<dd><input name="torque" type="text" class="inputbox percision4" maxlength="4" value ="{TORQUE}" />{L_DECIMAL_SEPERATOR}<input name="torque_decimal" type="text" class="inputbox percision2" maxlength="2" value="{TORQUE_DECIMAL}" />&nbsp;<select id="torque_unit" name="torque_unit"><option value="">{L_SELECT_A_OPTION}</option><option value="">------</option><!-- BEGIN torque_unit --><option value="{torque_unit.VALUE}" <!-- IF torque_unit.S_SELECTED -->selected="selected"<!-- ENDIF -->>{torque_unit.TEXT}</option><!-- END torque_unit --></select></dd>
+									</dl>
+									<dl>
+										<dt>{L_BOOST_EXPLAIN}</dt>
+										<dd><input name="boost" type="text" class="inputbox percision4" maxlength="4" value ="{BOOST}" />{L_DECIMAL_SEPERATOR}<input name="boost_decimal" type="text" class="inputbox percision2" maxlength="2" value="{BOOST_DECIMAL}" />&nbsp;<select id="boost_unit" name="boost_unit"><option value="">{L_SELECT_A_OPTION}</option><option value="">------</option><!-- BEGIN boost --><option value="{boost.VALUE}" <!-- IF boost.S_SELECTED -->selected="selected"<!-- ENDIF -->>{boost.TEXT}</option><!-- END boost --></select></dd>
+									</dl>
+									<dl>
+										<dt>{L_NITROUS_EXPLAIN}</dt>
+										<dd><select id="nitrous" name="nitrous"><option value="">{L_SELECT_A_OPTION}</option><option value="">------</option><!-- BEGIN nitrous --><option value="{nitrous.VALUE}" <!-- IF nitrous.S_SELECTED -->selected="selected"<!-- ENDIF -->>{nitrous.TEXT}</option><!-- END nitrous --></select></dd>
+									</dl>
+									<dl>
+										<dt>{L_PEAKPOINT_EXPLAIN}</dt>
+										<dd><input name="peakpoint" type="text" class="inputbox percision4" maxlength="4" value ="{PEAKPOINT}" />{L_DECIMAL_SEPERATOR}<input name="peakpoint_decimal" type="text" class="inputbox percision3" maxlength="3" value="{PEAKPOINT_DECIMAL}" /></dd>
+									</dl>
+
+									<!-- IF ! DID -->
+										<!-- INCLUDE garage/garage_image_attach.html -->
+									<!-- ENDIF -->
+
+								</fieldset>
+		
+								<fieldset>
+									<input type="hidden" value="{VID}" name="VID" />
+									<input type="hidden" value="{DID}" name="DID" />
+									<input type="hidden" value="{REDIRECT}" name="redirect" />
+									<input type="hidden" value="" name="primary" />
+									<input type="hidden" value="" name="secondary" />
+									<input type="hidden" value="" name="tertiary" />
+								</fieldset>
+			
+								<fieldset class="submit-buttons">
+									<input type="reset" value="{L_RESET}" name="reset" class="button2" />&nbsp; 
+									<input type="submit" name="submit2" value="{L_BUTTON}" class="button1" />
+								</fieldset>
+								{S_FORM_TOKEN}
+								</form>
+
+								<span class="corners-bottom"><span></span></span>
+							</div>
+						</div>
+					</div>
+
+					<!-- IF DID -->
+					<div id="options001" style="display: none;">
+						<div class="panel">
+							<div class="inner">
+								<span class="corners-top"><span></span></span>
+								<!-- INCLUDE garage/garage_manage_gallery.html -->
+								<span class="corners-bottom"><span></span></span>
+							</div>
+						</div>
+					</div>
+					<!-- ENDIF -->
+					<span class="corners-bottom"><span></span></span>
+				</div>
+			</div>
+		</div>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+
+<script type="text/javascript">
+<!--
+function add_dynocentre ( tertiary )
+{
+	var dynorun = document.getElementById("dynorun");
+	dynorun.action = '{S_MODE_USER_SUBMIT}';
+	dynorun.primary.value = 'dynorun' ;
+	dynorun.secondary.value = '' ;
+	dynorun.tertiary.value = tertiary ;
+	dynorun.submit() ;
+}
+-->
+</script>
+
+<script type="text/javascript">
+<!--
+	var lowest_tab = '0';
+	var active_pmask = '0';
+	var active_fmask = '0';
+	if (document.location.hash == "")
+	{
+		active_cat = lowest_tab;
+		dE('options00' + lowest_tab , 0)
+		var active_tab = document.getElementById("tab00" + lowest_tab);
+	}
+	else if (document.location.hash == "#data")
+	{
+		active_cat = '0';
+		dE('options000', 0)
+		var active_tab = document.getElementById("tab000");
+	}
+	else if (document.location.hash == "#images")
+	{
+		active_cat = '1';
+		dE('options001', 0)
+		var active_tab = document.getElementById("tab001");
+	}
+
+	var id = '000';
+	active_tab.setAttribute("class", "garage_tab activetab");
+
+//-->
+</script>
+
+<!-- INCLUDE garage/garage_footer.html -->
+
+<!-- INCLUDE overall_footer.html -->

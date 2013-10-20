@@ -1,0 +1,106 @@
+<!-- INCLUDE overall_header.html -->
+<script type="text/javascript" src="{T_TEMPLATE_PATH}/garage/garage_ajax.js"></script>
+<script type="text/javascript">
+var ajax = new sack();
+
+function get_model_list(sel)
+{
+	var make_id = sel.options[sel.selectedIndex].value;
+	document.getElementById('model_id').options.length = 0;
+	ajax.requestFile = 'garage.php?mode=get_model_list&make_id='+make_id;
+	ajax.onCompletion = build_model_list;
+	ajax.runAJAX();
+}
+
+function get_product_list(sel)
+{
+	var make_id = sel.options[sel.selectedIndex].value;
+	document.getElementById('product_id').options.length = 0;
+	ajax.requestFile = 'garage.php?mode=get_product_list&manufacturer_id='+make_id;
+	ajax.onCompletion = build_product_list;
+	ajax.runAJAX();
+}
+
+function build_model_list()
+{
+	var obj = document.getElementById('model_id');
+	eval(ajax.response);
+} 
+
+function build_product_list()
+{
+	var obj = document.getElementById('product_id');
+	eval(ajax.response);
+} 
+</script>
+
+<!-- IF U_MCP -->
+	<div id="pageheader">
+		<p class="linkmcp">[ <a href="{U_MCP}">{L_MCP}</a> ]</p>
+	</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE garage/garage_header.html -->
+
+<!-- INCLUDE garage/garage_menu.html -->
+
+<div id="garage-main">
+	<div class="panel">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+			<form id="search_garage" method="post" action="{S_MODE_ACTION_SEARCH}">
+				<h3>{L_SEARCH_GARAGE}</h3>
+				<fieldset>
+					<dl>
+						<dt><label for="search_year"><input type="checkbox" id="search_year" name="search_year" value="1" />&nbsp;&nbsp;<b>{L_SEARCH_VEHYEAR}</b></label></dt>
+						<dd><select id="made_year" name="made_year"><option value="">{L_SELECT_YEAR}</option><option value="">------</option><!-- BEGIN year--><option value="{year.VALUE}">{year.TEXT}</option><!-- END year --></select></dd>
+					</dl>
+					<dl>
+						<dt><label for="search_make"><input type="checkbox" id="search_make" name="search_make" value="1" />&nbsp;&nbsp;<b>{L_SEARCH_VEHMAKE}</b></label></dt>
+						<dd><select id="make_id" name="make_id" onchange="get_model_list(this)" ><option value="{MAKE_ID}">{L_SELECT_MAKE}</option><option value="">------</option><!-- BEGIN make--><option value="{make.VALUE}">{make.TEXT}</option><!-- END make --></select></dd>
+					</dl>
+					<dl>
+						<dt><label for="search_model"><input type="checkbox" id="search_model" name="search_model" value="1" />&nbsp;&nbsp;<b>{L_SEARCH_VEHMODEL}</b></label></dt>
+						<dd><select id="model_id" name="model_id"><option value="">{L_SELECT_MODEL}</option><option value="">------</option></select></dd>
+					</dl>
+					<dl>
+						<dt><label for="search_category"><input type="checkbox" id="search_category" name="search_category" value="1" />&nbsp;&nbsp;<b>{L_SEARCH_MODCATEGORY}</b></label></dt>
+						<dd><select id="category_id" name="category_id"><option value="">{L_SELECT_CATEGORY}</option><option value="">------</option><!-- BEGIN category--><option value="{category.VALUE}">{category.TEXT}</option><!-- END catgeory --></select></dd>
+					</dl>
+					<dl>
+						<dt><label for="search_manufacturer"><input type="checkbox" id="search_manufacturer" name="search_manufacturer" value="1" />&nbsp;&nbsp;<b>{L_SEARCH_MODMANUFACTURER}</b></label></dt>
+						<dd><select id="manufacturer_id" name="manufacturer_id" onchange="get_product_list(this)" ><option value="">{L_SELECT_MANUFACTURER}</option><option value="">------</option><!-- BEGIN manufacturer--><option value="{manufacturer.VALUE}">{manufacturer.TEXT}</option><!-- END manufacturer --></select></dd>
+					</dl>
+					<dl>
+						<dt><label for="search_product"><input type="checkbox" id="search_product" name="search_product" value="1" />&nbsp;&nbsp;<b>{L_SEARCH_MODPRODUCT}</b></label></dt>
+						<dd><select id="product_id" name="product_id"><option value="">{L_SELECT_PRODUCT}</option><option value="">------</option></select></dd>
+					</dl>
+					<dl>
+						<dt><label for="search_username"><input type="checkbox" id="search_username" name="search_username" value="1" />&nbsp;&nbsp;<b>{L_MEMBER_NAME}</b></label></dt>
+						<dd><input id="username" name="username" type="text" class="inputbox autowidth" size="35" value="" />&nbsp;[&nbsp;<a href="{U_FIND_USERNAME}" onclick="find_username(this.href); return false;">{L_FIND_USERNAME}</a>&nbsp;]</dd>
+					</dl>
+					<dl>
+						<dt><label for="search_any"><b>{L_SEARCH_LOGIC}</b></label></dt>
+						<dd><label for="search_any">{L_MATCH_ANY}&nbsp;<input type="radio" name="search_logic" id="search_any" value="OR" checked="checked" /></label>&nbsp;&nbsp;<label for="search_all">{L_MATCH_ALL}&nbsp;<input type="radio" name="search_logic" id="search_all" value="AND" /></label></dd>
+					</dl>
+					<dl>
+						<dt><label for="vehicles"><b>{L_RESULTS_DISPLAY}</b></label></dt>
+						<dd><label for="vehicles">{L_VEHICLES}&nbsp;<input type="radio" class="radio" name="display_as" id="vehicles" value="vehicles" checked="checked" /></label>&nbsp;&nbsp;<label for="modifications">{L_MODIFICATIONS}&nbsp;<input name="display_as" type="radio" class="radio" id="modifications" value="modifications" /></label><!-- IF S_DISPLAY_SEARCH_INSURANCE -->&nbsp;&nbsp;<label for="premiums">{L_PREMIUMS}&nbsp;<input name="display_as" type="radio" class="radio" id="premiums" value="premiums" /></label><!-- ENDIF --><br /><label for="quartermiles">{L_QUARTERMILES}&nbsp;<input type="radio" class="radio" name="display_as" id="quartermiles" value="quartermiles" /></label>&nbsp;&nbsp;<label for="dynoruns">{L_DYNORUNS}&nbsp;<input type="radio" class="radio" name="display_as" id="dynoruns" value="dynoruns" /></label>&nbsp;&nbsp;<label for="laps">{L_LAPS}&nbsp;<input type="radio" class="radio" name="display_as" id="laps" value="laps" /></label></dd>
+					</dl>
+				</fieldset>
+
+				<fieldset class="submit-buttons">
+					<input type="reset" value="{L_RESET}" name="reset" class="button2" />&nbsp; 
+					<input type="submit" name="submit" value="{L_SEARCH}" class="button1" />
+				</fieldset>
+				{S_FORM_TOKEN}
+			</form>
+
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+</div>
+
+<!-- INCLUDE garage/garage_footer.html -->
+
+<!-- INCLUDE overall_footer.html -->

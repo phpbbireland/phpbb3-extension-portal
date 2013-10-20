@@ -1,0 +1,110 @@
+<!-- IF STARGATE -->
+
+	</div><!-- close center -->
+
+		<!-- IF S_SHOW_RIGHT_BLOCKS -->
+		<div class="r_block_vert_gap" style="width:{BLOCK_WIDTH};" id="right">
+			<script type="text/javascript">
+				// <![CDATA[
+				if(GetCookie('right_blocks_col_hide') == '2')
+				{
+					ShowHide('right');
+					ShowHide('right_blocks_col_hide');
+					ShowHide('right_blocks_col_show');
+				}
+				// ]]>
+			</script>
+			<!-- INCLUDE portal_layout_right.html -->
+		</div>
+		<!-- ENDIF -->
+
+	</div><!-- close p_row_ -->
+</div><!-- close p_container_ -->
+
+
+	<!-- Comment:
+	We do not process the block move/arrange unless user select this option...
+	This prevents js reports and ensures the scroll work correctly... Added: 09 March 2008 Mike.
+	-->
+	<!-- IF S_IS_PORTAL and S_ARRANGE -->
+	<script type="text/javascript">
+	// <![CDATA[
+		var _left;
+		var _right;
+		var _center;
+
+		$_left = GetCookie('{COOKIE_NAME}_sgp_left');
+		$_center = GetCookie('{COOKIE_NAME}_sgp_center');
+		$_right = GetCookie('{COOKIE_NAME}_sgp_right');
+
+		SetCookie('{COOKIE_NAME}_sgp_block_cache', '0');
+
+		Sortable.create("left",
+			{tag:'div',dropOnEmpty:true,handle:'handle',containment:["left","center","right"],constraint:false,
+			onChange:
+				function()
+				{
+					$_left = $('leftdebug').innerHTML = Sortable.serialize('left');
+					$_center = $('centerdebug').innerHTML = Sortable.serialize('center');
+					$_right = $('rightdebug').innerHTML = Sortable.serialize('right');
+					SetCookie('{COOKIE_NAME}_sgp_left', $_left);
+					SetCookie('{COOKIE_NAME}_sgp_center', $_center);
+					SetCookie('{COOKIE_NAME}_sgp_right', $_right);
+				}
+			});
+		Sortable.create("center",
+			{tag:'div',dropOnEmpty:true,handle:'handle',containment:["left","center","right"],constraint:false,
+			onChange:
+				function()
+				{
+					$_left = $('leftdebug').innerHTML = Sortable.serialize('left');
+					$_center = $('centerdebug').innerHTML = Sortable.serialize('center');
+					$_right = $('rightdebug').innerHTML = Sortable.serialize('right');
+					SetCookie('{COOKIE_NAME}_sgp_left', $_left);
+					SetCookie('{COOKIE_NAME}_sgp_center', $_center);
+					SetCookie('{COOKIE_NAME}_sgp_right', $_right);
+				}
+			});
+		Sortable.create("right",
+			{tag:'div',dropOnEmpty:true,handle:'handle',containment:["left","center","right"],constraint:false,
+			onChange:
+				function()
+				{
+					$_left = $('leftdebug').innerHTML = Sortable.serialize('left');
+					$_center = $('centerdebug').innerHTML = Sortable.serialize('center');
+					$_right = $('rightdebug').innerHTML = Sortable.serialize('right');
+					SetCookie('{COOKIE_NAME}_sgp_left', $_left);
+					SetCookie('{COOKIE_NAME}_sgp_center', $_center);
+					SetCookie('{COOKIE_NAME}_sgp_right', $_right);
+				}
+			});
+	// ]]>
+	</script>
+		<!-- DO NOT DELETE THIS CODE -->
+		<div style="display:none;">
+			<pre id="leftdebug"></pre>
+			<pre id="centerdebug"></pre>
+			<pre id="rightdebug"></pre>
+		</div>
+	<!-- ENDIF -->
+
+	<!-- IF S_IS_PORTAL and not S_ARRANGE -->
+	<script type="text/javascript">
+	// <![CDATA[
+		SetCookie('{COOKIE_NAME}_sgp_block_cache', '300');
+	 // ]]>
+	</script>
+	<!-- ENDIF -->
+
+	<!-- IF S_CLEAR_CACHE -->
+	<script type="text/javascript">
+	// <![CDATA[
+		SetCookie('{COOKIE_NAME}_sgp_block_cache', '0');
+		SetCookie('{COOKIE_NAME}_sgp_left', '', 0);
+		SetCookie('{COOKIE_NAME}_sgp_center', '', 0);
+		SetCookie('{COOKIE_NAME}_sgp_right', '', 0);
+	 // ]]>
+	</script>
+	<!-- ENDIF -->
+
+<!-- ENDIF -->

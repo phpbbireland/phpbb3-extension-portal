@@ -1,0 +1,151 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- IF U_MCP -->
+	<div id="pageheader">
+		<p class="linkmcp">[ <a href="{U_MCP}">{L_MCP}</a> ]</p>
+	</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE garage/garage_header.html -->
+
+<!-- INCLUDE garage/garage_menu.html -->
+
+<div id="garage-main">
+	<div class="panel">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+			<form action="{S_USER_SUBMIT_ACTION}" method="post">
+				<!-- IF S_USER_SUBMIT_SUCCESS -->
+				<h3>{L_ADD_DATA_SUCCESS}</h3>
+				<h4>{L_ADD_DATA_SUCCESS_EXPLAIN}</h4>
+				<!-- ENDIF -->
+
+				<!-- IF S_USER_SUBMIT_MAKE and ! S_USER_SUBMIT_SUCCESS -->
+				<h3>{L_ADD_MAKE}</h3>
+				<!-- IF S_DISPLAY_PENDING -->
+				<h4>{L_PENDING_NOTICE}</h4>
+				<!-- ENDIF -->
+				<fieldset>
+					<dl>
+						<dt>{L_VEHICLE_MAKE}</dt>
+						<dd><input name="make" type="text" class="inputbox autowidth" size="35" value="" /></dd>
+					</dl>
+				</fieldset>
+				<!-- ENDIF -->
+
+				<!-- IF S_USER_SUBMIT_MODEL and ! S_USER_SUBMIT_SUCCESS -->
+				<h3>{L_ADD_MODEL}</h3>
+				<!-- IF S_DISPLAY_PENDING -->
+				<h4>{L_PENDING_NOTICE}</h4>
+				<!-- ENDIF -->
+				<fieldset>
+					<dl>
+						<dt>{L_VEHICLE_MAKE}</dt>
+						<dd>{MAKE}</span></dd>
+					</dl>
+					<dl>
+						<dt>{L_VEHICLE_MODEL}</dt>
+						<dd><input name="model" type="text" class="inputbox autowidth" size="35" value="" /></dd>
+					</dl>
+				</fieldset>
+				<!-- ENDIF -->
+
+				<!-- IF S_USER_SUBMIT_PRODUCT and ! S_USER_SUBMIT_SUCCESS -->
+				<h3>{L_ADD_PRODUCT}</h3>
+				<!-- IF S_DISPLAY_PENDING -->
+				<h4>{L_PENDING_NOTICE}</h4>
+				<!-- ENDIF -->
+				<fieldset>
+					<dl>
+						<dt><b>{L_MODIFICATION}&nbsp;{L_CATEGORY}</b></dt>
+						<dd>{CATEGORY}</dd>
+					</dl>
+					<dl>
+						<dt><b>{L_MODIFICATION}&nbsp;{L_MANUFACTURER}</b></dt>
+						<dd>{MANUFACTURER}</dd>
+					</dl>
+					<dl>
+						<dt><b>{L_MODIFICATION}&nbsp;{L_PRODUCT}</b></dt>
+						<dd><input name="title" type="text" class="inputbox autowidth" size="35" value="" /></dd>
+					</dl>
+				</fieldset>
+				<!-- ENDIF -->
+
+				<!-- IF S_USER_SUBMIT_TRACK and ! S_USER_SUBMIT_SUCCESS -->
+				<h3>{L_ADD_TRACK}</h3>
+				<!-- IF S_DISPLAY_PENDING -->
+				<h4>{L_PENDING_NOTICE}</h4>
+				<!-- ENDIF -->
+				<fieldset>
+					<dl>
+						<dt><b>{L_TRACK}</b>&nbsp;<span style="color:#FF0000">[{L_REQUIRED}]</span></dt>
+						<dd><input name="title" type="text" class="inputbox autowidth" size="35" value="{TITLE}" /></dd>
+					</dl>
+					<dl>
+						<dt><b>{L_LENGTH}</b></dt>
+						<dd><input name="length" type="text" class="inputbox autowidth" size="15" value="{LENGTH}" />&nbsp;<select id="mileage_unit" name="mileage_unit"><option value="">{L_SELECT_MILEAGE_UNIT}</option><option value="">------</option><!-- BEGIN mileage --><option value="{mileage.VALUE}" <!-- IF mileage.S_SELECTED -->selected="selected"<!-- ENDIF -->>{mileage.TEXT}</option><!-- END mileage --></select></dd>
+					</dl>
+				</fieldset>
+				<!-- ENDIF -->
+
+				<!-- IF S_USER_SUBMIT_BUSINESS and ! S_USER_SUBMIT_SUCCESS -->
+				<h3>{L_ADD_NEW_BUSINESS}</h3>
+				<!-- IF S_DISPLAY_PENDING -->
+				<h4>{L_BUSINESS_NOTICE}</h4>
+				<!-- ENDIF -->
+				<fieldset>
+					<dl>
+						<dt><b>{L_BUSINESS_NAME}</b></dt>
+						<dd><input name="title" type="text" class="inputbox autowidth" size="35" value="{TITLE}" /> <span style="color:#FF0000">[{L_REQUIRED}]</span></dd>
+					</dl>
+					<dl>
+						<dt><b>{L_ADDRESS}</b></dt>
+						<dd><textarea name="address" cols="40" rows="4" wrap="soft" class="inputbox autowidth">{ADDRESS}</textarea></dd>
+					</dl>
+					<dl>
+						<dt><b>{L_TELEPHONE}</b></dt>
+						<dd><input name="telephone" type="text" class="inputbox autowidth" size="35" value="{TELEPHONE}" /></dd>
+					</dl>
+					<dl>
+						<dt><b>{L_FAX}</b></dt>
+						<dd><input name="fax" type="text" class="inputbox autowidth" size="35" value="{FAX}" /></dd>
+					</dl>
+					<dl>
+						<dt><b>{L_WEBSITE}</b></dt>
+						<dd><input name="website" type="text" class="inputbox autowidth" size="35" value="{WEBSITE}" /></dd>
+					</dl>
+					<dl>
+						<dt><b>{L_EMAIL}</b></dt>
+						<dd><input name="email" type="text" class="inputbox autowidth" size="35" value="{EMAIL}" /></dd>
+					</dl>
+					<dl>
+						<dt><b>{L_OPENING_HOURS}</b></dt>
+						<dd><textarea name="opening_hours" cols="40" rows="4" wrap="soft" class="inputbox autowidth">{OPENING_HOURS}</textarea></dd>
+					</dl>
+					<dl>
+						<dt><b>{L_TYPE}</b></dt>
+						<dd>{L_INSURANCE}&nbsp;{L_COLEN}&nbsp;<input type="checkbox" name="insurance" value="1" <!-- IF S_BUSINESS_INSURANCE -->checked="checked"<!-- ENDIF --> /><br />{L_GARAGE}&nbsp;{L_COLEN}&nbsp;<input type="checkbox" name="garage" value="1" <!-- IF S_BUSINESS_GARAGE-->checked="checked"<!-- ENDIF --> /><br />{L_RETAIL}&nbsp;{L_COLEN}&nbsp;<input type="checkbox" name="retail" value="1" <!-- IF S_BUSINESS_RETAIL -->checked="checked"<!-- ENDIF --> /><br />{L_PRODUCT_MANUFACTURER}&nbsp;{L_COLEN}&nbsp;<input type="checkbox" name="product" value="1" <!-- IF S_BUSINESS_PRODUCT -->checked="checked"<!-- ENDIF --> /><br />{L_DYNOCENTRE}&nbsp;{L_COLEN}&nbsp;<input type="checkbox" name="dynocentre" value="1" <!-- IF S_BUSINESS_DYNOCENTRE -->checked="checked"<!-- ENDIF --> /></dd>
+					</dl>
+				</fieldset>
+				<!-- ENDIF -->
+
+				<fieldset>
+					<!-- BEGIN hidden_data-->
+					<input type="hidden" value="{hidden_data.VALUE}" name="{hidden_data.NAME}" />
+					<!-- END -->
+				</fieldset>
+
+				<fieldset class="submit-buttons">
+					<!-- IF ! S_USER_SUBMIT_SUCCESS --><input type="reset" value="{L_RESET}" name="reset" class="button2" />&nbsp;<!-- ENDIF -->
+					<input type="submit" name="submit" value="{L_BUTTON_LABEL}" class="button1" />
+				</fieldset>
+				{S_FORM_TOKEN}
+			</form>
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+</div>
+
+<!-- INCLUDE garage/garage_footer.html -->
+
+<!-- INCLUDE overall_footer.html -->

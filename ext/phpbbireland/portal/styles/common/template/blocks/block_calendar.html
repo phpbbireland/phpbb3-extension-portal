@@ -1,0 +1,62 @@
+<!-- IDTAG block_calendar starts -->
+<span class="block_data_calc">
+<form id="hidden">
+    <input type="hidden" id="cal_h_month" name="cal_h_month" value="{HIDDEN_MONTH}" />
+    <input type="hidden" id="cal_h_year" name="cal_h_year" value="{HIDDEN_YEAR}" />
+</form>
+<table width="100%" cellpadding="1" cellspacing="1" border="0">
+	<tr>
+		<td id="cal_month_prev" align="left" onclick="populateTable('block_calendar:populate_table', 'hidden', 'prev');" style="cursor:pointer;"><img src="{T_IMAGESET_PATH}/arrowleftmonth.png"></td>
+		<td id="cal_month_name" align="center"></td>
+		<td id="cal_month_next" align="right" onclick="populateTable('block_calendar:populate_table', 'hidden', 'next');" style="cursor:pointer;"><img src="{T_IMAGESET_PATH}/arrowrightmonth.png"></td>
+	</tr>
+	<tr>
+		<td align="center" colspan="3">
+			<table class="calendar" width="100%" cellpadding="0" cellspacing="0" border="0">{CALENDAR_TABLE}</table>
+		</td>
+    </tr>
+</table>
+<!-- IF S_SHOW_UPCOMING_EVENTS or S_SHOW_UPCOMING_BIRTHDAYS -->
+<br />
+<table width="100%" cellpadding="1" cellspacing="1" border="0">
+<tr><td>
+    <div class="panel bg2" id="bday-panel">
+        <div class="inner"><span class="corners-top"><span></span></span>
+            <!-- IF S_SHOW_UPCOMING_EVENTS -->
+                <strong>{L_UPCOMING_EVENTS}{L_EVENTS_TIMEFRAME}:</strong><hr />
+                <div>
+                    <!-- IF S_IS_EVENTS -->
+                        <!-- BEGIN event_list -->{event_list.TITLE} ({L_ON} {event_list.DATE} {L_AT} {event_list.TIME})<!-- IF not event_list.S_LAST_ROW --><hr /><!-- ENDIF --><!-- END event_list -->
+                    <!-- ELSE -->
+                        {L_NO_UPCOMING_EVENTS}
+                    <!-- ENDIF -->
+                </div>
+                <br />
+            <!-- ENDIF -->
+            <!-- IF S_SHOW_UPCOMING_BIRTHDAYS -->
+                <strong>{L_UPCOMING_BIRTHDAYS}{L_BIRTHDAYS_TIMEFRAME}:</strong><hr />
+                <div>
+                    <!-- IF S_IS_BIRTHDAYS -->
+                        {L_CONGRATULATIONS}: <!-- BEGIN bday_list -->{bday_list.USERNAME_FULL} ({bday_list.AGE} {L_ON} {bday_list.ON_DAY})<!-- IF not bday_list.S_LAST_ROW --><hr /><!-- ENDIF --><!-- END bday_list -->
+                    <!-- ELSE -->
+                        {L_NO_UPCOMING_BIRTHDAYS}
+                    <!-- ENDIF -->
+                </div>
+            <!-- ENDIF -->
+        <span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+</tr></td>
+</table>
+<!-- ENDIF -->
+
+	<!-- IF S_NEW_EVENT -->
+		<div style="width:100%;">
+			<a class="button_event_new_icon" href="calendar.php?mode=main#tabs;" title="{L_CALENDAR}"><span>{L_CALENDAR}</span></a>
+		</div>
+	<!-- ENDIF -->
+</span>
+<script type="text/javascript">
+populateTable('block_calendar:populate_table', 'hidden', '');
+</script>
+<!-- IDTAG block_calendar ends -->

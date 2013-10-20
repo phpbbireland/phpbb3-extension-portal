@@ -1,0 +1,28 @@
+<span style="display:none;" id="alt">
+	<a href="javascript:StyleSwitchCookie('mystyle', 'default', '{T_THEME_PATH}', 'alt', 'default');">
+		<img style="margin-left:2px; margin-top:1px;" src="{T_THEME_PATH}/images/portal/wide.png" width="15" height="15" alt="{L_DEFAULT_WIDTH}" title="{L_DEFAULT_WIDTH}" />
+	</a>
+</span>
+<span style="display:none;" id="default">
+	<a href="javascript:StyleSwitchCookie('mystyle', 'alt', '{T_THEME_PATH}', 'default', 'alt');">
+		<img style="margin-left:2px; margin-top:1px;" src="{T_THEME_PATH}/images/portal/narrow.png" width="15" height="15" alt="{L_ALT_WIDTH}" title="{L_ALT_WIDTH}" />
+	</a>
+</span>
+
+<script type="text/javascript">
+// <![CDATA[
+	var value = Get_Cookie('mystyle');
+
+	if(value == null || value == 'undefined')
+	{
+		Show('default');
+		Load_css_file('{T_THEME_PATH}','default');
+	}
+	else
+	{
+		Show(value);
+		Load_css_file('{T_THEME_PATH}', value);
+	}
+
+// ]]>
+</script>

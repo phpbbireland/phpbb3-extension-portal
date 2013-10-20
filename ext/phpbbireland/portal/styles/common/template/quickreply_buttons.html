@@ -1,0 +1,34 @@
+<!-- quickreply_buttons.html (SGP) 16 September 2009 start -->
+<div id="format-buttons_bbc" style="float:left; width:75%">
+	<input type="button" class="bbb-bold" accesskey="b" name="addbbcode0" style="" onclick="bbstyle(0)" title="{L_BBCODE_B_HELP}" />
+	<input type="button" class="bbb-italic" accesskey="i" name="addbbcode2" style="" onclick="bbstyle(2)" title="{L_BBCODE_I_HELP}" />
+	<input type="button" class="bbb-under_line" accesskey="u" name="addbbcode4" style="" onclick="bbstyle(4)" title="{L_BBCODE_U_HELP}" />
+	<!-- IF S_BBCODE_QUOTE -->
+		<input type="button" class="bbb-quote" accesskey="q" name="addbbcode6" style="" onclick="bbstyle(6)" title="{L_BBCODE_Q_HELP}" />
+	<!-- ENDIF -->
+	<input type="button" class="bbb-code" accesskey="c" name="addbbcode8" style="" onclick="bbstyle(8)" title="{L_BBCODE_C_HELP}" />
+	<input type="button" class="bbb-list" accesskey="l" name="addbbcode10" style="" onclick="bbstyle(10)" title="{L_BBCODE_L_HELP}" />
+	<input type="button" class="bbb-ordered_list" accesskey="o" name="addbbcode12" style="" onclick="bbstyle(12)" title="{L_BBCODE_O_HELP}" />
+	<input type="button" class="bbb-add_list_item" accesskey="t" name="addlitsitem" style="" onclick="bbstyle(-1)" title="{L_BBCODE_LISTITEM_HELP}" />
+	<!-- IF S_BBCODE_IMG -->
+		<input type="button" class="bbb-image" accesskey="p" name="addbbcode14" style="" onclick="bbstyle(14)" title="{L_BBCODE_P_HELP}" />
+	<!-- ENDIF -->
+	<!-- IF S_LINKS_ALLOWED -->
+		<input type="button" class="bbb-url" accesskey="w" name="addbbcode16" style="" onclick="bbstyle(16)" title="{L_BBCODE_W_HELP}" />
+	<!-- ENDIF -->
+	<!-- IF S_BBCODE_FLASH -->
+		<input type="button" class="bbb-flash" accesskey="f" name="addbbcode18" onclick="bbstyle(18)" title="{L_BBCODE_D_HELP}" />
+	<!-- ENDIF -->
+	<select style="height:20px;" name="addbbcode20" onchange="bbfontstyle('[size=' + this.form.addbbcode20.options[this.form.addbbcode20.selectedIndex].value + ']', '[/size]');this.form.addbbcode20.selectedIndex = 2;" title="{L_FONT_SIZE}">
+	<option class="style_bg_color" value="100" selected="selected">{L_FONT_SIZE}</option>
+	<option class="style_bg_color" style="font-size:8px;"  value="60"> {L_FONT_TINY}</option>
+	<option class="style_bg_color" style="font-size:10px;" value="85"> {L_FONT_SMALL}</option>
+	<option class="style_bg_color" style="font-size:12px;" value="100">{L_FONT_NORMAL}</option>
+	<option class="style_bg_color" style="font-size:18px;" value="130">{L_FONT_LARGE}</option>
+	<option class="style_bg_color" style="font-size:24px;" value="170">{L_FONT_HUGE}</option>
+	</select>
+	<!-- BEGIN custom_tags -->
+		<input type="button" class="bbb-{custom_tags.BBCODE_TAG}" name="addbbcode{custom_tags.BBCODE_ID}" onclick="bbstyle({custom_tags.BBCODE_ID})" title="{custom_tags.BBCODE_HELPLINE}" />
+	<!-- END custom_tags -->
+</div>
+<!-- quickreply_buttons.html (SGP) 16 September 2009 end -->

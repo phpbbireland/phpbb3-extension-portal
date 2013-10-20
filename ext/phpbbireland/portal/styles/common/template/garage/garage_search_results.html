@@ -1,0 +1,404 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- IF U_MCP -->
+	<div id="pageheader">
+		<p class="linkmcp">[ <a href="{U_MCP}">{L_MCP}</a> ]</p>
+	</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE garage/garage_header.html -->
+
+<!-- INCLUDE garage/garage_menu.html -->
+
+<div id="garage-main">
+	<div class="panel">
+
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+
+			<!-- IF SEARCH_MESSAGE -->
+			<h3>{SEARCH_MESSAGE}</h3>
+			<!-- ENDIF -->
+
+			<form id="search_results" method="post" action="{S_MODE_ACTION}">
+
+			<!-- IF S_DISPLAY_VEHICLE_RESULTS -->
+		         <div id="gara-fora" class="forabg">
+				<div class="inner">
+					<span class="corners-top"><span></span></span>
+					<ul class="garage_list">
+						<li class="header">
+							<dl>
+								<dt class="gcamera_image"></dt>
+								<dd class="gwidth-10">{L_YEAR}</dd>
+								<dd class="gwidth-10">{L_MAKE}</dd>
+								<dd class="gwidth-15">{L_MODEL}</dd>
+								<dd class="gwidth-15">{L_COLOUR}</dd>
+								<dd class="gwidth-15">{L_OWNER}</dd>
+								<dd class="gwidth-5">{L_VIEWS}</dd>
+								<dd class="gwidth-5">{L_MODS}</dd>
+								<dd class="gwidth-10">{L_UPDATED}</dd>
+							</dl>
+						</li>
+					</ul>
+					<ul class="garage_list">
+					<!-- BEGIN vehicle -->
+					<!-- IF vehicle.ROW_NUMBER is even --><li class="row bg1"><!-- ELSE --><li class="row bg2"><!-- ENDIF -->
+						<dl>
+							<dt class="gcamera_image"><!-- IF vehicle.U_IMAGE --><a href="{vehicle.U_IMAGE}" rel="lightbox" class="garage-camera-icon"></a><!-- ENDIF --></dt>
+			  				<dd class="gwidth-10">{vehicle.YEAR}</dd>
+							<dd class="gwidth-10">{vehicle.MAKE}</dd>
+							<dd class="gwidth-15"><a href="{vehicle.U_VIEW_VEHICLE}">{vehicle.MODEL}</a></dd>
+							<dd class="gwidth-15">{vehicle.COLOUR}</dd>
+							<dd class="gwidth-15"><b><a href="{vehicle.U_VIEW_PROFILE}" <!-- IF vehicle.USERNAME_COLOUR --> style="color: {vehicle.USERNAME_COLOUR}"<!-- ENDIF -->>{vehicle.USERNAME}</a></b></dd>
+							<dd class="gwidth-5">{vehicle.VIEWS}</dd>
+							<dd class="gwidth-5">{vehicle.MODS}</dd>
+							<dd class="gwidth-20">{vehicle.UPDATED}</dd>
+						</dl>
+					</li>
+					<!-- BEGINELSE -->
+					<div class="panel">
+						<div class="inner"><span class="corners-top"><span></span></span>
+						<strong>{L_SEARCH_PRODUCED_NO_RESULTS}</strong>
+						<span class="corners-bottom"><span></span></span></div>
+					</div>
+					<!-- END row -->
+				</ul>
+			<span class="corners-bottom"><span></span></span></div>
+		</div>
+
+			<fieldset class="display-options">
+				<label>{L_SORTED_BY}{L_COLEN} <select id="sort" name="sort"><option value="">{L_SELECT_A_OPTION}</option><option value="">------</option><!-- BEGIN sort --><option value="{sort.VALUE}" <!-- IF sort.S_SELECTED -->selected="selected"<!-- ENDIF -->>{sort.TEXT}</option><!-- END sort --></select></label> 
+				<label>{L_IN}{L_COLEN} <select id="order" name="order"><option value="">{L_SELECT_A_OPTION}</option><option value="">------</option><!-- BEGIN order --><option value="{order.VALUE}" <!-- IF order.S_SELECTED -->selected="selected"<!-- ENDIF -->>{order.TEXT}</option><!-- END order --></select></label> 
+				<label><input type="submit" name="submit_vehicle" value="{L_GO}" class="button2" /></label>
+			</fieldset>
+
+		<!-- IF PAGINATION or TOTAL_VEHICLES -->
+		<hr />
+		<div class="pagination">
+			{TOTAL_VEHICLES}
+			<!-- IF PAGE_NUMBER --><!-- IF PAGINATION --> &bull; <a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span><!-- ELSE --> &bull; {PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
+		</div>
+		<!-- ENDIF -->
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_MODIFICATION_RESULTS -->
+	         <div id="gara-fora" class="forabg">
+			<div class="inner"><span class="corners-top"><span></span></span>
+				<ul class="garage_list">
+					<li class="header">
+						<dl>
+							<dt class="gcamera_image"></dt>
+							<dd class="gwidth-20">{L_VEHICLE}</dd>
+							<dd class="gwidth-20">{L_MODIFICATION}</dd>
+							<dd class="gwidth-20">{L_CATEGORY}</dd>
+							<dd class="gwidth-20">{L_OWNER}</dd>
+							<dd class="gwidth-10">{L_PRICE}</dd>
+							<dd class="gwidth-5">{L_RATING}</dd>
+						</dl>
+					</li>
+				</ul>
+				<ul class="garage_list">
+					<!-- BEGIN modification -->
+					<!-- IF modification.ROW_NUMBER is even --><li class="row bg1"><!-- ELSE --><li class="row bg2"><!-- ENDIF -->
+						<dl>
+							<dt class="gcamera_image"><!-- IF modification.U_IMAGE --><a href="{modification.U_IMAGE}" rel="lightbox" class="garage-camera-icon"></a><!-- ENDIF --></dt>
+			  				<dd class="gwidth-20"><a href="{modification.U_VIEW_VEHICLE}">{modification.VEHICLE}</a></dd>
+							<dd class="gwidth-20"><a href="{modification.U_VIEW_MODIFICATION}">{modification.MODIFICATION}</a></dd>
+							<dd class="gwidth-20">{modification.CATEGORY}</dd>
+							<dd class="gwidth-20"><b><a href="{modification.U_VIEW_PROFILE}" <!-- IF modification.USERNAME_COLOUR --> style="color: {modification.USERNAME_COLOUR}"<!-- ENDIF -->>{modification.USERNAME}</a></b></dd>
+							<dd class="gwidth-10">{modification.PRICE}</dd>
+							<dd class="gwidth-5">{modification.RATING}</dd>
+						</dl>
+					</li>
+					<!-- BEGINELSE -->
+					<div class="panel">
+						<div class="inner"><span class="corners-top"><span></span></span>
+						<strong>{L_SEARCH_PRODUCED_NO_RESULTS}</strong>
+						<span class="corners-bottom"><span></span></span></div>
+					</div>
+					<!-- END row -->
+				</ul>
+			<span class="corners-bottom"><span></span></span></div>
+		</div>
+
+
+
+			<fieldset class="display-options">
+				<label>{L_MODIFICATIONS_SORTED_BY}{L_COLEN} <select id="sort" name="sort"><option value="">{L_SELECT_A_OPTION}</option><option value="">------</option><!-- BEGIN sort --><option value="{sort.VALUE}" <!-- IF sort.S_SELECTED -->selected="selected"<!-- ENDIF -->>{sort.TEXT}</option><!-- END sort --></select></label> 
+				<label>{L_IN}{L_COLEN} <select id="order" name="order"><option value="">{L_SELECT_A_OPTION}</option><option value="">------</option><!-- BEGIN order --><option value="{order.VALUE}" <!-- IF order.S_SELECTED -->selected="selected"<!-- ENDIF -->>{order.TEXT}</option><!-- END order --></select></label> 
+				<label><input type="submit" name="submit_modification" value="{L_GO}" class="button2" /></label>
+			</fieldset>
+
+		<!-- IF PAGINATION or TOTAL_MODIFICATIONS -->
+		<hr />
+		<div class="pagination">
+			{TOTAL_MODIFICATIONS}
+			<!-- IF PAGE_NUMBER --><!-- IF PAGINATION --> &bull; <a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span><!-- ELSE --> &bull; {PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
+		</div>
+		<!-- ENDIF -->
+
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_PREMIUM_RESULTS -->
+	         <div id="gara-fora" class="forabg">
+			<div class="inner"><span class="corners-top"><span></span></span>
+				<ul class="garage_list">
+					<li class="header">
+						<dl>
+							<dt class="gwidth-20">{L_VEHICLE}</dt>
+							<dd class="gwidth-10">{L_PRICE}</dd>
+							<dd class="gwidth-10">{L_MOD_PRICE}</dd>
+							<dd class="gwidth-20">{L_OWNER}</dd>
+							<dd class="gwidth-10">{L_PREMIUM}</dd>
+							<dd class="gwidth-10">{L_COVER_TYPE}</dd>
+							<dd class="gwidth-15">{L_INSURER}</dd>
+						</dl>
+					</li>
+				</ul>
+				<ul class="garage_list">
+					<!-- BEGIN premium -->
+					<!-- IF premium.ROW_NUMBER is even --><li class="row bg1"><!-- ELSE --><li class="row bg2"><!-- ENDIF -->
+						<dl>
+							<dt class="gwidth-20"><a href="{premium.U_VIEW_VEHICLE}">{premium.VEHICLE}</a></dt>
+							<dd class="gwidth-10">{premium.PRICE}</dd>
+							<dd class="gwidth-10">{premium.MOD_PRICE}</dd>
+							<dd class="gwidth-20"><b><a href="{premium.U_VIEW_PROFILE}" <!-- IF premium.USERNAME_COLOUR --> style="color: {premium.USERNAME_COLOUR}"<!-- ENDIF -->>{premium.USERNAME}</a></b></dd>
+							<dd class="gwidth-10">{premium.PREMIUM}</dd>
+							<dd class="gwidth-10">{premium.COVER_TYPE}</dd>
+							<dd class="gwidth-25"><a href="{premium.U_VIEW_BUSINESS}">{premium.BUSINESS}</a></dd>
+						</dl>
+					</li>
+					<!-- BEGINELSE -->
+					<div class="panel">
+						<div class="inner"><span class="corners-top"><span></span></span>
+						<strong>{L_SEARCH_PRODUCED_NO_RESULTS}</strong>
+						<span class="corners-bottom"><span></span></span></div>
+					</div>
+					<!-- END row -->
+				</ul>
+			<span class="corners-bottom"><span></span></span></div>
+		</div>
+
+			<fieldset class="display-options">
+				<label>{L_INSURANCE_SORTED_BY}{L_COLEN} <select id="sort" name="sort"><option value="">{L_SELECT_A_OPTION}</option><option value="">------</option><!-- BEGIN sort --><option value="{sort.VALUE}" <!-- IF sort.S_SELECTED -->selected="selected"<!-- ENDIF -->>{sort.TEXT}</option><!-- END sort --></select></label> 
+				<label>{L_IN}{L_COLEN} <select id="order" name="order"><option value="">{L_SELECT_A_OPTION}</option><option value="">------</option><!-- BEGIN order --><option value="{order.VALUE}" <!-- IF order.S_SELECTED -->selected="selected"<!-- ENDIF -->>{order.TEXT}</option><!-- END order --></select></label> 
+				<label><input type="submit" name="submit_insurance" value="{L_GO}" class="button2" /></label>
+			</fieldset>
+
+		<!-- IF PAGINATION or TOTAL_PREMIUMS -->
+		<hr />
+		<div class="pagination">
+			{TOTAL_PREMIUMS}
+			<!-- IF PAGE_NUMBER --><!-- IF PAGINATION --> &bull; <a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span><!-- ELSE --> &bull; {PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
+		</div>
+		<!-- ENDIF -->
+
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_QUARTERMILE_RESULTS -->
+		<div id="gara-fora" class="forabg">
+			<div class="inner"><span class="corners-top"><span></span></span>
+				<ul class="garage_list">
+					<li class="header">
+						<dl>
+							<dt class="gcamera_image"></dt>
+							<dd class="gwidth-10">{L_USERNAME}</dd>
+							<dd class="gwidth-20">{L_VEHICLE}</dd>
+							<dd class="gwidth-10">{L_RT}</dd>
+							<dd class="gwidth-10">{L_SIXTY}</dd>
+							<dd class="gwidth-10">{L_THREE}</dd>
+							<dd class="gwidth-10">{L_EIGHTH}</dd>
+							<dd class="gwidth-10">{L_THOU}</dd>
+							<dd class="gwidth-10">{L_QUART}</dd>
+						</dl>
+					</li>
+				</ul>
+				<ul class="garage_list">
+					<!-- BEGIN quartermile -->
+					<!-- IF quartermile.ROW_NUMBER is even --><li class="row bg1"><!-- ELSE --><li class="row bg2"><!-- ENDIF -->
+						<dl>
+							<dt class="gcamera_image"><!-- IF quartermile.U_IMAGE --><a href="{quartermile.U_IMAGE}" rel="lightbox" class="garage-camera-icon"></a><!-- ENDIF --></dt>
+							<dd class="gwidth-10"><b><a href="{quartermile.U_VIEWPROFILE}" <!-- IF quartermile.USERNAME_COLOUR --> style="color: {quartermile.USERNAME_COLOUR}"<!-- ENDIF -->>{quartermile.USERNAME}</a></b></dd>
+							<dd class="gwidth-20"><a href="{quartermile.U_VIEWVEHICLE}">{quartermile.VEHICLE}</a></dd>
+							<dd class="gwidth-10">{quartermile.RT}</dd>
+							<dd class="gwidth-10">{quartermile.SIXTY}</dd>
+							<dd class="gwidth-10">{quartermile.THREE}</dd>
+							<dd class="gwidth-10">{quartermile.EIGHTH}<!-- IF quartermile.EIGHTHMPH != "-" --> &nbsp;&#64;&nbsp;{quartermile.EIGHTHMPH}<!-- ENDIF --></dd>
+							<dd class="gwidth-10">{quartermile.THOU}</dd>
+							<dd class="gwidth-10"><a href="{quartermile.U_QUART}">{quartermile.QUART}<!-- IF quartermile.QUARTMPH != "-" --> &nbsp;&#64;&nbsp;{quartermile.QUARTMPH}<!-- ENDIF --></a></dd>
+						</dl>
+					</li>
+					<!-- BEGINELSE -->
+					<div class="panel">
+						<div class="inner"><span class="corners-top"><span></span></span>
+						<strong>{L_SEARCH_PRODUCED_NO_RESULTS}</strong>
+						<span class="corners-bottom"><span></span></span></div>
+					</div>
+					<!-- END row -->
+				</ul>
+			<span class="corners-bottom"><span></span></span></div>
+		</div>
+
+			<fieldset class="display-options">
+				<label>{L_QUARTERMILE_SORTED_BY}{L_COLEN} <select id="sort" name="sort"><option value="">{L_SELECT_A_OPTION}</option><option value="">------</option><!-- BEGIN sort --><option value="{sort.VALUE}" <!-- IF sort.S_SELECTED -->selected="selected"<!-- ENDIF -->>{sort.TEXT}</option><!-- END sort --></select></label> 
+				<label>{L_IN}{L_COLEN} <select id="order" name="order"><option value="">{L_SELECT_A_OPTION}</option><option value="">------</option><!-- BEGIN order --><option value="{order.VALUE}" <!-- IF order.S_SELECTED -->selected="selected"<!-- ENDIF -->>{order.TEXT}</option><!-- END order --></select></label> 
+				<label><input type="submit" name="submit_quartermile" value="{L_GO}" class="button2" /></label>
+			</fieldset>
+
+		<!-- IF PAGINATION or TOTAL_QUARTERMILES -->
+		<hr />
+		<div class="pagination">
+			{TOTAL_QUARTERMILES}
+			<!-- IF PAGE_NUMBER --><!-- IF PAGINATION --> &bull; <a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span><!-- ELSE --> &bull; {PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
+		</div>
+		<!-- ENDIF -->
+
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_DYNORUN_RESULTS -->
+		<div id="gara-fora" class="forabg">
+			<div class="inner"><span class="corners-top"><span></span></span>
+				<ul class="garage_list">
+					<li class="header">
+						<dl>
+							<dt class="gcamera_image"></dt>
+							<dd class="gwidth-10">{L_USERNAME}</dd>
+							<dd class="gwidth-20">{L_VEHICLE}</dd>
+							<dd class="gwidth-10">{L_DYNOCENTRE}</dd>
+							<dd class="gwidth-10">{L_BHP}</dd>
+							<dd class="gwidth-10">{L_TORQUE}</dd>
+							<dd class="gwidth-10">{L_BOOST}</dd>
+							<dd class="gwidth-10">{L_NITROUS}</dd>
+							<dd class="gwidth-10">{L_PEAKPOINT}</dd>
+						</dl>
+					</li>
+				</ul>
+				<ul class="garage_list">
+					<!-- BEGIN dynorun -->
+					<!-- IF dynorun.ROW_NUMBER is even --><li class="row bg1"><!-- ELSE --><li class="row bg2"><!-- ENDIF -->
+						<dl>
+							<dt class="gcamera_image"><!-- IF dynorun.U_IMAGE --><a href="{dynorun.U_IMAGE}" rel="lightbox" class="garage-camera-icon"></a><!-- ENDIF --></dt>
+							<dd class="gwidth-10"><b><a href="{dynorun.U_VIEWPROFILE}" <!-- IF dynorun.USERNAME_COLOUR --> style="color: {dynorun.USERNAME_COLOUR}"<!-- ENDIF -->>{dynorun.USERNAME}</a></b></dd>
+							<dd class="gwidth-20"><a href="{dynorun.U_VIEWVEHICLE}" >{dynorun.VEHICLE}</a></dd>
+							<dd class="gwidth-10">{dynorun.DYNOCENTRE}</dd>
+							<dd class="gwidth-10"><a href="{dynorun.U_BHP}">{dynorun.BHP}&nbsp;{dynorun.BHP_UNIT}</a></dd>
+							<dd class="gwidth-10">{dynorun.TORQUE}&nbsp;{dynorun.TORQUE_UNIT}</dd>
+							<dd class="gwidth-10">{dynorun.BOOST}&nbsp;{dynorun.BOOST_UNIT}</dd>
+							<dd class="gwidth-10">{dynorun.NITROUS}</dd>
+							<dd class="gwidth-10">{dynorun.PEAKPOINT}</dd>
+						</dl>
+					</li>
+					<!-- BEGINELSE -->
+					<div class="panel">
+						<div class="inner"><span class="corners-top"><span></span></span>
+						<strong>{L_SEARCH_PRODUCED_NO_RESULTS}</strong>
+						<span class="corners-bottom"><span></span></span></div>
+					</div>
+					<!-- END row -->
+				</ul>
+			<span class="corners-bottom"><span></span></span></div>
+		</div>
+
+			<fieldset class="display-options">
+				<label>{L_DYNORUN_SORTED_BY}{L_COLEN} <select id="sort" name="sort"><option value="">{L_SELECT_A_OPTION}</option><option value="">------</option><!-- BEGIN sort --><option value="{sort.VALUE}" <!-- IF sort.S_SELECTED -->selected="selected"<!-- ENDIF -->>{sort.TEXT}</option><!-- END sort --></select></label> 
+				<label>{L_IN}{L_COLEN} <select id="order" name="order"><option value="">{L_SELECT_A_OPTION}</option><option value="">------</option><!-- BEGIN order --><option value="{order.VALUE}" <!-- IF order.S_SELECTED -->selected="selected"<!-- ENDIF -->>{order.TEXT}</option><!-- END order --></select></label> 
+				<label><input type="submit" name="submit_dynorun" value="{L_GO}" class="button2" /></label>
+			</fieldset>
+
+		<!-- IF PAGINATION or TOTAL_DYNORUNS -->
+		<hr />
+		<div class="pagination">
+			{TOTAL_DYNORUNS}
+			<!-- IF PAGE_NUMBER --><!-- IF PAGINATION --> &bull; <a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span><!-- ELSE --> &bull; {PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
+		</div>
+		<!-- ENDIF -->
+
+		<!-- ENDIF -->
+
+		<!-- IF S_DISPLAY_LAP_RESULTS -->
+		<div id="gara-fora" class="forabg">
+			<div class="inner"><span class="corners-top"><span></span></span>
+				<ul class="garage_list">
+					<li class="header">
+						<dl>
+							<dt class="gcamera_image"></dt>
+							<dd class="gwidth-20">{L_USERNAME}</dd>
+							<dd class="gwidth-20">{L_VEHICLE}</dd>
+							<dd class="gwidth-20">{L_TRACK}</dd>
+							<dd class="gwidth-10">{L_CONDITION}</dd>
+							<dd class="gwidth-10">{L_TYPE}</dd>
+							<dd class="gwidth-10">{L_TIME}&nbsp;(M:S:MS)</dd>
+						</dl>
+					</li>
+				</ul>
+				<ul class="garage_list">
+					<!-- BEGIN lap -->
+					<!-- IF lap.ROW_NUMBER is even --><li class="row bg1"><!-- ELSE --><li class="row bg2"><!-- ENDIF -->
+						<dl>
+							<dt class="gcamera_image"><!-- IF lap.U_IMAGE --><a href="{lap.U_IMAGE}" rel="lightbox" class="garage-camera-icon"></a><!-- ENDIF --></dt>
+							<dd class="gwidth-20"><b><a href="{lap.U_VIEWPROFILE}" <!-- IF lap.USERNAME_COLOUR --> style="color: {lap.USERNAME_COLOUR}"<!-- ENDIF -->>{lap.USERNAME}</a></b></dd>
+							<dd class="gwidth-20"><a href="{lap.U_VIEWVEHICLE}">{lap.VEHICLE}</a></dd>
+							<dd class="gwidth-20"><a href="{lap.U_TRACK}">{lap.TRACK}</a></dd>
+							<dd class="gwidth-10">{lap.CONDITION}</dd>
+							<dd class="gwidth-10">{lap.TYPE}</dd>
+							<dd class="gwidth-10"><a href="{lap.U_LAP}">{lap.MINUTE}.{lap.SECOND}.{lap.MILLISECOND}</a></dd>
+						</dl>
+					</li>
+					<!-- BEGINELSE -->
+					<div class="panel">
+						<div class="inner"><span class="corners-top"><span></span></span>
+						<strong>{L_SEARCH_PRODUCED_NO_RESULTS}</strong>
+						<span class="corners-bottom"><span></span></span></div>
+					</div>
+					<!-- END row -->
+				</ul>
+			<span class="corners-bottom"><span></span></span></div>
+		</div>
+
+			<fieldset class="display-options">
+				<label>{L_LAP_SORTED_BY}{L_COLEN} <select id="sort" name="sort"><option value="">{L_SELECT_A_OPTION}</option><option value="">------</option><!-- BEGIN sort --><option value="{sort.VALUE}" <!-- IF sort.S_SELECTED -->selected="selected"<!-- ENDIF -->>{sort.TEXT}</option><!-- END sort --></select></label> 
+				<label>{L_IN}{L_COLEN} <select id="order" name="order"><option value="">{L_SELECT_A_OPTION}</option><option value="">------</option><!-- BEGIN order --><option value="{order.VALUE}" <!-- IF order.S_SELECTED -->selected="selected"<!-- ENDIF -->>{order.TEXT}</option><!-- END order --></select></label> 
+				<label><input type="submit" name="submit_lap" value="{L_GO}" class="button2" /></label>
+			</fieldset>
+
+		<!-- IF PAGINATION or TOTAL_LAPS -->
+		<hr />
+		<div class="pagination">
+			{TOTAL_LAPS}
+			<!-- IF PAGE_NUMBER --><!-- IF PAGINATION --> &bull; <a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span><!-- ELSE --> &bull; {PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
+		</div>
+		<!-- ENDIF -->
+
+
+		<!-- ENDIF -->
+
+				<fieldset>
+					<input type="hidden" value="{SEARCH_YEAR}" name="search_year" />
+					<input type="hidden" value="{SEARCH_MAKE}" name="search_make" />
+					<input type="hidden" value="{SEARCH_MODEL}" name="search_model" />
+					<input type="hidden" value="{SEARCH_CATEGORY}" name="search_category" />
+					<input type="hidden" value="{SEARCH_MANUFACTURER}" name="search_manufacturer" />
+					<input type="hidden" value="{SEARCH_PRODUCT}" name="search_product" />
+					<input type="hidden" value="{SEARCH_USERNAME}" name="search_username" />
+					<input type="hidden" value="{DISPLAY_AS}" name="display_as" />
+					<input type="hidden" value="{MADE_YEAR}" name="made_year" />
+					<input type="hidden" value="{MAKE_ID}" name="make_id" />
+					<input type="hidden" value="{MODEL_ID}" name="model_id" />
+					<input type="hidden" value="{CATEGORY_ID}" name="category_id" />
+					<input type="hidden" value="{MANUFACTURER_ID}" name="manufacturer_id" />
+					<input type="hidden" value="{PRODUCT_ID}" name="product_id" />
+					<input type="hidden" value="{USERNAME}" name="username'" />
+				</fieldset>
+
+				{S_FORM_TOKEN}
+			</form>
+
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+</div>
+
+<!-- INCLUDE garage/garage_footer.html -->
+
+<!-- INCLUDE overall_footer.html -->

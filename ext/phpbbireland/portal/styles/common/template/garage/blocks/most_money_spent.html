@@ -1,0 +1,45 @@
+<!-- BEGIN block_6 -->
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h3>{block_6.BLOCK_TITLE}</h3>
+		<div class="forabg">
+			<div class="inner">
+				<span class="corners-top"><span></span></span>
+				<ul class="topiclist">
+					<li class="header">
+						<dl>
+							<dd class="index_block_header">{block_6.COLUMN_1_TITLE}</dd>
+							<dd class="index_block_header">{block_6.COLUMN_2_TITLE}</dd>
+							<dd class="index_block_header">{block_6.COLUMN_3_TITLE}</dd>
+						</dl>
+					</li>
+				</ul>
+				<ul class="topiclist forums">
+				<!-- BEGIN row -->
+				<!-- IF block_6.row.S_ROW_COUNT is even --><li class="row bg1"><!-- ELSE --><li class="row bg2"><!-- ENDIF -->
+						<dl>
+							<dd class="index_block"><a href ="{block_6.row.U_COLUMN_1}">{block_6.row.COLUMN_1_TITLE}</a></dd>
+							<dd class="index_block"><b><a href ="{block_6.row.U_COLUMN_2}" <!-- IF block_6.row.USERNAME_COLOUR --> style="color: {block_6.row.USERNAME_COLOUR}"<!-- ENDIF -->>{block_6.row.COLUMN_2_TITLE}</a></b></dd>
+							<!-- IF block_6.row.U_COLUMN_3 -->
+							<dd class="index_block"><a href ="{block_6.row.U_COLUMN_3}">{block_6.row.COLUMN_3_TITLE}</a></dd>
+							<!-- ELSE -->
+							<dd class="index_block">{block_6.row.COLUMN_3_TITLE}</dd>
+							<!-- ENDIF -->
+						</dl>
+					</li>
+					<!-- BEGINELSE -->
+					<li class="row bg1">
+						<dl>
+							<dd class="index_block_header">{L_NO_ITEM_TO_LIST}</dd>
+						</dl>
+					</li>
+					<!-- END row -->
+				</ul>
+				<span class="corners-bottom"><span></span></span>
+			</div>
+		</div>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<!-- END block_6 -->
