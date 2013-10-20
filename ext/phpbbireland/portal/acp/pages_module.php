@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 /**
 * @package acp
 */
-class acp_k_pages
+class pages_module
 {
 	var $u_action;
 
@@ -30,24 +30,37 @@ class acp_k_pages
 
 		$current_pages = array();
 
-		include($phpbb_root_path . 'includes/sgp_functions.' . $phpEx);
+		include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.'.$phpEx);
 
-		$user->add_lang('acp/k_pages');
-		$this->tpl_name = 'acp_k_pages';
-		$this->page_filename = 'ACP_PAGES';
-		$this->page_title = 'ACP_K_PAGES';
+		$user->add_lang_ext('phpbbireland/pages', 'k_blocks');
+		$this->tpl_name = 'acp_pages';
+		$this->page_title = $user->lang['ACP_PAGES'];
+		add_form_key('pages')
+
+
 
 		$form_key = 'acp_k_pages';
 		add_form_key($form_key);
 
 		//$s_hidden_fields = '';
 
-		$mode = request_var('mode', '');
-		$page_id = request_var('page_id', 0);
-		$action	= request_var('config', '');
-		$tag_id = request_var('tag_id', '');
+		$mode = $request->variable('mode', '');
+		$page_id = $request->variable('page_id', 0);
+		$action	= $request->variable('config', '');
+		$tag_id = $request->variable('tag_id', '');
 
-		$submit = (isset($_POST['submit'])) ? true : false;
+		if ($request->is_set_post('submit'))
+		{
+			if (!check_form_key('pages'))
+			{
+				$submit = false;
+				$mode = '';
+				trigger_error('FORM_INVALID');
+			}
+			$submit = ture;
+		}
+
+
 
 		if ($tag_id != '')
 		{
@@ -75,7 +88,7 @@ class acp_k_pages
 
 		if ($submit)
 		{
-			$mod_pages = request_var('k_mod_folders', '');
+			$mod_pages = $request->variable('k_mod_folders', '');
 
 			// trap trailing commas in mod pages //
 			if ($mod_pages && $mod_pages[strlen($mod_pages) - 1] == ',')
@@ -270,7 +283,7 @@ function get_all_available_files()
 {
 	global $phpbb_root_path, $phpEx, $template, $dirslist, $db, $user, $k_config, $phpbb_admin_path;
 
-	include($phpbb_root_path . 'includes/sgp_functions.' . $phpEx);
+	include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.'.$phpEx);
 
 	$page_name = '';
 	$dirslist = $store = ' ';

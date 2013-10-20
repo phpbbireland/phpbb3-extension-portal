@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 /**
 * @package acp
 */
-class acp_k_resources
+class resources_module
 {
 	var $u_action;
 
@@ -28,17 +28,16 @@ class acp_k_resources
 		global $db, $user, $auth, $template, $cache , $k_cache;
 		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
-		include($phpbb_root_path . 'includes/sgp_functions.'.$phpEx);
+		include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.'.$phpEx);
 
-		$user->add_lang('acp/k_resources');
-		$this->tpl_name = 'acp_k_resources';
-		$this->page_title = 'ACP_K_RESOURCES';
+		$user->add_lang_ext('phpbbireland/portal', 'k_resources');
+		$this->tpl_name = 'acp_resources';
+		$this->page_title = $user->lang['ACP_RESOURCES'];
+		add_form_key('resources');
 
-		$form_key = 'acp_k_resources';
-		add_form_key($form_key);
 
 		// Set up general vars
-		$action = request_var('action', '');
+		$action = $request->variable('action', '');
 		$action = (isset($_POST['edit'])) ? 'edit' : $action;
 		$action = (isset($_POST['add'])) ? 'add' : $action;
 		$action = (isset($_POST['save'])) ? 'save' : $action;
@@ -49,9 +48,9 @@ class acp_k_resources
 		//			[ MAIN PROCESS ]
 		// ======================================================
 
-		$add		= request_var('add', '');
+		$add		= $request->variable('add', '');
 
-		$id_list = (( isset($_POST['id_list']) ) ? request_var('id_list', array(0)) : ( (isset($_GET['id_list'])) ? request_var('id_list', array(0)) : array()));
+		$id_list = (( isset($_POST['id_list']) ) ? $request->variable('id_list', array(0)) : ( (isset($_GET['id_list'])) ? $request->variable('id_list', array(0)) : array()));
 
 		switch ($action)
 		{
@@ -61,7 +60,7 @@ class acp_k_resources
 				$start = '{';
 				$end = '}';
 
-				$new_word = request_var('new_word', '');
+				$new_word = $request->variable('new_word', '');
 
 				if (isset($k_config[$new_word]))
 				{
