@@ -1,6 +1,6 @@
 services:
     phpbbireland.portal.controller:
-        class: phpbbireland\portal\controller\main
+        class: phpbbireland\portal\controller\portal
         arguments:
             - @config
             - @template
