@@ -16,14 +16,14 @@ if (!defined('IN_PHPBB'))
 /**
 * @package module_install
 */
-class acp_k_resources_info
+class resources_info
 {
 	function module()
 	{
 		return array(
-			'filename' => 'acp_k_resources',
+			'filename' => '\phpbbireland\portal\acp\resources_module',
 			'title'    => 'ACP_K_RESOURCES',
-			'version'  => '1.0.22',
+			'version'  => '1.0.0',
 			'modes'    => array(
 				'select' => array('title' => 'ACP_K_RESOURCES', 'auth' => 'acl_a_k_tools', 'cat' => array('ACP_K_TOOLS')),
 			),
