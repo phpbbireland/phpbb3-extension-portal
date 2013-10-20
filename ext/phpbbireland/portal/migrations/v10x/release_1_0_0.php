@@ -26,6 +26,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 		return array(
 			array('config.add', array('k_portal_enabled', 1)),
 			array('config.add', array('k_blocks_enabled', 1)),
+			array('config.add', array('k_portal_version', '1.0.0')),
 			array('config.add', array('k_portal_build', '310-001')),
 			array('config.add', array('k_blocks_width', '190')),
 
