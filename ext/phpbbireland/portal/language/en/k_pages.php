@@ -40,7 +40,7 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'ACP_PAGES'					=> 'Current phpBB pages.',
+	'ACP_PAGES'					=> 'Pages',
 	'ACP_K_PAGES'				=> 'phpBB pages',
 	'ACP_K_PAGES_LAND'			=> 'Set landing page',
 	'ACP_K_PAGES_MANAGE'		=> 'Manage phpBB pages',

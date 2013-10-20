@@ -27,6 +27,7 @@ class menus_module
 		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx, $table_prefix;
 
 		define('K_MENUS_TABLE',	$table_prefix . 'k_menus');
+
 		$img_path = $phpbb_root_path. 'ext/phpbbireland/portal/images/block_images/menu/';
 
 		$user->add_lang_ext('phpbbireland/portal', 'k_menus');
@@ -659,5 +660,3 @@ function parse_all_groups()
 	}
 	$db->sql_freeresult($result);
 }
-
-?>

@@ -251,9 +251,12 @@ $lang = array_merge($lang, array(
 
 // module install
 	'ACP_PORTAL_TITLE'		=> 'Portal',
-	'ACP_CONFIG_TITLE'		=> 'Portal settings',
+	'ACP_CONFIG_TITLE'		=> 'Settings',
 	'ACP_BLOCKS_TITLE'		=> 'Blocks',
 	'ACP_MENUS_TITLE'		=> 'Menus',
+	'ACP_PAGES_TITLE'		=> 'Pages',
+	'ACP_RESOURCES_TITLE'	=> 'Resources',
+
 
 	'K_PORTAL_ENABLED'		=> 'Enable portal',
 	'K_PORTAL_BUILD'		=> 'Portal build',

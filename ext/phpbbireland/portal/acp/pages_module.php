@@ -1,12 +1,13 @@
 <?php
 /**
 *
-* @package acp Kiss Portal Engine
-* @version $Id$
-* @copyright (c) 2005-2013 phpbbireland
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @package Portal Extension
+* @copyright (c) 2013 phpbbireland
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
+
+namespace phpbbireland\portal\acp;
 
 /**
 * @ignore
@@ -16,38 +17,35 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-/**
-* @package acp
-*/
 class pages_module
 {
 	var $u_action;
 
 	function main($page_id, $mode)
 	{
-		global $db, $user, $auth, $template, $cache;
-		global $k_config, $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx;
+		global $db, $user, $auth, $template, $cache, $request;
+		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx, $k_config, $table_prefix;
 
-		$current_pages = array();
+		define('K_PAGES_TABLE',	$table_prefix . 'k_pages');
+		define('K_VARIABLES_TABLE',	$table_prefix . 'k_vars');
 
-		include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.'.$phpEx);
 
-		$user->add_lang_ext('phpbbireland/pages', 'k_blocks');
+		$img_path  = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/block/';
+		$portal_js = $phpbb_root_path . 'ext/phpbbireland/portal/js/portal.js';
+
+		$user->add_lang_ext('phpbbireland/portal', 'k_pages');
 		$this->tpl_name = 'acp_pages';
 		$this->page_title = $user->lang['ACP_PAGES'];
 		add_form_key('pages')
 
-
-
-		$form_key = 'acp_k_pages';
-		add_form_key($form_key);
-
-		//$s_hidden_fields = '';
+		include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.'.$phpEx);
 
 		$mode = $request->variable('mode', '');
 		$page_id = $request->variable('page_id', 0);
 		$action	= $request->variable('config', '');
 		$tag_id = $request->variable('tag_id', '');
+
+		$current_pages = array();
 
 		if ($request->is_set_post('submit'))
 		{
@@ -224,7 +222,7 @@ class pages_module
 				));
 
 				$cache->destroy('k_config');
-				$cache->destroy('sql', K_BLOCKS_CONFIG_VAR_TABLE);
+				$cache->destroy('sql', K_VARIABLES_TABLE);
 
 				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_pages&amp;mode=manage'));
 			break;
@@ -416,5 +414,3 @@ function get_page_filename($page_id)
 
 	return($row['page_name']);
 }
-
-?>

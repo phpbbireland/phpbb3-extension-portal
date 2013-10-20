@@ -53,7 +53,7 @@ $lang = array_merge($lang, array(
 	'TITLE_MAIN'   => 'General Portal Variable',
 	'TITLE_BLOCK'  => 'Portal Block Variable',
 	'TITLE_EXPLAIN_MAIN'  => 'Setting for variables used by general portal blocks...',
-	'TITLE_EXPLAIN_BLOCK' => '&bull; Blocks can contain variables (normally stored in the K_BLOCKS_CONFIG_VAR_TABLE).
+	'TITLE_EXPLAIN_BLOCK' => '&bull; Blocks can contain variables (normally stored in the K_VARIABLES_TABLE).
 	<br />&bull; Each block can have an associated html file (to set the variables), these are located in adm/style/k_block_vars folder.<br />&bull; If you add your own block variables, you need to include the html file to display and edit these variables.',
 
 	'NEWS_SETTINGS'       => 'News Settings',

@@ -1,12 +1,13 @@
 <?php
 /**
 *
-* @package acp Kiss Portal Engine
-* @version $Id$
-* @copyright (c) 2005-2013 phpbbireland
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @package Portal Extension
+* @copyright (c) 2013 phpbbireland
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
+
+namespace phpbbireland\portal\acp;
 
 /**
 * @ignore
@@ -16,17 +17,16 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-/**
-* @package acp
-*/
 class resources_module
 {
 	var $u_action;
 
 	function main($id, $mode)
 	{
-		global $db, $user, $auth, $template, $cache , $k_cache;
-		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
+		global $db, $user, $auth, $template, $cache, $k_cache, $request;
+		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $k_config, $table_prefix;
+
+		define('K_RESOURCES_TABLE',	$table_prefix . 'k_resources');
 
 		include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.'.$phpEx);
 
@@ -159,5 +159,3 @@ class resources_module
 
 
 }
-
-?>
