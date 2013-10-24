@@ -74,7 +74,7 @@ class blocks_module
 			'IMG_PATH'          => $img_path,
 			'IMG_PATH_ACP'      => $img_path_acp,
 			'CSS_PATH'          => $css_path,
-			'U_MANAGE_PAGES'	=> append_sid("{$phpbb_admin_path}index.$phpEx" , "i={$is}&amp;mode=manage"),
+			'U_MANAGE_PAGES'	=> append_sid("{$phpbb_admin_path}index.$phpEx" , "i={$id}&amp;mode=manage"),
 		));
 
 		// Set up general vars
@@ -103,7 +103,9 @@ class blocks_module
 
 		$template->assign_var('k_adm_block', $k_config['k_adm_block']);
 
-		$u_action = append_sid("{$phpbb_admin_path}index.$phpEx" , "i={$id}&amp;mode=" . $mode);
+		$u_action = $this->u_action;
+
+		//append_sid("{$phpbb_admin_path}index.$phpEx" , "i={$id}&amp;mode=" . $mode);
 
 		switch ($mode)
 		{
@@ -336,7 +338,7 @@ class blocks_module
 
 						$template->assign_var('BLOCK_REPORT', $message .'<br />');
 
-						meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$id}&amp;mode=add'));
+						meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$id}&amp;mode=add"));
 						return;
 					}
 
@@ -413,7 +415,7 @@ class blocks_module
 
 					$cache->destroy('sql', K_BLOCKS_TABLE);
 
-					meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$id}&amp;mode=manage'));
+					meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$id}&amp;mode=manage"));
 					return;
 				}
 				else
@@ -627,7 +629,7 @@ class blocks_module
 					//meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=307&amp;mode=' . $mode));
 					//return;
 
-					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$module_id}&amp;mode=' . $mode));
+					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=" . $mode));
 					return;
 				}
 
@@ -772,7 +774,7 @@ class blocks_module
 
 					$cache->destroy('sql', K_BLOCKS_TABLE);
 
-					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$id}&amp;mode=manage'));
+					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$id}&amp;mode=manage"));
 
 					break;
 
@@ -788,7 +790,7 @@ class blocks_module
 
 				$template->assign_var('BLOCK_REPORT', $user->lang['ACTION_CANCELLED']);
 
-				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$id}&amp;mode=manage'));
+				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$id}&amp;mode=manage"));
 
 				break;
 			}
@@ -841,7 +843,7 @@ class blocks_module
 
 					$cache->destroy('sql', K_BLOCKS_TABLE);
 
-					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$id}&amp;mode=manage'));
+					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$id}&amp;mode=manage"));
 
 					break;
 
@@ -857,7 +859,7 @@ class blocks_module
 
 				$template->assign_var('BLOCK_REPORT', $user->lang['ACTION_CANCELLED']);
 
-				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$id}&amp;mode=manage'));
+				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$id}&amp;mode=manage"));
 
 				break;
 			}
@@ -963,7 +965,7 @@ class blocks_module
 				}
 
 				$template->assign_var('BLOCK_REPORT', $user->lang['BLOCK_LAYOUT_RESET']);
-				meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$id}&amp;mode=manage'));
+				meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$id}&amp;mode=manage"));
 
 			}
 			case 'default':
