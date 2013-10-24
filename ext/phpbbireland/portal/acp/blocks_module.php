@@ -27,12 +27,13 @@ class blocks_module
 		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx, $k_config, $table_prefix;
 
 		define('K_BLOCKS_TABLE',	$table_prefix . 'k_blocks');
-		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
+		define('K_VARS_TABLE',		$table_prefix . 'k_variables');
 		define('K_PAGES_TABLE',		$table_prefix . 'k_pages');
 
-
 		$img_path  = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/block/';
+		$img_path_acp = $phpbb_root_path . 'ext/phpbbireland/portal/adm/images/';
 		$portal_js = $phpbb_root_path . 'ext/phpbbireland/portal/js/portal.js';
+		$css_path = $phpbb_root_path . 'ext/phpbbireland/portal/adm/style/';
 
 		$user->add_lang_ext('phpbbireland/portal', 'k_blocks');
 		$this->tpl_name = 'acp_blocks';
@@ -44,9 +45,6 @@ class blocks_module
 		include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.'.$phpEx);
 
 		// Define Switches for html file //
-
-
-		$action	= $request->variable('action', '');
 
 		if ($request->is_set_post('submit'))
 		{
@@ -74,23 +72,26 @@ class blocks_module
 			'U_BACK'			=> $this->u_action,
 			'PORTAL_JS'         => $portal_js,
 			'IMG_PATH'          => $img_path,
-			'U_MANAGE_PAGES'	=> append_sid("{$phpbb_admin_path}index.$phpEx" , "i=k_pages&amp;mode=manage"),
+			'IMG_PATH_ACP'      => $img_path_acp,
+			'CSS_PATH'          => $css_path,
+			'U_MANAGE_PAGES'	=> append_sid("{$phpbb_admin_path}index.$phpEx" , "i={$is}&amp;mode=manage"),
 		));
 
 		// Set up general vars
 		$mode	= $request->variable('mode', '');
 		$block	= $request->variable('block', 0);
+		$module_id = $request->variable('i', 0);
 
 		// bold current row text so things are easier to follow when moving/editing etc... //
 		if (($block) ? $block : 0)
 		{
-			$sql = 'UPDATE ' . K_VARIABLES_TABLE . ' SET config_value = ' . (int)$block . ' WHERE config_name = "k_adm_block"';
+			$sql = 'UPDATE ' . K_VARS_TABLE . ' SET config_value = ' . (int)$block . ' WHERE config_name = "k_adm_block"';
 			$db->sql_query($sql);
 		}
 		else
 		{
 			$sql = 'SELECT config_name, config_value
-				FROM ' . K_VARIABLES_TABLE . "
+				FROM ' . K_VARS_TABLE . "
 				WHERE config_name = 'k_adm_block'";
 
 			$result = $db->sql_query($sql);
@@ -102,7 +103,7 @@ class blocks_module
 
 		$template->assign_var('k_adm_block', $k_config['k_adm_block']);
 
-		$u_action = append_sid("{$phpbb_admin_path}index.$phpEx" , "i=$id&amp;mode=" . $mode);
+		$u_action = append_sid("{$phpbb_admin_path}index.$phpEx" , "i={$id}&amp;mode=" . $mode);
 
 		switch ($mode)
 		{
@@ -335,7 +336,7 @@ class blocks_module
 
 						$template->assign_var('BLOCK_REPORT', $message .'<br />');
 
-						meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_blocks&amp;mode=add'));
+						meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$id}&amp;mode=add'));
 						return;
 					}
 
@@ -412,7 +413,7 @@ class blocks_module
 
 					$cache->destroy('sql', K_BLOCKS_TABLE);
 
-					meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_blocks&amp;mode=manage'));
+					meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$id}&amp;mode=manage'));
 					return;
 				}
 				else
@@ -459,7 +460,7 @@ class blocks_module
 					{
 						if ($dirslist[$i] != '')
 						{
-							$template->assign_block_variables('html_file_name', array('S_BLOCK_FILE_HTML' => $dirslist[$i]));
+							$template->assign_block_vars('html_file_name', array('S_BLOCK_FILE_HTML' => $dirslist[$i]));
 						}
 					}
 
@@ -484,7 +485,7 @@ class blocks_module
 					{
 						if ($dirslist[$i] != '')
 						{
-							$template->assign_block_variables('img_file_name', array('S_BLOCK_FILE_I' => $dirslist[$i]));
+							$template->assign_block_vars('img_file_name', array('S_BLOCK_FILE_I' => $dirslist[$i]));
 						}
 					}
 					$dirslist = '';
@@ -621,8 +622,12 @@ class blocks_module
 					{
 						$mode = 'manage';
 					}
-					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_blocks&amp;mode=' . $mode));
 
+					// works
+					//meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=307&amp;mode=' . $mode));
+					//return;
+
+					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$module_id}&amp;mode=' . $mode));
 					return;
 				}
 
@@ -648,7 +653,7 @@ class blocks_module
 				{
 					if ($dirslist[$i] != '')
 					{
-						$template->assign_block_variables('html_file_name', array('S_BLOCK_FILE_HTML' => $dirslist[$i]));
+						$template->assign_block_vars('html_file_name', array('S_BLOCK_FILE_HTML' => $dirslist[$i]));
 					}
 				}
 
@@ -670,11 +675,11 @@ class blocks_module
 				$dirslist = explode(" ", $dirslist);
 				sort($dirslist);
 
-				for ($i=0; $i < sizeof($dirslist); $i++)
+				for ($i = 0; $i < sizeof($dirslist); $i++)
 				{
 					if ($dirslist[$i] != '')
 					{
-						$template->assign_block_variables('img_file_name', array('S_BLOCK_FILE_I' => $dirslist[$i]));
+						$template->assign_block_vars('img_file_name', array('S_BLOCK_FILE_I' => $dirslist[$i]));
 					}
 				}
 				$dirslist = '';
@@ -767,7 +772,7 @@ class blocks_module
 
 					$cache->destroy('sql', K_BLOCKS_TABLE);
 
-					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_blocks&amp;mode=manage'));
+					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$id}&amp;mode=manage'));
 
 					break;
 
@@ -783,7 +788,7 @@ class blocks_module
 
 				$template->assign_var('BLOCK_REPORT', $user->lang['ACTION_CANCELLED']);
 
-				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_blocks&amp;mode=manage'));
+				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$id}&amp;mode=manage'));
 
 				break;
 			}
@@ -836,7 +841,7 @@ class blocks_module
 
 					$cache->destroy('sql', K_BLOCKS_TABLE);
 
-					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_blocks&amp;mode=manage'));
+					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$id}&amp;mode=manage'));
 
 					break;
 
@@ -852,7 +857,7 @@ class blocks_module
 
 				$template->assign_var('BLOCK_REPORT', $user->lang['ACTION_CANCELLED']);
 
-				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_blocks&amp;mode=manage'));
+				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$id}&amp;mode=manage'));
 
 				break;
 			}
@@ -906,7 +911,7 @@ class blocks_module
 							$c_b_last = $c_b_last + 1;
 						}
 
-						$template->assign_block_variables('bdata', array(
+						$template->assign_block_vars('bdata', array(
 							'S_ID'               => $row['id'],
 							'S_NDX'              => $row['ndx'],
 							'S_TITLE'            => $row['title'],
@@ -926,11 +931,11 @@ class blocks_module
 							'S_BLOCK_CACHE_TIME' => $row['block_cache_time'],
 							'S_BLOCK'            => ($row['id'] == $block) ? $block : '.....',
 
-							'U_EDIT2'            => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_blocks&amp;mode=edit&amp;block=" . $row['id']),
-							'U_UP'               => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_blocks&amp;mode=up&amp;block=" . $row['id']),
-							'U_DOWN'             => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_blocks&amp;mode=down&amp;block=" . $row['id']),
-							'U_DELETE'           => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_blocks&amp;mode=delete&amp;block=" . $row['id']),
-							'U_SET_VARS'         => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_variables&amp;mode=config&amp;block=" . $row['id']),
+							'U_EDIT2'            => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$id}&amp;mode=edit&amp;block=" . $row['id']),
+							'U_UP'               => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$id}&amp;mode=up&amp;block=" . $row['id']),
+							'U_DOWN'             => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$id}&amp;mode=down&amp;block=" . $row['id']),
+							'U_DELETE'           => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$id}&amp;mode=delete&amp;block=" . $row['id']),
+							'U_SET_VARS'         => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$id}&amp;mode=config&amp;block=" . $row['id']),
 						));
 					}
 
@@ -958,7 +963,7 @@ class blocks_module
 				}
 
 				$template->assign_var('BLOCK_REPORT', $user->lang['BLOCK_LAYOUT_RESET']);
-				meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_blocks&amp;mode=manage'));
+				meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$id}&amp;mode=manage'));
 
 			}
 			case 'default':
@@ -1032,7 +1037,7 @@ function get_all_pages($id)
 		ORDER BY page_id ASC, page_name';
 	$result = $db->sql_query($sql);
 
-	$template->assign_block_variables('pages', array(
+	$template->assign_block_vars('pages', array(
 		'PAGE_NAME'		=> $user->lang['NONE'],
 		'PAGE_ID'		=> 0,
 	));
@@ -1041,7 +1046,7 @@ function get_all_pages($id)
 	{
 		$page_id = $row['page_id'];
 		$page_name = $row['page_name'];
-		$template->assign_block_variables('pages', array(
+		$template->assign_block_vars('pages', array(
 			'PAGE_NAME'  => $page_name,
 			'PAGE_ID'    => $page_id,
 			'IS_CHECKED' => ($id) ? (in_array($page_id, $arr)) ? true : false : '',
@@ -1081,7 +1086,7 @@ function get_all_vars_files($block)
 
 	$dirslist = ' '; // use ... for empty //
 
-	$dirs = dir_file_exists($phpbb_root_path . 'ext/phpbbireland/portal/adm/style/k_block_variables');
+	$dirs = dir_file_exists($phpbb_root_path . 'ext/phpbbireland/portal/adm/style/k_block_vars');
 
 	while ($file = $dirs->read())
 	{
@@ -1102,7 +1107,7 @@ function get_all_vars_files($block)
 	{
 		if ($dirslist[$i] != '')
 		{
-			$template->assign_block_variables('var_file_name', array('S_VAR_FILE_NAME' => $dirslist[$i]));
+			$template->assign_block_vars('var_file_name', array('S_VAR_FILE_NAME' => $dirslist[$i]));
 		}
 	}
 	$dirslist = '';
@@ -1207,7 +1212,7 @@ function parse_all_groups()
 	$result = $db->sql_query($sql);
 
 	// backward compatability, set up group zero //
-	$template->assign_block_variables('groups', array(
+	$template->assign_block_vars('groups', array(
 		'GROUP_NAME'  => $user->lang['NONE'],
 		'GROUP_ID'    => 0,
 	));
@@ -1219,7 +1224,7 @@ function parse_all_groups()
 
 		$group_name = ($user->lang(strtoupper('G_'.$group_name))) ? $user->lang(strtoupper('G_'.$group_name)) : $user->lang(strtoupper($group_name));
 
-		$template->assign_block_variables('groups', array(
+		$template->assign_block_vars('groups', array(
 			'GROUP_NAME' => $group_name,
 			'GROUP_ID'   => $group_id,
 			)
