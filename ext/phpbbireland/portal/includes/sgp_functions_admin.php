@@ -157,7 +157,3 @@ if (!function_exists('check_version'))
 		return(null);
 	}
 }
-
-
-
-?>
