@@ -1,0 +1,56 @@
+<!-- IDTAG starts block_mod_queue.html By Q @ www.cybercommand.net -->
+<span class="block_data">
+	<!-- IF MOD_MCP_ALLOWED -->
+	<!-- BEGIN moderator -->
+		<div class="mod_queue">
+			<a href="{U_MOD_MCP}"><img src="{ROOT_PATH}images/block_images/block/information.png" alt="" height="16" width="16" /> {L_MCP}*</a>
+		</div>
+		<!-- IF moderator.TOPIC_APPROVE > 0 -->
+			<div class="mod_queue red">
+				<a href="mcp.php?i=queue&mode=unapproved_topics">
+					<img  src="{ROOT_PATH}images/block_images/block/exclamation.png"  alt="" height="16" width="16" /> {L_MCP_QUEUE_UNAPPROVED_TOPICS}:
+				</a> {moderator.TOPIC_APPROVE}
+			</div>
+		<!-- ELSE -->
+			<div class="mod_queue">
+				<img src="{ROOT_PATH}images/block_images/block/checkmark.png"  alt="" height="16" width="16" /> {L_NO} {L_MCP_QUEUE_UNAPPROVED_TOPICS}
+			</div>
+		<!-- ENDIF -->
+
+		<!-- IF moderator.POSTS_APPROVE > 0 -->
+			<div class="mod_queue red">
+				<a href="mcp.php?i=queue&mode=unapproved_posts">
+					<img src="{ROOT_PATH}images/block_images/block/exclamation.png"  alt="" height="16" width="16" /> {L_MCP_QUEUE_UNAPPROVED_POSTS}:
+				</a> {moderator.POSTS_APPROVE}
+			</div>
+		<!-- ELSE -->
+			<div class="mod_queue">
+				<img src="{ROOT_PATH}images/block_images/block/checkmark.png"  alt="" height="16" width="16" /> {L_NO} {L_MCP_QUEUE_UNAPPROVED_POSTS}
+			</div>
+		<!-- ENDIF -->
+
+		<!-- IF moderator.POSTS_REPORT > 0 -->
+			<div class="mod_queue red">
+				<a href="mcp.php?i=reports&mode=reports">
+					<img src="{ROOT_PATH}images/block_images/block/exclamation.png"  alt="" height="16" width="16" /> {L_REPORTED} {L_TOPICS}:
+				</a> {moderator.POSTS_REPORT}
+			</div>
+		<!-- ELSE -->
+			<div class="mod_queue">
+				<img src="{ROOT_PATH}images/block_images/block/checkmark.png"  alt="" height="16" width="16" /> {L_NO} {L_REPORTED} {L_TOPICS}
+			</div>
+		<!-- ENDIF -->
+
+		<!-- IF U_MCP -->
+			<div class="mod_queue">
+				<a href="{U_MCP}">{L_MCP}</a>
+			</div>
+		<!-- ENDIF -->
+
+	<!-- END moderator -->
+	<!-- ELSE -->
+	{L_NOT_AUTHORISED}
+	<!-- ENDIF -->
+	<!-- IF DEBUG_QUERIES -->{MOD_PORTAL_DEBUG}<!-- ENDIF -->
+</span>
+<!-- IDTAG ends block_mod_que.html -->

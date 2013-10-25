@@ -1,0 +1,57 @@
+<!-- IF PORTAL_MESSAGE -->
+	<div class="panel sgp-corners">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+				<div class="block_header"><div class="portal_message">{PORTAL_MESSAGE}</div></div>
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+<!-- ENDIF -->
+
+<!-- IDTAG START portal_layout_center 08 May 2011 -->
+
+<!-- BEGIN center_block_files -->
+	<div id="<!-- IF S_ARRANGE -->BLOCK_<!-- ENDIF -->{center_block_files.CENTER_BLOCK_ID}">
+		<div class="forabg sgp-corners" style="margin-bottom:8px;">
+			<div class="inner"><span class="corners-top"><span></span></span>
+
+				<div class="block_header <!-- IF S_ARRANGE -->handle<!-- ENDIF -->">
+					<div class="block_title" style="text-align:{S_CONTENT_FLOW_BEGIN};">{center_block_files.CENTER_BLOCK_TITLE}&nbsp;
+						<div style="text-align:{S_CONTENT_FLOW_BEGIN};" id="p_{center_block_files.CENTER_BLOCK_ID}">
+
+							<!-- IF S_ARRANGE -->
+								<span class="bmove">{MOVE_IMG}</span>
+								<a href="javascript:ShowHide('{center_block_files.CENTER_BLOCK_ID}','_{center_block_files.CENTER_BLOCK_ID}','BLOCK_{center_block_files.CENTER_BLOCK_ID}');">
+									<span class="bchide">{HIDE_IMG}</span>
+								</a>
+							<!-- ELSE -->
+								<span class="bcimage"><img src="{center_block_files.CENTER_BLOCK_IMG}" alt = "" /></span>
+							<!-- ENDIF -->
+						</div>
+					</div>
+				</div>
+
+				<div class="box" id="<!-- IF not S_ARRANGE -->BLOCK_<!-- ENDIF -->{center_block_files.CENTER_BLOCK_ID}">
+					<!-- IF center_block_files.CENTER_BLOCK_SCROLL and not DISABLE_RT_SCROLL -->
+						<!-- IF not S_ARRANGE -->
+							<div class="scroll_outer" height="{center_block_files.CENTER_BLOCK_HEIGHT}" id="{center_block_files.CENTER_BLOCK_ID}_outer" onmouseover="do_speed(this, event)" onmousemove="do_speed(this, event)" onmouseout="set_defaults(this, event)"><div class="scroll_inner" id="{center_block_files.CENTER_BLOCK_ID}_inner">{center_block_files.CENTER_BLOCKS}</div></div>
+						<!-- ELSE -->
+							{L_SCROLLING_BLOCKS_DISABLED}
+						<!-- ENDIF -->
+					<!-- ELSE -->
+						{center_block_files.CENTER_BLOCKS}
+					<!-- ENDIF -->
+				</div>
+			<span class="corners-bottom"><span></span></span></div>
+		</div>
+		<script type="text/javascript">
+		// <![CDATA[
+			if(GetCookie('BLOCK_{center_block_files.CENTER_BLOCK_ID}') == '2')
+			{
+				ShowHide('{center_block_files.CENTER_BLOCK_ID}','_{center_block_files.CENTER_BLOCK_ID}','BLOCK_{center_block_files.CENTER_BLOCK_ID}');
+			}
+		// ]]>
+		</script>
+	</div>
+<!-- END center_block_files -->
+<!-- IDTAG END portal_layout_center -->

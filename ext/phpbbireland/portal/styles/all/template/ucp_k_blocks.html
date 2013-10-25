@@ -1,0 +1,85 @@
+<!-- INCLUDE ucp_header.html -->
+
+<h2>{L_TITLE}</h2>
+
+<form id="ucp" method="post" action="{S_UCP_ACTION}">
+
+<div class="panel sgp-corners">
+	<div class="inner"><span class="corners-top"><span></span></span>
+
+	<!-- IF ERROR_MESSAGE --><p class="error">{ERROR_MESSAGE}</p><!-- ENDIF -->
+	<!-- IF NOTIFICATION_MESSAGE --><p class="error">{NOTIFICATION_MESSAGE}</p><!-- ENDIF -->
+
+	<fieldset class="fields2">
+	<!-- IF SWITCH == 'arrange' -->
+		{L_ARRANGE_ICON} <a href="{U_PORTAL_ARRANGE}">{LINK_IMG}{L_ARRANGE_NOW}</a>
+	<!-- ENDIF -->
+
+	<!-- IF SWITCH == 'delete' -->
+		<legend>{L_UCP_K_INFO_DELETE}</legend>
+		<dl>
+			<dt><label for="delete_blocks">{L_DELETE_BLOCKS}:</label></dt>
+			<dd><input type="checkbox" class="post" id="reset_blocks" name="reset_blocks" value="{CKECKBOX}" type="text"></dd>
+		</dl>
+	<!-- ENDIF -->
+
+	<!-- IF SWITCH == 'edit' -->
+		<legend>{L_UCP_K_INFO_EDIT}</legend>
+		<dl>
+			<dt><label for="left_blocks">{L_LEFT_BLOCKS}:</label><br /><span>{L_LEFT_BLOCKS_EXPLAIN}</span></dt>
+			<dd><br /><input class="post" size="40" maxlength="200" id="left_blocks" name="left_blocks" value="{K_LEFT_BLOCKS}" type="text"></dd>
+			<dt><label>{L_DEFAULT_BLOCKS}:</label></dt>
+			<dd> &nbsp;&nbsp; {DATA_LEFT}</dd>
+		</dl>
+		<dl>
+			<dt><label for="center_blocks">{L_CENTER_BLOCKS}:</label><br /><span>{L_CENTER_BLOCKS_EXPLAIN}</span></dt>
+			<dd><br /><input class="post" size="40" maxlength="200" id="center_blocks" name="center_blocks" value="{K_CENTER_BLOCKS}" type="text"></dd>
+			<dt><label>{L_DEFAULT_BLOCKS}:</label></dt>
+			<dd> &nbsp;&nbsp; {DATA_CENTER}</dd>
+		</dl>
+		<dl>
+			<dt><label for="right_blocks">{L_RIGHT_BLOCKS}:</label><br /><span>{L_RIGHT_BLOCKS_EXPLAIN}</span></dt>
+			<dd><br /><input class="post" size="40" maxlength="200" id="right_blocks" name="right_blocks" value="{K_RIGHT_BLOCKS}" type="text"></dd>
+			<dt><label>{L_DEFAULT_BLOCKS}:</label></dt>
+			<dd> &nbsp;&nbsp; {DATA_RIGHT}</dd>
+		</dl>
+	<!-- ENDIF -->
+
+	<!-- IF SWITCH == 'info' -->
+		<legend><br />{L_UCP_K_INFO_INFO}<br /></legend>
+		<br />
+		<br />
+		<br />{PORTAL_SITE}
+		<br />
+		<br />{L_P_VERSION}: {PORTAL_VERSION} ({L_B_VERSION}: {PORTAL_BUILD})
+		<br />
+	<!-- ENDIF -->
+
+	<!-- IF SWITCH == 'width' -->
+		<div>
+			{L_UCP_K_INFO_WIDTH}:<br /><br />
+			{L_DEFAULT_WIDTH}: <a href="#" onclick="StyleSwitchCookie('mystyle', 'default', '{T_THEME_PATH}', 'alt', 'default');" title="Hide Blocks"> <img src="{ROOT_PATH}images/wide.gif" height="15" width="14" alt="" title="{L_DEFAULT_WIDTH}" /></a> &nbsp;
+			{L_ALT_WIDTH}: <a href="#" onclick="StyleSwitchCookie('mystyle', 'alt', '{T_THEME_PATH}', 'default', 'alt');" title="Show Blocks"> <img src="{ROOT_PATH}images/narrow.gif" height="15" width="11" alt="" title="{L_ALT_WIDTH}" /></a>
+			<br /><br />{L_UCP_K_INFO_WIDTH_NO}
+		</div>
+		<br /><br />
+	<!-- ENDIF -->
+	</fieldset>
+
+	<div><h3>{MESSAGE}</h3></div>
+
+	<span class="corners-bottom"><span></span></span></div>
+	{S_FORM_TOKEN}
+</div>
+
+<!-- IF SWITCH == 'delete' or  SWITCH == 'edit' -->
+	<fieldset class="submit-buttons">
+		{S_HIDDEN_FIELDS}<input type="reset" value="{L_RESET}" name="reset" class="button2" />&nbsp;
+		<input type="submit" name="submit" value="{L_SUBMIT}" class="button1" />
+		{S_FORM_TOKEN}
+	</fieldset>
+<!-- ENDIF -->
+
+</form>
+
+<!-- INCLUDE ucp_footer.html -->
