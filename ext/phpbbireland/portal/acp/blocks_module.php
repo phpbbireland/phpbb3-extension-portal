@@ -46,16 +46,14 @@ class blocks_module
 			include_once($phpbb_root_path . 'ext/phpbbireland/portal/acp/sgp_functions.' . $phpEx);
 		}
 
-		$sgp_functions = new sgp_functions;
+		$sgp_functions = new sgp_functions();
 
 		if (!class_exists($sgp_functions_admin))
 		{
 			include_once($phpbb_root_path . 'ext/phpbbireland/portal/acp/sgp_functions_admin.' . $phpEx);
 		}
 
-		$sgp_functions_admin = new sgp_functions_admin;
-
-		// Define Switches for html file //
+		$sgp_functions_admin = new sgp_functions_admin();
 
 		if ($request->is_set_post('submit'))
 		{
@@ -666,8 +664,7 @@ class blocks_module
 					return;
 				}
 
-				// get all available html files, note.. we search the admin styles folder //
-
+				// get all available html files, note.. we search our common styles folder //
 				$dirslist = '... '; // use ... for empty //
 
 				$dirs = dir_file_exists($phpbb_root_path . 'ext/phpbbireland/portal/styles/common/template/blocks');
@@ -693,7 +690,6 @@ class blocks_module
 				}
 
 				// get all available block images //
-
 				$dirslist = '';
 
 				$dirs = dir_file_exists($phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/block');
@@ -1093,7 +1089,7 @@ function which_group($id)
 {
 	global $db, $template, $user;
 
-	// Get us all the groups
+	// Get all the groups
 	$sql = 'SELECT group_name
 		FROM ' . GROUPS_TABLE . '
 		WHERE group_id = ' . (int)$id;
@@ -1118,7 +1114,7 @@ function get_all_vars_files($block)
 {
 	global $template, $user, $phpbb_admin_path, $phpbb_root_path;
 
-	$dirslist = ' '; // use ... for empty //
+	$dirslist = ' '; // use "..." for empty //
 
 	$dirs = dir_file_exists($phpbb_root_path . 'ext/phpbbireland/portal/adm/style/k_block_vars');
 
