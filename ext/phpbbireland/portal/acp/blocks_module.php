@@ -41,13 +41,6 @@ class blocks_module
 
 		$template->assign_var('U_ACTION', $this->u_action);
 
-		if (!class_exists($sgp_functions))
-		{
-			include_once($phpbb_root_path . 'ext/phpbbireland/portal/acp/sgp_functions.' . $phpEx);
-		}
-
-		$sgp_functions = new sgp_functions();
-
 		if (!class_exists($sgp_functions_admin))
 		{
 			include_once($phpbb_root_path . 'ext/phpbbireland/portal/acp/sgp_functions_admin.' . $phpEx);
@@ -99,7 +92,7 @@ class blocks_module
 		if ($mode == 'L' || $mode == 'R' || $mode == 'C' || $mode == 'manage')
 		{
 
-			$sgp_functions->sgp_acp_set_config('base', $request->variable('i', 0));
+			$sgp_functions_admin->sgp_acp_set_config('base', $request->variable('i', 0));
 
 			$template->assign_var('BASE', $k_config['base']);
 		}

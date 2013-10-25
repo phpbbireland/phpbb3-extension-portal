@@ -12,6 +12,44 @@ namespace phpbbireland\portal\acp;
 
 class sgp_functions_admin {
 
+
+	/***
+	* set config value phpbb code reused
+	*/
+
+	public function sgp_acp_set_config($config_name, $config_value, $is_dynamic = false)
+	{
+		global $db, $cache, $table_prefix;
+
+		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
+
+		$k_config = $cache->get('k_config');
+
+		$sql = 'UPDATE ' . K_VARIABLES_TABLE . "
+			SET config_value = '" . $db->sql_escape($config_value) . "'
+			WHERE config_name = '" . $db->sql_escape($config_name) . "'";
+		$result = $db->sql_query($sql);
+
+// need to fix this....
+		if (!$result)
+		//if (!$db->sql_affectedrows() && !isset($k_config[$config_name]))
+		{
+			$sql = 'INSERT INTO ' . K_VARIABLES_TABLE . ' ' . $db->sql_build_array('INSERT', array(
+				'config_name'   => $config_name,
+				'config_value'  => $config_value,
+				'is_dynamic'    => ($is_dynamic) ? 1 : 0));
+			$db->sql_query($sql);
+		}
+
+		$k_config[$config_name] = $config_value;
+
+		if (!$is_dynamic)
+		{
+			$cache->destroy('k_config');
+			$cache->destroy('config');
+		}
+	}
+
 	public function get_reserved_words()
 	{
 		global $reserved_words, $db, $template, $table_prefix;

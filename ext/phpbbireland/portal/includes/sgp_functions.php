@@ -17,24 +17,24 @@
 /**
 * @ignore
 */
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+
+namespace phpbbireland\portal\acp;
 
 global $phpbb_root_path;
 
-/***
-* Stargate functions starts
+class sgp_functions {
+
+/*
+	public function __construct(\phpbb\cache\service $cache, \phpbb\config\config $config, $root_path, $php_ext)
+	{
+		$this->cache = $cache;
+		$this->config = $config;
+		$this->root_path = $root_path;
+		$this->php_ext = $php_ext;
+	}
 */
 
-
-/***
-* generate random logo
-*/
-if (!function_exists('sgp_get_rand_logo'))
-{
-	function sgp_get_rand_logo()
+	public function sgp_get_rand_logo()
 	{
 		// initalise variables //
 		global $user, $phpbb_root_path, $k_config;
@@ -89,33 +89,28 @@ if (!function_exists('sgp_get_rand_logo'))
 
 		return ($rand_logo);
 	}
-}
 
-/***
-* set config value phpbb code reused
-*/
-if (!function_exists('sgp_acp_set_config'))
-{
-	function sgp_acp_set_config($config_name, $config_value, $is_dynamic = false)
+
+	/***
+	* set config value phpbb code reused
+	*/
+
+	public function set_k_config($config_name, $config_value, $is_dynamic = false)
 	{
-		global $db, $cache;
+		global $db, $cache, $table_prefix;
 
-		/*
-		$k_config		= $cache->get('k_config');
-		$k_pages		= $cache->get('k_pages');
-		$k_resources	= $cache->get('k_resources');
-		$k_blocks		= $cache->get('k_blocks');
-		$k_menus		= $cache->get('k_menus');
-		*/
+		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
 
-		//$k_groups		= $cache->get('groups');
+		$k_config = $cache->get('k_config');
 
 		$sql = 'UPDATE ' . K_VARIABLES_TABLE . "
 			SET config_value = '" . $db->sql_escape($config_value) . "'
 			WHERE config_name = '" . $db->sql_escape($config_name) . "'";
-		$db->sql_query($sql);
+		$result = $db->sql_query($sql);
 
-		if (!$db->sql_affectedrows() && !isset($k_config[$config_name]))
+// needs fixing...
+		if (!$result)
+		//if (!$db->sql_affectedrows() && !isset($k_config[$config_name]))
 		{
 			$sql = 'INSERT INTO ' . K_VARIABLES_TABLE . ' ' . $db->sql_build_array('INSERT', array(
 				'config_name'   => $config_name,
@@ -132,16 +127,12 @@ if (!function_exists('sgp_acp_set_config'))
 			$cache->destroy('config');
 		}
 	}
-}
-/***
-* return a k_config value (may not be required)
-*/
-if (!function_exists('get_k_config_var'))
-{
-	define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
 
-	function get_k_config_var($item)
+
+	public function get_k_config_var($item)
 	{
+		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
+
 		if (isset($item))
 		{
 			return($item);
@@ -156,14 +147,9 @@ if (!function_exists('get_k_config_var'))
 		//$k_config[$row['config_name']] = $row['config_value'];
 		return $row['config_value'];
 	}
-}
 
-/***
-* little function to create text version for a comnpletion bar 0-100%
-*/
-if (!function_exists('k_progress_bar'))
-{
-	function k_progress_bar($percent)
+
+	public function k_progress_bar($percent)
 	{
 		// $percent = number between 0 and 100 //
 
@@ -210,15 +196,14 @@ if (!function_exists('k_progress_bar'))
 
 		return ' [' . $start . ']';
 	}
-}
+
 
 
 /***
 * same as truncate_string() with ...
 */
-if (!function_exists('sgp_checksize'))
-{
-	function sgp_checksize($txt,$len)
+
+	public function sgp_checksize($txt,$len)
 	{
 		if (strlen($txt) > $len)
 		{
@@ -227,15 +212,14 @@ if (!function_exists('sgp_checksize'))
 		}
 		return($txt);
 	}
-}
+
 
 
 /***
 * sort smilies
 */
-if (!function_exists('smiley_sort'))
-{
-	function smiley_sort($a, $b)
+
+	public function smiley_sort($a, $b)
 	{
 		if ( strlen($a['code']) == strlen($b['code']) )
 		{
@@ -244,14 +228,13 @@ if (!function_exists('smiley_sort'))
 
 		return ( strlen($a['code']) > strlen($b['code']) ) ? -1 : 1;
 	}
-}
+
 
 /***
 * search block search
 */
-if (!function_exists('search_block_func'))
-{
-	function search_block_func()
+
+	public function search_block_func()
 	{
 		global $lang, $template, $portal_config, $board_config, $keywords, $phpbb_root_path;
 
@@ -263,14 +246,12 @@ if (!function_exists('search_block_func'))
 			'U_SEARCH'         => append_sid("{$phpbb_root_path}search.$phpEx", 'keywords=' . urlencode($keywords)),
 		));
 	}
-}
 
 /**
 *	returns the users group name
 */
-if (!function_exists('which_group'))
-{
-	function which_group($id)
+
+	public function which_group($id)
 	{
 		global $db, $template;
 
@@ -287,12 +268,11 @@ if (!function_exists('which_group'))
 
 		return ($name);
 	}
-}
 
 
-if (!function_exists('process_for_vars'))
-{
-	function process_for_vars($data)
+
+
+	public function process_for_vars($data)
 	{
 		global $config, $k_config, $k_resources;
 
@@ -322,13 +302,11 @@ if (!function_exists('process_for_vars'))
 		}
 		return($data);
 	}
-}
 
 
-// Stargate Random Banner mod //
-if (!function_exists('get_user_data'))
-{
-	function get_user_data($what = '', $id)
+
+
+	public function get_user_data($what = '', $id)
 	{
 		global $db, $template, $user;
 
@@ -358,14 +336,12 @@ if (!function_exists('get_user_data'))
 				return;
 		}
 	}
-}
 
 /**
 * templates
 */
-if (!function_exists('portal_block_template'))
-{
-	function portal_block_template($block_file)
+
+	public function portal_block_template($block_file)
 	{
 		global $template;
 
@@ -375,11 +351,9 @@ if (!function_exists('portal_block_template'))
 		// Return templated data
 		return $template->assign_display('block', true);
 	}
-}
 
-if (!function_exists('process_for_admin_bbcodes'))
-{
-	function process_for_admin_bbcodes($data)
+
+	public function process_for_admin_bbcodes($data)
 	{
 		global $user;
 
@@ -395,16 +369,15 @@ if (!function_exists('process_for_admin_bbcodes'))
 		}
 		return($data);
 	}
-}
+
 
 
 /*
 * Takes the page name
 * Returns the pages id
 */
-if (!function_exists('get_page_id'))
-{
-	function get_page_id($this_page_name)
+
+	public function get_page_id($this_page_name)
 	{
 		global $db, $user, $k_pages;
 
@@ -419,14 +392,12 @@ if (!function_exists('get_page_id'))
 		}
 		return(0);
 	}
-}
+
 
 /**
 * Convert Menu Name to language variable... leave alone if not found!
 **/
-if (!function_exists('get_menu_lang_name'))
-{
-	function get_menu_lang_name($input)
+	public function get_menu_lang_name($input)
 	{
 		global $user;
 
@@ -443,11 +414,10 @@ if (!function_exists('get_menu_lang_name'))
 
 		return($block_title);
 	}
-}
 
-if (!function_exists('s_get_vars_array'))
-{
-	function s_get_vars_array()
+
+
+	public function s_get_vars_array()
 	{
 		global $db, $template, $table_prefix;
 
@@ -466,11 +436,10 @@ if (!function_exists('s_get_vars_array'))
 		$db->sql_freeresult($result);
 		return($resources);
 	}
-}
 
-if (!function_exists('s_get_vars'))
-{
-	function s_get_vars()
+
+
+	public function s_get_vars()
 	{
 		global $db, $template, $table_prefix;
 
@@ -488,11 +457,9 @@ if (!function_exists('s_get_vars'))
 		}
 		$db->sql_freeresult($result);
 	}
-}
 
-if (!function_exists('get_link_from_image_name'))
-{
-	function get_link_from_image_name($image)
+
+	public function get_link_from_image_name($image)
 	{
 		if (strpos($image, '.gif'))
 		{
@@ -512,15 +479,14 @@ if (!function_exists('get_link_from_image_name'))
 		$lnk = str_replace('£','+', $lnk);
 		return($lnk);
 	}
-}
+
 
 /***
 *	build and handles menus //
 *
 **/
-if (!function_exists('generate_menus'))
-{
-	function generate_menus()
+
+	public function generate_menus()
 	{
 		global $k_groups, $k_blocks, $k_menus;
 		global $template, $phpbb_root_path, $auth, $user, $phpEx;
@@ -708,7 +674,6 @@ if (!function_exists('generate_menus'))
 			'MENUS_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 		));
 	}
-}
 
 
 /* generic/tools functions */
@@ -719,9 +684,8 @@ if (!function_exists('generate_menus'))
 * @return boolean
 *
 */
-if (!function_exists('tools_image_attached'))
-{
-	function tools_image_attached()
+
+	public function tools_image_attached()
 	{
 		global $_FILES, $_POST;
 
@@ -732,6 +696,7 @@ if (!function_exists('tools_image_attached'))
 		}
 		return false;
 	}
+
+
+
 }
-
-
