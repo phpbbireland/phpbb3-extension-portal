@@ -476,7 +476,8 @@ class sgp_functions {
 
 		$lnk = str_replace('+','/', $lnk);
 		$lnk = str_replace('@','?', $lnk);
-		$lnk = str_replace('£','+', $lnk);
+		$lnk = str_replace('Â£','+', $lnk);
+
 		return($lnk);
 	}
 
