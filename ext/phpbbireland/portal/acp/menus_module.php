@@ -27,6 +27,17 @@ class menus_module
 		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx, $table_prefix;
 
 		define('K_MENUS_TABLE',	$table_prefix . 'k_menus');
+		define('WELCOME_MESSAGE', 1);
+		define('UN_ALLOC_MENUS', 0);
+		define('NAV_MENUS', 1);
+		define('SUB_MENUS', 2);
+		define('HEAD_MENUS', 3);
+		define('FOOT_MENUS', 4);
+		define('LINKS_MENUS', 5);
+		define('ALL_MENUS', 90);
+		define('UNALLOC_MENUS', 99);
+		define('OPEN_IN_TAB', 1);
+		define('OPEN_IN_WINDOW', 2);
 
 		$img_path = $phpbb_root_path. 'ext/phpbbireland/portal/images/block_images/menu/';
 
@@ -39,7 +50,7 @@ class menus_module
 		include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.'.$phpEx);
 
 		$store = '';
-
+		$iss = $request->variable('i', '');
 
 		if ($request->is_set_post('submit'))
 		{
@@ -55,7 +66,7 @@ class menus_module
 		$menuitem	= $request->variable('menuitem', '');
 
 		$template->assign_vars(array(
-			'U_BACK'    => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_menus&amp;mode=nav"),
+			'U_BACK'    => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$iss}&amp;mode=nav"),
 			'IMG_PATH'  => $img_path,
 		));
 
@@ -167,7 +178,7 @@ class menus_module
 						'S_OPTIONS' => 'save',
 					));
 
-					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_menus&amp;mode=' . $mode));
+					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$iss}&amp;mode=' . $mode));
 					break;
 				}
 
@@ -218,7 +229,7 @@ class menus_module
 					$template->assign_var('L_MENU_REPORT', $name . $user->lang['DELETED'] . '<br />');
 					$cache->destroy('sql', K_MENUS_TABLE);
 
-					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_menus&amp;mode=all'));
+					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$iss}&amp;mode=all'));
 					break;
 				}
 				else
@@ -232,7 +243,7 @@ class menus_module
 
 				$template->assign_var('L_MENU_REPORT', $user->lang['ACTION_CANCELLED']);
 
-				meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_menus&amp;mode=all'));
+				meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$iss}&amp;mode=all'));
 
 				break;
 			}
@@ -364,7 +375,7 @@ class menus_module
 					break;
 				}
 
-				meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_menus&amp;mode=' . $current_menu_type));
+				meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$iss}&amp;mode=' . $current_menu_type));
 
 				break;
 			}
@@ -430,7 +441,7 @@ class menus_module
 					$cache->destroy('sql', K_MENUS_TABLE);
 
 					//fix for the different menus...
-					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_menus&amp;mode=' . $store));
+					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i={$iss}&amp;mode=' . $store));
 
 					$template->assign_var('L_MENU_REPORT', $user->lang['MENU_CREATED']);
 
@@ -494,8 +505,10 @@ class menus_module
 
 function get_menu($this_one)
 {
-	global $db, $phpbb_root_path, $phpEx, $template;
+	global $db, $phpbb_root_path, $phpEx, $template, $request;
 	global $phpbb_admin_path, $phpEx;
+
+	$iss = $request->variable('i', '');
 
 	if ($this_one > UN_ALLOC_MENUS && $this_one < ALL_MENUS) // standard menus defined as 1 to 5 //
 	{
@@ -533,10 +546,10 @@ function get_menu($this_one)
 				'S_SOFT_HR'          => $row['soft_hr'],
 				'S_SUB_HEADING'      => $row['sub_heading'],
 
-				'U_EDIT'    => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_menus&amp;mode=edit&amp;menu=" . $row['m_id']),
-				'U_UP'      => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_menus&amp;mode=up&amp;menu=" . $row['m_id']),
-				'U_DOWN'    => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_menus&amp;mode=down&amp;menu=" . $row['m_id']),
-				'U_DELETE'  => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_menus&amp;mode=delete&amp;menu=" . $row['m_id']),
+				'U_EDIT'    => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$iss}&amp;mode=edit&amp;menu=" . $row['m_id']),
+				'U_UP'      => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$iss}&amp;mode=up&amp;menu=" . $row['m_id']),
+				'U_DOWN'    => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$iss}&amp;mode=down&amp;menu=" . $row['m_id']),
+				'U_DELETE'  => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$iss}&amp;mode=delete&amp;menu=" . $row['m_id']),
 			));
 		}
 		$db->sql_freeresult($result);

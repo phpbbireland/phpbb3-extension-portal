@@ -2,7 +2,7 @@
 
 /**
 *
-* @package NV Newspage Extension
+* @package Portal Extension
 * @copyright (c) 2013 phpbbireland
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
@@ -69,7 +69,7 @@ class portal
 	*
 	* Route must be a sequence of the following substrings,
 	* the order is mandatory:
-	*	/news							[mandatory]
+	*	/portal							[mandatory]
 	*		/page/{page}				[optional]
 	*
 	* @param int	$page			Page to display
@@ -92,14 +92,12 @@ class portal
 	*/
 	public function base($display_pagination = true)
 	{
-		$this->portal->generate_archive_list();
-		if ($display_pagination)
-		{
-			$this->portal->generate_pagination();
-		}
-
 		$this->portal->base();
-		$this->assign_images($this->config['news_user_info'], $this->config['news_post_buttons']);
+
+		// backward compatibility for now
+		$this->template->assign_vars(array(
+			'STARGATE'	=> true,
+		));
 
 		return $this->helper->render('portal_body.html', $this->portal->get_page_title());
 	}
@@ -110,8 +108,10 @@ class portal
 		{
 			$this->template->assign_vars(array(
 				'PORTAL_LOGO_IMG'	=> $this->user->img('icon_portal_logo', 'PORTAL_LOGO'),
+				'ICON-PORTAL'		=> 'ext/phpbbireland/portal/style/common/images/phpbb_logo.png',
 			));
 		}
+
 
 		if ($assign_user_buttons)
 		{
@@ -140,5 +140,6 @@ class portal
 				'WARN_IMG'			=> $this->user->img('icon_user_warn', 'WARN_USER'),
 			));
 		}
+
 	}
 }

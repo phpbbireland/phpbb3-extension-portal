@@ -24,13 +24,21 @@ class pages_module
 	function main($page_id, $mode)
 	{
 		global $db, $user, $auth, $template, $cache, $request;
-		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx, $k_config, $table_prefix;
+		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx, $k_config, $table_prefix, $cache;
+
+
+		if (!isset($k_config))
+		{
+			$k_config = $cache->get('k_config');
+			print_r($k_config);
+		}
 
 		define('K_PAGES_TABLE',	$table_prefix . 'k_pages');
-		define('K_VARIABLES_TABLE',	$table_prefix . 'k_vars');
+		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
 
 
 		$img_path  = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/block/';
+		$img_path_acp = $phpbb_root_path . 'ext/phpbbireland/portal/adm/images/';
 		$portal_js = $phpbb_root_path . 'ext/phpbbireland/portal/js/portal.js';
 
 		$user->add_lang_ext('phpbbireland/portal', 'k_pages');
@@ -127,6 +135,7 @@ class pages_module
 			'U_MANAGE'  => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_pages&amp;mode=manage"),
 			'S_OPT'     => 'S_MANAGE',
 			'S_PAGE'    => isset($k_config['k_landing_page']) ? $k_config['k_landing_page'] : 'portal',
+			'IMG_PATH_ACP'	=> $img_path_acp,
 		));
 
 		switch ($mode)
@@ -287,12 +296,6 @@ function get_all_available_files()
 	$dirslist = $store = ' ';
 
 	$illegal_files = array(".htaccess", "common.$phpEx", "report.$phpEx", "feed.$phpEx", "cron.$phpEx", "config.$phpEx", "csv.$phpEx", "style.$phpEx", "sgp_ajax.$phpEx", "sgpical.$phpEx", "rss.$phpEx");
-
-
-	if (!isset($k_config['k_mod_folders']))
-	{
-		sgp_acp_set_config('k_mod_folders', '');
-	}
 
 	$sql = 'SELECT page_name
 		FROM ' . K_PAGES_TABLE . '

@@ -98,9 +98,17 @@ if (!function_exists('sgp_acp_set_config'))
 {
 	function sgp_acp_set_config($config_name, $config_value, $is_dynamic = false)
 	{
-		global $db, $cache, $k_config;
+		global $db, $cache;
 
-		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
+		/*
+		$k_config		= $cache->get('k_config');
+		$k_pages		= $cache->get('k_pages');
+		$k_resources	= $cache->get('k_resources');
+		$k_blocks		= $cache->get('k_blocks');
+		$k_menus		= $cache->get('k_menus');
+		*/
+
+		//$k_groups		= $cache->get('groups');
 
 		$sql = 'UPDATE ' . K_VARIABLES_TABLE . "
 			SET config_value = '" . $db->sql_escape($config_value) . "'
@@ -130,6 +138,8 @@ if (!function_exists('sgp_acp_set_config'))
 */
 if (!function_exists('get_k_config_var'))
 {
+	define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
+
 	function get_k_config_var($item)
 	{
 		if (isset($item))
@@ -402,11 +412,12 @@ if (!function_exists('get_page_id'))
 		{
 			if ($page['page_name'] == $this_page_name)
 			{
+				//echo 'page ' . $this_page_name . '<br />';
+				//echo 'id  ' . $page['page_id'] . '<br />';
 				return($page['page_id']);
 			}
 		}
 		return(0);
-
 	}
 }
 
@@ -438,8 +449,10 @@ if (!function_exists('s_get_vars_array'))
 {
 	function s_get_vars_array()
 	{
+		global $db, $template, $table_prefix;
 
-		global $db, $template;
+		define('K_RESOURCES_TABLE',	$table_prefix . 'k_resources');
+
 		$resources = array();
 
 		$sql = 'SELECT * FROM ' . K_RESOURCES_TABLE  . ' ORDER BY word ASC';
@@ -459,7 +472,9 @@ if (!function_exists('s_get_vars'))
 {
 	function s_get_vars()
 	{
-		global $db, $template;
+		global $db, $template, $table_prefix;
+
+		define('K_RESOURCES_TABLE',	$table_prefix . 'k_resources');
 
 		$sql = "SELECT * FROM " . K_RESOURCES_TABLE  . " WHERE type = 'V' ORDER BY word ASC";
 
@@ -507,9 +522,25 @@ if (!function_exists('generate_menus'))
 {
 	function generate_menus()
 	{
-		global $k_groups, $k_blocks, $k_menus, $template, $phpbb_root_path, $auth, $user, $phpEx;
+		global $k_groups, $k_blocks, $k_menus;
+		global $template, $phpbb_root_path, $auth, $user, $phpEx;
 		$queries = $cached_queries = $total_queries = 0;
 		static $process = 0;
+
+
+		define('WELCOME_MESSAGE', 1);
+		define('UN_ALLOC_MENUS', 0);
+		define('NAV_MENUS', 1);
+		define('SUB_MENUS', 2);
+		define('HEAD_MENUS', 3);
+		define('FOOT_MENUS', 4);
+		define('LINKS_MENUS', 5);
+		define('ALL_MENUS', 90);
+		define('UNALLOC_MENUS', 99);
+		define('OPEN_IN_TAB', 1);
+		define('OPEN_IN_WINDOW', 2);
+
+		$menu_image_path = '../ext/phpbbireland/portal/images/block_images/menu/';
 
 		// process all menus at once //
 		if ($process)
@@ -517,7 +548,8 @@ if (!function_exists('generate_menus'))
 			return;
 		}
 
-		$user->add_lang('portal/kiss_block_variables');
+		//$user->add_lang('portal/kiss_block_variables');
+		$user->add_lang_ext('phpbbireland/portal', 'kiss_block_variables');
 
 		$p_count = count($k_menus);
 
@@ -634,7 +666,7 @@ if (!function_exists('generate_menus'))
 							'PORTAL_LINK_OPTION'	=> $link_option,
 							'PORTAL_MENU_HEAD_NAME'	=> ($is_sub_heading) ? $name : '',
 							'PORTAL_MENU_NAME' 		=> $name,
-							'PORTAL_MENU_ICON'		=> ($k_menus[$i]['menu_icon']) ? '<img src="' . $phpbb_root_path . 'images/block_images/menu/' . $k_menus[$i]['menu_icon'] . '" height="16" width="16" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/menu/spacer.gif" height="15px" width="15px" alt="" />',
+							'PORTAL_MENU_ICON'		=> ($k_menus[$i]['menu_icon']) ? '<img src="' . $menu_image_path . $k_menus[$i]['menu_icon'] . '" height="16" width="16" alt="" />' : '<img src="' . $menu_image_path . 'spacer.gif" height="15px" width="15px" alt="" />',
 							'U_PORTAL_MENU_LINK' 	=> ($k_menus[$i]['sub_heading']) ? '' : $link,
 							'S_SOFT_HR'				=> $k_menus[$i]['soft_hr'],
 							'S_SUB_HEADING' 		=> ($k_menus[$i]['sub_heading']) ? true : false,
@@ -646,7 +678,7 @@ if (!function_exists('generate_menus'))
 							'PORTAL_LINK_OPTION'	=> $link_option,
 							'PORTAL_MENU_HEAD_NAME'	=> ($is_sub_heading) ? $name : '',
 							'PORTAL_MENU_NAME' 		=> $name,
-							'PORTAL_MENU_ICON'		=> ($k_menus[$i]['menu_icon']) ? '<img src="' . $phpbb_root_path . 'images/block_images/menu/' . $k_menus[$i]['menu_icon'] . '" height="16" width="16" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/menu/spacer.gif" height="15px" width="15px" alt="" />',
+							'PORTAL_MENU_ICON'		=> ($k_menus[$i]['menu_icon']) ? '<img src="' . $menu_image_path . $k_menus[$i]['menu_icon'] . '" height="16" width="16" alt="" />' : '<img src="' . $menu_image_path . 'spacer.gif" height="15px" width="15px" alt="" />',
 							'U_PORTAL_MENU_LINK' 	=> ($k_menus[$i]['sub_heading']) ? '' : $link,
 							'S_SOFT_HR'				=> $k_menus[$i]['soft_hr'],
 							'S_SUB_HEADING' 		=> ($k_menus[$i]['sub_heading']) ? true : false,
@@ -659,7 +691,7 @@ if (!function_exists('generate_menus'))
 							'PORTAL_LINK_MENU_HEAD_NAME'	=> ($is_sub_heading) ? $name : '',
 							'PORTAL_LINK_MENU_NAME'			=> ($is_sub_heading) ? '' : $name,
 							'U_PORTAL_LINK_MENU_LINK'		=> ($is_sub_heading) ? '' : $link,
-							'PORTAL_LINK_MENU_ICON'			=> ($k_menus[$i]['menu_icon'] == 'NONE') ? '' : '<img src="' . $phpbb_root_path . 'images/block_images/menu/' . $k_menus[$i]['menu_icon'] . '" alt="" />',
+							'PORTAL_LINK_MENU_ICON'			=> ($k_menus[$i]['menu_icon'] == 'NONE') ? '' : '<img src="' . $menu_image_path . $k_menus[$i]['menu_icon'] . '" alt="" />',
 							'S_SOFT_HR'						=> $k_menus[$i]['soft_hr'],
 							'S_SUB_HEADING'					=> ($k_menus[$i]['sub_heading']) ? true : false,
 						));
@@ -702,4 +734,4 @@ if (!function_exists('tools_image_attached'))
 	}
 }
 
-?>
+

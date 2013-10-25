@@ -58,34 +58,6 @@ class config_module
 		$portal_build	= $config['k_portal_build'];
 
 
-/*
-		if ($request->is_set_post('submit'))
-		{
-			if (!check_form_key('config'))
-			{
-				trigger_error('FORM_INVALID');
-			}
-
-			$config->set('news_char_limit',			max(100, $request->variable('news_char_limit', 0)));
-			$config->set('news_forums',				implode(',', $request->variable('news_forums', array(0))));
-			$config->set('news_number',				max(1, $request->variable('news_number', 0)));
-			$config->set('news_pages',				max(1, $request->variable('news_pages', 0)));
-			$config->set('news_post_buttons',		$request->variable('news_post_buttons', 0));
-			$config->set('news_user_info',			$request->variable('news_user_info', 0));
-			$config->set('news_shadow',				$request->variable('news_shadow_show', 0));
-			$config->set('news_attach_show',		$request->variable('news_attach_show', 0));
-			$config->set('news_cat_show',			$request->variable('news_cat_show', 0));
-			$config->set('news_archive_per_year',	$request->variable('news_archive_per_year', 0));
-
-
-			$config->set('blocks_width', $blocks_width);
-			$config->set('blocks_enabled', $blocks_enabled);
-			$config->set('portal_build', $portal_build);
-
-			trigger_error($user->lang['NEWS_SAVED'] . adm_back_link($this->u_action));
-		}
-*/
-
 		if ($data['version'])
 		{
 			$template->assign_vars(array(

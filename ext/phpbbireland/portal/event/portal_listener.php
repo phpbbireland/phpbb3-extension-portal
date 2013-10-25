@@ -2,7 +2,7 @@
 
 /**
 *
-* @package NV Newspage Extension
+* @package NV portalpage Extension
 * @copyright (c) 2013 phpbbireland
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
@@ -50,7 +50,7 @@ class portal_listener implements EventSubscriberInterface
 		global $template, $phpbb_container;
 
 		$template->assign_vars(array(
-			'U_PORTAL'	=> $phpbb_container->get('controller.helper')->url('news'),
+			'U_PORTAL'	=> $phpbb_container->get('controller.helper')->url('portal'),
 		));
 	}
 

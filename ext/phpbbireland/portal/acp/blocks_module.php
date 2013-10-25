@@ -9,13 +9,6 @@
 
 namespace phpbbireland\portal\acp;
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
 
 class blocks_module
 {
@@ -26,10 +19,16 @@ class blocks_module
 		global $db, $user, $auth, $template, $cache, $request;
 		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx, $k_config, $table_prefix;
 
+		$module_id_base = 0;
+
+		// need to add cache as we can't access $k_config //
+
+		// no longer defined in common so where do the go> //
 		define('K_BLOCKS_TABLE',	$table_prefix . 'k_blocks');
 		define('K_VARS_TABLE',		$table_prefix . 'k_variables');
 		define('K_PAGES_TABLE',		$table_prefix . 'k_pages');
 
+		// works for now //
 		$img_path  = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/block/';
 		$img_path_acp = $phpbb_root_path . 'ext/phpbbireland/portal/adm/images/';
 		$portal_js = $phpbb_root_path . 'ext/phpbbireland/portal/js/portal.js';
@@ -40,9 +39,21 @@ class blocks_module
 		$this->page_title = $user->lang['ACP_BLOCKS'];
 		add_form_key('blocks');
 
-		$error = array();
+		$template->assign_var('U_ACTION', $this->u_action);
 
-		include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.'.$phpEx);
+		if (!class_exists($sgp_functions))
+		{
+			include_once($phpbb_root_path . 'ext/phpbbireland/portal/acp/sgp_functions.' . $phpEx);
+		}
+
+		$sgp_functions = new sgp_functions;
+
+		if (!class_exists($sgp_functions_admin))
+		{
+			include_once($phpbb_root_path . 'ext/phpbbireland/portal/acp/sgp_functions_admin.' . $phpEx);
+		}
+
+		$sgp_functions_admin = new sgp_functions_admin;
 
 		// Define Switches for html file //
 
@@ -58,11 +69,13 @@ class blocks_module
 		}
 
 		// Do not write values if there is an error
+		/*
 		if (sizeof($error))
 		{
 			$mode = '';
 			$submit = false;
 		}
+		*/
 
 		// Can not use append_sid here, the $block_id is assigned to the html but unknow to this code //
 		// Would require I add a form element and use $request->variable to retrieve it //
@@ -81,6 +94,29 @@ class blocks_module
 		$mode	= $request->variable('mode', '');
 		$block	= $request->variable('block', 0);
 		$module_id = $request->variable('i', 0);
+
+
+		// very long winded fix for modules
+		// we are only interested in the module id for the main section //
+		if ($mode == 'L' || $mode == 'R' || $mode == 'C' || $mode == 'manage')
+		{
+
+			$sgp_functions->sgp_acp_set_config('base', $request->variable('i', 0));
+
+			$template->assign_var('BASE', $k_config['base']);
+		}
+
+		// we save the module id to our temp config so we can retrieve it later //
+		$sql = 'SELECT config_name, config_value
+			FROM ' . K_VARS_TABLE . "
+			WHERE config_name = 'base'";
+		$result = $db->sql_query($sql);
+		$row = $db->sql_fetchrow($result);
+		$k_config[$row['config_name']] = $row['config_value'];
+		$module_id_base = $k_config['base'];
+
+		// show the id, just a bit of debug info ///
+		$template->assign_var('BASE', $k_config['base']);
 
 		// bold current row text so things are easier to follow when moving/editing etc... //
 		if (($block) ? $block : 0)
@@ -102,8 +138,6 @@ class blocks_module
 		}
 
 		$template->assign_var('k_adm_block', $k_config['k_adm_block']);
-
-		$u_action = $this->u_action;
 
 		//append_sid("{$phpbb_admin_path}index.$phpEx" , "i={$id}&amp;mode=" . $mode);
 
@@ -504,6 +538,7 @@ class blocks_module
 
 			case 'edit':
 			{
+
 				if ($submit)
 				{
 					$id                = $request->variable('id', 0);
@@ -556,7 +591,7 @@ class blocks_module
 
 					if ($view_all)
 					{
-						$view_groups = get_all_groups();
+						$view_groups = $sgp_functions_admin->get_all_groups();
 						if ($view_groups == '')
 						{
 							$view_groups = 0;
@@ -625,11 +660,9 @@ class blocks_module
 						$mode = 'manage';
 					}
 
-					// works
-					//meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=307&amp;mode=' . $mode));
-					//return;
+					// the $module_id will be for the current module, we need the parent id //
 
-					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=" . $mode));
+					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id_base}&amp;mode=" . $mode));
 					return;
 				}
 
@@ -876,10 +909,10 @@ class blocks_module
 			case 'R':
 			case '1':
 			case '2':
-			case '3':	$template->assign_var('S_TYPE', $mode);
+			case '3':	$module_id = $request->variable('i','');
+						$template->assign_var('S_TYPE', $mode);
 
 			case 'manage':
-			{
 				if ($mode != 'manage')
 				{
 					$sql = "SELECT * FROM " . K_BLOCKS_TABLE . " WHERE position = '" . $db->sql_escape($mode) . "' ORDER by ndx, type";
@@ -952,8 +985,9 @@ class blocks_module
 					'S_LRC' => '1',
 				));
 
+				$module_id = $request->variable('i', '');
+
 			break;
-			}
 
 			case 'reset':
 			{
@@ -971,8 +1005,6 @@ class blocks_module
 			case 'default':
 			break;
 		}
-
-		$template->assign_var('U_ACTION', $u_action);
 	}
 }
 

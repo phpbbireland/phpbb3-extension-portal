@@ -1,61 +1,10 @@
 portal_base_controller:
-    pattern: /news
+    pattern: /portal
     defaults: { _controller: phpbbireland.portal.controller:portal, forum_id: 0, year: 0, month: 0, page: 1 }
 
 portal_base_page_controller:
-    pattern: /news/page/{page}
-    defaults: { _controller: phpbbireland.portal.controller:portal, forum_id: 0, year: 0, month: 0 }
+    pattern: /portal/page/{page}
+    defaults: { _controller: phpbbireland.portal.controller:portal, page: 0 }
     requirements:
         page:      \d+
 
-portal_archive_controller:
-    pattern: /news/archive/{year}/{month}
-    defaults: { _controller: phpbbireland.portal.controller:portal, forum_id: 0, page: 1 }
-    requirements:
-        year:      \d+
-        month:     \d+
-
-portal_archive_page_controller:
-    pattern: /news/archive/{year}/{month}/page/{page}
-    defaults: { _controller: phpbbireland.portal.controller:portal, forum_id: 0 }
-    requirements:
-        year:      \d+
-        month:     \d+
-        page:      \d+
-
-portal_category_controller:
-    pattern: /news/category/{forum_id}
-    defaults: { _controller: phpbbireland.portal.controller:portal, year: 0, month: 0, page: 1 }
-    requirements:
-        forum_id:  \d+
-
-portal_category_page_controller:
-    pattern: /news/category/{forum_id}/page/{page}
-    defaults: { _controller: phpbbireland.portal.controller:portal, year: 0, month: 0 }
-    requirements:
-        forum_id:  \d+
-        page:      \d+
-
-portal_category_archive_controller:
-    pattern: /news/category/{forum_id}/archive/{year}/{month}
-    defaults: { _controller: phpbbireland.portal.controller:portal, page: 1 }
-    requirements:
-        forum_id:  \d+
-        year:      \d+
-        month:     \d+
-
-portal_category_archive_page_controller:
-    pattern: /news/category/{forum_id}/archive/{year}/{month}/page/{page}
-    defaults: { _controller: phpbbireland.portal.controller:portal }
-    requirements:
-        forum_id:  \d+
-        year:      \d+
-        month:     \d+
-        page:      \d+
-
-
-portal_singlenews_controller:
-    pattern: /news/{topic_id}
-    defaults: { _controller: phpbbireland.portal.controller:single_news }
-    requirements:
-        topic_id:  \d+

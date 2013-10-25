@@ -41,7 +41,7 @@
 	<!-- ENDIF -->
 </div>
 
-<form id="acp_menus" method="post" action="{U_ACTION}">
+<form id="acp_menus" name="acp_menus" method="post" action="{U_ACTION}">
 <!-- IF S_OPTIONS == 'nav' || S_OPTIONS == 'sub' || S_OPTIONS == 'link' || S_OPTIONS == 'all' || S_OPTIONS == 'unalloc' -->
 <table cellspacing="1" border="0">
 	<thead>
@@ -386,6 +386,7 @@
 	<input class="button2" name="add_menu_option" type="submit" value="{L_MENU_ADD_NEW}" />
 	<input type="hidden" name="mode" value="add" />
 	<input type="hidden" name="menutype" value="{S_OPTIONS}" />
+	{S_FORM_TOKEN}
 </p>
 <!-- ENDIF -->
 

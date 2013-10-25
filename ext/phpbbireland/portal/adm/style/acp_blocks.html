@@ -1,5 +1,5 @@
 <!-- INCLUDE overall_header.html -->
-
+<link rel="stylesheet" type="text/css" href="{CSS_PATH}portal.css" />
 <script type="text/javascript" src="{PORTAL_JS}"></script>
 <script type="text/javascript">
 // <![CDATA[
@@ -147,28 +147,28 @@
 				<div style="text-align: center;">
 					<!-- IF bdata.S_FIRST_ROW or bdata.S_NDX == '1' -->
 						{ICON_MOVE_UP_DISABLED}
-						<a href="{bdata.U_DOWN}"><img src="images/icon_down.gif" title="{L_MOVE_DOWN}" alt="{L_BLOCK_DOWN}" /></a>
+						<a href="{bdata.U_DOWN}"><img src="{IMG_PATH_ACP}/icon_down.gif" title="{L_MOVE_DOWN}" alt="{L_BLOCK_DOWN}" /></a>
 					<!-- ELSEIF bdata.S_NDX == S_LBL and bdata.S_POSITION == 'L' or bdata.S_NDX == S_RBL and bdata.S_POSITION == 'R' or bdata.S_NDX == S_CBL and bdata.S_POSITION == 'C'  -->
 						{ICON_MOVE_DOWN_DISABLED}
-						<a href="{bdata.U_UP}"><img src="images/icon_up.gif" title="{L_MOVE_UP}" alt="{L_BLOCK_UP}" /></a>
+						<a href="{bdata.U_UP}"><img src="{IMG_PATH_ACP}/icon_up.gif" title="{L_MOVE_UP}" alt="{L_BLOCK_UP}" /></a>
 					<!-- ELSE -->
-						<a href="{bdata.bdata.U_UP}"><img src="images/icon_up.gif" title="{L_MOVE_UP}" alt="{L_BLOCK_UP}" /></a>
-						<a href="{bdata.bdata.U_DOWN}"><img src="images/icon_down.gif" title="{L_MOVE_DOWN}" alt="{L_BLOCK_DOWN}" /></a>
+						<a href="{bdata.bdata.U_UP}"><img src="{IMG_PATH_ACP}/icon_up.gif" title="{L_MOVE_UP}" alt="{L_BLOCK_UP}" /></a>
+						<a href="{bdata.bdata.U_DOWN}"><img src="{IMG_PATH_ACP}/icon_down.gif" title="{L_MOVE_DOWN}" alt="{L_BLOCK_DOWN}" /></a>
 					<!-- ENDIF -->
-					<a href="{bdata.U_EDIT2}"><img src="images/icon_edit.gif" title="{L_EDIT_BLOCK}" alt="{L_EDIT}" /></a>
+					<a href="{bdata.U_EDIT2}"><img src="{IMG_PATH_ACP}/icon_edit.gif" title="{L_EDIT_BLOCK}" alt="{L_EDIT}" /></a>
 					<!-- IF bdata.S_FNAME_H != 'block_welcome_message.html' -->
-					<a href="{bdata.U_DELETE}"><img src="images/icon_delete.gif" title="{L_DELETE_THIS_BLOCK}" alt="{L_DELETE}" /></a>
+					<a href="{bdata.U_DELETE}"><img src="{IMG_PATH_ACP}/icon_delete.gif" title="{L_DELETE_THIS_BLOCK}" alt="{L_DELETE}" /></a>
 					<!-- ELSE -->
 					{ICON_DELETE_DISABLED}
 					<!-- ENDIF -->
 					<!-- IF bdata.S_HAS_VARS -->
 						<!-- IF bdata.S_FNAME_H == "block_welcome.html" -->
-						<a href="{bdata.U_SET_VARS_W}"><img src="images/vars_edit.gif" title="{L_SET_VARIABLES_IN_MINI-MODULES}" alt="{L_VARS_HAS_EDIT}" /></a>
+						<a href="{bdata.U_SET_VARS_W}"><img src="{IMG_PATH_ACP}/vars_edit.gif" title="{L_SET_VARIABLES_IN_MINI-MODULES}" alt="{L_VARS_HAS_EDIT}" /></a>
 						<!-- ELSE -->
-						<a href="{bdata.U_SET_VARS}"><img src="images/vars_edit.gif" title="{L_VARS_HAS_EDIT}" alt="" /></a>
+						<a href="{bdata.U_SET_VARS}"><img src="{IMG_PATH_ACP}/vars_edit.gif" title="{L_VARS_HAS_EDIT}" alt="" /></a>
 						<!-- ENDIF -->
 					<!-- ELSE -->
-					<img src="images/vars_no_edit.gif" title="{L_VARS_NO_EDIT}" alt="" />
+					<img src="{IMG_PATH_ACP}/vars_no_edit.gif" title="{L_VARS_NO_EDIT}" alt="" />
 					<!-- ENDIF -->
 				</div>
 			</td>
@@ -511,7 +511,7 @@
 	</p>
 	<!-- ENDIF -->
 <!-- ENDIF -->
-
+[{BASE}]
 
 </form>
 <!-- INCLUDE overall_footer.html -->
