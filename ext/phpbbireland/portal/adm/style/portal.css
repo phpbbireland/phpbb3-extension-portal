@@ -239,3 +239,13 @@
 	height: 22px;
 }
 button { border: solid 3px; }
+
+.dl
+{
+	background-color: #FCF5D8;
+	border-radius: 7px;
+}
+.dl legend
+{
+	color: #CD6800;
+}

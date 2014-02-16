@@ -1,0 +1,38 @@
+<?php
+/**
+*
+* @package Kiss Portal Engine / Stargate Portal
+* @version $Id$
+* @copyright (c) 2005-2013 phpbbireland
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+*
+*/
+
+namespace phpbbireland\portal\acp;
+
+class portal_constants {
+
+	global $table_prefix;
+
+	define('WELCOME_MESSAGE', 1);
+	define('UN_ALLOC_MENUS', 0);
+	define('NAV_MENUS', 1);
+	define('SUB_MENUS', 2);
+	define('HEAD_MENUS', 3);
+	define('FOOT_MENUS', 4);
+	define('LINKS_MENUS', 5);
+	define('ALL_MENUS', 90);
+	define('UNALLOC_MENUS', 99);
+	define('OPEN_IN_TAB', 1);
+	define('OPEN_IN_WINDOW', 2);
+
+	define('K_VARIABLES_TABLE',		$table_prefix . 'k_variables');
+	define('K_BLOCKS_TABLE',		$table_prefix . 'k_blocks');
+	define('K_VARS_TABLE',			$table_prefix . 'k_variables');
+	define('K_PAGES_TABLE',			$table_prefix . 'k_pages');
+	define('K_MENUS_TABLE',			$table_prefix . 'k_menus');
+	define('K_NEWSFEEDS_TABLE',		$table_prefix . 'k_newsfeeds');
+	define('K_RESOURCES_TABLE',		$table_prefix . 'k_resources');
+	define('K_YOUTUBE_TABLE',		$table_prefix . 'k_youtube');
+	define('K_ACRONYMS_TABLE',		$table_prefix . 'k_acronyms');
+}

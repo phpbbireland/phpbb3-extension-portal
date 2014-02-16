@@ -99,16 +99,16 @@ if ($skip_archived_forums)
 
 	if (!$result = $db->sql_query($sql, 600))
 	{
-		trigger_error($user->lang['ERROR_PORTAL_FORUMS']);
+		trigger_error($user->lang['ERROR_PORTAL_FORUMS'] . '102');
 	}
 }
 else
 {
-
+$block_cache_time = 0;
 	$sql = "SELECT * FROM ". FORUMS_TABLE . " ORDER BY forum_id";
 	if (!$result = $db->sql_query($sql, $block_cache_time))
 	{
-		trigger_error($user->lang['ERROR_PORTAL_FORUMS']);
+		trigger_error($user->lang['ERROR_PORTAL_FORUMS'] . ' 111');
 	}
 }
 
@@ -156,7 +156,7 @@ else
 
 // New code //
 $sql_array = array(
-	'SELECT'		=> 'distinct p.post_id, t.topic_id, t.topic_time, t.topic_title, t.topic_replies, t.forum_id, t.topic_last_post_time, t.topic_last_post_id, t.topic_last_poster_id, t.topic_last_poster_name, t.topic_last_poster_colour, t.topic_type, t.topic_attachment, f.forum_name, p.post_edit_time, p.post_subject, p.post_text, p.post_time, p.bbcode_bitfield, p.bbcode_uid, f.forum_desc, u.user_avatar, u.user_avatar_type, a.topic_id, a.download_count, a.extension, a.is_orphan',
+	'SELECT'		=> 'distinct p.post_id, t.topic_id, t.topic_time, t.topic_title, t.forum_id, t.topic_last_post_time, t.topic_last_post_id, t.topic_last_poster_id, t.topic_last_poster_name, t.topic_last_poster_colour, t.topic_type, t.topic_attachment, f.forum_name, p.post_edit_time, p.post_subject, p.post_text, p.post_time, p.bbcode_bitfield, p.bbcode_uid, f.forum_desc, u.user_avatar, u.user_avatar_type, a.topic_id, a.download_count, a.extension, a.is_orphan',
 
 	'FROM'			=> array(FORUMS_TABLE => 'f'),
 
@@ -180,9 +180,7 @@ $sql_array = array(
 	),
 
 	'WHERE'	=> $where_sql . '
-		AND t.topic_approved = 1
 		AND ' . $db->sql_in_set('a.extension', $types) . '
-		AND p.post_approved = 1
 		AND t.topic_attachment = 1
 		AND p.post_id = t.topic_first_post_id
 		' . $days . '
@@ -283,7 +281,7 @@ for ($i = 0; $i < $display_this_many; $i++)
 		'LAST_POST_IMG_W'	=> $next_img,
 		'POSTER_FULL_W'		=> get_username_string('full', $row[$i]['topic_last_poster_id'], $row[$i]['topic_last_poster_name'], $row[$i]['topic_last_poster_colour']),
 		'POSTTIME_W'		=> $this_post_time,
-		'REPLIES'			=> $row[$i]['topic_replies'],
+//		'REPLIES'			=> $row[$i]['topic_replies'],
 		'U_FORUM_W'			=> append_sid("{$phpbb_root_path}viewforum.$phpEx?" . POST_FORUM_URL . '=' . $row[$i]['forum_id']),
 		'U_TITLE_W'			=> $view_topic_url . '&amp;p=' . $row[$i]['topic_last_post_id'] . '#p' . $row[$i]['topic_last_post_id'],
 		'S_ROW_COUNT'		=> $i,
@@ -315,4 +313,3 @@ $template->assign_vars(array(
 	'TOP_DOWNLOADS_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 
-?>

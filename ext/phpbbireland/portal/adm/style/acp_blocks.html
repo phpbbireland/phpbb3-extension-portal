@@ -108,7 +108,7 @@
 <h1>{L_BLOCKS_TITLE}</h1>
 <p>{L_BLOCKS_TITLE_EXPLAIN}</p>
 
-<form id="acp_blocks" name="acp_blocks" method="post" action="{U_ACTION}">
+<form id="acp_blocks" method="post" action="{U_ACTION}">
 
 <!-- IF S_OPTIONS  == 'manage' || S_OPTIONS  == 'l' || S_OPTIONS  == 'r' || S_OPTIONS  == 'c' -->
 <table cellspacing="1" border="0">
@@ -128,7 +128,7 @@
 	</thead>
 	<tbody>
 		<!-- BEGIN bdata -->
-		<tr<!-- IF bdata.S_ID == ADM_BLOCK --> style="font-weight: bold;"<!-- ENDIF -->>
+		<tr<!-- IF bdata.S_ID == K_ADM_BLOCK --> style="font-weight: bold;"<!-- ENDIF -->>
 			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" >{bdata.S_ID}</td>
 			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" >{bdata.S_NDX}</td>
 			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" ><!-- IF bdata.S_ACTIVE == 1 -->{L_ACTIVE}<!-- ELSE -->{L_DISABLED}<!-- ENDIF --></td>
@@ -152,24 +152,22 @@
 						{ICON_MOVE_DOWN_DISABLED}
 						<a href="{bdata.U_UP}"><img src="{IMG_PATH_ACP}/icon_up.gif" title="{L_MOVE_UP}" alt="{L_BLOCK_UP}" /></a>
 					<!-- ELSE -->
-						<a href="{bdata.bdata.U_UP}"><img src="{IMG_PATH_ACP}/icon_up.gif" title="{L_MOVE_UP}" alt="{L_BLOCK_UP}" /></a>
-						<a href="{bdata.bdata.U_DOWN}"><img src="{IMG_PATH_ACP}/icon_down.gif" title="{L_MOVE_DOWN}" alt="{L_BLOCK_DOWN}" /></a>
+						<a href="{bdata.U_UP}"><img src="{IMG_PATH_ACP}/icon_up.gif" title="{L_MOVE_UP}" alt="{L_BLOCK_UP}" /></a>
+						<a href="{bdata.U_DOWN}"><img src="{IMG_PATH_ACP}/icon_down.gif" title="{L_MOVE_DOWN}" alt="{L_BLOCK_DOWN}" /></a>
 					<!-- ENDIF -->
-					<a href="{bdata.U_EDIT2}"><img src="{IMG_PATH_ACP}/icon_edit.gif" title="{L_EDIT_BLOCK}" alt="{L_EDIT}" /></a>
+					<a href="{bdata.U_EDIT2}">
+						<!-- IF bdata.S_HAS_VARS -->
+						<img src="{IMG_PATH_ACP}/icon_editv.gif" title="{L_EDIT_BLOCK}" alt="{L_EDIT}" />
+						<!-- ELSE -->
+						<img src="{IMG_PATH_ACP}/icon_edit.gif" title="{L_EDIT_BLOCK}" alt="{L_EDIT}" />
+						<!-- ENDIF -->
+					</a>
 					<!-- IF bdata.S_FNAME_H != 'block_welcome_message.html' -->
 					<a href="{bdata.U_DELETE}"><img src="{IMG_PATH_ACP}/icon_delete.gif" title="{L_DELETE_THIS_BLOCK}" alt="{L_DELETE}" /></a>
 					<!-- ELSE -->
 					{ICON_DELETE_DISABLED}
 					<!-- ENDIF -->
-					<!-- IF bdata.S_HAS_VARS -->
-						<!-- IF bdata.S_FNAME_H == "block_welcome.html" -->
-						<a href="{bdata.U_SET_VARS_W}"><img src="{IMG_PATH_ACP}/vars_edit.gif" title="{L_SET_VARIABLES_IN_MINI-MODULES}" alt="{L_VARS_HAS_EDIT}" /></a>
-						<!-- ELSE -->
-						<a href="{bdata.U_SET_VARS}"><img src="{IMG_PATH_ACP}/vars_edit.gif" title="{L_VARS_HAS_EDIT}" alt="" /></a>
-						<!-- ENDIF -->
-					<!-- ELSE -->
-					<img src="{IMG_PATH_ACP}/vars_no_edit.gif" title="{L_VARS_NO_EDIT}" alt="" />
-					<!-- ENDIF -->
+
 				</div>
 			</td>
 		</tr>
@@ -311,9 +309,9 @@
 	</dl>
 	<div style="display:<!-- IF not S_HAS_VARS --> none<!-- ELSE --> block<!-- ENDIF -->;" id="vars">
  	<dl>
-		<dt>{L_BLOCK_VAR_FILE}:{L_BLOCK_VAR_FILE_EXPLAIN}</dt>
+		<dt><label for="var_file_name">{L_BLOCK_VAR_FILE}</label><br />{L_BLOCK_VAR_FILE_EXPLAIN}</dt>
 		<dd>
-		<select name="var_file_name" class="post">
+		<select id="var_file_name" name="var_file_name" class="post">{S_FNAME_V}
 			<!-- BEGIN var_file_name -->
 				<option value="{var_file_name.S_VAR_FILE_NAME}"<!-- IF var_file_name.S_VAR_FILE_NAME == S_FNAME_V --> selected="selected"<!-- ENDIF -->>{var_file_name.S_VAR_FILE_NAME}</option>
 			<!-- END var_file_name -->
@@ -327,6 +325,11 @@
 		<dd><input type="text" maxlength="10" size="6" id="block_cache_time" name="block_cache_time" value="{BLOCK_CACHE_TIME}" class="post" /></dd>
 	</dl>
 </fieldset>
+
+	<!-- IF S_BLOCK_VAR -->
+		<!-- INCLUDE k_block_vars/{S_BLOCK_VAR} -->
+	<!-- ENDIF -->
+
 <!-- ENDIF -->
 
 
@@ -457,9 +460,9 @@
 	</dl>
 	<div style="display:<!-- IF not S_HAS_VARS --> none<!-- ELSE --> block<!-- ENDIF -->;" id="vars">
  	<dl>
-		<dt>{L_BLOCK_VAR_FILE}:{L_BLOCK_VAR_FILE_EXPLAIN}</dt>
+		<dt><label for="var_file_name">{L_BLOCK_VAR_FILE}</label><br />{L_BLOCK_VAR_FILE_EXPLAIN}</dt>
 		<dd>
-		<select name="var_file_name" class="post">
+		<select id="var_file_name" name="var_file_name" class="post">
 			<!-- BEGIN var_file_name -->
 				<option value="{var_file_name.S_VAR_FILE_NAME}"<!-- IF var_file_name.S_VAR_FILE_NAME == S_FNAME_V --> selected="selected"<!-- ENDIF -->>{var_file_name.S_VAR_FILE_NAME}</option>
 			<!-- END var_file_name -->
@@ -472,10 +475,10 @@
 		<dt><label for="block_cache_time">{L_BLOCK_CACHE_TIME}:</label><br />{L_BLOCK_CACHE_TIME_EXPLAIN}</dt>
 		<dd><input type="text" maxlength="10" size="6" id="block_cache_time" name="block_cache_time" value="{BLOCK_CACHE_TIME}" class="post" /></dd>
 	</dl>
-
-
-
 </fieldset>
+	<!-- IF S_BLOCK_VAR -->
+		<!-- INCLUDE k_block_vars/{S_BLOCK_VAR} -->
+	<!-- ENDIF -->
 <!-- ENDIF -->
 
 <!-- IF S_OPTIONS  == 'tools' -->
@@ -511,7 +514,7 @@
 	</p>
 	<!-- ENDIF -->
 <!-- ENDIF -->
-[{BASE}]
 
 </form>
+{RPT}
 <!-- INCLUDE overall_footer.html -->

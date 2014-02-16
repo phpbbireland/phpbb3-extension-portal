@@ -114,7 +114,7 @@ $result = $db->sql_query($sql);
 if (!$result)
 //if (!$result = $db->sql_query($sql, $block_cache_time))
 {
-	trigger_error($user->lang['ERROR_PORTAL_FORUMS'] . '108');
+	trigger_error($user->lang['ERROR_PORTAL_FORUMS'] . '117');
 }
 
 /* don't show these (set in ACP) */
@@ -335,4 +335,3 @@ $template->assign_vars(array(
 	'RECENT_TOPICS_WIDE_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 
-?>

@@ -37,7 +37,7 @@ if ($this_page_name == 'viewforum' || $this_page_name == 'viewtopic')
 }
 
 /***
-* Validation notes, version: 1.0.19 (2 February 2013)
+* Validation notes, version: 1.0.22
 *
 * As this block's data can be obtained from block_build.php (which processes
 * the phpBB core for use by the portal page), we do not need to reinvent the
@@ -52,6 +52,8 @@ if ($this_page_name == 'viewforum' || $this_page_name == 'viewtopic')
 * May need to trim some more code but it works for now... Mike
 ***/
 
+
+/*****
 $template->assign_vars(array(
 	'FORUM_CATEGORIES_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
@@ -365,50 +367,51 @@ function display_forums_categories()
 		'S_CAT_BLOCK' => true,
 	));
 }
+*/
 
 /**
 * Returns forum parents as an array. Get them from forum_data if available, or update the database otherwise
 */
-
+/*
 if (!function_exists('get_forum_parents'))
 {
-
-function get_forum_parents(&$forum_data)
-{
-	global $db;
-
-	$forum_parents = array();
-
-	if ($forum_data['parent_id'] > 0)
+	function get_forum_parents(&$forum_data)
 	{
-		if ($forum_data['forum_parents'] == '')
-		{
-			$sql = 'SELECT forum_id, forum_name, forum_type
-				FROM ' . FORUMS_TABLE . '
-				WHERE left_id < ' . $forum_data['left_id'] . '
-					AND right_id > ' . $forum_data['right_id'] . '
-				ORDER BY left_id ASC';
-			$result = $db->sql_query($sql);
+		global $db;
 
-			while ($row = $db->sql_fetchrow($result))
+		$forum_parents = array();
+
+		if ($forum_data['parent_id'] > 0)
+		{
+			if ($forum_data['forum_parents'] == '')
 			{
-				$forum_parents[$row['forum_id']] = array($row['forum_name'], (int) $row['forum_type']);
+				$sql = 'SELECT forum_id, forum_name, forum_type
+					FROM ' . FORUMS_TABLE . '
+					WHERE left_id < ' . $forum_data['left_id'] . '
+						AND right_id > ' . $forum_data['right_id'] . '
+					ORDER BY left_id ASC';
+				$result = $db->sql_query($sql);
+
+				while ($row = $db->sql_fetchrow($result))
+				{
+					$forum_parents[$row['forum_id']] = array($row['forum_name'], (int) $row['forum_type']);
+				}
+				$db->sql_freeresult($result);
+
+				$forum_data['forum_parents'] = serialize($forum_parents);
+
+				$sql = 'UPDATE ' . FORUMS_TABLE . "
+					SET forum_parents = '" . $db->sql_escape($forum_data['forum_parents']) . "'
+					WHERE parent_id = " . $forum_data['parent_id'];
+				$db->sql_query($sql);
 			}
-			$db->sql_freeresult($result);
-
-			$forum_data['forum_parents'] = serialize($forum_parents);
-
-			$sql = 'UPDATE ' . FORUMS_TABLE . "
-				SET forum_parents = '" . $db->sql_escape($forum_data['forum_parents']) . "'
-				WHERE parent_id = " . $forum_data['parent_id'];
-			$db->sql_query($sql);
+			else
+			{
+				$forum_parents = unserialize($forum_data['forum_parents']);
+			}
 		}
-		else
-		{
-			$forum_parents = unserialize($forum_data['forum_parents']);
-		}
+
+		return $forum_parents;
 	}
-
-	return $forum_parents;
-}}
-?>
+}
+*/

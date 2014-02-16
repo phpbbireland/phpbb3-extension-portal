@@ -1,0 +1,42 @@
+services:
+    phpbireland.blocks.announcements:
+        class: phpbbireland\portal\blocks\block_announcements
+        arguments:
+            - @auth
+            - @cache
+            - @config
+            - @template
+            - @dbal.conn
+            - @pagination
+            - @request
+            - %core.php_ext%
+            - %core.root_path%
+            - @user
+        tags:
+            - { name: phpbireland.blocks }
+
+    phpbireland.blocks.clock:
+        class: phpbbireland\portal\blocks\clock
+        tags:
+            - { name: phpbireland.blocks }
+
+    phpbireland.blocks.donation:
+        class: phpbbireland\portal\blocks\block_donations
+        arguments:
+            - @config
+            - @template
+            - @user
+        tags:
+            - { name: phpbireland.blocks }
+
+    phpbireland.blocks.block_forum_categories:
+        class: phpbbireland\portal\blocks\block_forum_categories
+        arguments:
+            - @config
+            - @dbal.conn
+            - @template
+            - @user
+        tags:
+            - { name: phpbireland.blocks }
+
+   

@@ -201,7 +201,7 @@ $lang = array_merge($lang, array(
 	'IRC_TITLE'				=> 'Stargate Portal IRC Popup',
 
 	'K_QUICK_REPLY'			=> 'Kiss Simple Quick Reply',
-	'K_RECENT_SEARCH_DAYS'	=> 'Search days: ',
+
 	'K_TOP_DL_PER_FORUM'	=> '',
 	'LOCAL_TIME'			=> 'Local Time',
 
@@ -244,7 +244,7 @@ $lang = array_merge($lang, array(
 	'NO_TEAMS'			=> 'No teams selected!<br />Can be added in<br /> ACP > PORTAL > BLOCKS (team block variables)',
 	'NO_TOP_TOPICS'		=> 'No active topics',
 	'NO_POLL'			=> 'No poll selected',
-	'NO_RECENT_TOPICS'	=> ' No recent topics to display',
+
 	'NO_SEARCH'			=> 'Sorry but you are not permitted to use the search system.',
 	'NO_SEARCHS'		=> 'No words found.',
 	'NO_UNRESOLVED'		=> 'No bugs to report...',
@@ -321,8 +321,7 @@ $lang = array_merge($lang, array(
 
 	'READ_ARTICLE'			=> 'Read Full Article',
 	'READ_FULL'				=> 'Read full message',
-	'RECENT_TOPICS'			=> 'Recent Topics',
-	'RECENT_REPLY'			=> 'View latest reply...',
+
 	'REGISTRATION'       	=> '<b>Click here to Register</b>',
 	'RE-INDEXING BLOCKS'	=> 'Notice! Please re-index the blocks (this is a normal maintenance process when block get out of sequence)',
 	'RETURN_INDEX'			=> '%s Return to the portal page%s',
@@ -405,7 +404,7 @@ $lang = array_merge($lang, array(
 	//'WELCOME_MESSAGE'	=> "Welcome back [you]...<br /><br /><strong>{SITENAME} </strong> is powered by <strong>phpBB</strong> {VERSION} and <strong> the Kiss Portal Engine </strong>{PORTAL_VERSION}."
 
 	// Translators don’t edit "[you]" in next line, it's code... //
-	'WELCOME_MESSAGE'	=> "Welcome back [you]...<br /><br /><strong>{SITENAME} </strong> is powered by <strong>phpBB3</strong> and <strong> the Kiss Portal Engine </strong>.",
+
 	'WELCOME_TO_MOD'	=> 'Welcome to',
 
 	'YOUTUBE'				=> 'Youtube',
@@ -561,4 +560,3 @@ $lang = array_merge($lang, array(
 	'TOTAL_DONATIONS'  => 'Total donations for %s are $%01.2f',
 ));
 
-?>

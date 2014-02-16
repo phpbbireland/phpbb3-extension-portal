@@ -1,16 +1,11 @@
+imports:
+    - { resource: controller.yml }
+    - { resource: blocks.yml }
+    - { resource: tables.yml }
+
 services:
-    phpbbireland.portal.controller:
-        class: phpbbireland\portal\controller\portal
-        arguments:
-            - @config
-            - @template
-            - @user
-            - @controller.helper
-            - @phpbbireland.portal
-            - %core.root_path%
-            - %core.php_ext%
-    phpbbireland.portal:
-        class: phpbbireland\portal\portal
+    phpbbireland.portal.main:
+        class: phpbbireland\portal\controller\main
         arguments:
             - @auth
             - @cache
@@ -19,7 +14,37 @@ services:
             - @request
             - @template
             - @user
-            - @content.visibility
             - @controller.helper
             - %core.root_path%
             - %core.php_ext%
+
+    phpbbireland.core.helpers.portal:
+        class: phpbbireland\core\helpers\portal
+
+    phpbbireland.core.helpers.tables:
+        class: phpbbireland\core\helpers\tables
+        arguments:
+            - %tables.phpbbireland.k_config%
+            - %tables.phpbbireland.k_blocks%
+            - %tables.phpbbireland.k_pages%
+            - %tables.phpbbireland.k_menus%
+            - %tables.phpbbireland.k_resources%
+            - %tables.phpbbireland.k_newsfeeds%
+            - %tables.phpbbireland.k_youtube%
+            - %tables.phpbbireland.k_acronyms%
+
+    phpbbireland.blocks_collection:
+        class: phpbb\di\service_collection
+        arguments:
+            - @service_container
+        tags:
+            - { name: service_collection, tag: phpbbireland.blocks }
+
+    phpbbireland.portal.listner:
+        class: phpbbireland\portal\event\main_listener
+        arguments:
+             - @controller.helper
+             - @template
+             - @user
+        tags:
+            - { name: event.listener }

@@ -79,7 +79,7 @@ foreach ($k_blocks as $blk)
 }
 $block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['k_block_cache_time_default']);
 
-include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions' . '.' . $phpEx);
 
 
 $sql = 'SELECT user_id, username, user_posts, user_colour, user_type, user_inactive_time, group_id, user_avatar, user_avatar_type, user_avatar_width , user_avatar_height, user_website

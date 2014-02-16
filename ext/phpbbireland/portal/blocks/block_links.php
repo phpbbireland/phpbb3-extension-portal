@@ -61,7 +61,7 @@ else
 $imglist = array();
 
 mt_srand((double)microtime()*1000002);
-$imgs = dir($phpbb_root_path . 'images/links');
+$imgs = dir($phpbb_root_path . 'ext/phpbbireland/portal/images/links');
 
 while ($file = $imgs->read())
 {
@@ -154,4 +154,3 @@ $template->assign_vars(array(
 	'LINKS_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 
-?>

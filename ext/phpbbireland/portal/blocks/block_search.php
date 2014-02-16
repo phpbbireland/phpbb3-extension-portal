@@ -21,9 +21,12 @@ if (!defined('IN_PHPBB'))
 
 
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
+$this->user->add_lang_ext('phpbbireland/portal', 'kiss_search');
 
+/*
 $user->add_lang('portal/kiss_search');
 $user->add_lang('search');
+*/
 
 $submit = request_var('submit', false);
 $keywords = request_var('keywords', '', true);
@@ -59,4 +62,3 @@ $template->assign_vars(array(
 	'SEARCH_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 
-?>

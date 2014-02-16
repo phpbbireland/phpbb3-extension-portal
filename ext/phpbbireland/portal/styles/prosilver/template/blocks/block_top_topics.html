@@ -1,0 +1,30 @@
+<!-- IDTAG starts block_top_topics.html 4 November 2008 copyright phpbbireland.com 2008 -->
+<div class="block_data">
+	<div class="tcontainer" style="padding-bottom:3px; margin-top:-2px;">
+		<div>
+			<span style="position: relative; float:left; text-align:left; width:70%;"><b>{L_TOPIC}</b></span>
+			<span style="position: relative; float:right; text-align:right; width:30%;"><b>{L_REPLIES}</b></span>
+		</div>
+	</div>
+	<div class="tcontainer">
+		<!-- BEGIN top_topics -->
+			<div class="trow">
+				<span class="bg2 tleft" style="text-align:left; width:100%; overflow:hidden;"><a href="{top_topics.S_SEARCH_ACTION}" title="{top_topics.FULL_T_TITLE}">{top_topics.TOPIC_TITLE}</a></span>
+				<span class="bg2 tleft" style="text-align:right; min-width:35px; overflow:auto;">{top_topics.TOPIC_REPLIES}</span>
+			</div>
+		<!-- BEGINELSE -->
+			<div style="width:99%;">
+				<span class="bg2" style="position: relative; float:left; text-align:left; width:100%; padding:0;">
+					{NO_TOP_TOPICS}
+				</span>
+			</div>
+		<!-- END top_topics -->
+	</div>
+	<div>
+		<span class="bg2" style="position: relative; float:left; text-align:center; width:100%; padding:0;">
+			{TOP_TOPICS_DAYS}
+		</span>
+	</div>
+</div>
+<!-- IF DEBUG_QUERIES --><div class="block_data">{TOP_TOPICS_DEBUG}</div><!-- ENDIF -->
+<!-- IDTAG ends block_top_topics.html -->

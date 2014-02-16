@@ -1,0 +1,26 @@
+services:
+    phpbbireland.portal.controller:
+        class: phpbbireland\portal\controller\main
+        arguments:
+            - @config
+            - @template
+            - @user
+            - @controller.helper
+            - @phpbbireland.portal
+            - %core.root_path%
+            - %core.php_ext%
+
+    phpbbireland.portal:
+        class: phpbbireland\portal\main
+        arguments:
+            - @auth
+            - @cache
+            - @config
+            - @dbal.conn
+            - @request
+            - @template
+            - @user
+            - @content.visibility
+            - @controller.helper
+            - %core.root_path%
+            - %core.php_ext%

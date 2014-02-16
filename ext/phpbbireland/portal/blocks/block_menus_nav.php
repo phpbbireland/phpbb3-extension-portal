@@ -19,6 +19,10 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
+global $phpbb_root_path, $config, $k_config, $phpEx, $SID, $userm, $table_prefix;
+
+include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.' . $phpEx);
+
 generate_menus();
 
 ?>

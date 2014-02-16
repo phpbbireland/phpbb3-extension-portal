@@ -20,7 +20,7 @@ if (!defined('IN_PHPBB'))
 }
 
 global $phpbb_root_path, $phpEx;
-
+return; //
 $user->add_lang('mcp');
 
 $tapproved = $treported = $papproved = $preported = 0;
@@ -84,5 +84,3 @@ $template->assign_vars(array(
 	'MOD_PORTAL_DEBUG'    => sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 
-
-?>

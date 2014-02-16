@@ -106,7 +106,7 @@ $sql = "SELECT t.topic_id, t.topic_title, t.topic_last_post_id, t.forum_id, p.po
 
 if (!$result = $db->sql_query($sql, 300))
 {
-	trigger_error($user->lang['ERROR_PORTAL_FORUMS']);
+	trigger_error($user->lang['ERROR_PORTAL_FORUMS'] . ' 109');
 }
 
 while ($row = $db->sql_fetchrow($result))
@@ -122,7 +122,7 @@ while ($row = $db->sql_fetchrow($result))
 			LIMIT " . 1;
 		if (!$my_result = $db->sql_query($sql2, 300))
 		{
-			trigger_error($user->lang['ERROR_PORTAL_FORUMS']);
+			trigger_error($user->lang['ERROR_PORTAL_FORUMS'] . '125');
 		}
 		$my_row = $db->sql_fetchrow($my_result);
 		$recent_topic_row['forum_name'][$row_count] = $my_row['forum_name'];
@@ -145,7 +145,7 @@ if( $result = $db->sql_query($sql, 300) )
 }
 else
 {
-	trigger_error($user->lang['ERROR_PORTAL_FORUMS']);
+	trigger_error($user->lang['ERROR_PORTAL_FORUMS'] . '148');
 }
 
 //echo $scroll;
@@ -237,4 +237,3 @@ $template->assign_vars(array(
 	//'RT1_PORTAL_DEBUG'					=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
 ));
 
-?>

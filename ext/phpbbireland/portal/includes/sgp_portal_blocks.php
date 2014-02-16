@@ -23,22 +23,20 @@ if (!STARGATE)
 	return;
 }
 
-global $phpbb_root_path, $config, $k_config, $phpEx, $SID, $userm, $table_prefix;
-global $db, $k_blocks, $user_id, $avatar_img, $template, $auth;
+global $phpbb_root_path, $config, $k_config, $phpEx, $user, $table_prefix;
+global $db, $k_blocks, $user, $avatar_img, $template, $auth;
 global $k_groups;
 
-$style_path_ext = $phpbb_root_path . 'ext/phpbbireland/portal/style/';
+//$style_path_ext = $phpbb_root_path . 'ext/phpbbireland/portal/style/' . $user->user_style;
 
-define('K_BLOCKS_TABLE',	$table_prefix . 'k_blocks');
 
 // Grab some portal cached data //
-$block_cache_time = $k_config['k_block_cache_time_default'];
-$blocks_width 	= $config['k_blocks_width'];
-$blocks_enabled = $config['k_blocks_enabled'];
-
+$block_cache_time  = $k_config['k_block_cache_time_default'];
+$blocks_width 	   = $config['k_blocks_width'];
+$blocks_enabled    = $config['k_blocks_enabled'];
 $use_block_cookies = (isset($k_config['use_block_cookies'])) ? $k_config['use_block_cookies'] : 0;
 
-$user->add_lang_ext('phpbbireland/portal', 'common');
+//$user->add_lang_ext('phpbbireland/portal', 'common');
 
 // if block disabled, generate message and return... //
 if (!$blocks_enabled)
@@ -57,15 +55,15 @@ $active_blocks = array();
 // if styles use large block images change path to images //
 $block_image_path = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/block/';
 $big_image_path = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/large/';
-
+$my_root_path = $phpbb_root_path . 'ext/phpbbireland/portal/';
 
 //$user->add_lang('portal/kiss_block_variables');
-$user->add_lang_ext('phpbbireland/portal', 'kiss_block_variables');
+/////$user->add_lang_ext('phpbbireland/portal', 'kiss_block_variables');
 
 $this_page = explode(".", $user->page['page']);
 $user_id = $user->data['user_id'];
 
-include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions' . '.' . $phpEx);
+include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.' . $phpEx);
 
 // Grab data for this user //
 $sql = "SELECT group_id, user_type, user_style, user_avatar, user_avatar_type, username, user_left_blocks, user_center_blocks, user_right_blocks
@@ -385,37 +383,38 @@ if (isset($center_block_ary) && $show_center)
 		));
 	}
 }
-
+//var_dump($phpbb_root_path . 'ext/phpbbireland/portal/style/' . rawurlencode($user->style['style_path']) . '/theme/images/');
 $template->assign_vars(array(
-	'AVATAR'				=> get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height']),
-	'BLOCK_WIDTH'			=> $blocks_width . 'px',
+//	'T_THEME_PATH'            => $phpbb_root_path . 'ext/phpbbireland/portal/style/' . rawurlencode($user->style['style_path']) . '/theme/images/',
+	'AVATAR'				  => get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height']),
+	'BLOCK_WIDTH'			  => $blocks_width . 'px',
 
-	'PORTAL_ACTIVE'			=> $config['portal_enabled'],
-	'PORTAL_BUILD'			=> $config['portal_build'],
-	'PORTAL_VERSION'		=> $config['portal_version'],
+	'PORTAL_ACTIVE'			  => $config['portal_enabled'],
+	'PORTAL_BUILD'			  => $config['portal_build'],
+	'PORTAL_VERSION'		  => $config['portal_version'],
 
-	'READ_ARTICLE_IMG'		=> $user->img('btn_read_article', 'READ_ARTICLE'),
-	'POST_COMMENTS_IMG'		=> $user->img('btn_post_comments', 'POST_COMMENTS'),
-	'VIEW_COMMENTS_IMG'		=> $user->img('btn_view_comments', 'VIEW_COMMENTS'),
+	'READ_ARTICLE_IMG'		  => $user->img('btn_read_article', 'READ_ARTICLE'),
+	'POST_COMMENTS_IMG'		  => $user->img('btn_post_comments', 'POST_COMMENTS'),
+	'VIEW_COMMENTS_IMG'		  => $user->img('btn_view_comments', 'VIEW_COMMENTS'),
 
-	'SITE_NAME'				=> $config['sitename'],
-	'S_USER_LOGGED_IN'		=> ($user->data['user_id'] != ANONYMOUS) ? true : false,
+	'SITE_NAME'				  => $config['sitename'],
+	'S_USER_LOGGED_IN'		  => ($user->data['user_id'] != ANONYMOUS) ? true : false,
 
-	'S_SHOW_LEFT_BLOCKS'	=> $show_left,
-	'S_SHOW_RIGHT_BLOCKS'	=> $show_right,
+	'S_SHOW_LEFT_BLOCKS'	  => $show_left,
+	'S_SHOW_RIGHT_BLOCKS'	  => $show_right,
 
 	'S_BLOCKS_ENABLED'        => $blocks_enabled,
 	'S_K_FOOTER_IMAGES_ALLOW' => ($k_config['k_footer_images_allow']) ? true : false,
 	'S_CONTENT_FLOW_BEGIN'    => ($user->lang['DIRECTION'] == 'ltr') ? 'left' : 'right',
 	'S_CONTENT_FLOW_END'      => ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
 
-	'USER_NAME'          => $user->data['username'],
-	'USERNAME_FULL'      => get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']),
-	'U_INDEX'            => append_sid("{$phpbb_root_path}index.$phpEx"),
-	'U_PORTAL'           => append_sid("{$phpbb_root_path}portal.$phpEx"),
-	'U_PORTAL_ARRANGE'   => append_sid("{$phpbb_root_path}portal.$phpEx", "arrange=1"),
-	'U_STAFF'            => append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=leaders'),
-	'U_SEARCH_BOOKMARKS' => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&mode=bookmarks'),
+	'USER_NAME'               => $user->data['username'],
+	'USERNAME_FULL'           => get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']),
+	'U_INDEX'                 => append_sid("{$phpbb_root_path}index.$phpEx"),
+	'U_PORTAL'                => append_sid("{$phpbb_root_path}portal.$phpEx"),
+	'U_PORTAL_ARRANGE'        => append_sid("{$phpbb_root_path}portal.$phpEx", "arrange=1"),
+	'U_STAFF'                 => append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=leaders'),
+	'U_SEARCH_BOOKMARKS'      => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&mode=bookmarks'),
 ));
 
 // process common data here //

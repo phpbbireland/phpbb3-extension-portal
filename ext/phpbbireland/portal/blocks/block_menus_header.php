@@ -25,7 +25,12 @@ $queries = $cached_queries = 0;
 
 $user->add_lang('portal/kiss_block_variables');
 
-include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+if (!class_exists('sgp_functions'))
+{
+	include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions' . '.' . $phpEx);
+}
+
+$sgp_functions = new \phpbbireland\portal\includes\sgp_functions();
 
 global $db, $user, $_SID, $_EXTRA_URL, $k_groups, $k_blocks;
 

@@ -23,18 +23,23 @@ class resources_module
 
 	function main($id, $mode)
 	{
-		global $db, $user, $auth, $template, $cache, $k_cache, $request;
-		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $k_config, $table_prefix;
+		global $db, $user, $auth, $template, $cache, $request;
+		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $table_prefix;
 
-		define('K_RESOURCES_TABLE',	$table_prefix . 'k_resources');
+		include_once($phpbb_root_path . 'ext/phpbbireland/portal/config/constants.' . $phpEx);
 
 		include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.'.$phpEx);
+
+		if(!function_exists('obtain_k_config'))
+		{
+			include($phpbb_root_path . 'ext/phpbbireland/portal/includes/functions.' . $phpEx);
+			$k_config = obtain_k_config();
+		}
 
 		$user->add_lang_ext('phpbbireland/portal', 'k_resources');
 		$this->tpl_name = 'acp_resources';
 		$this->page_title = $user->lang['ACP_RESOURCES'];
 		add_form_key('resources');
-
 
 		// Set up general vars
 		$action = $request->variable('action', '');
@@ -48,9 +53,9 @@ class resources_module
 		//			[ MAIN PROCESS ]
 		// ======================================================
 
-		$add		= $request->variable('add', '');
+		$add = $request->variable('add', '');
 
-		$id_list = (( isset($_POST['id_list']) ) ? $request->variable('id_list', array(0)) : ( (isset($_GET['id_list'])) ? $request->variable('id_list', array(0)) : array()));
+		$id_list = ((isset($_POST['id_list'])) ? $request->variable('id_list', array(0)) : ((isset($_GET['id_list'])) ? $request->variable('id_list', array(0)) : array()));
 
 		switch ($action)
 		{

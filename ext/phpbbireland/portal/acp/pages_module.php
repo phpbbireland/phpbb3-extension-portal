@@ -8,6 +8,7 @@
 */
 
 namespace phpbbireland\portal\acp;
+//use phpbbireland\portal;
 
 /**
 * @ignore
@@ -26,16 +27,13 @@ class pages_module
 		global $db, $user, $auth, $template, $cache, $request;
 		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx, $k_config, $table_prefix, $cache;
 
+		include_once($phpbb_root_path . 'ext/phpbbireland/portal/config/constants.' . $phpEx);
 
-		if (!isset($k_config))
+		if(!function_exists('obtain_k_config'))
 		{
-			$k_config = $cache->get('k_config');
-			print_r($k_config);
+			include($phpbb_root_path . 'ext/phpbbireland/portal/includes/functions.' . $phpEx);
+			$k_config = obtain_k_config();
 		}
-
-		define('K_PAGES_TABLE',	$table_prefix . 'k_pages');
-		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
-
 
 		$img_path  = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/block/';
 		$img_path_acp = $phpbb_root_path . 'ext/phpbbireland/portal/adm/images/';
@@ -46,7 +44,11 @@ class pages_module
 		$this->page_title = $user->lang['ACP_PAGES'];
 		add_form_key('pages');
 
-		include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.'.$phpEx);
+		if (!class_exists($sgp_functions_admin))
+		{
+			include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.' . $phpEx);
+		}
+		$sgp_functions_admin = new sgp_functions_admin();
 
 		$mode = $request->variable('mode', '');
 		$page_id = $request->variable('page_id', 0);
@@ -65,8 +67,6 @@ class pages_module
 			}
 			$submit = ture;
 		}
-
-
 
 		if ($tag_id != '')
 		{
@@ -295,7 +295,7 @@ function get_all_available_files()
 	$page_name = '';
 	$dirslist = $store = ' ';
 
-	$illegal_files = array(".htaccess", "common.$phpEx", "report.$phpEx", "feed.$phpEx", "cron.$phpEx", "config.$phpEx", "csv.$phpEx", "style.$phpEx", "sgp_ajax.$phpEx", "sgpical.$phpEx", "rss.$phpEx");
+	$illegal_files = array(".htaccess", "app.$phpEx", "common.$phpEx", "report.$phpEx", "feed.$phpEx", "cron.$phpEx", "config.$phpEx", "csv.$phpEx", "style.$phpEx", "sgp_ajax.$phpEx", "sgpical.$phpEx", "rss.$phpEx");
 
 	$sql = 'SELECT page_name
 		FROM ' . K_PAGES_TABLE . '

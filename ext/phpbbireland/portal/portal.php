@@ -3,7 +3,7 @@
 /**
 *
 * @package Portal Extension
-* @copyright (c) 2013 phpbbireland
+* @copyright (c) 2013 Michael O’Toole (phpbbireland.com)
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -56,6 +56,7 @@ class portal
 		$this->cache_setup();
 
 		include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_portal_blocks.' . $this->php_ext);
+
 	}
 
 	public function cache_setup()
@@ -75,10 +76,6 @@ class portal
 		$k_menus		= $cache->get('k_menus');
 		$k_blocks		= $cache->get('k_blocks');
 		$k_resources	= $cache->get('k_resources');
-/*
-echo '<pre>';print_r($k_config);
-echo '<pre>';print_r($k_resources);
-*/
 	}
 
 	public function get_page_title()
@@ -106,7 +103,7 @@ echo '<pre>';print_r($k_resources);
 		;
 	}
 */
-	public function base()
+	public function handle()
 	{
 
 		$this->get_page();
@@ -116,21 +113,37 @@ echo '<pre>';print_r($k_resources);
 		return;
 	}
 
-
-	/**
-	* Generate the pagination for the news list
-	*
-	* @return	string	$append_route		Additional string that should be appended to the route
-	* @return		string		Full URL with append_sid performed on it
-	*/
-/*
-	public function get_url($append_route = '')
+	public function set_k_config($config_name, $config_value, $is_dynamic = false)
 	{
-		$base_url = 'portal';
+		global $db, $cache, $table_prefix;
 
-		return $this->helper->url($base_url . $append_route);
+		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
+
+		$k_config = $cache->get('k_config');
+
+		$sql = 'UPDATE ' . K_VARIABLES_TABLE . "
+			SET config_value = '" . $db->sql_escape($config_value) . "'
+			WHERE config_name = '" . $db->sql_escape($config_name) . "'";
+		$result = $db->sql_query($sql);
+
+		if (!$result)
+		//if (!$db->sql_affectedrows() && !isset($k_config[$config_name]))
+		{
+			$sql = 'INSERT INTO ' . K_VARIABLES_TABLE . ' ' . $db->sql_build_array('INSERT', array(
+				'config_name'   => $config_name,
+				'config_value'  => $config_value,
+				'is_dynamic'    => ($is_dynamic) ? 1 : 0));
+			$db->sql_query($sql);
+		}
+
+		$k_config[$config_name] = $config_value;
+
+		if (!$is_dynamic)
+		{
+			$cache->destroy('k_config');
+			$cache->destroy('config');
+		}
 	}
-*/
 
 	public function cache_k_config()
 	{
@@ -261,7 +274,6 @@ echo '<pre>';print_r($k_resources);
 			$db->sql_freeresult($result);
 			$cache->put('k_menus', $k_menus);
 		}
-
 	}
 
 	public function cache_k_resources()

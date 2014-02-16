@@ -1,0 +1,100 @@
+<div class="block_data">
+	<!-- IF S_CENTRED -->
+
+		<!-- IF S_COUNT -->
+		<div class="tcontainer">
+			<!-- BEGIN top_downloads_row -->
+			<!-- IF top_downloads_row.S_ROW_COUNT == 0 -->
+			<div class="trow">
+				<span class="bg2 tleft" style="padding:1px; width:auto; text-align:right; padding-right:3px"><strong>#</strong></span>
+				<span class="bg2 tleft" style="padding:1px; width:auto;"><strong>{L_TITLE}</strong></span>
+				<span class="bg2 tleft" style="padding:1px; width:20px;"><strong> </strong></span>
+				<span class="bg2 tleft" style="padding:1px; width:auto;"><strong>{L_POSTER}</strong></span>
+				<span class="bg2 tleft" style="padding:1px; width:20px; text-align:center;"><strong>{L_COUNT}</strong></span>
+				<span class="bg2 tleft" style="padding:1px; width:23%; text-align:right"><strong>{L_POSTED}/{L_EDITED}</strong></span>
+			</div>
+			<div class="trow divider_bottom_line" style="width:100%;"></div>
+			<!-- ENDIF -->
+			<!-- IF top_downloads_row.S_UNIQUE and SHOW_FORUM_CAT -->
+			<div class="trow bg3">
+				<span class="bg3 tleft" style="padding:1px; text-align:left;">
+					<strong><a title="{top_downloads_row.TOOLTIP2_W}" href="{top_downloads_row.U_FORUM_W}">{top_downloads_row.FORUM_W}</a></strong>
+				</span><span class="bg3 tleft"></span><span class="bg3 tleft"></span>
+			</div>
+			<!-- ENDIF -->
+
+			<!-- IF top_downloads_row.S_ROW_COUNT is even -->
+			<div class="trow bg2">
+			<!-- ELSE -->
+			<div class="trow bg1">
+			<!-- ENDIF -->
+				<span class="tleft" style="padding:1px; font-size:10px; width: 20px; text-align:right; padding-right:3px">{top_downloads_row.NUM} </span>
+				<span class="tleft" style="padding:1px;">{top_downloads_row.LAST_POST_IMG_W}<a href="{top_downloads_row.U_TITLE_W}" title="{top_downloads_row.TOOLTIP_W}"><span class="{top_downloads_row.S_CTYPE}">{top_downloads_row.TITLE_W}</span></a></span>
+				<span class="tleft" style="padding:1px;">{top_downloads_row.AVATAR_SMALL_IMG} </span>
+				<span class="tleft" style="padding:1px;">{top_downloads_row.POSTER_FULL_W} </span>
+				<span class="tright" style="padding:1px;">{top_downloads_row.ATT_COUNT} </span>
+				<span class="tleft" style="padding:1px; text-align:right;">{top_downloads_row.POSTTIME_W}</span>
+			</div>
+			<!-- END top_downloads_row -->
+		</div>
+		<div class="tcontainer">
+			<div class="trow">
+				<span class="tleft bg3" style="width:auto; padding:2px;">
+					<span class="">{L_TOTAL_DOWNLOADS_COUNT}</span> : <span class="black">{T_DOWNLOADS}</span>
+				</span>
+
+			</div>
+		</div>
+		<!-- ELSE -->
+			<div style="text-align:center;"><span class="genmed"><strong>{L_NO_TOP_DOWNLOADS_TOPICS}</strong></span></div>
+		<!-- ENDIF -->
+
+	<!-- ELSE -->
+
+		<!-- IF S_COUNT -->
+		<div class="tcontainer">
+			<!-- BEGIN top_downloads_row -->
+				<!-- IF top_downloads_row.S_ROW_COUNT == 0 -->
+				<div class="trow">
+					<span class="bg2 tleft" style="padding:1px; width:auto;"><strong>#</strong></span>
+					<span class="bg2 tleft" style="padding:1px; width:auto;"><strong>{L_TITLE}</strong></span>
+					<span class="bg2 tleft" style="padding:1px; width:20px; text-align:center;"><strong>{L_COUNT}</strong></span>
+				</div>
+				<div class="trow divider_bottom_line" style="width:100%;"></div>
+				<!-- ENDIF -->
+
+				<!-- IF top_downloads_row.S_UNIQUE and SHOW_FORUM_CAT -->
+				<div class="trow bg3">
+					<span class="bg3 tleft" style="padding:1px; text-align:left;">
+						<strong><a title="{top_downloads_row.TOOLTIP2_W}" href="{top_downloads_row.U_FORUM_W}">{top_downloads_row.FORUM_W}</a></strong>
+					</span><span class="bg3 tleft"></span><span class="bg3 tleft"></span>
+				</div>
+				<!-- ENDIF -->
+
+				<!-- IF top_downloads_row.S_ROW_COUNT is even -->
+				<div class="trow bg2">
+				<!-- ELSE -->
+				<div class="trow bg1">
+				<!-- ENDIF -->
+					<span class="tleft" style="padding:1px; font-size:10px; width: auto; text-align:right;">{top_downloads_row.NUM}</span>
+					<span class="tleft" style="padding:1px; font-size:10px">{top_downloads_row.LAST_POST_IMG_W} <a href="{top_downloads_row.U_TITLE_W}" title="{top_downloads_row.TOOLTIP_W}"><span class="{top_downloads_row.S_CTYPE}">{top_downloads_row.TITLE_W}</span></a></span>
+					<span class="tright" style="padding:1px; font-size:10px">{top_downloads_row.ATT_COUNT} </span>
+				</div>
+			<!-- END top_downloads_row -->
+		</div>
+		<div class="tcontainer">
+			<div class="trow">
+				<span class="tleft bg3" style="width:auto; padding:2px; text-align:center;">
+					<span class="">{L_TOTAL_DOWNLOADS_COUNT}</span> : <span class="black">{T_DOWNLOADS}</span>
+				</span>
+
+			</div>
+		</div>
+		<!-- ELSE -->
+		<div style="text-align:center;"><span class="genmed"><strong>{L_NO_TOP_DOWNLOADS_TOPICS}</strong></span></div>
+		<!-- ENDIF -->
+
+	<!-- ENDIF -->
+</div>
+
+<!-- IF DEBUG_QUERIES --><div class="block_data">{TOP_DOWNLOADS_DEBUG}</div><!-- ENDIF -->

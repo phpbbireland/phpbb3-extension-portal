@@ -21,7 +21,7 @@ class config_module
 {
 	var $u_action;
 
-	function main($id, $mode)
+	function main($module_id, $mode)
 	{
 		global $db, $user, $auth, $template, $cache, $request;
 		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
@@ -42,8 +42,6 @@ class config_module
 		$forum_id   = request_var('f', 0);
 		$forum_data = $errors = array();
 
-
-
 		if ($request->is_set_post('submit'))
 		{
 			if (!check_form_key('config'))
@@ -56,7 +54,6 @@ class config_module
 		$blocks_enabled = $config['k_blocks_enabled'];
 		$portal_version	= $config['k_portal_version'];
 		$portal_build	= $config['k_portal_build'];
-
 
 		if ($data['version'])
 		{
@@ -102,9 +99,7 @@ class config_module
 
 				$template->assign_var('S_OPT', 'save');
 
-				$url = $this->u_action . "&amp;i=k_config&amp;action=config";
-
-				meta_refresh(0, $url);
+				meta_refresh(0, $this->u_action);
 				return;
 			}
 

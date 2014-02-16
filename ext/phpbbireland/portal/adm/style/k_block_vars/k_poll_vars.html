@@ -1,10 +1,37 @@
-<fieldset>
-	<legend>{L_POLL_BLOCK_SETTINGS}</legend>
+<script type="text/javascript">
+// <![CDATA[
+	function null_fields(id)
+	{
+		 switch(id)
+		 {
+			 case 'k_poll_post_id':
+				  document.getElementById('k_poll_forum_id').value = '0';
+			 break;
+		 }
+	}
+// ]]>
+</script>
+
+<fieldset class="dl">
+	<legend>{L_K_POLL_BLOCK_SETTINGS}</legend>
 	<dl>
-		<dt><label for="k_poll_wide">{L_POLL_WIDE}:</label><br /><span>{L_POLL_VIEW_EXPLAIN}</span></dt>
+		<dt><label for="k_poll_post_id">{L_K_POLL_POST_ID}:</label></dt>
 		<dd>
-			<label><input type="radio" class="radio" name="k_poll_wide" value="1" <!-- IF S_K_POLL_WIDE --> checked="checked" id="k_poll_view"<!-- ENDIF --> /> {L_POLL_CENTRE}</label>
-			<label><input type="radio" class="radio" name="k_poll_wide" value="0" <!-- IF not S_K_POLL_WIDE --> checked="checked" id="k_poll_view"<!-- ENDIF --> /> {L_POLL_LR}</label>
+			<input name="k_poll_post_id" type="text" id="k_poll_post_id" value="{S_K_POLL_POST_ID}" size="10" onkeypress="null_fields(this.id)"/>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="k_poll_wide">{L_K_POLL_WIDE}:</label><br /><span>{L_K_POLL_WIDE_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="k_poll_wide" value="1" <!-- IF S_K_POLL_WIDE --> checked="checked" id="k_poll_wide"<!-- ENDIF --> /> {L_K_POLL_CNTR}</label>
+			<label><input type="radio" class="radio" name="k_poll_wide" value="0" <!-- IF not S_K_POLL_WIDE --> checked="checked" id="k_poll_wide"<!-- ENDIF --> /> {L_K_POLL_LR}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="k_poll_view">{L_K_POLL_VIEW}:</label><br /><span>{L_K_POLL_VIEW_EXPLAIN}</span></dt>
+		<dd>
+			<label><input name="k_poll_view" type="radio" value="0"<!-- IF S_K_POLL_VIEW == '0' --> checked="checked" id="k_poll_view"<!-- ENDIF --> /> {L_K_POLL_SIMPLE}</label>
+			<label><input name="k_poll_view" type="radio" value="1"<!-- IF S_K_POLL_VIEW == '1' --> checked="checked" id="k_poll_view"<!-- ENDIF --> /> {L_K_POLL_DETAILED}</label>
 		</dd>
 	</dl>
 </fieldset>

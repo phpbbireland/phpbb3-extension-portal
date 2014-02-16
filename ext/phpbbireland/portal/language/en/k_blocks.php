@@ -82,8 +82,8 @@ $lang = array_merge($lang, array(
 	'BLOCK_SCROLL_BIG'            => 'Allow Scrolling',
 	'BLOCK_SCROLL_BIG_EXPLAIN'    => 'Yes, block (data) will scroll, No, block is static.',
 	'BLOCK_UPDATING'              => 'Block positions updated...<br />',
-	'BLOCK_VAR_FILE'              => 'Select the config file used to display/edit variables',
-	'BLOCK_VAR_FILE_EXPLAIN'      => '(located in adm/style/k_block_vars folder).',
+	'BLOCK_VAR_FILE'              => 'Select the block config file',
+	'BLOCK_VAR_FILE_EXPLAIN'      => '(vars will be displayed below, location d in adm/style/k_block_vars folder).',
 
 	'BLOCKS_ADD_HEADER'           => 'Add a new block',
 	'BLOCKS_AUTO_REINDEXED'       => 'The block index has been corrected...',
@@ -109,8 +109,9 @@ $lang = array_merge($lang, array(
 	'MINIMOD_OPTIONS_EXPLAIN'        => 'Ignore if block is not based on a minimod.',
 	'MINIMOD_DETAILS_SHOW'           => 'This block is based on a minimod, this is a link to it!',
 	'MINIMOD_DETAILS_NO_EDIT'        => 'Block is not a minimod',
-
 	'MUST_SELECT_VALID_BLOCK_DATA'   => 'Invalid block ID',
+
+	'NO_VAR_FILE'                    => 'The %s block variable file was not found, please add the missing file...<br />Please use browser back button...',
 	'PAGE_ARRAY'                     => 'Array of page',
 	'PAGE_ARRAY_EXPLAIN'             => 'List of all block where block is visible',
 	'PORTAL_BLOCKS_ENABLED'          => 'Portal blocks enabled',

@@ -1,10 +1,13 @@
-portal_base_controller:
+phpbbireland_controller:
     pattern: /portal
-    defaults: { _controller: phpbbireland.portal.controller:portal, forum_id: 0, year: 0, month: 0, page: 1 }
+    defaults: { _controller: phpbbireland.portal.main:build_portal }
 
-portal_base_page_controller:
-    pattern: /portal/page/{page}
-    defaults: { _controller: phpbbireland.portal.controller:portal, page: 0 }
-    requirements:
-        page:      \d+
+# This is currently not supported yet
+phpbbireland_pages_controller:
+    pattern: /portal/{page}
+    defaults: { _controller: phpbbireland.portal.main:build_portal, page: "portal" }
 
+# Redirect to portal by default
+phpbbireland_redirect_controller:
+    pattern: /
+    defaults: { _controller: phpbbireland.portal.main:build }

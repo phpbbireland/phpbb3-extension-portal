@@ -36,7 +36,8 @@ class blocks_info
 				'C'			=> array('title' => 'ACP_K_PAGE_CERTRE_BLOCKS', 'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS')),
 				'R'			=> array('title' => 'ACP_K_PAGE_RIGHT_BLOCKS',  'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS')),
 				'manage'	=> array('title' => 'ACP_K_BLOCKS_MANAGE',      'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS')),
-				'reset'		=> array('title' => 'ACP_K_BLOCKS_RESET',       'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS'))
+				'reset'		=> array('title' => 'ACP_K_BLOCKS_RESET',       'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS')),
+				'config'	=> array('title' => 'ACP_BLOCK_CONFIG',         'auth' => 'acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS'))
 			),
 		);
 	}

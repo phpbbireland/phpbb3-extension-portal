@@ -4,37 +4,23 @@
 * @package Kiss Portal Engine / Stargate Portal
 * @version $Id$
 * @copyright (c) 2005-2013 phpbbireland
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @license http://opensource.org/licenses/gpl-license.php GNU License
 *
 */
 
 /*
 * A couple of functions rescued from functions.php
 * @copyright (c) 2007 phpBB Group
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @license http://opensource.org/licenses/gpl-license.php GNU License
 */
 
 /**
 * @ignore
 */
 
-namespace phpbbireland\portal\acp;
-
-global $phpbb_root_path;
-
-class sgp_functions {
-
-/*
-	public function __construct(\phpbb\cache\service $cache, \phpbb\config\config $config, $root_path, $php_ext)
-	{
-		$this->cache = $cache;
-		$this->config = $config;
-		$this->root_path = $root_path;
-		$this->php_ext = $php_ext;
-	}
-*/
-
-	public function sgp_get_rand_logo()
+if (!function_exists('sgp_get_rand_logo'))
+{
+	function sgp_get_rand_logo()
 	{
 		// initalise variables //
 		global $user, $phpbb_root_path, $k_config;
@@ -89,13 +75,15 @@ class sgp_functions {
 
 		return ($rand_logo);
 	}
+}
 
 
 	/***
 	* set config value phpbb code reused
 	*/
-
-	public function set_k_config($config_name, $config_value, $is_dynamic = false)
+if (!function_exists('set_k_config'))
+{
+	function set_k_config($config_name, $config_value, $is_dynamic = false)
 	{
 		global $db, $cache, $table_prefix;
 
@@ -127,9 +115,11 @@ class sgp_functions {
 			$cache->destroy('config');
 		}
 	}
+}
 
-
-	public function get_k_config_var($item)
+if (!function_exists('get_k_config_var'))
+{
+	function get_k_config_var($item)
 	{
 		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
 
@@ -147,9 +137,12 @@ class sgp_functions {
 		//$k_config[$row['config_name']] = $row['config_value'];
 		return $row['config_value'];
 	}
+}
 
 
-	public function k_progress_bar($percent)
+if (!function_exists('k_progress_bar'))
+{
+	function k_progress_bar($percent)
 	{
 		// $percent = number between 0 and 100 //
 
@@ -196,14 +189,15 @@ class sgp_functions {
 
 		return ' [' . $start . ']';
 	}
-
+}
 
 
 /***
 * same as truncate_string() with ...
 */
-
-	public function sgp_checksize($txt,$len)
+if (!function_exists('sgp_checksize'))
+{
+	function sgp_checksize($txt,$len)
 	{
 		if (strlen($txt) > $len)
 		{
@@ -212,14 +206,15 @@ class sgp_functions {
 		}
 		return($txt);
 	}
-
+}
 
 
 /***
 * sort smilies
 */
-
-	public function smiley_sort($a, $b)
+if (!function_exists('smiley_sort'))
+{
+	function smiley_sort($a, $b)
 	{
 		if ( strlen($a['code']) == strlen($b['code']) )
 		{
@@ -228,13 +223,14 @@ class sgp_functions {
 
 		return ( strlen($a['code']) > strlen($b['code']) ) ? -1 : 1;
 	}
-
+}
 
 /***
 * search block search
 */
-
-	public function search_block_func()
+if (!function_exists('search_block_func'))
+{
+	function search_block_func()
 	{
 		global $lang, $template, $portal_config, $board_config, $keywords, $phpbb_root_path;
 
@@ -246,12 +242,14 @@ class sgp_functions {
 			'U_SEARCH'         => append_sid("{$phpbb_root_path}search.$phpEx", 'keywords=' . urlencode($keywords)),
 		));
 	}
+}
 
 /**
 *	returns the users group name
 */
-
-	public function which_group($id)
+if (!function_exists('which_group'))
+{
+	function which_group($id)
 	{
 		global $db, $template;
 
@@ -268,13 +266,15 @@ class sgp_functions {
 
 		return ($name);
 	}
+}
 
 
-
-
-	public function process_for_vars($data)
+if (!function_exists('process_for_vars'))
+{
+	function process_for_vars($data)
 	{
-		global $config, $k_config, $k_resources;
+		global $config;
+		global $k_config, $k_menus, $k_blocks, $k_pages, $k_groups, $k_resources;
 
 		$a = array('{', '}');
 		$b = array('','');
@@ -302,11 +302,13 @@ class sgp_functions {
 		}
 		return($data);
 	}
+}
 
 
-
-
-	public function get_user_data($what = '', $id)
+// Stargate Random Banner mod //
+if (!function_exists('get_user_data'))
+{
+	function get_user_data($what = '', $id)
 	{
 		global $db, $template, $user;
 
@@ -336,12 +338,14 @@ class sgp_functions {
 				return;
 		}
 	}
+}
 
 /**
 * templates
 */
-
-	public function portal_block_template($block_file)
+if (!function_exists('portal_block_template'))
+{
+	function portal_block_template($block_file)
 	{
 		global $template;
 
@@ -351,9 +355,11 @@ class sgp_functions {
 		// Return templated data
 		return $template->assign_display('block', true);
 	}
+}
 
-
-	public function process_for_admin_bbcodes($data)
+if (!function_exists('process_for_admin_bbcodes'))
+{
+	function process_for_admin_bbcodes($data)
 	{
 		global $user;
 
@@ -369,15 +375,16 @@ class sgp_functions {
 		}
 		return($data);
 	}
-
+}
 
 
 /*
 * Takes the page name
 * Returns the pages id
 */
-
-	public function get_page_id($this_page_name)
+if (!function_exists('get_page_id'))
+{
+	function get_page_id($this_page_name)
 	{
 		global $db, $user, $k_pages;
 
@@ -391,13 +398,16 @@ class sgp_functions {
 			}
 		}
 		return(0);
-	}
 
+	}
+}
 
 /**
 * Convert Menu Name to language variable... leave alone if not found!
 **/
-	public function get_menu_lang_name($input)
+if (!function_exists('get_menu_lang_name'))
+{
+	function get_menu_lang_name($input)
 	{
 		global $user;
 
@@ -414,10 +424,13 @@ class sgp_functions {
 
 		return($block_title);
 	}
+}
 
 
 
-	public function s_get_vars_array()
+if (!function_exists('s_get_vars_array'))
+{
+	function s_get_vars_array()
 	{
 		global $db, $template, $table_prefix;
 
@@ -436,10 +449,11 @@ class sgp_functions {
 		$db->sql_freeresult($result);
 		return($resources);
 	}
+}
 
-
-
-	public function s_get_vars()
+if (!function_exists('s_get_vars'))
+{
+	function s_get_vars()
 	{
 		global $db, $template, $table_prefix;
 
@@ -457,9 +471,11 @@ class sgp_functions {
 		}
 		$db->sql_freeresult($result);
 	}
+}
 
-
-	public function get_link_from_image_name($image)
+if (!function_exists('get_link_from_image_name'))
+{
+	function get_link_from_image_name($image)
 	{
 		if (strpos($image, '.gif'))
 		{
@@ -480,14 +496,15 @@ class sgp_functions {
 
 		return($lnk);
 	}
-
+}
 
 /***
 *	build and handles menus //
 *
 **/
-
-	public function generate_menus()
+if (!function_exists('generate_menus'))
+{
+	function generate_menus()
 	{
 		global $k_groups, $k_blocks, $k_menus;
 		global $template, $phpbb_root_path, $auth, $user, $phpEx;
@@ -507,7 +524,7 @@ class sgp_functions {
 		define('OPEN_IN_TAB', 1);
 		define('OPEN_IN_WINDOW', 2);
 
-		$menu_image_path = '../ext/phpbbireland/portal/images/block_images/menu/';
+		$menu_image_path = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/menu/';
 
 		// process all menus at once //
 		if ($process)
@@ -581,9 +598,9 @@ class sgp_functions {
 
 				if ($process_menu_item)
 				{
-					$name = strtoupper($k_menus[$i]['name']);														// convert to uppercase //
-					$tmp_name = str_replace(' ','_', $name);														// replace spaces with underscore //
-					$name = (!empty($user->lang[$tmp_name])) ? $user->lang[$tmp_name] : $k_menus[$i]['name'];		// get language equivalent //
+					$name = strtoupper($k_menus[$i]['name']);
+					$tmp_name = str_replace(' ','_', $name);
+					$name = (!empty($user->lang[$tmp_name])) ? $user->lang[$tmp_name] : $k_menus[$i]['name'];
 
 					if (strstr($k_menus[$i]['link_to'], 'http'))
 					{
@@ -675,29 +692,4 @@ class sgp_functions {
 			'MENUS_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 		));
 	}
-
-
-/* generic/tools functions */
-
-/**
-* Check if any image either uploaded or remote needs processing phpBB Garage
-*
-* @return boolean
-*
-*/
-
-	public function tools_image_attached()
-	{
-		global $_FILES, $_POST;
-
-		//Look for image to handle from either upload or remotely linked
-		if (((isset($_FILES['FILE_UPLOAD'])) && ($_FILES['FILE_UPLOAD']['name'])) || ((!preg_match("/^http:\/\/$/i", $_POST['url_image'])) && (!empty($_POST['url_image']))))
-		{
-			return true;
-		}
-		return false;
-	}
-
-
-
 }
