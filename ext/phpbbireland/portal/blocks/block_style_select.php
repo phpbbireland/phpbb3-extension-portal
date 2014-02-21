@@ -18,6 +18,7 @@ if (!defined('IN_PHPBB'))
 {
 	exit;
 }
+return;
 
  // Anonymous users can't select a style...
 if ($user->data['user_id'] == ANONYMOUS)

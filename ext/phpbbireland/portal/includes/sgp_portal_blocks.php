@@ -18,10 +18,13 @@ if (!defined('IN_PHPBB'))
 }
 
 // If portal is not active return //
+/*
 if (!STARGATE)
 {
 	return;
 }
+*/
+
 
 global $phpbb_root_path, $config, $k_config, $phpEx, $user, $table_prefix;
 global $db, $k_blocks, $user, $avatar_img, $template, $auth;
@@ -151,8 +154,6 @@ if ($row['group_id'] != ANONYMOUS)
 }
 else
 {
-	define('K_BLOCKS_TABLE',	$table_prefix . 'k_blocks');
-
 	$sql = "SELECT *
 		FROM " . K_BLOCKS_TABLE . "
 		WHERE active = 1
@@ -169,24 +170,24 @@ while ($row = $db->sql_fetchrow($result))
 }
 
 // process phpbb common data //
-include($phpbb_root_path . 'ext/phpbbireland/portal/blocks/block_build.' . $phpEx);
+//include($phpbb_root_path . 'ext/phpbbireland/portal/blocks/block_build.' . $phpEx);
+
 
 $this_page_name = $this_page[1];
 $this_page_name = str_replace('php/', '', $this_page_name);
+$page_id = get_page_id($this_page_name);
 
 foreach ($active_blocks as $active_block)
 {
 	$filename = substr($active_block['html_file_name'], 0, strpos($active_block['html_file_name'], '.'));
-
 	if (file_exists($phpbb_root_path . 'ext/phpbbireland/portal/blocks/' . $filename . '.' . $phpEx))
 	{
- 		$page_id = get_page_id($this_page_name);
-
 		if (in_array($page_id, $arr[$active_block['id']]))
 		{
 			include($phpbb_root_path . 'ext/phpbbireland/portal/blocks/' . $filename . '.' . $phpEx);
 		}
 	}
+
 }
 $db->sql_freeresult($result);
 
@@ -201,7 +202,7 @@ $memberships = group_memberships(false, $user->data['user_id'], false);
 
 if ($active_blocks)
 {
-	//print_r($active_blocks);
+	//var_dump($active_blocks);
 
 	$L = $R = $C = 0;
 	foreach ($active_blocks as $row)
@@ -353,8 +354,12 @@ if (isset($center_block_ary) && $show_center)
 		// As it is not always possible to display all data as intended in a narrow block (left or right blocks) we automatically load a wide layout if it exists //
 		// We check the default template folder and the SGP common folder templates //
 
-		$my_file_wide = "{$style_path_ext}" . $user->theme['template_path'] . '/template/blocks/' . $value;
-		$my_file_wide = str_replace('.html', '_wide.html', $my_file_wide);
+
+
+///// 3.1
+		//$my_file_wide = "{$style_path_ext}" . $user->theme['template_path'] . '/template/blocks/' . $value;
+		//$my_file_wide = str_replace('.html', '_wide.html', $my_file_wide);
+		$my_file_wide = $style_path_ext = '';
 
 		if (file_exists($my_file_wide))
 		{
@@ -385,7 +390,7 @@ if (isset($center_block_ary) && $show_center)
 }
 //var_dump($phpbb_root_path . 'ext/phpbbireland/portal/style/' . rawurlencode($user->style['style_path']) . '/theme/images/');
 $template->assign_vars(array(
-//	'T_THEME_PATH'            => $phpbb_root_path . 'ext/phpbbireland/portal/style/' . rawurlencode($user->style['style_path']) . '/theme/images/',
+	'T_THEME_PATH'            => $phpbb_root_path . 'ext/phpbbireland/portal/style/' . rawurlencode($user->style['style_path']) . '/theme/images/',
 	'AVATAR'				  => get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height']),
 	'BLOCK_WIDTH'			  => $blocks_width . 'px',
 
@@ -411,12 +416,16 @@ $template->assign_vars(array(
 	'USER_NAME'               => $user->data['username'],
 	'USERNAME_FULL'           => get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']),
 	'U_INDEX'                 => append_sid("{$phpbb_root_path}index.$phpEx"),
-	'U_PORTAL'                => append_sid("{$phpbb_root_path}portal.$phpEx"),
-	'U_PORTAL_ARRANGE'        => append_sid("{$phpbb_root_path}portal.$phpEx", "arrange=1"),
+	///'U_PORTAL'                => append_sid("{$phpbb_root_path}portal.$phpEx"),
+	//'U_PORTAL'                => append_sid("{$phpbb_root_path}portal"),
+	//'U_PORTAL_ARRANGE'        => append_sid("{$phpbb_root_path}portal.$phpEx", "arrange=1"),
 	'U_STAFF'                 => append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=leaders'),
 	'U_SEARCH_BOOKMARKS'      => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&mode=bookmarks'),
 ));
 
+
+
+/***
 // process common data here //
 if ($this_page[0] == 'viewtopic')
 {
@@ -466,3 +475,4 @@ if ($this_page[0] == 'viewtopic')
 		'QUOTE_IMG'           => $user->img('icon_post_quote', 'REPLY_WITH_QUOTE'),
 	));
 }
+***/

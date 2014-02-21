@@ -51,18 +51,35 @@ class portal
 		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
 
+		global $phpbb_root_path;
 		$this->page_title = $this->user->lang['PORTAL'];
 
 		$this->cache_setup();
 
-		include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_portal_blocks.' . $this->php_ext);
+		//include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_portal_blocks.' . $this->php_ext);
 
 	}
 
 	public function cache_setup()
 	{
-		global $cache, $k_pages, $k_menus, $k_blocks, $k_resources;
+		global $user, $auth, $config, $template, $user, $path_helper, $phpbb_root_path, $php_ext, $phpbb_container;
+		global $k_config, $k_menus, $k_blocks, $k_pages, $k_groups, $k_resources;
 
+if(!$php_ext)
+	$php_ext = 'php';
+
+
+		if(!$k_config)
+		{
+			include($phpbb_root_path . 'ext/phpbbireland/portal/includes/functions.' . $php_ext);
+			$k_config = obtain_k_config();
+			$k_menus = obtain_k_menus();
+			$k_blocks = obtain_block_data();
+			$k_pages = obtain_k_pages();
+			$k_groups = obtain_k_groups();
+			$k_resources = obtain_k_resources();
+		}
+		/*
 		$this->cache_k_blocks();
 		$this->cache_k_pages();
 		$this->cache_k_config();
@@ -76,6 +93,7 @@ class portal
 		$k_menus		= $cache->get('k_menus');
 		$k_blocks		= $cache->get('k_blocks');
 		$k_resources	= $cache->get('k_resources');
+		*/
 	}
 
 	public function get_page_title()
@@ -113,6 +131,11 @@ class portal
 		return;
 	}
 
+
+
+
+
+/*****
 	public function set_k_config($config_name, $config_value, $is_dynamic = false)
 	{
 		global $db, $cache, $table_prefix;
@@ -147,7 +170,7 @@ class portal
 
 	public function cache_k_config()
 	{
-		global $db, $cache, $table_prefix;
+		global $db, $cache, $table_prefix, $k_config;
 
 		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
 
@@ -189,9 +212,7 @@ class portal
 
 	public function cache_k_pages()
 	{
-		global $db, $cache, $table_prefix;
-
-		define('K_PAGES_TABLE',	$table_prefix . 'k_pages');
+		global $db, $cache, $table_prefix, $k_pages;
 
 		if (!$k_pages)
 		{
@@ -211,8 +232,7 @@ class portal
 
 	public function cache_k_blocks()
 	{
-		global $db, $cache, $table_prefix;
-		define('K_BLOCKS_TABLE', $table_prefix . 'k_blocks');
+		global $db, $cache, $table_prefix, $k_blocks;
 
 		if (!$k_blocks)
 		{
@@ -246,8 +266,7 @@ class portal
 
 	public function cache_k_menus()
 	{
-		global $db, $cache, $table_prefix;
-		define('K_MENUS_TABLE', $table_prefix . 'k_menus');
+		global $db, $cache, $table_prefix, $k_menus;
 
 		if (!$k_menus)
 		{
@@ -278,9 +297,7 @@ class portal
 
 	public function cache_k_resources()
 	{
-		global $db, $cache, $table_prefix;
-
-		define('K_RESOURCES_TABLE',	$table_prefix . 'k_resources');
+		global $db, $cache, $table_prefix, $k_resources;
 
 		if (!$k_resources)
 		{
@@ -298,4 +315,5 @@ class portal
 			$cache->put('k_resources', $k_resources);
 		}
 	}
+*****/
 }

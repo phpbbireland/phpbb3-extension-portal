@@ -109,6 +109,7 @@ $lang = array_merge($lang, array(
 	'MINIMOD_OPTIONS_EXPLAIN'        => 'Ignore if block is not based on a minimod.',
 	'MINIMOD_DETAILS_SHOW'           => 'This block is based on a minimod, this is a link to it!',
 	'MINIMOD_DETAILS_NO_EDIT'        => 'Block is not a minimod',
+	'MISSING_FILE_OR_FOLDER'         => '%s is missing',
 	'MUST_SELECT_VALID_BLOCK_DATA'   => 'Invalid block ID',
 
 	'NO_VAR_FILE'                    => 'The %s block variable file was not found, please add the missing file...<br />Please use browser back button...',

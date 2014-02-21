@@ -251,6 +251,7 @@ $lang = array_merge($lang, array(
 	'DONATIONS_CREATED'        => 'Donation added',
 
 // module install
+	'ACP_CONFIG'            => 'Portal ACP',
 	'ACP_PORTAL_TITLE'		=> 'Portal',
 	'ACP_CONFIG_TITLE'		=> 'Settings',
 	'ACP_BLOCKS_TITLE'		=> 'Blocks',

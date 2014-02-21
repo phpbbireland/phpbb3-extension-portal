@@ -36,7 +36,8 @@ if (!function_exists('sgp_get_rand_logo'))
 
 		mt_srand((double)microtime()*1000001);
 
-		$logos_dir = "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/images/logos';
+		//$logos_dir = "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/images/logos';
+		$logos_dir = "{$phpbb_root_path}styles/prosilver/theme/images/logos";
 
 		$handle = @opendir($logos_dir);
 
@@ -349,6 +350,8 @@ if (!function_exists('portal_block_template'))
 	{
 		global $template;
 
+		//if ($block_file == '') var_dump('Bug missing: '. $block_file);
+
 		// Set template filename
 		$template->set_filenames(array('block' => 'blocks/' . $block_file));
 
@@ -511,7 +514,7 @@ if (!function_exists('generate_menus'))
 		$queries = $cached_queries = $total_queries = 0;
 		static $process = 0;
 
-
+/*
 		define('WELCOME_MESSAGE', 1);
 		define('UN_ALLOC_MENUS', 0);
 		define('NAV_MENUS', 1);
@@ -523,7 +526,7 @@ if (!function_exists('generate_menus'))
 		define('UNALLOC_MENUS', 99);
 		define('OPEN_IN_TAB', 1);
 		define('OPEN_IN_WINDOW', 2);
-
+*/
 		$menu_image_path = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/menu/';
 
 		// process all menus at once //
@@ -689,7 +692,7 @@ if (!function_exists('generate_menus'))
 			'S_USER_LOGGED_IN'	=> ($user->data['user_id'] != ANONYMOUS) ? true : false,
 			'U_INDEX'			=> append_sid("{$phpbb_root_path}index.$phpEx"),
 			'U_PORTAL'			=> append_sid("{$phpbb_root_path}portal.$phpEx"),
-			'MENUS_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
+			///'MENUS_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 		));
 	}
 }

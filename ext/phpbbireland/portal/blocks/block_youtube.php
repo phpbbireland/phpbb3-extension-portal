@@ -26,8 +26,7 @@ $emp = '?';
 $rating = '';
 $video = '';
 $last_cat = '';
-$k_video_max = ($k_config['k_yourtube_link_limit']) ? $k_config['k_yourtube_link_limit'] : '';
-
+$k_video_max = ($k_config['k_yourtube_link_limit']) ? $k_config['k_yourtube_link_limit'] : 3;
 
 foreach ($k_blocks as $blk)
 {
@@ -118,5 +117,3 @@ while ($row = $db->sql_fetchrow($result))
 	$emp = $row['video_category'];
 }
 $db->sql_freeresult($result);
-
-?>

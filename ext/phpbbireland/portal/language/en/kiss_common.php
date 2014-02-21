@@ -200,6 +200,8 @@ $lang = array_merge($lang, array(
 
 	'IRC_TITLE'				=> 'Stargate Portal IRC Popup',
 
+	'K_RECENT_SEARCH_DAYS'  => 'Number of days to search',
+
 	'K_QUICK_REPLY'			=> 'Kiss Simple Quick Reply',
 
 	'K_TOP_DL_PER_FORUM'	=> '',
@@ -401,11 +403,11 @@ $lang = array_merge($lang, array(
 	'WIDE_VERSION'			=> 'Wide Version',
 
 	// Use this version to display debug info //
-	//'WELCOME_MESSAGE'	=> "Welcome back [you]...<br /><br /><strong>{SITENAME} </strong> is powered by <strong>phpBB</strong> {VERSION} and <strong> the Kiss Portal Engine </strong>{PORTAL_VERSION}."
+	'WELCOME_MESSAGE'	=> "Welcome back [you]...<br /><br /><strong>{SITENAME} </strong> is powered by <strong>phpBB</strong> {VERSION} and <strong> the Kiss Portal Engine </strong>{PORTAL_VERSION}.",
 
 	// Translators don’t edit "[you]" in next line, it's code... //
 
-	'WELCOME_TO_MOD'	=> 'Welcome to',
+	'WELCOME_TO_MOD'        => 'Welcome to',
 
 	'YOUTUBE'				=> 'Youtube',
 	'YOUTUBE_PAGE'			=> 'Youtube Page',

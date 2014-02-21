@@ -52,9 +52,8 @@ $block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['k
 
 $sort_by = isset($k_config['k_teams_sort']) ? $k_config['k_teams_sort'] : 'g.group_name';
 
-if ($sort_by == 'default')
+if ($sort_by == '' || $sort_by == 'default')
 {
-	$set =
 	$sort_by = 'g.group_name';
 }
 
@@ -67,7 +66,7 @@ else
 	$sql_refine = '';
 }
 
-$sql = 'SELECT DISTINCT u.user_id, u.group_id, u.username, u.user_colour, u.username_clean, g.group_id, g.group_name, g.group_colour, g.group_type, ug.group_id
+$sql = 'SELECT DISTINCT u.user_id, u.group_id, u.username, u.user_colour, u.username_clean, u.user_timezone, u.user_from, g.group_id, g.group_name, g.group_colour, g.group_type, ug.group_id
 		FROM ' . USERS_TABLE . ' u, ' . GROUPS_TABLE . ' g, ' . USER_GROUP_TABLE . ' ug
 			WHERE ug.group_id = g.group_id and u.user_id = ug.user_id ' . $sql_refine . '
 				AND ' . $db->sql_in_set('g.group_id', $sql_in) . '
@@ -75,36 +74,42 @@ $sql = 'SELECT DISTINCT u.user_id, u.group_id, u.username, u.user_colour, u.user
 
 $result = $db->sql_query($sql, $block_cache_time);
 
+$mod_root_path          = $phpbb_root_path . 'ext/phpbbireland/portal/';
+$user_group_image_path  = $mod_root_path . 'styles/'. $user->style['style_path'] . 'style/theme/images/teams/';
+$mods_group_image_path  = $mod_root_path . 'images/teams/';
+
+
 while ($row = $db->sql_fetchrow($result))
 {
 	$group_name = $row['group_name'];
-
 	$which_row = strtolower($group_name);
 	$which_row = str_replace(' ' , '_', $which_row);
 	$group_img = strtolower($row['group_name']);
 	$group_img = str_replace(' ' , '_', $group_img);
 
-	// Use the code below to check for team images in the user style... If they don’t exist use default in ./image/teams //
-	if (file_exists($phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/teams/' . $group_img . '.png'))
+	// Use the code below to check for team images in the user style... //
+	// If they don’t exist use default in ./image/teams //
+
+	if (file_exists($user_group_image_path . $group_img . '.png'))
 	{
-		$group_image_path = $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/teams/';
+		$g_path = $group_image_path;
 		$ext = '.png';
 	}
-	else if (file_exists($phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/teams/' . $group_img . '.gif'))
+	else if (file_exists($user_group_image_path . $group_img . '.gif'))
 	{
-		$group_image_path = $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/teams/';
+		$g_path = $group_image_path;
 		$ext = '.gif';
 	}
 	else
 	{
-		$group_image_path = $phpbb_root_path . 'images/teams/';
-
-		if (file_exists($group_image_path . $group_img . '.png'))
+		if (file_exists($mods_group_image_path . $group_img . '.png'))
 		{
+			$g_path = $mods_group_image_path;
 			$ext = '.png';
 		}
-		else if (file_exists($group_image_path . $group_img . '.gif'))
+		else if (file_exists($mods_group_image_path . $group_img . '.gif'))
 		{
+			$g_path = $mods_group_image_path;
 			$ext = '.gif';
 		}
 		else
@@ -133,7 +138,7 @@ while ($row = $db->sql_fetchrow($result))
 	else
 	{
 		$change = false;
-		$team_count = $team_count + 1;
+		$team_count++;
 	}
 
 	if ($team_count < $team_max_count || $team_max_count == 0)
@@ -141,8 +146,7 @@ while ($row = $db->sql_fetchrow($result))
 		$template->assign_block_vars('loop', array(
 			'FIRST'				=> $i++,
 			'S_CHANGE'			=> $change,
-
-			'GROUP_IMG_PATH'	=> $group_image_path,
+			'GROUP_IMG_PATH'	=> $g_path,
 			'GROUP_IMG'			=> $group_img . $ext,
 			'GROUP_NAME'		=> $group_name,
 			'GROUP_COLOR'		=> $row['group_colour'],

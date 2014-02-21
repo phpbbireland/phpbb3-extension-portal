@@ -202,7 +202,7 @@ if ($bbcode_bitfield !== '')
 	$bbcode = new bbcode(base64_encode($bbcode_bitfield));
 }
 
-$image_path = $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/portal/';
+//$image_path = $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/portal/';
 
 for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 {
@@ -255,9 +255,9 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 		'U_REPLY'		=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=reply&amp;t=' . $row['topic_id'] . '&amp;f=' . $row['forum_id']),
 		'U_PRINT'		=> ($auth->acl_get('f_print', $row['forum_id'])) ? append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=" . $row['forum_id'] . "&amp;t=" . $row['topic_id'] . "&amp;view=print") : '',
 
-		'REPLY_IMG'		=> $image_path . 'post_comment.png',
-		'PRINT_IMG' 	=> $image_path . 'post_print.png',
-		'VIEW_IMG'		=> $image_path . 'post_view.png',
+		//'REPLY_IMG'		=> $image_path . 'post_comment.png',
+		//'PRINT_IMG' 	=> $image_path . 'post_print.png',
+		//'VIEW_IMG'		=> $image_path . 'post_view.png',
 
 		'S_TOPIC_TYPE'	=> $row['topic_type'],
 		'S_NOT_LAST'	=> ($i < sizeof($posts) - 1) ? true : false,
@@ -292,8 +292,6 @@ $message = '';
 $template->assign_vars(array(
 	'S_ANNOUNCEMENTS_COUNT_ASKED'		=> sizeof($posts),
 	'S_ANNOUNCEMENTS_COUNT_RETURNED'	=> sizeof($post_list),
-	'T_IMAGESET_LANG_PATH'				=> "{$phpbb_root_path}styles/" . $user->theme['imageset_path'] . '/imageset/' . $user->data['user_lang'],
-
 	'ANNOUNCEMENYS_DEBUG'				=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 

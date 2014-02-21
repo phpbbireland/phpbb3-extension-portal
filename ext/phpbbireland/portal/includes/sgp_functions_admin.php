@@ -20,8 +20,6 @@ class sgp_functions_admin
 	{
 		global $db, $cache, $table_prefix, $k_config;
 
-		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
-
 		$sql = 'UPDATE ' . K_VARIABLES_TABLE . "
 			SET config_value = '" . $db->sql_escape($config_value) . "'
 			WHERE config_name = '" . $db->sql_escape($config_name) . "'";
@@ -50,8 +48,6 @@ class sgp_functions_admin
 		global $reserved_words, $db, $template, $table_prefix;
 
 		$reserved_words = array();
-
-		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
 
 		$sql = 'SELECT *
 			FROM ' . K_RESOURCES_TABLE . "

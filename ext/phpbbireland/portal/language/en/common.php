@@ -52,5 +52,3 @@ $lang = array_merge($lang, array(
 	'POST_NEW_HOT_IMG'		 => 'Post New Hot',
 	'VIEW_TOPIC_NEWS'		 => 'News: ',
 ));
-
-?>

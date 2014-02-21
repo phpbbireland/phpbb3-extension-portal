@@ -28,16 +28,19 @@ class blocks_module
 		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $k_config, $table_prefix;
 		global $helper, $root_path, $php_ext, $content_visibility;
 
+		$submit = $request->is_set_post('submit');
+
 		include_once($phpbb_root_path . 'ext/phpbbireland/portal/config/constants.' . $phpEx);
 		include_once($phpbb_root_path . 'ext/phpbbireland/portal/helpers/tables.' . $phpEx);
 
 		$this->cache_setup();
 
-		if (!class_exists($sgp_functions_admin))
+		if (!class_exists('sgp_functions_admin'))
 		{
-			include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.' . $phpEx);
+			require($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.' . $phpEx);
+			$sgp_functions_admin = new sgp_functions_admin();
 		}
-		$sgp_functions_admin = new sgp_functions_admin();
+
 
 		$k_config = $cache->get('k_config');
 
@@ -159,7 +162,7 @@ class blocks_module
 						'BLOCK_REPORT'   => $user->lang['BLOCKS_AUTO_REINDEXED'],
 					));
 
-					$cache->destroy('sql', $k_blocks);
+					//$cache->destroy('sql', $k_blocks);
 
 					meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=". $mode));
 					//meta_refresh(1, ($k_config['base']) ? $k_config['base'] : $this->u_action);
@@ -314,7 +317,7 @@ class blocks_module
 					$mode = 'manage';
 				}
 
-				$cache->destroy('sql', $k_blocks);
+				//$cache->destroy('sql', $k_blocks);
 
 				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=". $mode));
 
@@ -405,7 +408,7 @@ class blocks_module
 						$template->assign_var('BLOCK_REPORT', $title . $message . '<br />');
 					}
 
-					$cache->destroy('sql', $k_blocks);
+					//$cache->destroy('sql', $k_blocks);
 
 					meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage"));
 					return;
@@ -433,7 +436,7 @@ class blocks_module
 
 					$dirslist = '... '; // use ... for empty //
 
-					$dirs = $this->dir_file_exists($phpbb_root_path . 'ext/phpbbireland/portal/styles/common/template/blocks');
+					$dirs = $this->dir_file_exists($phpbb_root_path . 'ext/phpbbireland/portal/styles/common/template/blocks/');
 
 					while ($file = $dirs->read())
 					{
@@ -632,7 +635,7 @@ class blocks_module
 
 					$template->assign_var('BLOCK_REPORT', $user->lang['SAVING']);
 
-					$cache->destroy('sql', $k_blocks);
+					//$cache->destroy('sql', $k_blocks);
 
 					$this->delete_this_block_cached_file($html_file_name);
 
@@ -801,7 +804,7 @@ class blocks_module
 
 					$template->assign_var('BLOCK_REPORT', $title . $user->lang['BLOCK_DELETED'] . '<br />');
 
-					$cache->destroy('sql', $k_blocks);
+					//$cache->destroy('sql', $k_blocks);
 
 					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage"));
 
@@ -866,7 +869,7 @@ class blocks_module
 						'BLOCK_REPORT' => $user->lang['BLOCKS_REINDEXED'],
 					));
 
-					$cache->destroy('sql', $k_blocks);
+					//$cache->destroy('sql', $k_blocks);
 
 					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage"));
 
@@ -1034,8 +1037,6 @@ class blocks_module
 	{
 		global $db, $cache, $table_prefix;
 
-		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
-
 		if (($k_config = $cache->get('k_config')) !== false)
 		{
 			$sql = 'SELECT config_name, config_value
@@ -1081,7 +1082,7 @@ class blocks_module
 	**/
 	public function get_all_pages($id)
 	{
-		global $db, $template, $request, $phpbb_root_path, $phpbb_admin_path, $phpEx;
+		global $db, $template, $request, $phpbb_root_path, $phpbb_admin_path, $phpEx, $user;
 
 		if ($id != 0)
 		{
@@ -1330,6 +1331,8 @@ class blocks_module
 	}
 	public function dir_file_exists($file)
 	{
+		global $user;
+
 		if (!file_exists($file))
 		{
 			trigger_error(sprintf($user->lang['MISSING_FILE_OR_FOLDER'], $file));

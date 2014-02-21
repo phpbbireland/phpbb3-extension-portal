@@ -13,6 +13,9 @@
 		define('OPEN_IN_TAB', 1);
 		define('OPEN_IN_WINDOW', 2);
 
+		define('POST_NEWS', 4);
+		define('POST_NEWS_GLOBAL', 5);
+
 		define('K_CONFIG_TABLE',			$table_prefix . 'k_config');
 		define('K_MENUS_TABLE',				$table_prefix . 'k_menus');
 		define('K_BLOCKS_TABLE',			$table_prefix . 'k_blocks');

@@ -2,6 +2,10 @@ phpbbireland_controller:
     pattern: /portal
     defaults: { _controller: phpbbireland.portal.main:build_portal }
 
+phpbbireland_controller:
+    pattern: /portal.php
+    defaults: { _controller: phpbbireland.portal.main:build_portal }
+
 # This is currently not supported yet
 phpbbireland_pages_controller:
     pattern: /portal/{page}

@@ -30,20 +30,24 @@ class main_listener implements EventSubscriberInterface
 	{
 		return array(
 			'core.user_setup'	=> 'load_language_on_setup',
+		);
+/*
+		return array(
+			'core.user_setup'	=> 'load_language_on_setup',
 			'core.page_header'	=> 'add_portal_header',
 			'core.page_body'	=> 'add_portal_center',
 			'core.page_footer'	=> 'add_portal_footer',
 			'core.page_header'	=> 'add_page_header_link',
 		);
-
-		/*
+*/
+/*
 		return array(
 			'core.user_setup'	=> 'load_language_on_setup',
 			'core.page_header'	=> 'add_page_header_link',
 			'core.page_header'	=> 'add_portal_header',
 			'core.page_footer'	=> 'add_portal_footer',
 		);
-		*/
+*/
 	}
 
 
@@ -67,7 +71,7 @@ class main_listener implements EventSubscriberInterface
 	* @param \phpbb\user                 $user      User object
 	* @param string                      $php_ext   phpEx
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
 	{
 		$this->helper = $helper;
 		$this->template = $template;
@@ -88,36 +92,34 @@ class main_listener implements EventSubscriberInterface
 	public function add_page_header_link($event)
 	{
 		global $user, $template, $phpbb_container, $phpbb_root_path;
-
+var_dump('1' .  $event['location_url']);
         $this->user->add_lang_ext('phpbbireland/portal', 'kiss_common');
 
         $this->template->assign_vars(array(
-            'U_PORTAL'     => $this->helper->url('portal'),
-			'STARGATE'	   => true,
-			'HS'           => true,
-			'S_HIGHSLIDE'  => true,
-			'STARGATE_BUILD'		=> (isset($config['portal_build'])) ? $config['portal_build'] : '',
-			'STARGATE_VERSION'		=> (isset($config['portal_version'])) ? $config['portal_version'] : '',
-
-
+            'U_PORTAL'          => $this->helper->url('portal'),
+			'STARGATE'	        => true,
+			'HS'                => true,
+			'S_HIGHSLIDE'       => true,
+			'STARGATE_BUILD'    => (isset($config['portal_build'])) ? $config['portal_build'] : '',
+			'STARGATE_VERSION'  => (isset($config['portal_version'])) ? $config['portal_version'] : '',
 
 			'S_SHOW_RIGHT_BLOCKS' => true,
 			'S_SHOW_LEFT_BLOCKS'  => true,
-			'JS_PATH'                       => $web_path . 'js',
-			'JS_JQUERY'                     => $web_path . 'js/jquery/jquery-2.0.3.min.js',
-			'DEBUG_QUERIES'					=> (defined('DEBUG_QUERIES')) ? DEBUG_QUERIES : '',
+			'JS_PATH'             => $web_path . 'js',
+			'JS_JQUERY'           => $web_path . 'js/jquery/jquery-2.0.3.min.js',
+			'DEBUG_QUERIES'       => (defined('DEBUG_QUERIES')) ? DEBUG_QUERIES : '',
 
-			'T_STYLESHEET_PORTAL_OVERLOAD'	=> ($css) ? "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/portal_' . $css . '.css' : "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/portal.css',
-			'T_STYLESHEET_PORTAL_COMMON'	=> "{$phpbb_root_path}styles/_portal_common/theme/portal_common.css",
+			'T_STYLESHEET_PORTAL_OVERLOAD'  => ($css) ? "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/portal_' . $css . '.css' : "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/portal.css',
+			'T_STYLESHEET_PORTAL_COMMON'    => "{$phpbb_root_path}styles/_portal_common/theme/portal_common.css",
 
-			'L_PORTAL'			=> $user->lang['FORUM_PORTAL'],
-			'U_PORTAL'			=> append_sid("{$phpbb_root_path}portal.$this->php_ext"),
-			'U_PORTAL_ARRANGE'	=> append_sid("{$phpbb_root_path}portal.$this->php_ext", "arrange=1"),
-			'U_HOME'			=> append_sid("{$phpbb_root_path}portal.$this->php_ext"),
+			'L_PORTAL'          => $user->lang['FORUM_PORTAL'],
+			'U_PORTAL'          => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
+			'U_PORTAL_ARRANGE'  => append_sid("{$phpbb_root_path}portal.$this->php_ext", "arrange=1"),
+			'U_HOME'            => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
 
-			'SITE_LOGO_IMG'			=> $logo,
-			'SITE_LOGO_IMG_RIGHT'	=> $logo_right,
-			'RANDOM_BACK_COLOR'		=> $rand_color,
+			'SITE_LOGO_IMG'        => $logo,
+			'SITE_LOGO_IMG_RIGHT'  => $logo_right,
+			'RANDOM_BACK_COLOR'    => $rand_color,
 		));
 
 	}
@@ -125,7 +127,7 @@ class main_listener implements EventSubscriberInterface
 	public function add_overall_footer_content_after($event)
 	{
 		global $user, $phpbb_root_path, $php_ext;
-
+var_dump('2' . $event['location_url']);
 		if ($event['on_page'][1] == 'app')
 		{
 			if (utf8_strpos($event['row']['session_page'], 'controller=portal') !== false)
@@ -139,7 +141,7 @@ class main_listener implements EventSubscriberInterface
 	public function add_portal_footer($event)
 	{
 		global $user, $phpbb_root_path, $php_ext;
-
+var_dump('3' . $event['location_url']);
 		if ($event['on_page'][1] == 'app')
 		{
 			if (utf8_strpos($event['row']['session_page'], 'controller=portal') !== false)

@@ -35,11 +35,13 @@ class menus_module
 
 		$this->cache_setup();
 
-		if (!class_exists($sgp_functions_admin))
+		$submit = $request->is_set_post('submit');
+
+		if (!class_exists('sgp_functions_admin'))
 		{
 			include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.' . $phpEx);
+			$sgp_functions_admin = new sgp_functions_admin();
 		}
-		$sgp_functions_admin = new sgp_functions_admin();
 
 		$k_config = $cache->get('k_config');
 		//var_dump($module_id);
@@ -98,7 +100,7 @@ class menus_module
 		// bold current row text so things are easier to follow when moving/editing etc... //
 		if (($menu) ? $menu : 0)
 		{
-			$sql = 'UPDATE ' . K_VARIABLES_TABLE . ' SET config_value = ' . (int)$block . ' WHERE config_name = "k_adm_block"';
+			$sql = 'UPDATE ' . K_VARIABLES_TABLE . ' SET config_value = ' . (int)$menu . ' WHERE config_name = "k_adm_block"';
 			$db->sql_query($sql);
 		}
 		else
@@ -143,7 +145,7 @@ class menus_module
 
 					if ($view_all)
 					{
-						$view_groups = get_all_groups();
+						$view_groups = $sgp_functions_admin->get_all_groups();
 						if ($view_groups == '')
 						{
 							$view_groups = 0;
@@ -508,7 +510,7 @@ class menus_module
 			break;
 		}
 
-		$template->assign_var('U_ACTION', $u_action);
+		//$template->assign_var('U_ACTION', $u_action);
 	}
 	public function cache_setup()
 	{
@@ -520,8 +522,6 @@ class menus_module
 	public function cache_k_config()
 	{
 		global $db, $cache, $table_prefix;
-
-		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
 
 		if (($k_config = $cache->get('k_config')) !== false)
 		{
