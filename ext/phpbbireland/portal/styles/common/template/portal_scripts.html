@@ -30,28 +30,28 @@
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-<script type="text/javascript" src="{ROOT_PATH}js/scroller.js"></script>
+<script type="text/javascript" src="{MOD_ROOT_JS_PATH}scroller.js"></script>
 
 <!-- IF S_IS_PORTAL and S_ARRANGE -->
-<script type="text/javascript" src="{ROOT_PATH}js/drag_n_drop/prototype.js"></script>
-<script type="text/javascript" src="{ROOT_PATH}js/drag_n_drop/scriptaculous.js"></script>
-<script type="text/javascript" src="{ROOT_PATH}js/drag_n_drop/builder.js"></script>
-<script type="text/javascript" src="{ROOT_PATH}js/drag_n_drop/dragdrop.js"></script>
-<script type="text/javascript" src="{ROOT_PATH}js/drag_n_drop/effects.js"></script>
-<script type="text/javascript" src="{ROOT_PATH}js/drag_n_drop/controls.js"></script>
-<script type="text/javascript" src="{ROOT_PATH}js/drag_n_drop/slider.js"></script>
-<script type="text/javascript" src="{ROOT_PATH}js/drag_n_drop/unittest.js"></script>
+<script type="text/javascript" src="{JS_PATH}drag_n_drop/prototype.js"></script>
+<script type="text/javascript" src="{JS_PATH}drag_n_drop/scriptaculous.js"></script>
+<script type="text/javascript" src="{JS_PATH}drag_n_drop/builder.js"></script>
+<script type="text/javascript" src="{JS_PATH}drag_n_drop/dragdrop.js"></script>
+<script type="text/javascript" src="{JS_PATH}drag_n_drop/effects.js"></script>
+<script type="text/javascript" src="{JS_PATH}drag_n_drop/controls.js"></script>
+<script type="text/javascript" src="{JS_PATH}drag_n_drop/slider.js"></script>
+<script type="text/javascript" src="{JS_PATH}drag_n_drop/unittest.js"></script>
 <!-- ENDIF -->
 
-<script type="text/javascript" src="{ROOT_PATH}js/portal.js"></script>
+<script type="text/javascript" src="{JS_PATH}portal.js"></script>
 
 <!-- IF S_HIGHSLIDE -->
-<script type="text/javascript" src="{ROOT_PATH}js/highslide/highslide-full.packed.js"></script>
-<link rel="stylesheet" type="text/css" href="{ROOT_PATH}js/highslide/highslide.css" />
+<script type="text/javascript" src="{JS_PATH}highslide/highslide-full.packed.js"></script>
+<link rel="stylesheet" type="text/css" href="{JS_PATH}highslide/highslide.css" />
 
 <script type="text/javascript">
 // <![CDATA[
-	hs.graphicsDir = '{ROOT_PATH}js/highslide/graphics/';
+	hs.graphicsDir = '{JS_PATH}highslide/graphics/';
 	hs.align = 'center';
 	hs.transitions = ['expand', 'crossfade'];
 	hs.outlineType = 'glossy-dark';
@@ -79,11 +79,11 @@
 <link rel="stylesheet" href="{T_STYLESHEET_PORTAL_COMMON}" type="text/css" />
 <link rel="stylesheet" href="{T_STYLESHEET_PORTAL_OVERLOAD}" type="text/css" />
 
-<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery-2.0.2.js"></script>
+<script type="text/javascript" src="{JS_PATH}jquery/jquery-2.0.2.js"></script>
 
-<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery.hoverIntent.js"></script>
-<script type="text/javascript" src="{ROOT_PATH}js/jquery/imgbubbles.js"></script>
-<script type="text/javascript" src="{ROOT_PATH}js/jquery/youtube/jquery.youtubepopup.js"></script>
+<script type="text/javascript" src="{JS_PATH}jquery/jquery.hoverIntent.js"></script>
+<script type="text/javascript" src="{JS_PATH}jquery/imgbubbles.js"></script>
+<script type="text/javascript" src="{JS_PATH}jquery/youtube/jquery.youtubepopup.js"></script>
 
 
 
@@ -115,7 +115,7 @@
 
 	jQuery.noConflict();
 	jQuery(document).ready(function(){
-		jQuery('<link rel="stylesheet" href="{T_THEME_PATH}/' + $css_file_append + '" type="text/css" />').appendTo('body');
+		jQuery('<link rel="stylesheet" href="{MOD_USER_TEMPLATE_PATH}theme/' + $css_file_append + '" type="text/css" />').appendTo('body');
 	});
 
 //]]>
