@@ -1,20 +1,11 @@
-<script type="text/javascript" src="{ROOT_PATH}js/jquery/jquery_ui/jquery-ui.min.js"></script>
-<script type="text/javascript" src="{ROOT_PATH}js/jquery/youtube/jquery.youtubepopup.js"></script>
-<script type="text/javascript">
-// <![CDATA[
 
-	jQuery.noConflict();
-	jQuery(function () {
-		jQuery("a.youtube").YouTubePopup({ autoplay: <!-- IF S_AUTOPLAY -->1<!-- ELSE -->0<!-- ENDIF --> });
-	});
-
-//]]>
-</script>
+<script type="text/javascript" src="{MOD_ROOT_JQ_PATH}jquery_ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{MOD_ROOT_JQ_PATH}youtube/jquery.youtubepopup.js"></script>
 
 <!-- IF S_STYLE_SPECIFIC_VERSION -->
-<link type="text/css" href="{T_THEME_PATH}/jquery_ui/jquery-ui.css" rel="stylesheet" />
+<link type="text/css" href="{MOD_USER_TEMPLATE_PATH}/template/js/jquery_ui/jquery-ui.css" rel="stylesheet" />
 <!-- ELSE -->
-<link type="text/css" href="{ROOT_PATH}js/jquery/jquery_ui/jquery-ui.css" rel="stylesheet" />
+<link type="text/css" href="{MOD_ROOT_JQ_PATH}/jquery_ui/jquery-ui.css" rel="stylesheet" />
 <!-- ENDIF -->
 
 <div class="block_data">
