@@ -1,0 +1,386 @@
+/* ------------------------ Stargate Portal mods ------------------------ */
+/* 
+New format css file... We no longer edit the original subsilver2 css
+file... All portal css tags are placed in the portal css file... 
+Here we overload previous subsilver2 tags and of course add the 
+necessary portal tags...
+This makes porting of subsilver styles much easier... The same will
+also be dome for subsilver based styles... Mike
+
+Note: The portal.css is called from the overall_header.html, this 
+requires 1 edit to the functions.php...
+*/
+
+
+
+
+/* Block Classes 
+-------------------------------------------------------------------------- */
+
+.block_header {
+color: #FFA34F;
+font-size: 1.1em;
+font-weight: bold;
+background-color: #006699;
+background-image: url('./images/cellpic3.gif');
+background-repeat:repeat-x;
+width:auto;
+white-space: nowrap;
+padding:6px; 
+padding-right:0px;
+}
+.block_header a { color:#FFA34F; }
+.block_data { float:left; width:100%; }
+
+.block_body, .forabg {
+background-color: #F9F9F9;
+width:100%; /* IE :( */
+border-top: solid 1px #BBBBBB;
+border-left: solid 1px #BBBBBB;
+border-right: solid 1px #BBBBBB;
+border-bottom: solid 1px #BBBBBB;
+overflow: hidden;
+margin-bottom: 13px;
+clear: both;
+}
+
+.block_head {
+color: #FFA34F;
+font-size: 1.1em;
+font-weight: bold;
+background-color: #006699;
+background-image: url('./images/cellpic3.gif');
+height:25px;
+white-space: nowrap;
+padding:2px;
+}
+.box {
+background-color: #F9F9F9;
+text-align:left;
+padding:5px;
+padding-top:8px;
+padding-bottom:8px;
+margin:0;
+
+margin-bottom:1px;
+overflow: hidden;
+width:auto;
+}
+
+/* round corners 
+-------------------------------------------------------------------------------------------------------------- */
+span.corners-top-news, span.corners-bottom-news, span.corners-top-news span, span.corners-bottom-news span {
+font-size: 1px;
+line-height: 1px;
+display: block;
+height: 5px;
+background-repeat: no-repeat;
+}
+span.corners-top-news {
+background-image: none;
+background-position: 0 0;
+margin: 0 -5px;
+}
+span.corners-top-news span {
+background-image: none;
+background-position: 100% 0;
+}
+
+span.corners-bottom-news {
+background-image: none;
+background-position: 0 100%;
+margin: 0 -5px;
+clear: both;
+}
+span.corners-bottom-news span {
+background-image: none;
+background-position: 100% 100%;
+}
+span.corners-top-news {
+background-image: url("./images/corners_left_news.png");
+}
+span.corners-top-news span {
+background-image: url("./images/corners_right_news.png");
+}
+span.corners-bottom-news {
+background-image: url("./images/corners_left_news.png");
+}
+span.corners-bottom-news span {
+background-image: url("./images/corners_right_news.png");
+}
+
+.bg1a{ background-color: #DFDFDF; }
+.bg2a{ background-color: #E7E7E7; }
+
+.forum_icons {
+float:left;
+padding-right:10px;
+position:relative; left: 5px; top: -20px;
+}
+
+
+/* advanced styles
+ -------------------------------------------------------------- */
+caption { 
+margin: 0; 
+padding: 0;
+background: url(images/portal/2.png) top left repeat-x;
+white-space: nowrap;
+height: 22px;
+text-align: left;
+}
+.cap-left {
+background: url(images/portal/1.png) top left no-repeat;
+padding-left: 25px;
+}
+.cap-left-wide {
+background: url(images/portal/1w.png) top left no-repeat;
+padding-left: 72px;
+}
+.cap-right {
+background: url(images/portal/3.png) top right no-repeat;
+padding-top: 6px;
+height: 22px;
+}
+.cap-right-wide {
+background: url(images/portal/3w.png) top right no-repeat;
+padding-top: 6px;
+height: 22px;
+}
+.cap-right-wide_no {
+background: url(images/portal/cat_t_right_no.gif) top right no-repeat;
+padding-top: 6px;
+height: 22px;
+}
+caption, caption h1, caption h2, caption h3, caption h4, caption span { 
+font-size: 12px;
+line-height: 1.2em;
+font-weight: bold;
+color: #2E5B82;
+font-family: "Lucida Grande", "Trebuchet MS", Helvetica, Arial, sans-serif;
+}
+caption h1, caption h2, caption h3, caption h4, caption span { 
+display: inline;
+}
+caption a, caption a:visited {
+color: #2E5B82;
+text-decoration: underline;
+}
+caption a:hover {
+color: #D11010;
+text-decoration: underline;
+}
+
+
+/* Overloading... 
+ -------------------------------------------------------------------------- */
+
+.shouts{
+width: 100%;
+height:200px;
+overflow:auto;
+}
+
+#chat{
+width: 100%;
+text-align:left;
+}
+
+#message {
+width: 65%;
+}
+
+#whois_online{
+vertical-align:text-top;
+text-align:left;
+}
+
+.online_img {
+vertical-align:middle;
+}
+
+#act_indicator {
+visibility:hidden;
+}
+
+#wrapsts {
+border-style: solid;
+border-width: 0 0px 0px 0px;
+border-color: #000;
+margin: 0 auto;
+}
+
+.spacer {
+background-image: url(images/spacer.gif); width:10px; height:1px;
+}
+.gap {
+background-image: url(images/gap.gif); width:1px; height:2px;
+}
+
+
+
+/* Main message box */
+#message-box {
+width: 96%;
+
+}
+
+#message-box textarea {
+font-family: "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
+width: 100%;
+font-size: 1.2em;
+color: #B6B6B6;
+}
+
+/* Emoticons panel */
+#smiley-box {
+width: 18%;
+float: right;
+margin-left:5px;
+text-align:center;
+}
+
+#smiley-box img {
+margin: 3px;
+}
+.inputbox {border-color: #101010; 
+border:1px solid; border-color:#000000 #333535 #333535 #000000; margin:1px;padding:1px;
+}
+
+
+/* Back to top of page */
+.back2top {
+clear: both;
+height: 13px;
+text-align: right;
+}
+
+
+.direction {
+border:none; padding:0; background: #FFF url(images/scroll_arrows.gif) repeat-x; height: 16px;
+}
+input.search {
+background-image: none;
+background-repeat: no-repeat;
+background-position: left 1px;
+padding-left: 17px;
+}
+
+input.search {
+background-image: url("./images/icon_search.gif");
+background-repeat: no-repeat;
+padding-left: 17px;
+}
+.search a:hover {
+color: #FFFFFF;
+text-decoration: underline; 
+}
+
+
+/* Icon images */
+.rtl .icon_chat {
+background-position: 100% 50%;
+padding: 1px 17px 0 0;
+}
+
+/* Icon images */
+.icon-chat {
+ background-position: 0 50%;
+ background-repeat: no-repeat;
+ background-image: none;
+ padding: 1px 0 0 17px;
+}
+
+/* Icon images */
+.icon-chat {
+ background-image: url("{T_THEME_PATH}/images/icon_chat.gif"); 
+ }
+
+
+table.box {
+background-color:#080809;
+border-top: solid 1px #000001;
+border-left: solid 1px #000001;
+border-right: solid 1px #000001;
+border-bottom: solid 1px #000001;
+padding:0;
+}
+
+.button2 {
+color: #F0FADC;
+font-weight: normal;
+font-size: 1.1em;
+font-family: "Lucida Grande", Verdana, Helvetica, sans-serif;
+background: #212121 url('./images/cellpic1.gif');
+border: 1px solid #121212;
+}
+.button2:hover {
+color: #81B41A;
+}
+.button1 {
+font-weight: bold;
+background: #212121 url('./images/cellpic1.gif');
+border: 1px solid #121212;
+cursor: pointer;
+padding: 1px 5px;
+font-size: 1.1em;
+}
+.button1:hover {
+color: #81B41A;
+}
+
+/* code with lines Mike */
+.codecontent {
+overflow: auto;
+display: block;
+height: auto;
+max-height: 300px;
+white-space: normal;
+}
+
+/*
+-----------------------------------------------------*
+/* fix for ie in search 10 February 2008 */
+input.full{ width: 99%; }
+
+
+
+/* Temp over-rides link for header Mike
+-----------------------------------------------------*/
+#container {width: 100%; background: #eee; margin: 0 auto; text-align: left; }
+
+
+/* quick reply 
+----------------- */
+.qreply-icon { 
+	float: left; display: block; width: 97px; height: 27px;
+	background: url("./../../../styles/subsilver2/imageset/en/button_topic_qreply.gif") 0 0 no-repeat;
+	margin-right: 10px;
+}
+.qreply-icon-no	{ 
+	float: left; display: block; width: 97px; height: 27px;
+	background: url("./../../../styles/subsilver2/imageset/en/button_topic_qreply.gif") 0 0 no-repeat;
+	margin-right: 10px;
+}
+
+.qreply-icon span, .qreply-icon-no span {
+	display: none; text-indent: -5000px;
+}
+
+.qreply-icon:hover, .qreply-icon-no:hover {
+	background-position: 0 0; /*0 -27px;*/
+}
+.portal_message {
+	text-align:center;
+	font-size: 16px;
+	padding: 4px;
+}
+
+
+.panel {
+	margin-bottom: 4px;
+	background-color: #f9f9f9;
+	border: solid 1px #BBB;
+}
+.fields2 { padding:8px; border:none;}
+.submit-buttons {border:none;}

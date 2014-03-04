@@ -1,0 +1,21 @@
+<span class="block_data">
+	<div style="text-align:center; font-size:10px; padding:2px;">
+
+		<!-- IF S_USER_LOGGED_IN -->
+		<form method="post" id="style_select" action="{S_SELECT_ACTION}">
+			<!-- IF S_SHOW_PERM -->
+			<select id="style_select" onchange="document.location.href = this.options[this.selectedIndex].value + '&amp;mp=' + mp.checked;">
+				{STYLE_SELECT}
+			</select>
+			<div style="padding-top: 4px; text-align:center;">{L_PERMANENT} <input type="checkbox" title="{L_MAKE_PERMANENT}" class="radio" id="mp" name="mp" value="" /></div>
+			<!-- ELSE -->
+			<select id="style_select" onchange="document.location.href = this.options[this.selectedIndex].value;">
+				{STYLE_SELECT}
+			</select>
+			<!-- ENDIF -->
+		</form>
+		<!-- ENDIF -->
+
+	</div>
+	<div style="padding:2px; text-align:center;">{L_TOTAL_STYLES}: {STYLE_COUNT}</div>
+</span>

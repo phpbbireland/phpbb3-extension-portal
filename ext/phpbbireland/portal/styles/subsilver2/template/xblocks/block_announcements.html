@@ -1,0 +1,70 @@
+<!-- IDTAG block_announcements.html 24 March 2011 copyright phpbbireland.com 2008 -->
+
+<div class="news">
+	<a id="start" name="start" accesskey="t"></a>
+	<!-- IF S_ANNOUNCEMENTS_COUNT_RETURNED == 0 -->
+		<div class="genmed" style="text-align:center;"><strong>{L_NO_ANNOUNCEMENTS}</strong></div>
+	<!-- ELSE -->
+	<!-- BEGIN announce_row -->
+		<!-- IF announce_row.S_TOPIC_TYPE != 3 -->
+			<div class="announce <!-- IF announce_row.S_ROW_COUNT is even -->bg1a<!-- ELSE -->bg2a<!-- ENDIF --> sgp-corners">
+			<!-- ELSE -->
+			<div class="announce bg3a sgp-corners">
+			<!-- ENDIF -->
+				<div class="inner" style="min-height:50px; width:100%;">
+					<div class="news_header" style="width:100%;">
+						<span class="news_title">
+							<!-- IF announce_row.S_TOPIC_TYPE == 3 -->
+							<span class="red"> {announce_row.TITLE}</span>
+							<!-- ELSE -->
+							<span class="black"> {announce_row.TITLE}</span>
+							<!-- ENDIF -->
+						</span>
+						<span class="news_time">  {announce_row.TIME}</span>
+					</div>
+					<div class="news_body">
+						<div class="news" style="width:100%;">
+							<div class="announce_box">
+
+						<!-- IF announce_row.S_TOPIC_TYPE == 3 -->
+							<img src="{T_IMAGESET_LANG_PATH}/news/announcement.png" alt="" />
+						<!-- ELSE -->
+							<img src="{T_IMAGESET_LANG_PATH}/news/announcement2.png" alt="" />
+						<!-- ENDIF -->
+
+							</div>
+							<div class="contents">{announce_row.MESSAGE}</div>
+							<!-- IF announce_row.S_HAS_ATTACHMENTS -->
+							<div class="highslide-gallery">
+								<dl class="attachbox">
+									<dt>{L_ATTACHMENTS}</dt>
+									<!-- BEGIN attachment -->
+										<dd>{announce_row.attachment.DISPLAY_ATTACHMENT}</dd>
+									<!-- END attachment -->
+								</dl>
+							</div>
+							<!-- ENDIF -->
+							<!-- IF announce_row.S_DISPLAY_NOTICE --><div class="rules">{L_DOWNLOAD_NOTICE}</div><!-- ENDIF -->
+						</div>
+					</div>
+					<div class="news_footer" style="width:100%;">
+						<span class="news_poster" style="width:50%;"> {L_POSTED_BY}: {announce_row.U_POSTER}</span>
+						<span class="news_reply" style="width:50%;">
+							<a href="{announce_row.U_VIEW}"> <img src="{announce_row.VIEW_IMG}" alt="{L_VIEW_FULL_ARTICLE}" title="{L_VIEW_FULL_ARTICLE}" /></a>
+							<a href="{announce_row.U_PRINT}"> <img src="{announce_row.PRINT_IMG}" alt="{L_PRINT_IT}" title="{L_PRINT_IT}" /></a>
+							<!-- IF announce_row.ALLOW_REPLY -->
+								<a href="{announce_row.U_REPLY}"> <img src="{announce_row.REPLY_IMG}" alt="{L_POST_COMMENTS}" title="{L_POST_COMMENTS}" /></a>
+							<!-- ENDIF -->
+							<a href="#start" title="Top"><img src="{T_IMAGESET_PATH}/portal/icon_back_top.png" width="14" height="14" alt="Top" /></a>
+						</span>
+					</div>
+					<br class="clear" />
+				</div>
+			</div>
+		<!-- IF announce_row.S_NOT_LAST --><br /><!-- ENDIF -->
+	<!-- END announce_row -->
+	<!-- ENDIF -->
+</div>
+<!-- IF DEBUG_QUERIES --><div class="block_data">{ANNOUNCEMENYS_DEBUG}</div><!-- ENDIF -->
+
+<!-- IDTAG ends block_announcements.html -->

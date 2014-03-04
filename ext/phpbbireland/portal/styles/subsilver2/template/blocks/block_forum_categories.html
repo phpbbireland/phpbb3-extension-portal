@@ -1,0 +1,30 @@
+<!-- IDTAG block_forum_categories.html starts updated 14 May 2012 -->
+<!-- to show categories only, remove the not in clause below -->
+<div class="block_data">
+	<!-- BEGIN forumrow -->
+		<!-- IF not forumrow.S_IS_CAT -->
+			<div class="bg1a sgp-corners" style="text-align:center; padding-bottom:13px; cursor:pointer; margin-bottom:4px;" id="T_{forumrow.FORUM_ID}" title="{L_CLICK_TO_EXPAND}">
+				<span class="pimg cat_images">
+					<!-- IF forumrow.FORUM_IMAGE_SRC -->
+					<img src="{forumrow.FORUM_IMAGE_SRC}" title="{CLICK_TO_EXPAND}..." class="smallimage" alt="" />
+					<!-- ELSE -->
+					<img src="./images/forum_icons/default.png" title="{CLICK_TO_EXPAND}..." class="smallimage" alt="" />
+					<!-- ENDIF -->
+				</span>
+				<span style="margin-left: -12px;"><strong><a href="{forumrow.U_VIEWFORUM}" title="{forumrow.POSTS} {L_FORUMS} &bull; {forumrow.TOPICS} {L_TOPICS} &bull; {forumrow.POSTS} {L_POSTS}">{forumrow.FORUM_NAME}<!-- IF forumrow.SUBFORUMS and forumrow.S_LIST_SUBFORUMS -->&deg;<!-- ENDIF --></a></strong></span>
+
+				<div class="hidden_part" style="display:none; margin-top:10px; margin-bottom: 5px; clear:both;" id="TT_{forumrow.FORUM_ID}">
+					<div class="centre" style="text-align:left; <!-- IF forumrow.FORUM_DESC --> padding-top: 6px; padding-bottom: 3px; <!-- ELSE --> padding-top: 1px; padding-bottom: 1px;<!-- ENDIF -->"><strong>{forumrow.FORUM_DESC}</strong></div>
+					<div style="text-align:left; padding-top:3px;"><span class="gensmall">{L_TOPICS}: <strong>{forumrow.TOPICS}</strong> - {L_POSTS}: <strong>{forumrow.POSTS}</strong></span></div>
+					<!-- IF forumrow.SUBFORUMS and forumrow.S_LIST_SUBFORUMS -->
+						<div style="text-align:left; margin-top:15px; padding-bottom:5px;"><strong>{forumrow.L_SUBFORUM_STR}</strong></div>
+						<div>{forumrow.SUBFORUMS}</div>
+					<!-- ENDIF -->
+				</div>
+
+			</div>
+		<!-- ENDIF -->
+	<!-- END forumrow -->
+</div>
+<!-- IF DEBUG_QUERIES --><div class="block_data">{FORUM_CATEGORIES_DEBUG}</div><!-- ENDIF -->
+<!-- IDTAG block_forum_categories.html ends -->

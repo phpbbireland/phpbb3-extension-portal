@@ -1,0 +1,22 @@
+<!-- IDTAG starts block_menus.html 13 September 2007 copyright phpbbireland.com 2007 -->
+<div class="block_data">
+	<div id="menu_links" class="sdmenu">
+		<div class="nav_menu">
+			<!-- BEGIN portal_link_menus_row -->
+				<!-- IF portal_link_menus_row.S_SUB_HEADING -->
+					<span class="sub_heading">{portal_link_menus_row.PORTAL_LINK_MENU_HEAD_NAME}</span>
+				<!-- ELSE -->
+					<span class="menu_item">
+					<!-- IF portal_link_menus_row.PORTAL_LINK_MENU_ICON -->{portal_link_menus_row.PORTAL_LINK_MENU_ICON}<!-- ENDIF -->
+						<a href="{portal_link_menus_row.U_PORTAL_LINK_MENU_LINK}" {portal_link_menus_row.LINK_OPTION} >{portal_link_menus_row.PORTAL_LINK_MENU_NAME}</a>
+					</span>
+					<!-- IF portal_link_menus_row.S_SOFT_HR == 1 --></div> <br /><img src="./images/soft_hr.gif" /><!-- ENDIF -->
+				<!-- ENDIF -->
+			<!-- BEGINELSE -->
+				<div style="text-align:center;">{L_NO_MENU}</div>
+			<!-- END portal_link_menus_row -->
+		</div>
+	</div>
+</div>
+<!-- IF DEBUG_QUERIES --><div class="block_data">{SUB_MENUS_DEBUG}</div><!-- ENDIF -->
+<!-- IDTAG block_menus ends -->

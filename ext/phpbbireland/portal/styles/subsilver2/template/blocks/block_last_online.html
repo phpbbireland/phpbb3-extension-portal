@@ -1,0 +1,51 @@
+<!-- IDTAG starts block_last_online.html 4 November 2008 copyright phpbbireland.com 2008 -->
+<div class="block_data">
+<!-- IF VIEWONLINE -->
+	<div>
+		<span style="position: relative; float:left; text-align:left; width:70%;"><b>{L_USERNAME}</b></span>
+		<span style="position: relative; float:right; text-align:right; width:30%;"><b>{L_ONLINE}</b></span>
+	</div>
+	<div class="top_poster">
+	<!-- BEGIN last_online -->
+		<span class="bg2" style="position: relative; float:left; text-align:left; width:100%; padding:0; font-size: 9px;" >
+			<!-- IF last_online.USER_AVATAR_IMG -->
+				{last_online.USER_AVATAR_IMG}
+			<!-- ELSE -->
+				<img src="{T_THEME_PATH}/images/no_avatar.gif" width="16" height="16" alt="" />
+			<!-- ENDIF -->
+			{last_online.USERNAME_FULL}
+		</span>
+		<span class="bg3" style="position: relative; float:left; text-align:center; width:100%; padding-bottom:3px; font-size: 9px;">
+			{last_online.ONLINE_TIME}
+		</span>
+		<br style="clear:both;" />
+	<!-- END last_online -->
+	<br />
+	</div>
+<!-- ENDIF -->
+<!-- IF NO_VIEWONLINE_R -->
+	<div style="text-align:center;">
+          <strong>{L_NO_VIEW_USERS_R}</strong>
+		<br />
+	</div>
+<!-- ENDIF -->
+<!-- IF NO_VIEWONLINE_A -->
+	<div style="text-align:center;">
+		<form method="post" action="{S_LOGIN_ACTION}" class="headerspace">
+		<div>
+			<strong>{L_NO_VIEW_USERS_A}</strong>
+			<br /><br />
+			<input type="submit" class="button2" name="{L_LOGIN}" value="{L_LOGIN}"></input>
+			<br /><br />
+			<p>{L_DONT_HAVE_ACCOUNT}</p>
+			<a href="ucp.php?cid=&amp;mode=register">{L_REGISTRATION}</a>
+		</div>
+		</form>
+		<br />
+	</div>
+<!-- ENDIF -->
+</div>
+<!-- IF DEBUG_QUERIES --><div class="block_data">{LAST_ONLINE_DEBUG}</div><!-- ENDIF -->
+
+<!-- IDTAG ends block_last_online.html -->
+
