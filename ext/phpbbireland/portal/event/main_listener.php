@@ -262,7 +262,7 @@ $page_id = get_page_id($this_page_name);
 
 		$this->template->assign_vars(array(
 			'PAGE'                          => $this_page_name,
-			'STARGATE'						=> true,
+			'STARGATE'                      => true,
 			'HS'                            => true,
 			'JS_PATH'                       => $mod_root_jq_path,
 			'JS_JQUERY'                     => $mod_root_jq_path . $js_version,
