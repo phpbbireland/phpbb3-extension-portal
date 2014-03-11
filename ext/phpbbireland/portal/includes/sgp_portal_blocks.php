@@ -32,7 +32,6 @@ global $k_groups;
 
 //$style_path_ext = $phpbb_root_path . 'ext/phpbbireland/portal/style/' . $user->user_style;
 
-
 // Grab some portal cached data //
 $block_cache_time  = $k_config['k_block_cache_time_default'];
 $blocks_width 	   = $config['k_blocks_width'];
@@ -173,9 +172,19 @@ while ($row = $db->sql_fetchrow($result))
 //include($phpbb_root_path . 'ext/phpbbireland/portal/blocks/block_build.' . $phpEx);
 
 
+
+
 $this_page_name = $this_page[1];
 $this_page_name = str_replace('php/', '', $this_page_name);
 $page_id = get_page_id($this_page_name);
+
+if ($page_id == 0)
+{
+	$page_id = $this_page[0];
+	$page_id = get_page_id($this_page[0]);
+}
+
+//var_dump($page_id);
 
 foreach ($active_blocks as $active_block)
 {
@@ -185,6 +194,7 @@ foreach ($active_blocks as $active_block)
 		if (in_array($page_id, $arr[$active_block['id']]))
 		{
 			include($phpbb_root_path . 'ext/phpbbireland/portal/blocks/' . $filename . '.' . $phpEx);
+			//var_dump($filename);
 		}
 	}
 
@@ -267,8 +277,15 @@ if ($active_blocks)
 		$this_page_name = str_replace('php/', '', $this_page_name);
 		$page_id = get_page_id($this_page_name);
 
+if ($page_id == 0)
+{
+	$page_id = $this_page[0];
+	$page_id = get_page_id($this_page[0]);
+}
+
 		if ($process_block && in_array($page_id, $arr))
 		{
+			//var_dump($html_file_name);
 			switch ($block_position)
 			{
 				case 'L':
@@ -422,7 +439,6 @@ $template->assign_vars(array(
 	'U_STAFF'                 => append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=leaders'),
 	'U_SEARCH_BOOKMARKS'      => append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&mode=bookmarks'),
 ));
-
 
 
 /***

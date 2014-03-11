@@ -24,7 +24,7 @@ global $user, $ranks, $config, $k_config, $k_blocks, $phpbb_root_path;
 
 $total_queries = $queries = $cached_queries = 0;
 $rank_title = $rank_img = $rank_img_src = '';
-$mod_root_path = $phpbb_root_path . 'ext/phpbbireland/portal/';
+/////$mod_root_path = $phpbb_root_path . 'ext/phpbbireland/portal/';
 if (!function_exists('get_user_rank'))
 {
 	include($phpbb_root_path . 'includes/functions_display.' . $this->php_ext);
@@ -59,7 +59,7 @@ $template->assign_vars(array(
 	'WELCOME_SITE'    => sprintf($user->lang['WELCOME_SITE'], $config['sitename']),
 	'USR_RANK_TITLE'  => $rank_title,
 	'USR_RANK_IMG'    => $rank_img,
-	'MY_ROOT_PATH'    => $mod_root_path,
+	//'MY_ROOT_PATH'    => $mod_root_path,
 	'U_LOGIN_LOGOUT'  => $u_login_logout,
 	'L_LOGIN_LOGOUT'  => $l_login_logout,
 ));

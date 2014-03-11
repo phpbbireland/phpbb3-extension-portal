@@ -19,14 +19,13 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-global $php_root_path, $db, $user, $config, $k_config, $k_blocks;
+global $php_root_path, $db, $user, $config, $k_config, $k_blocks, $phpbb_root_path;
 
 $user->add_lang_ext('phpbbireland/portal', 'kiss_common');
 $queries = $cached_queries = 0;
+$welcome_image	= $phpbb_root_path . 'ext/phpbbireland/portal/images/welcome.png';
 
-$welcome_image	= '../ext/phpbbireland/portal/images/welcome.png';
-
-if (file_exists($php_root_path . 'ext/phpbbireland/portal/images/welcome.png'))
+if (file_exists($welcome_image))
 {
 	$block_link = 'portal.php';
 }

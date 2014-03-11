@@ -348,13 +348,15 @@ if (!function_exists('portal_block_template'))
 {
 	function portal_block_template($block_file)
 	{
-		global $template;
+		global $template, $phpbb_root_path;
 
 		//if ($block_file == '') var_dump('Bug missing: '. $block_file);
 
 		// Set template filename
 		$template->set_filenames(array('block' => 'blocks/' . $block_file));
+		//$template->set_filenames(array('block' => $phpbb_root_path .  'ext/phpbbireland/portal/styles/prosilver/template/blocks/' . $block_file));
 
+//var_dump($template->assign_display('block', true));
 		// Return templated data
 		return $template->assign_display('block', true);
 	}
@@ -511,7 +513,6 @@ if (!function_exists('generate_menus'))
 	{
 		global $k_groups, $k_blocks, $k_menus;
 		global $template, $phpbb_root_path, $auth, $user, $phpEx;
-		$queries = $cached_queries = $total_queries = 0;
 		static $process = 0;
 
 /*
@@ -692,7 +693,6 @@ if (!function_exists('generate_menus'))
 			'S_USER_LOGGED_IN'	=> ($user->data['user_id'] != ANONYMOUS) ? true : false,
 			'U_INDEX'			=> append_sid("{$phpbb_root_path}index.$phpEx"),
 			'U_PORTAL'			=> append_sid("{$phpbb_root_path}portal.$phpEx"),
-			///'MENUS_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 		));
 	}
 }

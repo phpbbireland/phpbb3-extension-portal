@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-global $k_config, $phpbb_root_path, $k_blocks;
+global $k_config, $phpbb_root_path, $k_blocks, $template;
 $queries = $cached_queries = 0;
 
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
@@ -112,7 +112,7 @@ if ($show_all_links)
 		$lnk[0] = str_replace('£','+', $lnk[0]);
 
 		$template->assign_block_vars('portal_links_row', array(
-			'LINKS_IMG'	=> $phpbb_root_path . 'images/links/' . $image,
+			'LINKS_IMG'	=> $phpbb_root_path . 'ext/phpbbireland/portal/images/links/' . $image,
 			'U_LINKS'	=> $lnk[0],
 		));
 	}
@@ -141,16 +141,15 @@ else
 		$lnk[0] = str_replace('£','+', $lnk[0]);
 
 		$template->assign_block_vars('portal_links_row', array(
-			'LINKS_IMG'	=> $phpbb_root_path . 'images/links/' . $image,
+			'LINKS_IMG'	=> $phpbb_root_path . 'ext/phpbbireland/portal/images/links/' . $image,
 			'U_LINKS'	=> $lnk[0],
 		));
 	}
 }
 
-$template->assign_vars(array(
-	'SUBMIT_LINK' 		=> $links_forum,
-	'LINKS_COUNT'		=> $k_links_to_display,
-	'TOTAL_LINKS'		=> $total_images_found,
-	'LINKS_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
+$this->template->assign_vars(array(
+	'SUBMIT_LINK'  => $links_forum,
+	'LINKS_COUNT'  => $k_links_to_display,
+	'TOTAL_LINKS'  => $total_images_found,
+	'LINKS_DEBUG'  => sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
-

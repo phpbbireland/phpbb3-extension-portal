@@ -30,7 +30,9 @@ class main_listener implements EventSubscriberInterface
 	{
 		return array(
 			'core.user_setup'	=> 'load_language_on_setup',
-			'core.page_header'	=> 'generate_portal',
+			//'core.page_header'	=> 'add_portal_page_header_link',
+			'core.page_header'	=> 'add_portal_blocks',
+			//'core.page_footer'	=> 'add_portal_page_footer_link',
 		);
 	}
 
@@ -60,6 +62,7 @@ class main_listener implements EventSubscriberInterface
 		$this->template = $template;
 		$this->user = $user;
 		$this->php_ext = $php_ext;
+		$this->page = '';
 	}
 
 	public function load_language_on_setup($event)
@@ -72,40 +75,44 @@ class main_listener implements EventSubscriberInterface
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
-/*
-	public function add_page_header_link($event)
-	{
-		global $user, $template, $phpbb_container, $phpbb_root_path $web_path;
 
-        $this->user->add_lang_ext('phpbbireland/portal', 'kiss_common');
+	public function add_portal_page_header_link($event)
+	{
+		global $user, $template, $phpbb_container, $phpbb_root_path, $web_path;
+
+        //$this->user->add_lang_ext('phpbbireland/portal', 'kiss_common');
 
         $this->template->assign_vars(array(
-            'U_PORTAL'          => $this->helper->url('portal'),
-			'STARGATE'	        => true,
-			'HS'                => true,
-			'S_HIGHSLIDE'       => true,
-			'STARGATE_BUILD'    => (isset($config['portal_build'])) ? $config['portal_build'] : '',
-			'STARGATE_VERSION'  => (isset($config['portal_version'])) ? $config['portal_version'] : '',
-
+            'U_PORTAL'            => $this->helper->url('portal'),
+            'U_INDEX'             => $this->helper->url('index'),
+			'STARGATE'	          => true,
+			'HS'                  => true,
+			'S_HIGHSLIDE'         => true,
+			'STARGATE_BUILD'      => (isset($config['portal_build'])) ? $config['portal_build'] : '',
+			'STARGATE_VERSION'    => (isset($config['portal_version'])) ? $config['portal_version'] : '',
 			'S_SHOW_RIGHT_BLOCKS' => true,
 			'S_SHOW_LEFT_BLOCKS'  => true,
-			'JS_PATH'             => $web_path . 'js',
-			'JS_JQUERY'           => $web_path . 'js/jquery/jquery-2.0.3.min.js',
-			//'DEBUG_QUERIES'       => (defined('DEBUG_QUERIES')) ? DEBUG_QUERIES : '',
-			//'T_STYLESHEET_PORTAL_OVERLOAD'  => ($css) ? "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/portal_' . $css . '.css' : "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/portal.css',
-			'T_STYLESHEET_PORTAL_COMMON'    => "{$phpbb_root_path}styles/_portal_common/theme/portal_common.css",
+			'L_PORTAL'            => $user->lang['FORUM_PORTAL'],
+			'U_PORTAL'            => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
+			'U_PORTAL_ARRANGE'    => append_sid("{$phpbb_root_path}portal.$this->php_ext", "arrange=1"),
+			'U_HOME'              => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
+			'SITE_LOGO_IMG'       => $logo,
+			'SITE_LOGO_IMG_RIGHT' => $logo_right,
 
-			'L_PORTAL'          => $user->lang['FORUM_PORTAL'],
-			'U_PORTAL'          => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
-			'U_PORTAL_ARRANGE'  => append_sid("{$phpbb_root_path}portal.$this->php_ext", "arrange=1"),
-			'U_HOME'            => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
-
-			'SITE_LOGO_IMG'        => $logo,
-			'SITE_LOGO_IMG_RIGHT'  => $logo_right,
-			'RANDOM_BACK_COLOR'    => $rand_color,
 		));
 	}
 
+	public function add_portal_page_footer_link($event)
+	{
+		global $user, $template, $phpbb_container, $phpbb_root_path, $web_path;
+
+        $this->template->assign_vars(array(
+            'U_PORTAL'    => $this->helper->url('portal'),
+            'U_INDEX'     => $this->helper->url('index'),
+		));
+	}
+
+/*
 	public function add_portal_header($event)
 	{
 		global $user, $phpbb_root_path, $php_ext;
@@ -134,12 +141,13 @@ class main_listener implements EventSubscriberInterface
 	}
 */
 
-	public function generate_portal()
+	public function add_portal_blocks($event)
 	{
-		//var_dump('in function: generate_portal');
+		var_dump('in: event\main_listener.php : add_portal_blocks()');
 
-		global $auth, $config, $template, $user, $path_helper, $phpbb_root_path, $cache, $phpbb_container, $php_ext;
+		global $auth, $config, $template, $user, $path_helper, $phpbb_root_path, $phpbb_container;
 		global $queries, $cached_queries, $total_queries, $k_config, $k_blocks, $k_menus, $k_pages, $k_groups;
+		global $block_modules;
 
 		$this->auth = $auth;
 		$this->config = $config;
@@ -147,17 +155,22 @@ class main_listener implements EventSubscriberInterface
 		$this->user = $user;
 		$this->path_helper = $path_helper;
 		$this->phpbb_root_path = $phpbb_root_path;
-		$this->cache = $cache;
 
-		$this->php_ext = 'php';
+		$this_page = explode(".", $user->page['page']);
+		if ($this_page[0] == 'index')
+		{
+			$this->page = 'index';
+		}
+		else if ($this_page[0] == 'app' && str_replace('php/', '', $this_page[1]) == 'portal')
+		{
+			$this->page = 'portal';
+		}
 
 		$board_url = generate_board_url() . '/';
 
 		$phpbb_path_helper = $phpbb_container->get('path_helper');
 		$corrected_path = $phpbb_path_helper->get_web_root_path();
 		$web_path = (defined('PHPBB_USE_BOARD_URL_PATH') && PHPBB_USE_BOARD_URL_PATH) ? $board_url : $corrected_path;
-
-
 
 		$this->includes_path = $phpbb_root_path . 'ext/phpbbireland/portal/includes/';
 
@@ -189,34 +202,24 @@ class main_listener implements EventSubscriberInterface
 		}
 
 		$this->includes_path = $phpbb_root_path . 'ext/phpbbireland/portal/includes/';
-		$mod_path = $phpbb_root_path . 'ext/phpbbireland/portal';
+		$mod_path = $phpbb_root_path . 'ext/phpbbireland/portal/';
 
 		include_once($this->includes_path . 'sgp_functions.' . $this->php_ext);
-		include_once($this->includes_path . 'sgp_portal_blocks.' . $this->php_ext);
+		//y//include_once($this->includes_path . 'sgp_portal_blocks.' . $this->php_ext);
+
+/*
+autoload class?
+		include($mod_path . 'portal.php')
+		$portal = new \ext\phpbbireland\portal\portal;
+		$this->portal->block_modules();
+*/
+////block_modules();
+
 
 		if (!function_exists('phpbb_get_user_avatar'))
 		{
 			include($phpbb_root_path . 'includes/functions_display.'. $this->php_ext);
 		}
-
-
-
-// temp code //
-$this_page = explode(".", $user->page['page']);
-if ($this_page[0] == 'app')
-{
-	$this_page_name = $this_page[1];
-	$this_page_name = str_replace('php/', '', $this_page_name);
-}
-else if ($this_page[0] == 'index')
-{
-	$this_page_name = $this_page[0];
-}
-$page_id = get_page_id($this_page_name);
-
-//var_dump($this_page_name); var_dump($page_id);
-
-
 
 		$cache_time = (isset($k_config['block_cache_time'])) ? $k_config['block_cache_time'] : '600';
 
@@ -261,7 +264,7 @@ $page_id = get_page_id($this_page_name);
 		}
 
 		$this->template->assign_vars(array(
-			'PAGE'                          => $this_page_name,
+			'PAGE'                          => $this->page,
 			'STARGATE'                      => true,
 			'HS'                            => true,
 			'JS_PATH'                       => $mod_root_jq_path,

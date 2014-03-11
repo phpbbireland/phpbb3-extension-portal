@@ -18,7 +18,7 @@ if (!defined('IN_PHPBB'))
 {
 	exit;
 }
-return;
+
 
  // Anonymous users can't select a style...
 if ($user->data['user_id'] == ANONYMOUS)
@@ -27,6 +27,11 @@ if ($user->data['user_id'] == ANONYMOUS)
 }
 
 global $user_id, $user, $template, $phpbb_root_path, $phpEx, $db, $k_blocks;
+
+
+//var_dump($user->style['style_path']);
+//var_dump($user->data['user_style']);
+
 
 $current_style = $user->data['user_style'];		// the current style
 $new_style = request_var('style', 0);			// selected style
@@ -91,7 +96,7 @@ while ($row = $db->sql_fetchrow($result))
 	}
 	++$style_count;
 
-	$style_select .= '<option value="' . $url . '"' . ($row['style_id'] == $user->theme['style_id'] ? ' selected="selected"' : '') . '>' . htmlspecialchars(sgp_checksize ($row['style_name'], 16)) . '</option>';
+	$style_select .= '<option value="' . $url . '"' . ($row['style_id'] == $user->data['user_style'] ? ' selected="selected"' : '') . '>' . htmlspecialchars(sgp_checksize ($row['style_name'], 16)) . '</option>';
 }
 $db->sql_freeresult($result);
 
@@ -105,4 +110,3 @@ $template->assign_vars(array(
 	'STYLE_COUNT'	=> $style_count,
 	'S_SHOW_PERM'	=> ($this_page[0] == 'portal') ? true : false,
 ));
-?>

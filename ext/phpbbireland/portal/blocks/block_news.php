@@ -54,8 +54,6 @@ $has_attachments = $display_notice = false;
 $attach_array = $attach_list = $post_list = $posts = $attachments = $extensions = array();
 $time_now = time();
 
-define('POST_NEWS', 4);
-define('POST_NEWS_GLOBAL', 5);
 
 switch ($k_news_type)
 {
@@ -222,7 +220,7 @@ if ($bbcode_bitfield !== '')
 	$bbcode = new bbcode(base64_encode($bbcode_bitfield));
 }
 
-//$image_path = $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/portal/';
+$image_path = $mod_root_path . 'styles/common/theme/images/';
 
 for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 {
@@ -288,14 +286,15 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 		'U_REPLY'		=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=reply&amp;t=' . $row['topic_id'] . '&amp;f=' . $row['forum_id']),
 		'U_PRINT'		=> ($auth->acl_get('f_print', $row['forum_id'])) ? append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=" . $row['forum_id'] . "&amp;t=" . $row['topic_id'] . "&amp;view=print") : '',
 
-		//'REPLY_IMG'		=> $image_path . 'post_comment.png',
+		'REPLY_IMG'		=> $image_path . 'post_comment.png',
 		'PRINT_IMG' 	=> $image_path . 'post_print.png',
 		'VIEW_IMG'		=> $image_path . 'post_view.png',
+		'BTP_IMG'       => $image_path . 'icon_back_top.png',
 
 		'S_TOPIC_TYPE'	=> $row['topic_type'],
 		'S_NOT_LAST'	=> ($i < sizeof($posts) - 1) ? true : false,
 		'S_ROW_COUNT'	=> $i,
-		//'S_POST_UNAPPROVED'	=> ($row['post_approved']) ? false : true,
+
 		'S_DISPLAY_NOTICE'	=> $display_notice,
 
 		'S_HAS_ATTACHMENTS'	=> (!empty($attachments[$row['post_id']])) ? true : false,
@@ -325,7 +324,6 @@ $message = '';
 $template->assign_vars(array(
 	'S_NEWS_COUNT' 			=> sizeof($posts),
 	'S_NEWS_COUNT_RETURNED' => sizeof($post_list),
-	'T_IMAGESET_LANG_PATH'	=> "{$phpbb_root_path}styles/" . $user->theme['imageset_path'] . '/imageset/' . $user->data['user_lang'],
 
 	'NEWS_ADVANCED_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));

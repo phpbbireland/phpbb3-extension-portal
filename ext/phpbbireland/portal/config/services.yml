@@ -1,17 +1,11 @@
 imports:
-#    - { resource: controller.yml }
-#    - { resource: blocks.yml }
     - { resource: tables.yml }
 
 services:
-    phpbbireland.portal.main:
+    phpbbireland.portal.controller:
         class: phpbbireland\portal\controller\main
         arguments:
-            - @auth
-            - @cache
             - @config
-            - @dbal.conn
-            - @request
             - @template
             - @user
             - @controller.helper
@@ -32,7 +26,15 @@ services:
             - @controller.helper
             - %core.root_path%
             - %core.php_ext%
-
+    phpbbireland.portal.listener:
+        class: phpbbireland\portal\event\main_listener
+        arguments:
+            - @controller.helper
+            - @template
+            - @user
+            - %core.php_ext%
+        tags:
+            - { name: event.listener }
     phpbbireland.core.helpers.portal:
         class: phpbbireland\core\helpers\portal
 
@@ -55,12 +57,3 @@ services:
         tags:
             - { name: service_collection, tag: phpbbireland.blocks }
 
-    phpbbireland.portal.listner:
-        class: phpbbireland\portal\event\main_listener
-        arguments:
-             - @controller.helper
-             - @template
-             - @user
-             - %core.php_ext%
-        tags:
-            - { name: event.listener }

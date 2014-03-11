@@ -51,27 +51,28 @@ class portal
 		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
 
-		global $phpbb_root_path;
+		if (!class_exists('bbcode'))
+		{
+			include($this->root_path . 'includes/bbcode.' . $this->php_ext);
+		}
+		if (!function_exists('get_user_rank'))
+		{
+			include($this->root_path . 'includes/functions_display.' . $this->php_ext);
+		}
+
+		$this->user->add_lang_ext('phpbbireland/portal', 'kiss_common');
 		$this->page_title = $this->user->lang['PORTAL'];
-
 		$this->cache_setup();
-
-		//include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_portal_blocks.' . $this->php_ext);
-
 	}
 
 	public function cache_setup()
 	{
-		global $user, $auth, $config, $template, $user, $path_helper, $phpbb_root_path, $php_ext, $phpbb_container;
+		global $user, $auth, $config, $template, $user, $path_helper, $phpbb_root_path, $phpbb_container;
 		global $k_config, $k_menus, $k_blocks, $k_pages, $k_groups, $k_resources;
-
-if(!$php_ext)
-	$php_ext = 'php';
-
 
 		if(!$k_config)
 		{
-			include($phpbb_root_path . 'ext/phpbbireland/portal/includes/functions.' . $php_ext);
+			include($phpbb_root_path . 'ext/phpbbireland/portal/includes/functions.' . $this->php_ext);
 			$k_config = obtain_k_config();
 			$k_menus = obtain_k_menus();
 			$k_blocks = obtain_block_data();
@@ -79,21 +80,6 @@ if(!$php_ext)
 			$k_groups = obtain_k_groups();
 			$k_resources = obtain_k_resources();
 		}
-		/*
-		$this->cache_k_blocks();
-		$this->cache_k_pages();
-		$this->cache_k_config();
-		$this->cache_k_menus();
-		$this->cache_k_blocks();
-		$this->cache_k_resources();
-
-		$k_pages		= $cache->get('k_pages');
-		$k_config		= $cache->get('k_config');
-		$k_blocks		= $cache->get('k_blocks');
-		$k_menus		= $cache->get('k_menus');
-		$k_blocks		= $cache->get('k_blocks');
-		$k_resources	= $cache->get('k_resources');
-		*/
 	}
 
 	public function get_page_title()
@@ -101,6 +87,16 @@ if(!$php_ext)
 		return $this->page_title;
 	}
 
+
+
+	public function base()
+	{
+		// what do we do here???
+		return;
+	}
+
+
+/*
 	public function set_start($start)
 	{
 		$this->start = (int) $start;
@@ -108,212 +104,391 @@ if(!$php_ext)
 		return $this;
 	}
 
-
 	public function set_portal($portal)
 	{
 		$this->portal = (int) $portal;
 
 		return $this;
 	}
-/*
-	public function get_page()
-	{
-		;
-	}
 */
-	public function handle()
+
+
+
+	/*
+	public function block_modules()
 	{
+		global $phpbb_root_path, $config, $phpEx, $table_prefix;
+		global $db, $user, $avatar_img, $template, $auth;
+		global $k_config, $k_groups, $k_blocks;
 
-		$this->get_page();
+		//var_dump('in: portal.php : block_modules()');
 
-		$ranks = $this->cache->obtain_ranks();
-		$icons = $this->cache->obtain_icons();
-		return;
-	}
+		$block_cache_time  = $k_config['k_block_cache_time_default'];
+		$blocks_width 	   = $config['k_blocks_width'];
+		$blocks_enabled    = $config['k_blocks_enabled'];
+		$use_block_cookies = (isset($k_config['use_block_cookies'])) ? $k_config['use_block_cookies'] : 0;
 
-
-
-
-
-/*****
-	public function set_k_config($config_name, $config_value, $is_dynamic = false)
-	{
-		global $db, $cache, $table_prefix;
-
-		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
-
-		$k_config = $cache->get('k_config');
-
-		$sql = 'UPDATE ' . K_VARIABLES_TABLE . "
-			SET config_value = '" . $db->sql_escape($config_value) . "'
-			WHERE config_name = '" . $db->sql_escape($config_name) . "'";
-		$result = $db->sql_query($sql);
-
-		if (!$result)
-		//if (!$db->sql_affectedrows() && !isset($k_config[$config_name]))
+		if (!$blocks_enabled)
 		{
-			$sql = 'INSERT INTO ' . K_VARIABLES_TABLE . ' ' . $db->sql_build_array('INSERT', array(
-				'config_name'   => $config_name,
-				'config_value'  => $config_value,
-				'is_dynamic'    => ($is_dynamic) ? 1 : 0));
-			$db->sql_query($sql);
+			$template->assign_vars(array(
+				'PORTAL_MESSAGE' => $user->lang('BLOCKS_DISABLED'),
+			));
 		}
 
-		$k_config[$config_name] = $config_value;
+		$all = '';
+		$show_center = $show_left = $show_right = false;
+		$LB = $CB = $RB = array();
+		$active_blocks = array();
 
-		if (!$is_dynamic)
+		// if styles use large block images change path to images //
+		$block_image_path = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/block/';
+		$big_image_path = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/large/';
+		$my_root_path = $phpbb_root_path . 'ext/phpbbireland/portal/';
+
+		$this_page = explode(".", $user->page['page']);
+		$user_id = $user->data['user_id'];
+
+		include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.' . $this->php_ext);
+
+		// Grab data for this user //
+		$sql = "SELECT group_id, user_type, user_style, user_avatar, user_avatar_type, username, user_left_blocks, user_center_blocks, user_right_blocks
+			FROM " . USERS_TABLE . "
+			WHERE user_id = $user_id";
+
+		if ($result = $db->sql_query($sql))
 		{
-			$cache->destroy('k_config');
-			$cache->destroy('config');
-		}
-	}
+			$row = $db->sql_fetchrow($result);
 
-	public function cache_k_config()
-	{
-		global $db, $cache, $table_prefix, $k_config;
+			$user_avatar = $row['user_avatar'];
+			$user_style = $row['user_style'];
+			$usertype = $row['user_type'];
+			$groupid = $row['group_id'];
 
-		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
+			$left = $row['user_left_blocks'];
+			$LB = explode(',', $left);
+			$center = $row['user_center_blocks'];
+			$CB = explode(',', $center);
+			$right = $row['user_right_blocks'];
+			$RB = explode(',', $right);
 
-		if (($k_config = $cache->get('k_config')) !== false)
-		{
-			$sql = 'SELECT config_name, config_value
-				FROM ' . K_VARIABLES_TABLE . '
-				WHERE is_dynamic = 1';
-			$result = $db->sql_query($sql);
+			$LCR = array_merge((array)$LB, (array)$CB, (array)$RB);
+			$left .= ',';
+			$center .= ',';
 
-			while ($row = $db->sql_fetchrow($result))
-			{
-				$k_config[$row['config_name']] = $row['config_value'];
-			}
-			$db->sql_freeresult($result);
+			$all .= $left .= $center .= $right;
 		}
 		else
 		{
-			$k_config = $cached_k_config = array();
-
-			$sql = 'SELECT config_name, config_value, is_dynamic
-				FROM ' . K_VARIABLES_TABLE;
-			$result = $db->sql_query($sql);
-
-			while ($row = $db->sql_fetchrow($result))
-			{
-				if (!$row['is_dynamic'])
-				{
-					$cached_k_config[$row['config_name']] = $row['config_value'];
-				}
-				else
-				$k_config[$row['config_name']] = $row['config_value'];
-			}
-			$db->sql_freeresult($result);
-
-			$cache->put('k_config', $cached_k_config);
+			trigger_error($user->lang['ERROR_USER_TABLE']);
 		}
-	}
 
-	public function cache_k_pages()
-	{
-		global $db, $cache, $table_prefix, $k_pages;
-
-		if (!$k_pages)
+		// Process block positions for members only //
+		if ($row['group_id'] != ANONYMOUS)
 		{
-			$sql = 'SELECT page_id, page_name
-				FROM ' . K_PAGES_TABLE;
-			$result = $db->sql_query($sql);
-
-			while ($row = $db->sql_fetchrow($result))
+			if (isset($_COOKIE[$config['cookie_name'] . '_sgp_left']) || isset($_COOKIE[$config['cookie_name'] . '_sgp_center']) || isset($_COOKIE[$config['cookie_name'] . '_sgp_right']) && $use_block_cookies)
 			{
-				$k_pages[$row['page_id']]['page_id'] = $row['page_id'];
-				$k_pages[$row['page_id']]['page_name'] = $row['page_name'];
-			}
-			$db->sql_freeresult($result);
-			$cache->put('k_pages', $k_pages);
-		}
-	}
+				$left = request_var($config['cookie_name'] . '_sgp_left', '', false, true);
+				$left = str_replace("left[]=", "", $left);
+				$left = str_replace("&amp;", ',', $left);
+				$LBA = explode(',', $left);
 
-	public function cache_k_blocks()
-	{
-		global $db, $cache, $table_prefix, $k_blocks;
+				$center = request_var($config['cookie_name'] . '_sgp_center', '', false, true);
+				$center = str_replace("center[]=", "", $center);
+				$center = str_replace("&amp;", ',', $center);
+				$CBA = explode(',', $center);
 
-		if (!$k_blocks)
-		{
-			$sql = 'SELECT *
-				FROM ' . K_BLOCKS_TABLE . '
-				WHERE active = 1 ORDER BY ndx ASC';
-			$result = $db->sql_query($sql);
+				$right = request_var($config['cookie_name'] . '_sgp_right', '', false, true);
+				$right = str_replace("right[]=", "", $right);
+				$right = str_replace("&amp;", ',', $right);
+				$RBA = explode(',', $right);
 
-			while ($row = $db->sql_fetchrow($result))
-			{
-				if (!$row['is_static'])
+				// store cookie data (block positions in user table)
+				if (!empty($left))
 				{
-					$k_blocks[$row['id']]['id']				= $row['id'];
-					$k_blocks[$row['id']]['ndx']			= $row['ndx'];
-					$k_blocks[$row['id']]['title']			= $row['title'];
-					$k_blocks[$row['id']]['position']		= $row['position'];
-					$k_blocks[$row['id']]['type']			= $row['type'];
-					$k_blocks[$row['id']]['view_groups']	= $row['view_groups'];
-					$k_blocks[$row['id']]['scroll']			= $row['scroll'];
-					$k_blocks[$row['id']]['block_height']	= $row['block_height'];
-					$k_blocks[$row['id']]['html_file_name']	= $row['html_file_name'];
-					$k_blocks[$row['id']]['html_file_name']	= $row['html_file_name'];
-					$k_blocks[$row['id']]['img_file_name']	= $row['img_file_name'];
-					$k_blocks[$row['id']]['block_cache_time']	= $row['block_cache_time'];
+					$sql = 'UPDATE ' . USERS_TABLE . '
+						SET user_left_blocks = ' . "'" . $db->sql_escape($left) . "'" . ', user_center_blocks = ' . "'" . $db->sql_escape($center) . "'" . ', user_right_blocks = ' . "'" . $db->sql_escape($right) . "'" . '
+						WHERE user_id = ' . (int)$user->data['user_id'];
+					$db->sql_query($sql);
+					// set switch clear cookies now that we have them stored (we use javascript)//
+					$template->assign_vars(array(
+						'S_CLEAR_CACHE' => true
+					));
 				}
 			}
-			$db->sql_freeresult($result);
-			$cache->put('k_blocks', $k_blocks);
-		}
-	}
 
-	public function cache_k_menus()
-	{
-		global $db, $cache, $table_prefix, $k_menus;
-
-		if (!$k_menus)
-		{
-			$sql = "SELECT * FROM ". K_MENUS_TABLE . "
-				ORDER BY ndx ASC ";
-			$result = $db->sql_query($sql);
-
-			while ($row = $db->sql_fetchrow($result))
+			if (empty($row['user_left_blocks']))
 			{
-				$k_menus[$row['m_id']]['m_id'] = $row['m_id'];
-				$k_menus[$row['m_id']]['ndx'] = $row['ndx'];
-				$k_menus[$row['m_id']]['menu_type'] = $row['menu_type'];
-				$k_menus[$row['m_id']]['name'] = $row['name'];
-				$k_menus[$row['m_id']]['link_to'] = $row['link_to'];
-				$k_menus[$row['m_id']]['extern'] = $row['extern'];
-				$k_menus[$row['m_id']]['menu_icon'] = $row['menu_icon'];
-				$k_menus[$row['m_id']]['append_sid'] = $row['append_sid'];
-				$k_menus[$row['m_id']]['append_uid'] = $row['append_uid'];
-				$k_menus[$row['m_id']]['view_all'] = $row['view_all'];
-				$k_menus[$row['m_id']]['view_groups'] = $row['view_groups'];
-				$k_menus[$row['m_id']]['soft_hr'] = $row['soft_hr'];
-				$k_menus[$row['m_id']]['sub_heading'] = $row['sub_heading'];
+				$sql = "SELECT *
+					FROM " . K_BLOCKS_TABLE . "
+					WHERE active = 1
+						AND (view_pages <> '0')
+						ORDER BY ndx ASC";
 			}
-			$db->sql_freeresult($result);
-			$cache->put('k_menus', $k_menus);
-		}
-	}
-
-	public function cache_k_resources()
-	{
-		global $db, $cache, $table_prefix, $k_resources;
-
-		if (!$k_resources)
-		{
-			$sql = 'SELECT *
-				FROM ' . K_RESOURCES_TABLE  . '
-				ORDER BY word ASC';
-			$result = $db->sql_query($sql);
-
-			while ($row = $db->sql_fetchrow($result))
+			else
 			{
-				$k_resources[] = $row['word'];
-
+				$sql = "SELECT *
+					FROM " . K_BLOCKS_TABLE . "
+					WHERE active = 1
+						AND (view_pages <> '0')
+						AND " . $db->sql_in_set('id', $LCR) . "
+					ORDER BY find_in_set(id,'" . $all . "')";
 			}
-			$db->sql_freeresult($result);
-			$cache->put('k_resources', $k_resources);
 		}
+		else
+		{
+			$sql = "SELECT *
+				FROM " . K_BLOCKS_TABLE . "
+				WHERE active = 1
+						AND (view_pages <> '0')
+						ORDER BY ndx ASC";
+		}
+
+		$result = $db->sql_query($sql, $block_cache_time);
+
+		while ($row = $db->sql_fetchrow($result))
+		{
+			$active_blocks[] = $row;
+			$arr[$row['id']] = explode(','  , $row['view_pages']);
+		}
+
+		$this_page_name = $this_page[1];
+		$this_page_name = str_replace('php/', '', $this_page_name);
+		$page_id = get_page_id($this_page_name);
+
+		if ($page_id == 0)
+		{
+			$page_id = $this_page[0];
+			$page_id = get_page_id($this_page[0]);
+		}
+
+		foreach ($active_blocks as $active_block)
+		{
+			$filename = substr($active_block['html_file_name'], 0, strpos($active_block['html_file_name'], '.'));
+			if (file_exists($phpbb_root_path . 'ext/phpbbireland/portal/blocks/' . $filename . '.' . $this->php_ext))
+			{
+				if (in_array($page_id, $arr[$active_block['id']]))
+				{
+					include($phpbb_root_path . 'ext/phpbbireland/portal/blocks/' . $filename . '.' . $this->php_ext);
+				}
+			}
+		}
+		$db->sql_freeresult($result);
+
+		if (!function_exists('group_memberships'))
+		{
+			include($phpbb_root_path . 'includes/functions_user.'. $this->php_ext);
+		}
+		$memberships = array();
+		$memberships = group_memberships(false, $user->data['user_id'], false);
+
+		// Main processing of block data here //
+		if ($active_blocks)
+		{
+			$L = $R = $C = 0;
+			foreach ($active_blocks as $row)
+			{
+				$block_position = $row['position'];
+
+				// override default position with user designated position //
+				if (in_array($row['id'], $LB))
+				{
+					$block_position		= 'L';
+				} else if (in_array($row['id'], $CB))
+				{
+					$block_position		= 'C';
+				} else if (in_array($row['id'], $RB))
+				{
+					$block_position		= 'R';
+				}
+
+				$block_id           = $row['id'];
+				$block_ndx          = $row['ndx'];
+				$block_title        = $row['title'];
+				$block_active       = $row['active'];
+				$block_type         = $row['type'];
+				$block_view_groups  = $row['view_groups'];
+				$block_view_all     = $row['view_all'];
+				$block_scroll       = $row['scroll'];
+				$block_height       = $row['block_height'];
+				$html_file_name     = $row['html_file_name'];
+				$img_file_name      = $row['img_file_name'];
+				$view_pages         = $row['view_pages'];
+
+				$arr = explode(',', $view_pages);
+				$grps = explode(",", $block_view_groups);
+
+				$process_block = false;
+				$block_title = get_menu_lang_name($row['title']);
+
+				// process blocks for different groups //
+				if ($memberships)
+				{
+					foreach ($memberships as $member)
+					{
+						// First we check to see if the view_all over-ride is set (saves having to enter all groups) //
+						if ($block_view_all)
+						{
+							$process_block = true;
+						}
+						else
+						{
+							for ($j = 0; $j < $jcount = count($grps); $j++) // now we loop for all group the user is in //
+							{
+								if ($grps[$j] == $member['group_id'])
+								{
+									$process_block = true;
+								}
+							}
+						}
+					}
+
+				}
+				$this_page_name = $this_page[1];
+				$this_page_name = str_replace('php/', '', $this_page_name);
+				$page_id = get_page_id($this_page_name);
+
+				if ($page_id == 0)
+				{
+					$page_id = $this_page[0];
+					$page_id = get_page_id($this_page[0]);
+				}
+
+				if ($process_block && in_array($page_id, $arr))
+				{
+					//var_dump($html_file_name);
+					switch ($block_position)
+					{
+						case 'L':
+								$left_block_ary[$L]    = $html_file_name;
+								$left_block_id[$L]     = $block_id;
+								$left_block_ndx[$L]    = $block_ndx;
+								$left_block_title[$L]  = $block_title;
+								$left_block_img[$L]    = $img_file_name;
+								$left_block_scroll[$L] = $block_scroll;
+								$left_block_height[$L] = $block_height;
+								$L++;
+								$show_left = true;//show_blocks($this_page_name, $block_position);
+						break;
+						case 'C':
+								$center_block_ary[$C]    = $html_file_name;
+								$center_block_id[$C]     = $block_id;
+								$center_block_ndx[$C]    = $block_ndx;
+								$center_block_title[$C]  = $block_title;
+								$center_block_img[$C]    = $img_file_name;
+								$center_block_scroll[$C] = $block_scroll;
+								$center_block_height[$C] = $block_height;
+								$C++;
+								$show_center = true;//show_blocks($this_page_name, $block_position);
+						break;
+						case 'R':
+								$right_block_ary[$R]    = $html_file_name;
+								$right_block_id[$R]     = $block_id;
+								$right_block_ndx[$R]    = $block_ndx;
+								$right_block_title[$R]  = $block_title;
+								$right_block_img[$R]    = $img_file_name;
+								$right_block_scroll[$R] = $block_scroll;
+								$right_block_height[$R] = $block_height;
+								$R++;
+								$show_right = true;//show_blocks($this_page_name, $block_position);
+						break;
+						default:
+					}
+				}
+			}
+		}
+
+		if (isset($left_block_ary) && $show_left)
+		{
+			foreach ($left_block_ary as $block => $value)
+			{
+				$template->assign_block_vars('left_block_files', array(
+					'LEFT_BLOCKS'           => $this->build_block_modules($value),
+					'LEFT_BLOCK_ID'         => 'L_' .$left_block_id[$block],
+					'LEFT_BLOCK_TITLE'      => $left_block_title[$block],
+					'LEFT_BLOCK_SCROLL'     => $left_block_scroll[$block],
+					'LEFT_BLOCK_HEIGHT'     => $left_block_height[$block],
+					'LEFT_BLOCK_IMG'        => ($left_block_img[$block]) ? $block_image_path . $left_block_img[$block] : $block_image_path . 'none.gif',
+					'LEFT_BLOCK_IMG_2'      => (file_exists($big_image_path . $left_block_img[$block])) ? $big_image_path  . $left_block_img[$block] : $big_image_path . 'none.png',
+					'S_CONTENT_FLOW_BEGIN'  => ($user->lang['DIRECTION'] == 'ltr') ? 'left' : 'right',
+					'S_CONTENT_FLOW_END'    => ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
+				));
+			}
+		}
+
+		if (isset($right_block_ary) && $show_right)
+		{
+			foreach ($right_block_ary as $block => $value)
+			{
+				$template->assign_block_vars('right_block_files', array(
+					'RIGHT_BLOCKS'          => $this->build_block_modules($value),
+					'RIGHT_BLOCK_ID'        => 'R_' .$right_block_id[$block],
+					'RIGHT_BLOCK_TITLE'     => $right_block_title[$block],
+					'RIGHT_BLOCK_SCROLL'    => $right_block_scroll[$block],
+					'RIGHT_BLOCK_HEIGHT'    => $right_block_height[$block],
+					'RIGHT_BLOCK_IMG'       => ($right_block_img[$block]) ? $block_image_path . $right_block_img[$block] : $block_image_path . 'none.gif',
+					'RIGHT_BLOCK_IMG_2'     => (file_exists($big_image_path . $right_block_img[$block])) ? $big_image_path  . $right_block_img[$block] : $big_image_path . 'none.png',
+					'S_CONTENT_FLOW_BEGIN'  => ($user->lang['DIRECTION'] == 'ltr') ? 'left' : 'right',
+					'S_CONTENT_FLOW_END'    => ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
+				));
+			}
+		}
+
+		if (isset($center_block_ary) && $show_center)
+		{
+			foreach ($center_block_ary as $block => $value)
+			{
+				$template->assign_block_vars('center_block_files', array(
+					'CENTER_BLOCKS'        => $this->build_block_modules($value),
+					'CENTER_BLOCK_ID'      => 'C_' .$center_block_id[$block],
+					'CENTER_BLOCK_TITLE'   => $center_block_title[$block],
+					'CENTER_BLOCK_SCROLL'  => $center_block_scroll[$block],
+					'CENTER_BLOCK_HEIGHT'  => $center_block_height[$block],
+					'CENTER_BLOCK_IMG'     => ($center_block_img[$block]) ? $block_image_path . $center_block_img[$block] : $block_image_path . 'none.gif',
+					'CENTER_BLOCK_IMG_2'   => (file_exists($big_image_path . $center_block_img[$block])) ? $big_image_path  . $center_block_img[$block] : $big_image_path . 'none.png',
+					'S_CONTENT_FLOW_BEGIN' => ($user->lang['DIRECTION'] == 'ltr') ? 'left' : 'right',
+					'S_CONTENT_FLOW_END'   => ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
+				));
+			}
+		}
+
+		$template->assign_vars(array(
+			'T_THEME_PATH'            => $phpbb_root_path . 'ext/phpbbireland/portal/style/' . rawurlencode($user->style['style_path']) . '/theme/images/',
+			'AVATAR'				  => get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height']),
+			'BLOCK_WIDTH'			  => $blocks_width . 'px',
+			'PORTAL_ACTIVE'			  => $config['portal_enabled'],
+			'PORTAL_BUILD'			  => $config['portal_build'],
+			'PORTAL_VERSION'		  => $config['portal_version'],
+			'READ_ARTICLE_IMG'		  => $user->img('btn_read_article', 'READ_ARTICLE'),
+			'POST_COMMENTS_IMG'		  => $user->img('btn_post_comments', 'POST_COMMENTS'),
+			'VIEW_COMMENTS_IMG'		  => $user->img('btn_view_comments', 'VIEW_COMMENTS'),
+			'SITE_NAME'				  => $config['sitename'],
+			'S_USER_LOGGED_IN'		  => ($user->data['user_id'] != ANONYMOUS) ? true : false,
+			'S_SHOW_LEFT_BLOCKS'	  => $show_left,
+			'S_SHOW_RIGHT_BLOCKS'	  => $show_right,
+			'S_BLOCKS_ENABLED'        => $blocks_enabled,
+			'S_K_FOOTER_IMAGES_ALLOW' => ($k_config['k_footer_images_allow']) ? true : false,
+			'S_CONTENT_FLOW_BEGIN'    => ($user->lang['DIRECTION'] == 'ltr') ? 'left' : 'right',
+			'S_CONTENT_FLOW_END'      => ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
+			'USER_NAME'               => $user->data['username'],
+			'USERNAME_FULL'           => get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']),
+			'U_INDEX'                 => append_sid("{$phpbb_root_path}index.$this->php_ext"),
+			///'U_PORTAL'                => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
+			//'U_PORTAL'                => append_sid("{$phpbb_root_path}portal"),
+			//'U_PORTAL_ARRANGE'        => append_sid("{$phpbb_root_path}portal.$this->php_ext", "arrange=1"),
+			'U_STAFF'                 => append_sid("{$phpbb_root_path}memberlist.$this->php_ext", 'mode=leaders'),
+			'U_SEARCH_BOOKMARKS'      => append_sid("{$phpbb_root_path}ucp.$this->php_ext", 'i=main&mode=bookmarks'),
+		));
 	}
-*****/
+
+	public function build_block_modules($block_file)
+	{
+		global $template;
+		// var_dump('Building: ' . $block_file);
+		// Set template filename
+		$this->template->set_filenames(array('block' => 'blocks/' . $block_file));
+
+		// Return templated data
+		return $this->template->assign_display('block', true);
+	}
+	*/
 }

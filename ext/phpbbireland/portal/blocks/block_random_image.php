@@ -28,7 +28,7 @@ $randomimage = '';
 $imglist = "";
 //$ilist = static array();
 
-$rand_folder = $phpbb_root_path . 'images/random_images';
+$rand_folder = $phpbb_root_path . 'ext/phpbbireland/portal/images/random_images';
 
 foreach ($k_blocks as $blk)
 {

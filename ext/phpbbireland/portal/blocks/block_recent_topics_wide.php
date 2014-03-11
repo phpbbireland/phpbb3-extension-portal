@@ -75,14 +75,13 @@ $valid_forum_ids = array();
 
 $display_this_many = $k_config['k_recent_topics_to_display'];
 $except_forum_id = $k_config['k_recent_topics_search_exclude'];
-$k_recent_search_days = $k_config['k_recent_search_days'];
+$k_recent_search_days = (isset($k_config['k_recent_search_days'])) ? $k_config['k_recent_search_days'] : 7;
 $k_post_types = $k_config['k_post_types'];
 $k_recent_topics_per_forum = $k_config['k_recent_topics_per_forum'];
 
 static $last_forum = 0;
 
 $forum_data = array();
-define('K_BLOCKS_TABLE',	$table_prefix . 'k_blocks');
 
 $sql = "SELECT html_file_name, scroll, position
 	FROM " . K_BLOCKS_TABLE . "
@@ -233,14 +232,14 @@ if ($scroll)
 }
 
 // get the little image if it exists else we will use the default (backward compatibility is a must) ;)
-if (file_exists($phpbb_root_path . "{$web_path}styles/" . $user->theme['theme_path'] . '/theme/images/next_line.gif'))
-{
-	$next_img = '<img src="' . $phpbb_root_path . "{$web_path}styles/" . $user->theme['theme_path'] . '/theme/images/next_line.gif" height="9" width="11" alt="" />';
-}
-else
-{
+///if (file_exists($phpbb_root_path . "{$web_path}styles/" . $user->theme['theme_path'] . '/theme/images/next_line.gif'))
+///{
+///	$next_img = '<img src="' . $phpbb_root_path . "{$web_path}styles/" . $user->theme['theme_path'] . '/theme/images/next_line.gif" ///height="9" width="11" alt="" />';
+///}
+///else
+///{
 	$next_img = '<img src="' . $phpbb_root_path . 'images/next_line.gif" height="9" width="11" alt="" />';
-}
+///}
 
 $tn = time();
 $od = 86400;
@@ -309,8 +308,8 @@ for ($i = 0; $i < $display_this_many; $i++)
 		'S_UNIQUE_W'		=> $unique,
 		'S_TYPE_W'			=> $row[$i]['topic_type'],
 		'TITLE_W'			=> censor_text($my_title),
-		'TOOLTIP_W'			=> bbcode_strip($row[$i]['post_text']),
-		'TOOLTIP2_W'		=> bbcode_strip($row[$i]['forum_desc']),
+		//'TOOLTIP_W'			=> bbcode_strip($row[$i]['post_text']),
+		//'TOOLTIP2_W'		=> bbcode_strip($row[$i]['forum_desc']),
 		'S_PC'              => $thisd,
 		'SS' => $tn - $pd,
 	));
