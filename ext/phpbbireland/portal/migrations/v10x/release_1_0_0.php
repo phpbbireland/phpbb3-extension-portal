@@ -208,9 +208,6 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 					'PRIMARY_KEY'	=> 'page_id',
 				),
 			),
-		);
-
-		return array(
 			'add_columns' => array(
 				$this->table_pefix . 'users' => array(
 					array('user_left_blocks', '2'),
