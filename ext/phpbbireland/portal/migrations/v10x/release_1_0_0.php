@@ -1550,4 +1550,52 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 
 		);
 	}
+
+	public function revert_schema()
+	{
+		return array(
+			'drop_tables'	=> array(
+				$this->table_prefix . 'k_blocks',
+				$this->table_prefix . 'k_menus',
+				$this->table_prefix . 'k_config',
+				$this->table_prefix . 'k_vars',
+				$this->table_prefix . 'k_resources',
+				$this->table_prefix . 'k_pages',
+			),
+			'drop_columns' => array(
+				$this->table_pefix . 'users' => array(
+					array('user_left_blocks', '2'),
+					array('user_center_blocks', '2'),
+					array('user_right_blocks', '2'),
+				),
+			),
+		);
+	}
+
+	/*
+	public function seed_database()
+	{
+		include('\phpbbireland\portal\sql_data.' . $phpEx);
+
+		return array(
+			'add_columns' => array(
+				array($k_blocks_table, $k_blocks_array),
+				array($k_blocks_config_table, $k_blocks_config_array),
+				array($k_blocks_config_vars_table, $k_blocks_config_vars_array),
+				array($k_menus_table, $k_menus_array),
+				array($k_pages_table, $k_pages_array),
+				array($k_resources_table, $k_resources_array),
+			),
+		);
+
+
+		global $db;
+		$db_seed_file = '\phpbbireland\portal\310a3.sql';
+		$handle = fopen($db_seed_file, "rb");
+		$sql = fread($handle, filesize($db_seed_file));
+		fclose($handle);
+		var_dump($sql);
+		$result = $db->sql_query($sql);
+	}
+	*/
 }
