@@ -1,32 +1,28 @@
-CREATE TABLE IF NOT EXISTS `phpbb_k_blocks` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `ndx` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `title` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `position` char(1) COLLATE utf8_bin NOT NULL DEFAULT 'L',
-  `type` char(1) COLLATE utf8_bin NOT NULL DEFAULT 'H',
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `html_file_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `var_file_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT 'none.gif',
-  `img_file_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT 'none.gif',
-  `view_all` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `view_groups` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `view_pages` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `groups` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `scroll` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `block_height` smallint(4) unsigned NOT NULL DEFAULT '0',
-  `has_vars` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_static` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `minimod_based` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `mod_block_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `block_cache_time` mediumint(8) unsigned NOT NULL DEFAULT '600',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin ;
+CREATE TABLE IF NOT EXISTS phpbb_k_blocks (
+  id mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  ndx mediumint(8) unsigned NOT NULL DEFAULT '0',
+  title varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '',
+  position char(1) COLLATE utf8_bin NOT NULL DEFAULT 'L',
+  type char(1) COLLATE utf8_bin NOT NULL DEFAULT 'H',
+  active tinyint(1) unsigned NOT NULL DEFAULT '1',
+  html_file_name varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  var_file_name varchar(255) COLLATE utf8_bin NOT NULL DEFAULT 'none.gif',
+  img_file_name varchar(255) COLLATE utf8_bin NOT NULL DEFAULT 'none.gif',
+  view_all tinyint(1) unsigned NOT NULL DEFAULT '1',
+  view_groups varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
+  view_pages varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
+  groups mediumint(8) unsigned NOT NULL DEFAULT '0',
+  scroll tinyint(1) unsigned NOT NULL DEFAULT '0',
+  block_height smallint(4) unsigned NOT NULL DEFAULT '0',
+  has_vars tinyint(1) unsigned NOT NULL DEFAULT '0',
+  is_static tinyint(1) unsigned NOT NULL DEFAULT '0',
+  minimod_based tinyint(1) unsigned NOT NULL DEFAULT '0',
+  mod_block_id mediumint(8) unsigned NOT NULL DEFAULT '0',
+  block_cache_time mediumint(8) unsigned NOT NULL DEFAULT '600',
+  PRIMARY KEY (id)
+);
 
---
--- Dumping data for table `phpbb_k_blocks`
---
-
-INSERT INTO `phpbb_k_blocks` (`id`, `ndx`, `title`, `position`, `type`, `active`, `html_file_name`, `var_file_name`, `img_file_name`, `view_all`, `view_groups`, `view_pages`, `groups`, `scroll`, `block_height`, `has_vars`, `is_static`, `minimod_based`, `mod_block_id`, `block_cache_time`) VALUES
+INSERT INTO phpbb_k_blocks (id, ndx, title, position, type, active, html_file_name, var_file_name, img_file_name, view_all, view_groups, view_pages, groups, scroll, block_height, has_vars, is_static, minimod_based, mod_block_id, block_cache_time) VALUES
 (1, 1, 'Site Navigator', 'L', 'B', 1, 'block_menus_nav.html', '', 'menu.png', 1, '0', '1,2,3,4,5,6,7,8,9,10', 0, 0, 0, 0, 0, 0, 0, 600),
 (2, 2, 'Sub_Menu', 'L', 'B', 1, 'block_menus_sub.html', '', 'sub_menu.png', 1, '0', '1,2,3,4,5,6,7,8,9', 0, 0, 0, 0, 0, 0, 0, 600),
 (3, 4, 'Links_Menu', 'L', 'B', 1, 'block_menus_links.html', '', 'sub_menu.png', 1, '0', '1,2,3,4,5,6,7,8,9', 0, 0, 0, 0, 0, 0, 0, 600),
@@ -55,33 +51,33 @@ INSERT INTO `phpbb_k_blocks` (`id`, `ndx`, `title`, `position`, `type`, `active`
 (26, 10, 'Donations Received', 'C', 'B', 1, 'block_donations.html', 'k_donations_vars.html', 'stats.png', 1, '0', '2', 0, 0, 0, 1, 0, 0, 0, 600),
 (27, 7, 'Top Downloads', 'R', 'B', 1, 'block_top_downloads.html', 'k_top_downloads_vars.html', 'top_downoads.png', 1, '0', '2', 0, 0, 0, 1, 0, 0, 0, 300);
 
-CREATE TABLE IF NOT EXISTS `phpbb_k_config` (
-  `id` smallint(4) unsigned NOT NULL AUTO_INCREMENT,
-  `use_external_files` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `update_files` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `layout_default` tinyint(1) unsigned NOT NULL DEFAULT '2',
-  `portal_config` varchar(10) COLLATE utf8_bin NOT NULL DEFAULT 'Site',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+CREATE TABLE IF NOT EXISTS phpbb_k_config (
+  id smallint(4) unsigned NOT NULL AUTO_INCREMENT,
+  use_external_files tinyint(1) unsigned NOT NULL DEFAULT '0',
+  update_files tinyint(1) unsigned NOT NULL DEFAULT '0',
+  layout_default tinyint(1) unsigned NOT NULL DEFAULT '2',
+  portal_config varchar(10) COLLATE utf8_bin NOT NULL DEFAULT 'Site',
+  PRIMARY KEY (id)
+);
 
-CREATE TABLE IF NOT EXISTS `phpbb_k_menus` (
-  `m_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `ndx` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `menu_type` smallint(4) unsigned NOT NULL DEFAULT '0',
-  `name` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `link_to` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `extern` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `menu_icon` varchar(30) COLLATE utf8_bin NOT NULL DEFAULT 'none.gif',
-  `append_sid` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `append_uid` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `view_all` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `view_groups` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `soft_hr` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `sub_heading` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`m_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=26 ;
+CREATE TABLE IF NOT EXISTS phpbb_k_menus (
+  m_id mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  ndx mediumint(8) unsigned NOT NULL DEFAULT '0',
+  menu_type smallint(4) unsigned NOT NULL DEFAULT '0',
+  name varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '',
+  link_to varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  extern tinyint(1) unsigned NOT NULL DEFAULT '0',
+  menu_icon varchar(30) COLLATE utf8_bin NOT NULL DEFAULT 'none.gif',
+  append_sid tinyint(1) unsigned NOT NULL DEFAULT '1',
+  append_uid tinyint(1) unsigned NOT NULL DEFAULT '0',
+  view_all tinyint(1) unsigned NOT NULL DEFAULT '1',
+  view_groups varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
+  soft_hr tinyint(1) unsigned NOT NULL DEFAULT '0',
+  sub_heading tinyint(1) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (m_id)
+);
 
-INSERT INTO `phpbb_k_menus` (`m_id`, `ndx`, `menu_type`, `name`, `link_to`, `extern`, `menu_icon`, `append_sid`, `append_uid`, `view_all`, `view_groups`, `soft_hr`, `sub_heading`) VALUES
+INSERT INTO phpbb_k_menus (m_id, ndx, menu_type, name, link_to, extern, menu_icon, append_sid, append_uid, view_all, view_groups, soft_hr, sub_heading) VALUES
 (1, 1, 1, 'Main Menu', '', 0, 'default.png', 0, 0, 1, '', 0, 1),
 (2, 2, 1, 'Portal', 'portal.php', 0, 'portal.png', 0, 0, 1, '', 0, 0),
 (3, 3, 1, 'Forum', 'index.php', 0, 'home2.png', 0, 0, 1, '0', 0, 0),
@@ -108,13 +104,13 @@ INSERT INTO `phpbb_k_menus` (`m_id`, `ndx`, `menu_type`, `name`, `link_to`, `ext
 (24, 3, 2, 'Mark forum as read', 'index.php?hash', 0, 'acp.png', 1, 0, 0, '2', 0, 0),
 (25, 4, 2, 'Members Avatars', 'portal.php?page=avatars', 0, 'pengu.png', 0, 0, 0, '2', 0, 0);
 
-CREATE TABLE IF NOT EXISTS `phpbb_k_pages` (
-  `page_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `page_name` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`page_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=11 ;
+CREATE TABLE IF NOT EXISTS phpbb_k_pages (
+  page_id mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  page_name varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
+  PRIMARY KEY (page_id)
+);
 
-INSERT INTO `phpbb_k_pages` (`page_id`, `page_name`) VALUES
+INSERT INTO phpbb_k_pages (page_id, page_name) VALUES
 (1, 'index'),
 (2, 'portal'),
 (3, 'viewforum'),
@@ -126,30 +122,30 @@ INSERT INTO `phpbb_k_pages` (`page_id`, `page_name`) VALUES
 (9, 'faq'),
 (10, 'posting');
 
-CREATE TABLE IF NOT EXISTS `phpbb_k_resources` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `word` varchar(30) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `type` char(1) COLLATE utf8_bin NOT NULL DEFAULT 'V',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=9 ;
+CREATE TABLE IF NOT EXISTS phpbb_k_resources (
+  id mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  word varchar(30) COLLATE utf8_bin NOT NULL DEFAULT '',
+  type char(1) COLLATE utf8_bin NOT NULL DEFAULT 'V',
+  PRIMARY KEY (id)
+);
 
 
-INSERT INTO `phpbb_k_resources` (`id`, `word`, `type`) VALUES
+INSERT INTO phpbb_k_resources (id, word, type) VALUES
 (1, 'phpBB', 'R'),
 (2, '{PORTAL_VERSION}', 'V'),
 (3, '{PORTAL_BUILD}', 'V'),
 (4, '{VERSION}', 'V'),
 (5, '{SITENAME}', 'V');
 
-CREATE TABLE IF NOT EXISTS `phpbb_k_variables` (
-  `config_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `config_value` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `is_dynamic` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`config_name`),
-  KEY `is_dynamic` (`is_dynamic`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+CREATE TABLE IF NOT EXISTS phpbb_k_variables (
+  config_name varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  config_value varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  is_dynamic tinyint(1) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (config_name),
+  KEY is_dynamic (is_dynamic)
+);
 
-INSERT INTO `phpbb_k_variables` (`config_name`, `config_value`, `is_dynamic`) VALUES
+INSERT INTO phpbb_k_variables (config_name, config_value, is_dynamic) VALUES
 ('base', '\\phpbbireland\\portal\\acp\\menus_module', 0),
 ('k_adm_block', '26', 0),
 ('k_allow_acronyms', '1', 0),
@@ -226,15 +222,15 @@ INSERT INTO `phpbb_k_variables` (`config_name`, `config_value`, `is_dynamic`) VA
 ('rss_feeds_random_limit', '4', 0),
 ('rss_feeds_type', 'fopen', 0);
 
-CREATE TABLE IF NOT EXISTS `phpbb_k_vars` (
-  `config_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `config_value` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `is_dynamic` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`config_name`),
-  KEY `is_dynamic` (`is_dynamic`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+CREATE TABLE IF NOT EXISTS phpbb_k_vars (
+  config_name varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  config_value varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  is_dynamic tinyint(1) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (config_name),
+  KEY is_dynamic (is_dynamic)
+);
 
-INSERT INTO `phpbb_k_vars` (`config_name`, `config_value`, `is_dynamic`) VALUES
+INSERT INTO phpbb_k_vars (config_name, config_value, is_dynamic) VALUES
 ('k_ma_user_has_posted', '0', 0),
 ('k_max_block_avatar_height', '80', 0),
 ('k_max_block_avatar_width', '80', 0),
@@ -278,3 +274,7 @@ INSERT INTO `phpbb_k_vars` (`config_name`, `config_value`, `is_dynamic`) VALUES
 ('rss_feeds_items_limit', '5', 0),
 ('rss_feeds_random_limit', '4', 0),
 ('rss_feeds_type', 'fopen', 0);
+
+ALTER TABLE phpbb_users ADD user_left_blocks VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL ,
+ADD user_right_blocks VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL ,
+ADD user_center_blocks VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL ;

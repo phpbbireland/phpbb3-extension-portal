@@ -98,7 +98,6 @@ class main_listener implements EventSubscriberInterface
 			'U_HOME'              => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
 			'SITE_LOGO_IMG'       => $logo,
 			'SITE_LOGO_IMG_RIGHT' => $logo_right,
-
 		));
 	}
 
@@ -214,7 +213,10 @@ autoload class?
 		$this->portal->block_modules();
 */
 ////block_modules();
+///		$this->helper->render('portal_body.html', $this->portal->get_page_title());
+///		$this->helper->render('portal_header.html');
 
+		$this->portal->block_modules();
 
 		if (!function_exists('phpbb_get_user_avatar'))
 		{
