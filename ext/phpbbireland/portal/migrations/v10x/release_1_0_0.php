@@ -193,7 +193,6 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 					),
 					'PRIMARY_KEY'	=> 'id',
 				),
-<<<<<<< HEAD
 			),
 
 			'add_columns'    => array(
@@ -203,19 +202,6 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 					'user_right_blocks'   => array('VCHAR:255', ''),
 				),
 			),
-=======
-
-				$this->table_prefix . 'k_pages' => array(
-					'COLUMNS' => array(
-						'page_id'	=> array('UINT', NULL, 'auto_increment'),
-						'page_name'	=> array('VCHAR_UNI:100', ''),
-					),
-					'PRIMARY_KEY'	=> 'page_id',
-				),
-			),
-
-
->>>>>>> cde332d1e6631956861801334825d315836763f0
 		);
 	}
 
