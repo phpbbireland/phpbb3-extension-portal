@@ -88,20 +88,18 @@ if (!function_exists('set_k_config'))
 	{
 		global $db, $cache, $table_prefix;
 
-		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
-
 		$k_config = $cache->get('k_config');
 
-		$sql = 'UPDATE ' . K_VARIABLES_TABLE . "
+		$sql = 'UPDATE ' . K_CONFIG_TABLE . "
 			SET config_value = '" . $db->sql_escape($config_value) . "'
 			WHERE config_name = '" . $db->sql_escape($config_name) . "'";
 		$result = $db->sql_query($sql);
 
-// needs fixing...
+
 		if (!$result)
 		//if (!$db->sql_affectedrows() && !isset($k_config[$config_name]))
 		{
-			$sql = 'INSERT INTO ' . K_VARIABLES_TABLE . ' ' . $db->sql_build_array('INSERT', array(
+			$sql = 'INSERT INTO ' . K_CONFIG_TABLE . ' ' . $db->sql_build_array('INSERT', array(
 				'config_name'   => $config_name,
 				'config_value'  => $config_value,
 				'is_dynamic'    => ($is_dynamic) ? 1 : 0));
@@ -118,11 +116,13 @@ if (!function_exists('set_k_config'))
 	}
 }
 
+
+/****
 if (!function_exists('get_k_config_var'))
 {
 	function get_k_config_var($item)
 	{
-		define('K_VARIABLES_TABLE',	$table_prefix . 'k_variables');
+		define('K_CONFIG_TABLE',	$table_prefix . 'k_variables');
 
 		if (isset($item))
 		{
@@ -130,7 +130,7 @@ if (!function_exists('get_k_config_var'))
 		}
 
 		$sql = 'SELECT config_name, config_value
-			FROM ' . K_VARIABLES_TABLE . '
+			FROM ' . K_CONFIG_TABLE . '
 			WHERE config_name = ' . (int)$item;
 
 		$row = $db->sql_fetchrow($result);
@@ -139,6 +139,7 @@ if (!function_exists('get_k_config_var'))
 		return $row['config_value'];
 	}
 }
+*****/
 
 
 if (!function_exists('k_progress_bar'))

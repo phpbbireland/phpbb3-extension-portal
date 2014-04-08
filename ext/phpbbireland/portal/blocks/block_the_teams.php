@@ -66,7 +66,7 @@ else
 	$sql_refine = '';
 }
 
-$sql = 'SELECT DISTINCT u.user_id, u.group_id, u.username, u.user_colour, u.username_clean, u.user_timezone, u.user_from, g.group_id, g.group_name, g.group_colour, g.group_type, ug.group_id
+$sql = 'SELECT DISTINCT u.user_id, u.group_id, u.username, u.user_colour, u.username_clean, u.user_timezone, g.group_id, g.group_name, g.group_colour, g.group_type, ug.group_id
 		FROM ' . USERS_TABLE . ' u, ' . GROUPS_TABLE . ' g, ' . USER_GROUP_TABLE . ' ug
 			WHERE ug.group_id = g.group_id and u.user_id = ug.user_id ' . $sql_refine . '
 				AND ' . $db->sql_in_set('g.group_id', $sql_in) . '

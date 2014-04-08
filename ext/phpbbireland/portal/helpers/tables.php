@@ -33,26 +33,19 @@ class tables
 
 	public function __construct()
 	{
-		$k_config = 'k_config';
-		$k_variables = 'k_variables';
-		$k_blocks = 'k_blocks';
-		$k_pages = 'k_pages';
-		$k_menus = 'k_menus';
+		$k_config    = 'k_config';
+		$k_blocks    = 'k_blocks';
+		$k_menus     = 'k_menus';
+		$k_pages     = 'k_pages';
 		$k_resources = 'k_resources';
-		$k_newsfeeds = 'k_newsfeeds';
-		$k_youtube = 'k_youtube';
-		$k_acronyms = 'k_acronyms';
 
 		$this->tables = array(
-			'k_variables'	=> $k_variables,
+			'k_config'	    => $k_config,
 			'k_blocks'		=> $k_blocks,
-			'k_config'		=> $k_config,
 			'k_pages'		=> $k_pages,
 			'k_menus'		=> $k_menus,
 			'k_resources'	=> $k_resources,
-			'k_newsfeeds'	=> $k_newsfeeds,
-			'k_youtube'		=> $k_youtube,
-			'k_acronyms'	=> $k_acronyms,
+
 		);
 	}
 

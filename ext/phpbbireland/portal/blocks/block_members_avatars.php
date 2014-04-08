@@ -215,4 +215,3 @@ $template->assign_vars(array(
 
 
 $db->sql_freeresult($result);
-?>

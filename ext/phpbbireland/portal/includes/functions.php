@@ -28,7 +28,7 @@ if (!function_exists('obtain_k_config'))
 		if (($k_config = $cache->get('k_config')) === false)
 		{
 			$sql = 'SELECT config_name, config_value
-				FROM ' . K_VARIABLES_TABLE;
+				FROM ' . K_CONFIG_TABLE;
 
 			$result = $db->sql_query($sql);
 

@@ -17,15 +17,13 @@
 		define('POST_NEWS_GLOBAL', 5);
 
 		define('K_CONFIG_TABLE',			$table_prefix . 'k_config');
-		define('K_MENUS_TABLE',				$table_prefix . 'k_menus');
 		define('K_BLOCKS_TABLE',			$table_prefix . 'k_blocks');
-		define('K_VARIABLES_TABLE',			$table_prefix . 'k_variables');
-		define('K_NEWSFEEDS_TABLE',			$table_prefix . 'k_newsfeeds');
-		define('K_RESOURCES_TABLE',			$table_prefix . 'k_resources');
+		define('K_MENUS_TABLE',				$table_prefix . 'k_menus');
 		define('K_PAGES_TABLE',				$table_prefix . 'k_pages');
-		define('K_DONATIONS_TABLE',			$table_prefix . 'k_donations');
+		define('K_RESOURCES_TABLE',			$table_prefix . 'k_resources');
+
+		define('K_ACRONMYS_TABLE',			$table_prefix . 'k_acronyms');
 		define('K_YOUTUBE_TABLE',			$table_prefix . 'k_youtube');
-		define('K_ACRONYMS_TABLE',			$table_prefix . 'k_acronyms');
 
 		$ext = 'ext/phpbbireland/portal/';
 		// works for now //

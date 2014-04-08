@@ -52,14 +52,15 @@ if ($this_page_name == 'viewforum' || $this_page_name == 'viewtopic')
 * May need to trim some more code but it works for now... Mike
 ***/
 
-
-/*****
-$template->assign_vars(array(
+/*$template->assign_vars(array(
 	'FORUM_CATEGORIES_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
+*/
 
 function display_forums_categories()
 {
+	// not working 3.1 so return for now
+	return;
 	// A rewrite for phpBB3 display_forums code drastically reduced to provide categories block with data //
 
 	global $db, $auth, $user, $template;
@@ -367,12 +368,11 @@ function display_forums_categories()
 		'S_CAT_BLOCK' => true,
 	));
 }
-*/
 
 /**
 * Returns forum parents as an array. Get them from forum_data if available, or update the database otherwise
 */
-/*
+
 if (!function_exists('get_forum_parents'))
 {
 	function get_forum_parents(&$forum_data)
@@ -414,4 +414,3 @@ if (!function_exists('get_forum_parents'))
 		return $forum_parents;
 	}
 }
-*/

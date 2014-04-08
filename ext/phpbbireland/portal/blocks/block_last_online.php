@@ -91,6 +91,7 @@ if ($user->data['user_type'] <> USER_IGNORE && !$auth->acl_gets('u_viewprofile')
 	));
 }
 
+/*
 //Is user not logged in and have no auth to view profiles/memberlist/onlinelist?
 if ($user->data['user_id'] == ANONYMOUS && !$auth->acl_gets('u_viewprofile'))
 {
@@ -105,6 +106,5 @@ else
 		'LAST_ONLINE_DEBUG' => sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 	));
 }
+*/
 
-
-?>

@@ -22,6 +22,7 @@ if (!defined('IN_PHPBB'))
 global $php_root_path, $db, $user, $config, $k_config, $k_blocks, $phpbb_root_path;
 
 $user->add_lang_ext('phpbbireland/portal', 'kiss_common');
+
 $queries = $cached_queries = 0;
 $welcome_image	= $phpbb_root_path . 'ext/phpbbireland/portal/images/welcome.png';
 
@@ -61,5 +62,3 @@ $template->assign_vars( array(
 	'U_LINK'	=> $block_link,
 	'W_MESSAGE'	=> htmlspecialchars_decode($block_details),
 ));
-
-?>

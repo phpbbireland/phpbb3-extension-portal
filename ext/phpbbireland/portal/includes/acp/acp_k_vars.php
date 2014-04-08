@@ -88,7 +88,7 @@ class acp_k_vars
 		}
 
 		$sql = 'SELECT config_name, config_value
-			FROM ' . K_BLOCKS_CONFIG_VAR_TABLE;
+			FROM ' . K_CONFIG_TABLE;
 
 		$result = $db->sql_query($sql);
 
@@ -295,7 +295,7 @@ class acp_k_vars
 				));
 
 				$cache->destroy('_k_config');
-				$cache->destroy('sql', K_BLOCKS_CONFIG_VAR_TABLE);
+				$cache->destroy('sql', K_CONFIG_TABLE);
 
 				if ($block)
 				{

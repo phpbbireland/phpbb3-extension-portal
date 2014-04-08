@@ -20,5 +20,3 @@ if (!defined('IN_PHPBB'))
 }
 
 generate_menus();
-
-?>

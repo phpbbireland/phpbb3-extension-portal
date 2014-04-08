@@ -34,8 +34,8 @@ global $k_groups;
 
 // Grab some portal cached data //
 $block_cache_time  = $k_config['k_block_cache_time_default'];
-$blocks_width 	   = $config['k_blocks_width'];
-$blocks_enabled    = $config['k_blocks_enabled'];
+$blocks_width 	   = $config['blocks_width'];
+$blocks_enabled    = $config['blocks_enabled'];
 $use_block_cookies = (isset($k_config['use_block_cookies'])) ? $k_config['use_block_cookies'] : 0;
 
 //$user->add_lang_ext('phpbbireland/portal', 'common');

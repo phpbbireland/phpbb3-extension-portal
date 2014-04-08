@@ -19,9 +19,11 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
+global $php_root_path, $db, $user, $config, $k_config, $k_blocks, $phpbb_root_path, $phpEx;
+//$phpEx = substr(strrchr(__FILE__, '.'), 1);
+//$this->user->add_lang_ext('phpbbireland/portal', 'kiss_search');
+$user->add_lang_ext('phpbbireland/portal', 'kiss_search');
 
-$phpEx = substr(strrchr(__FILE__, '.'), 1);
-$this->user->add_lang_ext('phpbbireland/portal', 'kiss_search');
 
 /*
 $user->add_lang('portal/kiss_search');
@@ -59,6 +61,6 @@ $template->assign_vars(array(
 	'U_SEARCH'			=> append_sid("{$phpbb_root_path}search.$phpEx", 'keywords=' . urlencode($keywords)),
 	'U_SEARCH_BOOKMARKS'=> ($user->data['user_id'] != ANONYMOUS) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&mode=bookmarks') : '',
 
-	'SEARCH_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
+	///'SEARCH_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 

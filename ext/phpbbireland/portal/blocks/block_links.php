@@ -147,7 +147,7 @@ else
 	}
 }
 
-$this->template->assign_vars(array(
+$template->assign_vars(array(
 	'SUBMIT_LINK'  => $links_forum,
 	'LINKS_COUNT'  => $k_links_to_display,
 	'TOTAL_LINKS'  => $total_images_found,

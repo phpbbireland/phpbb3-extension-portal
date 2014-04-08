@@ -26,7 +26,7 @@ class acp_k_resources
 	function main($id, $mode)
 	{
 		global $db, $user, $auth, $template, $cache , $k_cache;
-		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
+		global $k_config, $config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
 		include($phpbb_root_path . 'includes/sgp_functions.'.$phpEx);
 
@@ -49,7 +49,7 @@ class acp_k_resources
 		//			[ MAIN PROCESS ]
 		// ======================================================
 
-		$add		= request_var('add', '');
+		$add = request_var('add', '');
 
 		$id_list = (( isset($_POST['id_list']) ) ? request_var('id_list', array(0)) : ( (isset($_GET['id_list'])) ? request_var('id_list', array(0)) : array()));
 

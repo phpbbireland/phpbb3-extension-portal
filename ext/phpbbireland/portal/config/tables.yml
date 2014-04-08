@@ -1,9 +1,7 @@
 parameters:
     tables.phpbbireland.k_config: %core.table_prefix%k_config
     tables.phpbbireland.k_blocks: %core.table_prefix%k_blocks
-    tables.phpbbireland.k_pages: %core.table_prefix%k_pages
     tables.phpbbireland.k_menus: %core.table_prefix%k_menus
+    tables.phpbbireland.k_pages: %core.table_prefix%k_pages
     tables.phpbbireland.k_resources: %core.table_prefix%k_resources
-    tables.phpbbireland.k_newsfeeds: %core.table_prefix%k_newsfeeds
-    tables.phpbbireland.k_youtube: %core.table_prefix%k_youtube
-    tables.phpbbireland.k_acronyms: %core.table_prefix%k_acronyms
+

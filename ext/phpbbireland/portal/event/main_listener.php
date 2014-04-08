@@ -98,6 +98,14 @@ class main_listener implements EventSubscriberInterface
 			'U_HOME'              => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
 			'SITE_LOGO_IMG'       => $logo,
 			'SITE_LOGO_IMG_RIGHT' => $logo_right,
+
+		));
+	}
+
+	public function add_page_header_link($event)
+	{
+		$this->template->assign_vars(array(
+			'U_PORTAL'  => $this->helper->route('portal', array('name' => 'portal')),
 		));
 	}
 
@@ -142,11 +150,19 @@ class main_listener implements EventSubscriberInterface
 
 	public function add_portal_blocks($event)
 	{
-		var_dump('in: event\main_listener.php : add_portal_blocks()');
+		//var_dump('in: event\main_listener.php : add_portal_blocks()');
 
 		global $auth, $config, $template, $user, $path_helper, $phpbb_root_path, $phpbb_container;
 		global $queries, $cached_queries, $total_queries, $k_config, $k_blocks, $k_menus, $k_pages, $k_groups;
-		global $block_modules;
+
+		/*
+		// process for phpbb page only, return if portal page //
+		$this_page = explode(".", $user->page['page']);
+		if ($this_page[1] == 'potal')
+		{
+			return;
+		}
+		*/
 
 		$this->auth = $auth;
 		$this->config = $config;
@@ -163,6 +179,7 @@ class main_listener implements EventSubscriberInterface
 		else if ($this_page[0] == 'app' && str_replace('php/', '', $this_page[1]) == 'portal')
 		{
 			$this->page = 'portal';
+			return;
 		}
 
 		$board_url = generate_board_url() . '/';
@@ -193,8 +210,8 @@ class main_listener implements EventSubscriberInterface
 		{
 			include($phpbb_root_path . 'ext/phpbbireland/portal/includes/functions.' . $this->php_ext);
 			$k_config = obtain_k_config();
-			$k_menus = obtain_k_menus();
 			$k_blocks = obtain_block_data();
+			$k_menus = obtain_k_menus();
 			$k_pages = obtain_k_pages();
 			$k_groups = obtain_k_groups();
 			$k_resources = obtain_k_resources();
@@ -204,19 +221,12 @@ class main_listener implements EventSubscriberInterface
 		$mod_path = $phpbb_root_path . 'ext/phpbbireland/portal/';
 
 		include_once($this->includes_path . 'sgp_functions.' . $this->php_ext);
-		//y//include_once($this->includes_path . 'sgp_portal_blocks.' . $this->php_ext);
 
-/*
-autoload class?
-		include($mod_path . 'portal.php')
-		$portal = new \ext\phpbbireland\portal\portal;
-		$this->portal->block_modules();
-*/
-////block_modules();
-///		$this->helper->render('portal_body.html', $this->portal->get_page_title());
-///		$this->helper->render('portal_header.html');
 
-		$this->portal->block_modules();
+
+		$func = new \phpbbireland\portal\includes\func;
+		$func->block_modules();
+
 
 		if (!function_exists('phpbb_get_user_avatar'))
 		{

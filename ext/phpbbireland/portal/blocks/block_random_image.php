@@ -76,4 +76,3 @@ $template->assign_vars(array(
 	'S_BLOCK_IS_CENTRED'  => ($block_centred) ? true : false,
 ));
 
-?>

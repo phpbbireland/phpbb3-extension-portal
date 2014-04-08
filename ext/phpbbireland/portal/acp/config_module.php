@@ -50,20 +50,20 @@ class config_module
 			}
 		}
 
-		$blocks_width 	= $config['k_blocks_width'];
-		$blocks_enabled = $config['k_blocks_enabled'];
-		$portal_version	= $config['k_portal_version'];
-		$portal_build	= $config['k_portal_build'];
+		$blocks_width 	= $config['blocks_width'];
+		$blocks_enabled = $config['blocks_enabled'];
+		$portal_version	= $config['portal_version'];
+		$portal_build	= $config['portal_build'];
 
 		if ($data['version'])
 		{
 			$template->assign_vars(array(
 				'MOD_ANNOUNCEMENT'     => $data['announcement'][0],
-				'MOD_CURRENT_VERSION'  => $config['k_portal_version'],
+				'MOD_CURRENT_VERSION'  => $config['portal_version'],
 				'MOD_DOWNLOAD'         => $data['download'][0],
 				'MOD_LATEST_VERSION'   => $data['version'],
 				'MOD_TITLE'            => $data['title'][0],
-				'S_UP_TO_DATE'         => ($data['version'] > $config['k_portal_version']) ? false : true,
+				'S_UP_TO_DATE'         => ($data['version'] > $config['portal_version']) ? false : true,
 			));
 
 		}

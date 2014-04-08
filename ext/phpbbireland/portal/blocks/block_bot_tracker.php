@@ -68,5 +68,3 @@ $template->assign_vars(array(
 	'S_BOT_TRACKER_SHOW'	=> ($k_bot_display_allow) ? true : false,
 	'BOT_TRACKER_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
-
-?>

@@ -182,5 +182,3 @@ $template->assign_vars(array(
 	'U_PORTAL'			=> append_sid("{$phpbb_root_path}portal.$phpEx"),
 	'MENUS_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
-
-?>

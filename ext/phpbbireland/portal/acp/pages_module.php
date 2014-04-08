@@ -44,11 +44,11 @@ class pages_module
 		$this->page_title = $user->lang['ACP_PAGES'];
 		add_form_key('pages');
 
-		if (!class_exists($sgp_functions_admin))
+		if (!class_exists('sgp_functions_admin'))
 		{
 			include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.' . $phpEx);
+			$sgp_functions_admin = new sgp_functions_admin();
 		}
-		$sgp_functions_admin = new sgp_functions_admin();
 
 		$mode = $request->variable('mode', '');
 		$page_id = $request->variable('page_id', 0);
@@ -57,6 +57,7 @@ class pages_module
 
 		$current_pages = array();
 
+		$submit = false;
 		if ($request->is_set_post('submit'))
 		{
 			if (!check_form_key('pages'))
@@ -231,7 +232,7 @@ class pages_module
 				));
 
 				$cache->destroy('k_config');
-				$cache->destroy('sql', K_VARIABLES_TABLE);
+				$cache->destroy('sql', K_CONFIG_TABLE);
 
 				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_pages&amp;mode=manage'));
 			break;

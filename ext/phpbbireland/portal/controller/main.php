@@ -5,7 +5,7 @@
 * @package Portal Extension 2.0
 * @copyright (c) 2013 Michael O’Toole (phpbbireland.com)
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
-*  
+*
 */
 
 namespace phpbbireland\portal\controller;
@@ -94,7 +94,7 @@ class main
 	//public function base($page = 'portal')
 	public function base()
 	{
-		var_dump('in: controller : main.php : base()');
+		//var_dump('in: controller : main.php : base()');
 /*
 		if ($this->config['news_archive_show'])
 		{
@@ -117,7 +117,7 @@ class main
 		global $k_config, $k_menus, $k_blocks, $k_pages, $k_groups, $k_resources;
 		global $ready_modules;
 
-		var_dump('in: portal.php : base()');
+		//var_dump('in: portal.php : base()');
 
 		// Determine board url - we may need it later
 		$board_url = generate_board_url() . '/';
@@ -331,8 +331,8 @@ class main
 		//var_dump('in: portal.php : block_modules()');
 
 		$block_cache_time  = $k_config['k_block_cache_time_default'];
-		$blocks_width 	   = $config['k_blocks_width'];
-		$blocks_enabled    = $config['k_blocks_enabled'];
+		$blocks_width 	   = $config['blocks_width'];
+		$blocks_enabled    = $config['blocks_enabled'];
 		$use_block_cookies = (isset($k_config['use_block_cookies'])) ? $k_config['use_block_cookies'] : 0;
 
 		if (!$blocks_enabled)
@@ -451,6 +451,8 @@ class main
 		}
 
 		$result = $db->sql_query($sql, $block_cache_time);
+
+		unset($LCR);
 
 		while ($row = $db->sql_fetchrow($result))
 		{
@@ -604,6 +606,8 @@ class main
 			}
 		}
 
+		unset($active_blocks);
+
 		if (isset($left_block_ary) && $show_left)
 		{
 			foreach ($left_block_ary as $block => $value)
@@ -692,6 +696,4 @@ class main
 		$this->template->set_filenames(array('block' => 'blocks/' . $block_file));
 		return $this->template->assign_display('block', true);
 	}
-
-
 }

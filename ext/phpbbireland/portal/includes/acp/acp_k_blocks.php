@@ -79,13 +79,13 @@ class acp_k_blocks
 		// bold current row text so things are easier to follow when moving/editing etc... //
 		if (($block) ? $block : 0)
 		{
-			$sql = 'UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . (int)$block . ' WHERE config_name = "k_adm_block"';
+			$sql = 'UPDATE ' . K_CONFIG_TABLE . ' SET config_value = ' . (int)$block . ' WHERE config_name = "k_adm_block"';
 			$db->sql_query($sql);
 		}
 		else
 		{
 			$sql = 'SELECT config_name, config_value
-				FROM ' . K_BLOCKS_CONFIG_VAR_TABLE . "
+				FROM ' . K_CONFIG_TABLE . "
 				WHERE config_name = 'k_adm_block'";
 
 			$result = $db->sql_query($sql);

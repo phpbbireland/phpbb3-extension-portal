@@ -20,14 +20,14 @@ class sgp_functions_admin
 	{
 		global $db, $cache, $table_prefix, $k_config;
 
-		$sql = 'UPDATE ' . K_VARIABLES_TABLE . "
+		$sql = 'UPDATE ' . K_CONFIG_TABLE . "
 			SET config_value = '" . $db->sql_escape($config_value) . "'
 			WHERE config_name = '" . $db->sql_escape($config_name) . "'";
 		$result = $db->sql_query($sql);
 
 		if (!$db->sql_affectedrows() && !isset($k_config[$config_name]))
 		{
-			$sql = 'INSERT INTO ' . K_VARIABLES_TABLE . ' ' . $db->sql_build_array('INSERT', array(
+			$sql = 'INSERT INTO ' . K_CONFIG_TABLE . ' ' . $db->sql_build_array('INSERT', array(
 				'config_name'   => $config_name,
 				'config_value'  => $config_value,
 				'is_dynamic'    => ($is_dynamic) ? 1 : 0));

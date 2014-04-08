@@ -38,7 +38,7 @@ class resources_module
 
 		$user->add_lang_ext('phpbbireland/portal', 'k_resources');
 		$this->tpl_name = 'acp_resources';
-		$this->page_title = $user->lang['ACP_RESOURCES'];
+		$this->page_title = $user->lang['ACP_RESOURCES_TITLE'];
 		add_form_key('resources');
 
 		// Set up general vars

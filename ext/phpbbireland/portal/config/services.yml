@@ -12,6 +12,7 @@ services:
             - @phpbbireland.portal
             - %core.root_path%
             - %core.php_ext%
+            
     phpbbireland.portal:
         class: phpbbireland\portal\portal
         arguments:
@@ -26,6 +27,7 @@ services:
             - @controller.helper
             - %core.root_path%
             - %core.php_ext%
+
     phpbbireland.portal.listener:
         class: phpbbireland\portal\event\main_listener
         arguments:
@@ -35,6 +37,7 @@ services:
             - %core.php_ext%
         tags:
             - { name: event.listener }
+
     phpbbireland.core.helpers.portal:
         class: phpbbireland\core\helpers\portal
 
@@ -46,9 +49,6 @@ services:
             - %tables.phpbbireland.k_pages%
             - %tables.phpbbireland.k_menus%
             - %tables.phpbbireland.k_resources%
-            - %tables.phpbbireland.k_newsfeeds%
-            - %tables.phpbbireland.k_youtube%
-            - %tables.phpbbireland.k_acronyms%
 
     phpbbireland.blocks_collection:
         class: phpbb\di\service_collection
