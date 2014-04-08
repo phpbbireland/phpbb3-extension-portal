@@ -266,4 +266,5 @@ $lang = array_merge($lang, array(
 	'K_BLOCKS_WIDTH'		=> 'Block width',
 	'PORTAL_CONFIG'			=> 'Portal config',
 	'ACP_PORTAL_CONFIG'		=> 'Configure portal',
+	'BLOCK_LAYOUT_RESET'    => 'All members layouts have been cleared/reset...',
 ));

@@ -151,5 +151,4 @@ $template->assign_vars(array(
 	'SUBMIT_LINK'  => $links_forum,
 	'LINKS_COUNT'  => $k_links_to_display,
 	'TOTAL_LINKS'  => $total_images_found,
-	'LINKS_DEBUG'  => sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));

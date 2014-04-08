@@ -7,10 +7,9 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
+namespace phpbbireland\portal\includes;
 
-namespace phpbbireland\portal\controller;
-
-class main
+class func
 {
 	/* @var \phpbb\config */
 	protected $config;
@@ -21,9 +20,6 @@ class main
 	/* @var \phpbb\user */
 	protected $user;
 
-	/* @var \phpbb\controller\helper */
-	protected $helper;
-
 	/* @var \phpbbireland\portal */
 	protected $portal;
 
@@ -33,289 +29,14 @@ class main
 	/* @var string phpEx */
 	protected $php_ext;
 
-	/**
-	* Constructor
-	*
-	* @param \phpbb\config                 $config           Config object
-	* @param phpbb_template                $template         Template object
-	* @param phpbb_user                    $user             User object
-	* @param \phpbb\controller\helper      $helper           Controller helper object
-	* @param \phpbbireland\portal          $portal	Portal object
-	* @param string                        $phpbb_root_path  phpBB root path
-	* @param string                        $php_ext          PHP file extension
-	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\template\template $template, \phpbb\user $user, \phpbb\controller\helper $helper, \phpbbireland\portal\portal $portal, $root_path, $php_ext)
-	{
-		$this->config = $config;
-		$this->template = $template;
-		$this->user = $user;
-		$this->helper = $helper;
-		$this->portal = $portal;
-		$this->root_path = $root_path;
-		$this->php_ext = $php_ext;
-
-		if (!class_exists('bbcode'))
-		{
-			include($this->root_path . 'includes/bbcode.' . $this->php_ext);
-		}
-		if (!function_exists('get_user_rank'))
-		{
-			include($this->root_path . 'includes/functions_display.' . $this->php_ext);
-		}
-	}
-
-	//public function portal($page)
-	public function portal()
-	{
-		// do stuff //
-		return $this->base();
-	}
-
-	public function basic_rules()
-	{
-		var_dump('in: cotroller main : basic_rules');
-		return('THIS IS THE PAGE');
-	}
-
-	/**
-	* News controller to be accessed with the URL /news/{topic_id} to display a single news
-	*
-	* @param int	$topic_id		Topic ID of the news to display
-	* @return Symfony\Component\HttpFoundation\Response A Symfony Response object
-	*/
-	public function single_news($topic_id)
-	{
-		$this->newspage->set_news($topic_id);
-
-		return $this->base(false);
-	}
-
-	/**
-	* Base controller to be accessed with the URL /portal/{page}
-	*
-	* @param	bool	$display_pagination		Force to hide the pagination
-	* @return Symfony\Component\HttpFoundation\Response A Symfony Response object
-	*/
-
-	//public function base($page = 'portal')
-	public function base()
-	{
-		//var_dump('in: controller : main.php : base()');
-
-		global $cache, $user, $auth, $config, $template, $path_helper, $phpbb_root_path, $phpbb_container;
-		global $k_config, $k_menus, $k_blocks, $k_pages, $k_groups, $k_resources;
-		global $ready_modules;
-
-		//var_dump('in: portal.php : base()');
-
-		// Determine board url - we may need it later
-		$board_url = generate_board_url() . '/';
-
-		// This path is sent with the base template paths in the assign_vars()
-		// call below. We need to correct it in case we are accessing from a
-		// controller because the web paths will be incorrect otherwise.
-
-		$phpbb_path_helper = $phpbb_container->get('path_helper');
-		$corrected_path = $phpbb_path_helper->get_web_root_path();
-
-		$web_path = (defined('PHPBB_USE_BOARD_URL_PATH') && PHPBB_USE_BOARD_URL_PATH) ? $board_url : $corrected_path;
-
-		// some euired paths //
-		$mod_root_path           = $phpbb_root_path . 'ext/phpbbireland/portal/';
-		$mod_root_image_path     = $mod_root_path . 'images/';
-		$mod_root_jq_path        = $mod_root_path . 'js/jquery/';
-		$mod_root_js_path        = $mod_root_path . 'js/';
-		$mod_root_common_path    = $mod_root_path . 'styles/common/';
-		$mod_common_images_path  = $mod_root_path . 'styles/common/theme/images/';
-		$mod_user_template_path  = $mod_root_path . 'styles/prosilver/';
-		$mod_user_jq_path        = $mod_root_path . 'styles/prosilver/template/js/';
-		$mod_image_lang_path     = $mod_root_path . 'styles/prosilver/theme/' . $user->data['user_lang'];
-		$js_version = 'jquery-2.0.3.min.js';
-
-
-		// generate cache if reuired //
-		if (!$k_config)
-		{
-			include($phpbb_root_path . 'ext/phpbbireland/portal/includes/functions.' . $this->php_ext);
-			$k_config = obtain_k_config();
-			$k_menus = obtain_k_menus();
-			$k_blocks = obtain_block_data();
-			$k_pages = obtain_k_pages();
-			$k_groups = obtain_k_groups();
-			$k_resources = obtain_k_resources();
-		}
-
-		$includes_path = $phpbb_root_path . 'ext/phpbbireland/portal/includes/';
-		$mod_path = $phpbb_root_path . 'ext/phpbbireland/portal';
-
-		global $user, $queries, $cached_queries, $total_queries, $k_config, $k_blocks, $k_menus, $k_pages, $k_groups;
-
-		include_once($includes_path . 'sgp_functions.' . $this->php_ext);
-
-		if (!function_exists('phpbb_get_user_avatar'))
-		{
-			include($phpbb_root_path . 'includes/functions_display.'. $this->php_ext);
-		}
-
-		$cache_time = (isset($k_config['block_cache_time'])) ? $k_config['block_cache_time'] : '600';
-
-		$set_time = time() + 31536000;
-		$reset_time = time() - 31536000;
-		$cookie_name = $cookie_value = $css = '';
-		$cookie_name = $config['cookie_name'] . '_css';
-
-		if (isset($_COOKIE[$cookie_name]))
-		{
-			$cookie_value = request_var($cookie_name, 0, false, true);
-		}
-
-		$css = request_var('css', 0);
-		if ($css) // set css //
-		{
-			$user->set_cookie('css', $css, $set_time);
-		}
-		else if ($cookie_value) // cookie set so use it //
-		{
-			$css = $cookie_value;
-		}
-
-		$logo_right = $logo = sgp_get_rand_logo();
-		$logo_right  = str_replace('logos', 'logos/right_images', $logo);
-
-
-		if (!defined('STARGATE'))
-		{
-			define('STARGATE', true);
-		}
-
-		$template->assign_vars(array(
-			'PORTAL'=> true,
-			'STARGATE'						=> true,
-			'HS'                            => true,
-			'JS_PATH'                       => $mod_root_jq_path,
-			'JS_JQUERY'                     => $mod_root_jq_path . $js_version,
-			'T_STYLESHEET_PORTAL_COMMON'	=> $mod_root_common_path . "/theme/portal_common.css",
-			'U_PORTAL'			            => append_sid("{$mod_root_path}portal"),
-			'U_PORTAL_ARRANGE'	            => append_sid("{$mod_root_path}portal.$this->php_ext", "arrange=1"),
-			'U_HOME'			            => append_sid("{$mod_root_path}portal.$this->php_ext"),
-			'SITE_LOGO_IMG'			        => $logo,
-			'SITE_LOGO_IMG_RIGHT'	        => $logo_right,
-			'MOD_COMMON_IMAGES_PATH'        => $mod_common_images_path,
-			'MOD_IMAGE_LANG_PATH'           => $mod_image_lang_path,
-
-			'MOD_ROOT_PATH'         => $mod_root_path,
-			'MOD_ROOT_IMAGE_PATH'   => $mod_root_image_path,
-			'MOD_ROOT_JQ_PATH'      => $mod_root_jq_path,
-			'MOD_USER_JQ_PATH'      => $mod_user_jq_path,
-			'MOD_USER_TEMPLATE_PATH'=> $mod_user_template_path,
-			'MOD_ROOT_JS_PATH'      => $mod_root_js_path,
-
-			'S_HIGHSLIDE'			=> true,
-			'COOKIE_NAME'			=> (isset($config['cookie_name'])) ? $config['cookie_name'] : '',
-			'STARGATE_BUILD'		=> (isset($config['portal_build'])) ? $config['portal_build'] : '',
-			'STARGATE_VERSION'		=> (isset($config['portal_version'])) ? $config['portal_version'] : '',
-			'AVATAR_SMALL_IMG'		=> (STARGATE) ? get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], '35', '35') : '',
-			'P_USERNAME'			=> (STARGATE) ? $user->data['username'] : '',
-			'P_USERNAME_FULL'		=> (STARGATE) ? get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']) : '',
-
-			'T_ASSETS_VERSION'		=> $config['assets_version'],
-			'T_ASSETS_PATH'			=> "{$web_path}assets",
-			'T_THEME_PATH'			=> "{$web_path}styles/" . rawurlencode('prosiver') . '/theme',
-			'T_TEMPLATE_PATH'		=> "{$web_path}styles/" . rawurlencode('prosiver') . '/template',
-			'T_SUPER_TEMPLATE_PATH'	=> "{$web_path}styles/" . rawurlencode('prosiver') . '/template',
-			'T_IMAGES_PATH'			=> "{$web_path}images/",
-			'T_SMILIES_PATH'		=> "{$web_path}{$config['smilies_path']}/",
-			'T_AVATAR_PATH'			=> "{$web_path}{$config['avatar_path']}/",
-			'T_AVATAR_GALLERY_PATH'	=> "{$web_path}{$config['avatar_gallery_path']}/",
-			'T_ICONS_PATH'			=> "{$web_path}{$config['icons_path']}/",
-			'T_RANKS_PATH'			=> "{$web_path}{$config['ranks_path']}/",
-			'T_UPLOAD_PATH'			=> "{$web_path}{$config['upload_path']}/",
-			'T_STYLESHEET_LINK'		=> "{$web_path}styles/" . rawurlencode('prosiver') . '/theme/stylesheet.css?assets_version=' . $config['assets_version'],
-			'T_STYLESHEET_LANG_LINK'    => "{$web_path}styles/" . rawurlencode('prosiver') . '/theme/' . $user->lang_name . '/stylesheet.css?assets_version=' . $config['assets_version'],
-			'T_JQUERY_LINK'			=> !empty($config['allow_cdn']) && !empty($config['load_jquery_url']) ? $config['load_jquery_url'] : "{$web_path}assets/javascript/jquery.js?assets_version=" . $config['assets_version'],
-			'S_ALLOW_CDN'			=> !empty($config['allow_cdn']),
-
-			'T_THEME_NAME'			=> rawurlencode('prosiver'),
-			'T_THEME_LANG_NAME'		=> $user->data['user_lang'],
-			'T_TEMPLATE_NAME'		=> 'prosiver',
-			'T_SUPER_TEMPLATE_NAME'	=> rawurlencode((isset($user->style['style_parent_tree']) && $user->style['style_parent_tree']) ? $user->style['style_parent_tree'] : 'prosiver'),
-			'T_IMAGES'				=> 'images',
-			'T_SMILIES'				=> $config['smilies_path'],
-			'T_AVATAR'				=> $config['avatar_path'],
-			'T_AVATAR_GALLERY'		=> $config['avatar_gallery_path'],
-			'T_ICONS'				=> $config['icons_path'],
-			'T_RANKS'				=> $config['ranks_path'],
-			'T_UPLOAD'				=> $config['upload_path'],
-		));
-
-		$this->block_modules();
-
-		// Generate logged in/logged out status
-		if ($user->data['user_id'] != ANONYMOUS)
-		{
-			$u_login_logout = append_sid("{$phpbb_root_path}ucp.$this->php_ext", 'mode=logout', true, $user->session_id);
-			$l_login_logout = sprintf($user->lang['LOGOUT_USER'], $user->data['username']);
-		}
-		else
-		{
-			$u_login_logout = append_sid("{$phpbb_root_path}ucp.$this->php_ext", 'mode=login');
-			$l_login_logout = $user->lang['LOGIN'];
-		}
-
-		$template->assign_vars(array(
-			'U_LOGIN_LOGOUT'  => $u_login_logout,
-			'L_LOGIN_LOGOUT'  => $l_login_logout,
-		));
-
-		// call portal.php : base //
-		$this->portal->base();
-
-		$this->assign_images($this->config['portal_user_info'], $this->config['portal_pick_buttons']);
-
-		return $this->helper->render('portal_body.html', $this->portal->get_page_title());
-	}
-
-	public function assign_images($assign_user_buttons, $assign_post_buttons)
-	{
-		// may extend to add portal images //
-		$this->template->assign_vars(array(
-			'REPORTED_IMG'			=> $this->user->img('icon_topic_reported', 'POST_REPORTED'),
-		));
-
-		if ($assign_user_buttons)
-		{
-			$this->template->assign_vars(array(
-				'PROFILE_IMG'		=> $this->user->img('icon_user_profile', 'READ_PROFILE'),
-				'SEARCH_IMG'		=> $this->user->img('icon_user_search', 'SEARCH_USER_POSTS'),
-				'PM_IMG'			=> $this->user->img('icon_contact_pm', 'SEND_PRIVATE_MESSAGE'),
-				'EMAIL_IMG'			=> $this->user->img('icon_contact_email', 'SEND_EMAIL'),
-				'WWW_IMG'			=> $this->user->img('icon_contact_www', 'VISIT_WEBSITE'),
-				'ICQ_IMG'			=> $this->user->img('icon_contact_icq', 'ICQ'),
-				'AIM_IMG'			=> $this->user->img('icon_contact_aim', 'AIM'),
-				'MSN_IMG'			=> $this->user->img('icon_contact_msnm', 'MSNM'),
-				'YIM_IMG'			=> $this->user->img('icon_contact_yahoo', 'YIM'),
-				'JABBER_IMG'		=> $this->user->img('icon_contact_jabber', 'JABBER'),
-			));
-		}
-
-		if ($assign_post_buttons)
-		{
-			$this->template->assign_vars(array(
-				'QUOTE_IMG'			=> $this->user->img('icon_post_quote', 'REPLY_WITH_QUOTE'),
-				'EDIT_IMG'			=> $this->user->img('icon_post_edit', 'EDIT_POST'),
-				'DELETE_IMG'		=> $this->user->img('icon_post_delete', 'DELETE_POST'),
-				'INFO_IMG'			=> $this->user->img('icon_post_info', 'VIEW_INFO'),
-				'REPORT_IMG'		=> $this->user->img('icon_post_report', 'REPORT_POST'),
-				'WARN_IMG'			=> $this->user->img('icon_user_warn', 'WARN_USER'),
-			));
-		}
-	}
 
 	public function block_modules()
 	{
 		global $phpbb_root_path, $config, $phpEx, $table_prefix;
 		global $db, $user, $avatar_img, $template, $auth;
 		global $k_config, $k_groups, $k_blocks;
+
+		$this->php_ext = 'php';
 
 		//var_dump('in: portal.php : block_modules()');
 
@@ -441,8 +162,6 @@ class main
 
 		$result = $db->sql_query($sql, $block_cache_time);
 
-		unset($LCR);
-
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$active_blocks[] = $row;
@@ -519,7 +238,7 @@ class main
 				$block_title = get_menu_lang_name($row['title']);
 
 				// process blocks for different groups //
-				if ($memberships)
+				if (isset($memberships))
 				{
 					foreach ($memberships as $member)
 					{
@@ -539,8 +258,9 @@ class main
 							}
 						}
 					}
-
+					//unset($memberships);
 				}
+
 				$this_page_name = $this_page[1];
 				$this_page_name = str_replace('php/', '', $this_page_name);
 				$page_id = get_page_id($this_page_name);
@@ -595,7 +315,7 @@ class main
 			}
 		}
 
-		unset($active_blocks);
+		//unset($active_blocks);
 
 		if (isset($left_block_ary) && $show_left)
 		{
@@ -614,6 +334,7 @@ class main
 				));
 			}
 		}
+		//unset($left_block_ary);
 
 		if (isset($right_block_ary) && $show_right)
 		{
@@ -632,6 +353,7 @@ class main
 				));
 			}
 		}
+		//unset($right_block_ary);
 
 		if (isset($center_block_ary) && $show_center)
 		{
@@ -650,6 +372,7 @@ class main
 				));
 			}
 		}
+		//unset($center_block_ary);
 
 		$template->assign_vars(array(
 			'T_THEME_PATH'            => $phpbb_root_path . 'ext/phpbbireland/portal/style/' . rawurlencode($user->style['style_path']) . '/theme/images/',
@@ -682,7 +405,10 @@ class main
 
 	public function build_block_modules($block_file)
 	{
-		$this->template->set_filenames(array('block' => 'blocks/' . $block_file));
-		return $this->template->assign_display('block', true);
+		global $template;
+
+		$template->set_filenames(array('block' => 'blocks/' . $block_file));
+		return $template->assign_display('block', true);
 	}
+
 }
