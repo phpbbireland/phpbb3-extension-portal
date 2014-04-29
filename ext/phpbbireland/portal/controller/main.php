@@ -71,12 +71,6 @@ class main
 		return $this->base();
 	}
 
-	public function basic_rules()
-	{
-		var_dump('in: cotroller main : basic_rules');
-		return('THIS IS THE PAGE');
-	}
-
 	/**
 	* News controller to be accessed with the URL /news/{topic_id} to display a single news
 	*
@@ -100,8 +94,6 @@ class main
 	//public function base($page = 'portal')
 	public function base()
 	{
-		//var_dump('in: controller : main.php : base()');
-
 		global $cache, $user, $auth, $config, $template, $path_helper, $phpbb_root_path, $phpbb_container;
 		global $k_config, $k_menus, $k_blocks, $k_pages, $k_groups, $k_resources;
 		global $ready_modules;
@@ -133,17 +125,7 @@ class main
 		$js_version = 'jquery-2.0.3.min.js';
 
 
-		// generate cache if reuired //
-		if (!$k_config)
-		{
-			include($phpbb_root_path . 'ext/phpbbireland/portal/includes/functions.' . $this->php_ext);
-			$k_config = obtain_k_config();
-			$k_menus = obtain_k_menus();
-			$k_blocks = obtain_block_data();
-			$k_pages = obtain_k_pages();
-			$k_groups = obtain_k_groups();
-			$k_resources = obtain_k_resources();
-		}
+		$this->get_cache();
 
 		$includes_path = $phpbb_root_path . 'ext/phpbbireland/portal/includes/';
 		$mod_path = $phpbb_root_path . 'ext/phpbbireland/portal';
@@ -189,6 +171,8 @@ class main
 		}
 
 		$template->assign_vars(array(
+			'U_SITE_HOME'                   => append_sid("{$mod_root_path}portal"),
+			'L_SITE_HOME'                   => $user->lang['PORTAL'],
 			'PORTAL'=> true,
 			'STARGATE'						=> true,
 			'HS'                            => true,
@@ -267,12 +251,39 @@ class main
 			'L_LOGIN_LOGOUT'  => $l_login_logout,
 		));
 
-		// call portal.php : base //
 		$this->portal->base();
 
 		$this->assign_images($this->config['portal_user_info'], $this->config['portal_pick_buttons']);
 
 		return $this->helper->render('portal_body.html', $this->portal->get_page_title());
+	}
+
+
+
+	public function rules()
+	{
+		global $user, $template;
+
+		$basic_rules = $user->lang['RULES_TEXT'];
+
+		$this->block_modules();
+
+		$template->assign_block_vars('rules', array(
+			'TO_DAY' => $user->format_date(time(), false, true),
+			'RULES'  => $basic_rules,
+		));
+
+		// Output page
+		page_header($user->lang['RULES_HEADER']);
+
+		$template->set_filenames(array(
+			'body' => 'rules.html')
+		);
+
+		page_footer();
+
+		//return $this->rules();
+		return $this->helper->render('rules.html', $this->portal->get_page_title());
 	}
 
 	public function assign_images($assign_user_buttons, $assign_post_buttons)
@@ -316,8 +327,6 @@ class main
 		global $phpbb_root_path, $config, $phpEx, $table_prefix;
 		global $db, $user, $avatar_img, $template, $auth;
 		global $k_config, $k_groups, $k_blocks;
-
-		//var_dump('in: portal.php : block_modules()');
 
 		$block_cache_time  = $k_config['k_block_cache_time_default'];
 		$blocks_width 	   = $config['blocks_width'];
@@ -684,5 +693,21 @@ class main
 	{
 		$this->template->set_filenames(array('block' => 'blocks/' . $block_file));
 		return $this->template->assign_display('block', true);
+	}
+
+	public function get_cache()
+	{
+		global $k_config, $phpbb_root_path;
+
+		if (!$k_config)
+		{
+			include($phpbb_root_path . 'ext/phpbbireland/portal/includes/functions.' . $this->php_ext);
+			$k_config = obtain_k_config();
+			$k_menus = obtain_k_menus();
+			$k_blocks = obtain_block_data();
+			$k_pages = obtain_k_pages();
+			$k_groups = obtain_k_groups();
+			$k_resources = obtain_k_resources();
+		}
 	}
 }
