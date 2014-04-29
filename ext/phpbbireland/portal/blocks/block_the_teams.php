@@ -28,7 +28,6 @@ global $k_config, $phpbb_root_path, $web_path, $k_blocks, $k_groups;
 
 // initialise variables //
 
-$queries = $cached_queries = 0;
 $store = '';
 $change = true;
 $ext = '.png';
@@ -168,8 +167,5 @@ while ($row = $db->sql_fetchrow($result))
 
 $db->sql_freeresult($result);
 
-$template->assign_vars(array(
-	'THE_TEAM_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
-));
 
 ?>

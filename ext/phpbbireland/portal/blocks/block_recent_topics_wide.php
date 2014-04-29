@@ -23,9 +23,10 @@ $phpEx = substr(strrchr(__FILE__, '.'), 1);
 
 $auth->acl($user->data);
 
-$queries = $cached_queries = 0;
-
 global $user, $forum_id, $phpbb_root_path, $phpEx, $SID, $config, $template, $k_config, $k_blocks, $db, $web_path;
+
+global $phpbb_container;
+$phpbb_content_visibility = $phpbb_container->get('content.visibility');
 
 foreach ($k_blocks as $blk)
 {
@@ -36,7 +37,6 @@ foreach ($k_blocks as $blk)
 	}
 }
 $block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['k_block_cache_time_default']);
-
 
 if (!defined('POST_TOPIC_URL'))
 {
@@ -158,7 +158,7 @@ $post_time_days = time() - 86400 * $k_recent_search_days;
 
 // New code //
 $sql_array = array(
-	'SELECT'		=> 'p.post_id, t.topic_id, t.topic_time, t.topic_title, t.forum_id, t.topic_last_post_time, t.topic_last_post_id, t.topic_last_poster_id, t.topic_last_poster_name, t.topic_last_poster_colour, t.topic_type, f.forum_name, p.post_edit_time, p.post_subject, p.post_text, p.post_time, p.bbcode_bitfield, p.bbcode_uid, f.forum_desc, u.user_avatar, u.user_avatar_type',
+	'SELECT'		=> 'p.post_id, t.*, p.post_edit_time, p.post_subject, p.post_text, p.post_time, p.bbcode_bitfield, p.bbcode_uid, f.forum_desc, u.user_avatar, u.user_avatar_type, f.forum_name',
 
 	'FROM'			=> array(FORUMS_TABLE => 'f'),
 
@@ -231,15 +231,9 @@ if ($scroll)
 	}
 }
 
-// get the little image if it exists else we will use the default (backward compatibility is a must) ;)
-///if (file_exists($phpbb_root_path . "{$web_path}styles/" . $user->theme['theme_path'] . '/theme/images/next_line.gif'))
-///{
-///	$next_img = '<img src="' . $phpbb_root_path . "{$web_path}styles/" . $user->theme['theme_path'] . '/theme/images/next_line.gif" ///height="9" width="11" alt="" />';
-///}
-///else
-///{
-	$next_img = '<img src="' . $phpbb_root_path . 'images/next_line.gif" height="9" width="11" alt="" />';
-///}
+
+$next_img = '<img src="' . $phpbb_root_path . 'images/next_line.gif" height="9" width="11" alt="" />';
+
 
 $tn = time();
 $od = 86400;
@@ -298,10 +292,12 @@ for ($i = 0; $i < $display_this_many; $i++)
 		'AVATAR_SMALL_IMG'	=> get_user_avatar($row[$i]['user_avatar'], $row[$i]['user_avatar_type'], '15', '15'),
 		'FORUM_W'			=> $forum_name,
 		'LAST_POST_IMG_W'	=> $user->img('icon_topic_newest', 'VIEW_LATEST_POST'),
-		'LAST_POST_IMG_W'	=> $next_img,
+		//'LAST_POST_IMG_W'	=> $next_img,
 		'POSTER_FULL_W'		=> get_username_string('full', $row[$i]['topic_last_poster_id'], $row[$i]['topic_last_poster_name'], $row[$i]['topic_last_poster_colour']),
 		'POSTTIME_W'		=> $this_post_time,
-		//'REPLIES'			=> $row[$i]['topic_replies'],
+
+		'REPLIES'			=> $phpbb_content_visibility->get_count('topic_posts', $row[$i], $row[$i]['forum_id']) - 1,
+
 		'U_FORUM_W'			=> append_sid("{$phpbb_root_path}viewforum.$phpEx?" . POST_FORUM_URL . '=' . $row[$i]['forum_id']),
 		'U_TITLE_W'			=> $view_topic_url . '&amp;p=' . $row[$i]['topic_last_post_id'] . '#p' . $row[$i]['topic_last_post_id'],
 		'S_ROW_COUNT_W'		=> $i,
@@ -328,9 +324,7 @@ else
 
 $template->assign_vars(array(
 	'S_COUNT_RECENT'		=> ($i > 0) ? true : false,
-	'RECENT_SEARCH_TYPE'	=> (!$k_recent_search_days) ? $user->lang['FULL_SEARCH'] : $user->lang['K_RECENT_SEARCH_DAYS'] . $k_recent_search_days,
-	'RECENT_SEARCH_LIMIT'			=> $user->lang['T_LIMITS'] . $k_recent_topics_per_forum . $user->lang['TOPICS_PER_FORUM_DISPLAY'] . $display_this_many . ' ' . $post_or_posts,
+	'RECENT_SEARCH_TYPE'	=> sprintf($user->lang['K_RECENT_SEARCH_DAYS'], $k_recent_search_days),
 	'S_FULL_LEGEND'			=> ($k_post_types) ? true : false,
 	'RECENT_TOPICS_WIDE_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
-

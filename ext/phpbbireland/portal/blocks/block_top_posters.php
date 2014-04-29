@@ -20,8 +20,7 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-global $k_config, $k_blocks;
-$queries = $cached_queries = 0;
+global $k_config, $k_blocks, $user;
 
 foreach ($k_blocks as $blk)
 {
@@ -81,9 +80,5 @@ while ($row = $db->sql_fetchrow($result))
         //'URL'				=> $row['user_website'],
         )
     );
-
-	$template->assign_vars(array(
-		'TOP_POSTERS_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
-	));
 }
 $db->sql_freeresult($result);
