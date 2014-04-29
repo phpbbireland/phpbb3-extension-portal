@@ -1,4 +1,5 @@
-<script type="text/javascript" src="{MOD_ROOT_JS_PATH}/portal.js"></script>
+
+<script type="text/javascript" src="./ext/phpbbireland/portal/js/portal.js"></script>
 <script type="text/javascript">
 // <![CDATA[
 	/**
@@ -30,28 +31,33 @@
 
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
-<script type="text/javascript" src="{MOD_ROOT_JS_PATH}/scroller.js"></script>
+
+<!-- INCLUDEJS scroller.js -->
+
+
 
 <!-- IF S_IS_PORTAL and S_ARRANGE -->
-<script type="text/javascript" src="{MOD_ROOT_JS_PATH}/drag_n_drop/prototype.js"></script>
-<script type="text/javascript" src="{MOD_ROOT_JS_PATH}/drag_n_drop/scriptaculous.js"></script>
-<script type="text/javascript" src="{MOD_ROOT_JS_PATH}/drag_n_drop/builder.js"></script>
-<script type="text/javascript" src="{MOD_ROOT_JS_PATH}/drag_n_drop/dragdrop.js"></script>
-<script type="text/javascript" src="{MOD_ROOT_JS_PATH}/drag_n_drop/effects.js"></script>
-<script type="text/javascript" src="{MOD_ROOT_JS_PATH}/drag_n_drop/controls.js"></script>
-<script type="text/javascript" src="{MOD_ROOT_JS_PATH}/drag_n_drop/slider.js"></script>
-<script type="text/javascript" src="{MOD_ROOT_JS_PATH}/drag_n_drop/unittest.js"></script>
+	<!-- INCLUDEJS ./ext/phpbbireland/portal/js/drag_n_drop/prototype.js -->
+	<!-- INCLUDEJS ./ext/phpbbireland/portal/js/drag_n_drop/scriptaculous.js -->
+	<!-- INCLUDEJS ./ext/phpbbireland/portal/js/drag_n_drop/builder.js -->
+	<!-- INCLUDEJS ./ext/phpbbireland/portal/js/drag_n_drop/dragdrop.js -->
+	<!-- INCLUDEJS ./ext/phpbbireland/portal/js/drag_n_drop/effects.js -->
+	<!-- INCLUDEJS ./ext/phpbbireland/portal/js/drag_n_drop/controls.js -->
+	<!-- INCLUDEJS ./ext/phpbbireland/portal/js/drag_n_drop/slider.js -->
+	<!-- INCLUDEJS ./ext/phpbbireland/portal/js/drag_n_drop/unittest.js -->
 <!-- ENDIF -->
 
 
 
 <!-- IF S_HIGHSLIDE -->
-<script type="text/javascript" src="{MOD_ROOT_JS_PATH}/highslide/highslide-full.packed.js"></script>
-<link rel="stylesheet" type="text/css" href="{MOD_ROOT_JS_PATH}/highslide/highslide.css" />
+<!-- xxINCLUDEJS highslide/highslide-full.packed.js -->
+
+<script type="text/javascript" src="./ext/phpbbireland/portal/js/highslide/highslide-full.packed.js"></script>
+<link rel="stylesheet" type="text/css" href="./ext/phpbbireland/portal/js/highslide/highslide.css" />
 
 <script type="text/javascript">
 // <![CDATA[
-	hs.graphicsDir = '{MOD_ROOT_JS_PATH}/highslide/graphics/';
+	hs.graphicsDir = './ext/phpbbireland/portal/js/highslide/graphics/';
 	hs.align = 'center';
 	hs.transitions = ['expand', 'crossfade'];
 	hs.outlineType = 'glossy-dark';
@@ -78,10 +84,16 @@
 
 <link rel="stylesheet" href="{T_STYLESHEET_PORTAL_COMMON}" type="text/css" />
 
-<script type="text/javascript" src="{MOD_ROOT_JQ_PATH}jquery-1.9.1.js"></script>
-<script type="text/javascript" src="{MOD_ROOT_JQ_PATH}jquery.hoverIntent.js"></script>
-<script type="text/javascript" src="{MOD_ROOT_JQ_PATH}imgbubbles.js"></script>
+<!-- xINCLUDEJS jquery/jquery-1.9.1.js -->
+<!-- xINCLUDEJS jquery/jquery.hoverIntent.js -->
+<!-- xINCLUDEJS jquery/imgbubbles.js -->
 
+<script type="text/javascript" src="./ext/phpbbireland/portal/js/jquery/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="./ext/phpbbireland/portal/js/jquery/jquery.hoverIntent.js"></script>
+<script type="text/javascript" src="./ext/phpbbireland/portal/js/jquery/imgbubbles.js"></script>
+
+<script type="text/javascript" src="./ext/phpbbireland/portal/js/jquery/jquery_ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./ext/phpbbireland/portal/js/jquery/youtube/jquery.youtubepopup.js"></script>
 
 <script type="text/javascript">
 //<![CDATA[
@@ -111,7 +123,7 @@
 
 	jQuery.noConflict();
 	jQuery(document).ready(function(){
-		jQuery('<link rel="stylesheet" href="{MOD_USER_TEMPLATE_PATH}theme/' + $css_file_append + '" type="text/css" />').appendTo('body');
+		jQuery('<link rel="stylesheet" href="{T_IMAGE_PATH}theme/' + $css_file_append + '" type="text/css" />').appendTo('body');
 	});
 
 //]]>
