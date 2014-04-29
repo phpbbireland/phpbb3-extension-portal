@@ -56,7 +56,7 @@
 
 				<!-- IF staticwide_recent_topic_row.S_ROW_COUNT is even -->
 				<div class="trow">
-					<span class="tleft bg2" style="padding:1px;">{staticwide_recent_topic_row.LAST_POST_IMG_W}<a href="{staticwide_recent_topic_row.U_TITLE_W}" title="{staticwide_recent_topic_row.TOOLTIP_W}"><span class="<!-- IF staticwide_recent_topic_row.S_TYPE_W == 2 or staticwide_recent_topic_row.S_TYPE_W == 3 -->red<!-- ELSEIF staticwide_recent_topic_row.S_TYPE_W == 4 or staticwide_recent_topic_row.S_TYPE_W == 5 -->orange<!-- ELSEIF staticwide_recent_topic_row.S_TYPE_W == 1 -->green<!-- ELSE --><!-- ENDIF -->">{staticwide_recent_topic_row.TITLE_W}</span></a>:</span>
+					<span class="tleft bg2" style="padding:1px;">{staticwide_recent_topic_row.LAST_POST_IMG_W} <a href="{staticwide_recent_topic_row.U_TITLE_W}" title="{staticwide_recent_topic_row.TOOLTIP_W}"><span class="<!-- IF staticwide_recent_topic_row.S_TYPE_W == 2 or staticwide_recent_topic_row.S_TYPE_W == 3 -->red<!-- ELSEIF staticwide_recent_topic_row.S_TYPE_W == 4 or staticwide_recent_topic_row.S_TYPE_W == 5 -->orange<!-- ELSEIF staticwide_recent_topic_row.S_TYPE_W == 1 -->green<!-- ELSE --><!-- ENDIF -->">{staticwide_recent_topic_row.TITLE_W}</span></a>:</span>
 					<span class="tleft bg2" style="padding:1px;">{staticwide_recent_topic_row.AVATAR_SMALL_IMG}</span>
 					<span class="tleft bg2" style="padding:1px;">{staticwide_recent_topic_row.POSTER_FULL_W}</span>
 					<span class="tleft bg2" style="padding:1px; text-align:right; padding-right:2px;">{staticwide_recent_topic_row.REPLIES}</span>
@@ -64,7 +64,7 @@
 				</div>
 				<!-- ELSE -->
 				<div class="trow">
-					<span class="tleft bg1" style="padding:1px;">{staticwide_recent_topic_row.LAST_POST_IMG_W}<a href="{staticwide_recent_topic_row.U_TITLE_W}" title="{staticwide_recent_topic_row.TOOLTIP_W}"><span class="<!-- IF staticwide_recent_topic_row.S_TYPE_W == 2 or staticwide_recent_topic_row.S_TYPE_W == 3 -->red<!-- ELSEIF staticwide_recent_topic_row.S_TYPE_W == 4 or staticwide_recent_topic_row.S_TYPE_W == 5 -->orange<!-- ELSEIF staticwide_recent_topic_row.S_TYPE_W == 1 -->green<!-- ELSE --><!-- ENDIF -->">{staticwide_recent_topic_row.TITLE_W}</span></a>:</span>
+					<span class="tleft bg1" style="padding:1px;">{staticwide_recent_topic_row.LAST_POST_IMG_W} <a href="{staticwide_recent_topic_row.U_TITLE_W}" title="{staticwide_recent_topic_row.TOOLTIP_W}"><span class="<!-- IF staticwide_recent_topic_row.S_TYPE_W == 2 or staticwide_recent_topic_row.S_TYPE_W == 3 -->red<!-- ELSEIF staticwide_recent_topic_row.S_TYPE_W == 4 or staticwide_recent_topic_row.S_TYPE_W == 5 -->orange<!-- ELSEIF staticwide_recent_topic_row.S_TYPE_W == 1 -->green<!-- ELSE --><!-- ENDIF -->">{staticwide_recent_topic_row.TITLE_W}</span></a>:</span>
 					<span class="tleft bg1" style="padding:1px;">{staticwide_recent_topic_row.AVATAR_SMALL_IMG}</span>
 					<span class="tleft bg1" style="padding:1px;">{staticwide_recent_topic_row.POSTER_FULL_W}</span>
 					<span class="tleft bg1" style="padding:1px; text-align:right; padding-right:2px;">{staticwide_recent_topic_row.REPLIES}</span>
@@ -77,7 +77,7 @@
 
 	<div class="tcontainer">
 		<div class="trow">
-			<span class="tleft bg3" style="width:auto; padding:2px;"><b>{L_LEGEND}:</b></span>
+			<span class="tleft bg3" style="width:40px; padding:2px;"><b>{L_LEGEND}:</b></span>
 			<span class="tleft bg3" style="width:auto; padding:2px;">
 				<!-- IF S_FULL_LEGEND -->
 				<span class="red">&nbsp;{L_ANNOUNCEMENTS}</span> &bull;
@@ -86,7 +86,7 @@
 				<span class="green">{L_STICKY}</span> &bull;
 				<span class="black">{L_NORMAL}</span>
 			</span>
-			<span class="tright bg3" style="width:auto; text-align:right; padding-right:1px; padding-top:2px; padding-bottom:2px;"><b>{RECENT_SEARCH_TYPE} &bull; {RECENT_SEARCH_LIMIT}</b>&nbsp;</span>
+			<span class="tright bg3" style="width:180px; text-align:right; padding-right:1px; padding-top:2px; padding-bottom:2px;"><b>{RECENT_SEARCH_TYPE}</b>&nbsp;</span>
 		</div>
 	</div>
 <!-- ELSE -->

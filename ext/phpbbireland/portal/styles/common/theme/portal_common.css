@@ -617,7 +617,7 @@ table.table1 .flag { text-align: center; width: 30px; }
   padding-bottom:2px; 
   width:25%;
 }
-.youtube2 {
+.youtube2, .donations {
   padding:1px; 
   padding-top:6px;
 }
@@ -781,7 +781,4 @@ table.table1 .flag { text-align: center; width: 30px; }
 
 	img  { max-width: 300px; }
 }
-
-
-
 */
