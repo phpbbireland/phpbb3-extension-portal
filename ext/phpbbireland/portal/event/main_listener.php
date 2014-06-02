@@ -29,12 +29,20 @@ class main_listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return array(
-			'core.user_setup'	=> 'load_language_on_setup',
-			//'core.page_header'	=> 'add_portal_page_header_link',
-			'core.page_header'	=> 'add_portal_blocks',
-			//'core.page_footer'	=> 'add_portal_page_footer_link',
+			'core.user_setup'         => 'load_language_on_setup',
+			//'core.page_header'        => 'add_portal_page_header_link',
+
+			//'core.page_header'        => 'add_portal_blocks',
+			'core.page_header_after'  =>  'add_portal_blocks',
+
+			//'core.page_footer'        => 'add_portal_page_footer_link',
 		);
 	}
+
+	/*
+		add event to add news ...
+
+	*/
 
 	/* @var \phpbb\controller\helper */
 	protected $helper;
@@ -221,7 +229,6 @@ class main_listener implements EventSubscriberInterface
 		$mod_path = $phpbb_root_path . 'ext/phpbbireland/portal/';
 
 		include_once($this->includes_path . 'sgp_functions.' . $this->php_ext);
-
 
 
 		$func = new \phpbbireland\portal\includes\func;
