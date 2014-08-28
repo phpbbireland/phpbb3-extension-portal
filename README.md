@@ -5,8 +5,8 @@ Fully integrated portal for phpBB 3.1.x
 
 **Development Status:**  
 
-**Due to illness I have not been able to update the code recently**  
-The current code will break your site, do not use.... Please call back later...  
+**Due to illness updates may be delayed**  
+Updated for RC3 please use this repository for testing only,  
 
 * Migration complete, only remains to seed the database tables (currently done manually)... 
 * ACP: Complete and fully working...
