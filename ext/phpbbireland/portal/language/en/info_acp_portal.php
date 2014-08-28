@@ -268,3 +268,4 @@ $lang = array_merge($lang, array(
 	'ACP_PORTAL_CONFIG'		=> 'Configure portal',
 	'BLOCK_LAYOUT_RESET'    => 'All members layouts have been cleared/reset...',
 ));
+

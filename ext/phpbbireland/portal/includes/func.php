@@ -39,6 +39,7 @@ class func
 		$this->php_ext = 'php';
 
 		//var_dump('in: portal.php : block_modules()');
+		//var_dump($k_config['k_block_cache_time_default']);
 
 		$block_cache_time  = $k_config['k_block_cache_time_default'];
 		$blocks_width 	   = $config['blocks_width'];
@@ -410,5 +411,4 @@ class func
 		$template->set_filenames(array('block' => 'blocks/' . $block_file));
 		return $template->assign_display('block', true);
 	}
-
 }

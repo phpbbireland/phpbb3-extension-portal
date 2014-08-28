@@ -9,28 +9,33 @@
 	"authors": [
 		{
 			"name": "Michael O'Toole",
+			"username": "michaelo",
 			"email": "phpbbireland@gmail.com",
 			"homepage": "http://phpbbireland.com",
 			"role": "Lead Developer"
 		},
 		{
 			"name": "John",
+			"username": "Helter",
 			"email": "name@site.com",
 			"homepage": "http://phpbbireland.com",
 			"role": "Developer"
 		},
 		{
 			"name": "Tyler",
+			"username": "Prosk8er",
 			"email": "name@site.com",
 			"homepage": "http://phpbbireland.com",
 			"role": "Developer"
 		}
 	],
 	"require": {
-		"php": ">=5.3.3",
-		"phpbb/phpbb": "3.1.*@dev"
+		"php": ">=5.3.3"
 	},
 	"extra": {
-		"display-name": "phpBB 3.1 Portal Extension"
+		"display-name": "Kiss Portal Extension",
+		"soft-require": {
+			"phpbb/phpbb": ">=3.1.0-RC2,<3.2.*@dev"
+		}
 	}
 }

@@ -1,14 +1,14 @@
 phpbbireland_base_controller:
     pattern: /portal
-    defaults: { _controller: phpbbireland.portal.controller:portal }
+    defaults: { _controller: phpbbireland.portal.controller:display }
 
 phpbbireland_base_controller:
     pattern: /portal.php
-    defaults: { _controller: phpbbireland.portal.controller:portal }
+    defaults: { _controller: phpbbireland.portal.controller:display }
 
 phpbbireland_page_controller:
     pattern: /portal/page/{page}
-    defaults: { _controller: phpbbireland.portal.controller:portal }
+    defaults: { _controller: phpbbireland.portal.controller:display }
     requirements:
         page:        \d+
 

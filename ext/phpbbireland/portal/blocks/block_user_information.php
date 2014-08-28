@@ -62,4 +62,5 @@ $template->assign_vars(array(
 	//'MY_ROOT_PATH'    => $mod_root_path,
 	'U_LOGIN_LOGOUT'  => $u_login_logout,
 	'L_LOGIN_LOGOUT'  => $l_login_logout,
+	'S_LOGIN_ACTION'  => append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=login'),
 ));

@@ -3,7 +3,7 @@ imports:
 
 services:
     phpbbireland.portal.controller:
-        class: phpbbireland\portal\controller\main
+        class: phpbbireland\portal\controller\main_controller
         arguments:
             - @config
             - @template
@@ -19,7 +19,6 @@ services:
             - @auth
             - @cache
             - @config
-            - @dbal.conn
             - @request
             - @template
             - @user
@@ -29,7 +28,7 @@ services:
             - %core.php_ext%
 
     phpbbireland.portal.listener:
-        class: phpbbireland\portal\event\main_listener
+        class: phpbbireland\portal\event\listener
         arguments:
             - @controller.helper
             - @template
