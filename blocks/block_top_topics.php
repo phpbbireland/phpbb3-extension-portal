@@ -1,13 +1,10 @@
 <?php
 /**
 *
-* @package Kiss Portal Engine
-* @version $Id$
-* @author  Martin Larsson - aka NeXur
-* @begin   Thursday, 28 October, 2008
-* @copyright (c) 2005-2013 phpbbireland
-* @home    http://www.phpbbireland.com
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* Kiss Portal extension for the phpBB Forum Software package.
+*
+* @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
+* @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
 

@@ -1,24 +1,16 @@
 <?php
 /**
 *
-* @package Stargate Portal
-* @author  Michael O'Toole - aka Michaelo
-* @begin   Sunday, 20th May, 2007
-* @copyright (c) 2005-2008 phpbbireland
-* @home    http://www.phpbbireland.com
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-* @note: Do not remove this copyright. Just append yours if you have modified it,
-*        this is part of the Stargate Portal copyright agreement...
+* Kiss Portal extension for the phpBB Forum Software package.
 *
-* @version $Id: block_recent_topics.php 297 2008-12-30 18:40:30Z JohnnyTheOne $
-* Updated: 21 February 2008
+* @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
+* @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
 
 /**
 * @ignore
 */
-
 if (!defined('IN_PHPBB'))
 {
 	exit;

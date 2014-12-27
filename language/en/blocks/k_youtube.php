@@ -1,12 +1,10 @@
 <?php
 /**
 *
-* acp_k_youtube [English]
+* Kiss Portal extension for the phpBB Forum Software package.
 *
-* @package language (Kiss Portal Engine / Stargate Portal)
-* @version $Id$
-* @copyright (c) 2008 phpbbireland
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
+* @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
 
@@ -15,12 +13,12 @@
 */
 if (!defined('IN_PHPBB'))
 {
-    exit;
+	exit;
 }
 
 if (empty($lang) || !is_array($lang))
 {
-    $lang = array();
+	$lang = array();
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -40,7 +38,6 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-
     'AUTOPLAY_OFF'               => 'Autoplay is off...',
     'AUTOPLAY_ON'                => 'Autoplay is on...',
     'ACP_VIDEO_TITLE'            => 'Portal youtube variables.',

@@ -1,15 +1,11 @@
 <?php
 /**
 *
-* @package Kiss Portal Engine
-* @version $Id$
-* @author  Michael O'Toole - aka michaelo
-* @begin   Saturday, Jan 22, 2005
-* @copyright (c) 2005-2013 phpbbireland
-* @home    http://www.phpbbireland.com
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* Kiss Portal extension for the phpBB Forum Software package.
 *
-* 2008-12-30 18:40:30Z JohnnyTheOne edits
+* @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
+* @license GNU General Public License, version 2 (GPL-2.0)
+*
 */
 
 /**

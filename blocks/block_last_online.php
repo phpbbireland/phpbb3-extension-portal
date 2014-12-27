@@ -1,25 +1,16 @@
 <?php
 /**
 *
-* @package Kiss Portal Engine
-* @version $Id$
-* @author  Martin Larsson - aka NeXur
-* @co-author Michaelo - Michael O'Toole
-* @begin   Wed, Oct 14, 2008
-* @copyright (c) 2008 Martin Larsson - aka NeXur
-* @home    http://www.phpbbireland.com
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* Kiss Portal extension for the phpBB Forum Software package.
 *
-* UPDATE INFO (these comments can be removed when we reach final draft)
-* fixed problem with multiple sessions by checking code in memberlist.php
-* changed block html layout - thanks nGAGE!
-* Auth check added & throws 2 differnt messages if you are logged in/browsing as guest
+* @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
+* @license GNU General Public License, version 2 (GPL-2.0)
+*
 */
 
 /**
 * @ignore
 */
-
 if (!defined('IN_PHPBB'))
 {
 	exit;

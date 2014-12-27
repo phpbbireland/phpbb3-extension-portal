@@ -1,12 +1,10 @@
 <?php
 /**
 *
-* acp_k_vars [English]
+* Kiss Portal extension for the phpBB Forum Software package.
 *
-* @package language (Kiss Portal Engine / Stargate Portal)
-* @version $Id$
-* @copyright (c) 2005-2013 phpbbireland
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
+* @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
 
@@ -38,16 +36,6 @@ if (empty($lang) || !is_array($lang))
 // Some characters you may want to copy&paste:
 // ’ » “ ” …
 //
-
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
-if (empty($lang) || !is_array($lang))
-{
-	$lang = array();
-}
 
 $lang = array_merge($lang, array(
 	'TITLE_MAIN'   => 'General Portal Variable',

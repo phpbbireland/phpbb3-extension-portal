@@ -1,13 +1,10 @@
 <?php
 /**
 *
-* @package Kiss Portal Engine
-* @version $Id$
-* @author  Jedis
-* @begin   25 June 2013
-* @copyright (c) Q @ http://cybercommand.net 26Dec 2012
-* @home    http://www.phpbbireland.com
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* Kiss Portal extension for the phpBB Forum Software package.
+*
+* @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
+* @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
 

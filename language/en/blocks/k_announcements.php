@@ -1,12 +1,10 @@
 <?php
 /**
 *
-* acp_k_announcements [English]
+* Kiss Portal extension for the phpBB Forum Software package.
 *
-* @package language (Kiss Portal Engine / Stargate Portal)
-* @version $Id$
-* @copyright (c) 2005-2013 phpbbireland
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
+* @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
 

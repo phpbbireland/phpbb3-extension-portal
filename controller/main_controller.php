@@ -1,9 +1,10 @@
 <?php
 /**
 *
-* @package Portal Extension 2.0
-* @copyright (c) 2013 Michael O’Toole (phpbbireland.com)
-* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+* Kiss Portal extension for the phpBB Forum Software package.
+*
+* @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
+* @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
 
