@@ -24,18 +24,22 @@
 		{
 			"name": "Tyler",
 			"username": "Prosk8er",
-			"email": "name@site.com",
-			"homepage": "http://phpbbireland.com",
+			"email": "prosk8er@gotskillslounge.com",
+			"homepage": "http://gotskillslounge.com",
 			"role": "Developer"
 		}
 	],
 	"require": {
-		"php": ">=5.3.3"
+		"php": ">=5.3.3",
+		"composer/installers": "~1.0"
+	},
+	"require-dev": {
+		"phpbb/epv": "dev-master"
 	},
 	"extra": {
 		"display-name": "Kiss Portal Extension",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.1.0-RC2,<3.2.*@dev"
+			"phpbb/phpbb": ">=3.1.0,<3.2.*@dev"
 		}
 	}
 }
