@@ -53,7 +53,3 @@ $template->assign_vars(array(
 	'S_K_MA_USER_ACTIVE'            => $k_ma_user_active,
 	'S_K_MA_USER_HAS_POSTED'        => $k_ma_user_has_posted,
 ));
-
-
-
-

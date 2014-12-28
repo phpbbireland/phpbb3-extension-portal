@@ -197,26 +197,26 @@ if (!function_exists('obtain_k_resources'))
 
 	function obtain_k_resources()
 	{
-	global $db, $cache, $k_resources, $phpbb_root_path, $phpEx;
+		global $db, $cache, $k_resources, $phpbb_root_path, $phpEx;
 
-	include_once($phpbb_root_path . 'ext/phpbbireland/portal/config/constants.' . $phpEx);
+		include_once($phpbb_root_path . 'ext/phpbbireland/portal/config/constants.' . $phpEx);
 
-	if (($k_resources = $cache->get('k_resources')) === false)
-	{
-		$sql = 'SELECT *
-			FROM ' . K_RESOURCES_TABLE  . '
-			ORDER BY word ASC';
-		$result = $db->sql_query($sql);
-
-		while ($row = $db->sql_fetchrow($result))
+		if (($k_resources = $cache->get('k_resources')) === false)
 		{
-			$k_resources[] = $row['word'];
+			$sql = 'SELECT *
+				FROM ' . K_RESOURCES_TABLE  . '
+				ORDER BY word ASC';
+			$result = $db->sql_query($sql);
 
+			while ($row = $db->sql_fetchrow($result))
+			{
+				$k_resources[] = $row['word'];
+
+			}
+			$db->sql_freeresult($result);
+
+			$cache->put('k_resources', $k_resources);
 		}
-		$db->sql_freeresult($result);
-
-		$cache->put('k_resources', $k_resources);
+		return $k_resources;
 	}
-	return $k_resources;
-}
 }

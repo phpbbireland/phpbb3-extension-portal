@@ -19,4 +19,3 @@ if (!defined('IN_PHPBB'))
 $queries = $cached_queries = 0;
 
 /* already processed by phpBB common code section */
-

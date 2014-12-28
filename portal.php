@@ -77,7 +77,7 @@ class portal
 		global $user, $auth, $config, $template, $user, $path_helper, $phpbb_root_path, $phpbb_container;
 		global $k_config, $k_menus, $k_blocks, $k_pages, $k_groups, $k_resources;
 
-		if(!$k_config)
+		if (!$k_config)
 		{
 			include($phpbb_root_path . 'ext/phpbbireland/portal/includes/functions.' . $this->php_ext);
 			$k_config = obtain_k_config();

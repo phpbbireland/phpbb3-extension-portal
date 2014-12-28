@@ -228,4 +228,3 @@ $template->assign_vars(array(
 	'S_COUNT'							=> $display_this_many,
 	//'RT1_PORTAL_DEBUG'					=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
 ));
-

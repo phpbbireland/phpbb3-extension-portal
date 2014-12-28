@@ -317,4 +317,3 @@ function word_replace($search, $replace, $subject)
 {
 	return preg_replace('/[a-zA-Z]+/e', '\'\0\' == \'' . $search . '\' ? \'' . $replace . '\': \'\0\';', $subject);
 }
-?>

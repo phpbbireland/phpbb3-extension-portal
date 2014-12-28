@@ -32,5 +32,3 @@ $template->assign_vars(array(
 	'S_K_TOP_TOPICS_DAYS' => $k_top_topics_days,
 	'S_K_TOP_TOPICS_MAX'  => $k_top_topics_max,
 ));
-
-

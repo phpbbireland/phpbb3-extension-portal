@@ -72,4 +72,3 @@ $template->assign_vars(array(
 	'RANDOMIMAGE'         => $randomimage,
 	'S_BLOCK_IS_CENTRED'  => ($block_centred) ? true : false,
 ));
-

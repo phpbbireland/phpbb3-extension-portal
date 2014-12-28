@@ -309,4 +309,3 @@ $template->assign_vars(array(
 	'SEARCH_LIMIT'		=> $user->lang['T_LIMITS'] . $k_top_downloads_per_forum . $user->lang['K_TOP_DL_PER_FORUM'] . $display_this_many . ' ' . $post_or_posts,
 	'TOP_DOWNLOADS_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
-

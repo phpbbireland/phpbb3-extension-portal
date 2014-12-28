@@ -1384,18 +1384,18 @@ class blocks_module
 	}
 }
 
-	function get_k_config()
+function get_k_config()
+{
+	global $db, $k_config;
+
+	$sql = 'SELECT config_name, config_value
+	FROM ' . K_CONFIG_TABLE;
+
+	$result = $db->sql_query($sql);
+
+	while ($row = $db->sql_fetchrow($result))
 	{
-		global $db, $k_config;
-
-		$sql = 'SELECT config_name, config_value
-		FROM ' . K_CONFIG_TABLE;
-
-		$result = $db->sql_query($sql);
-
-		while ($row = $db->sql_fetchrow($result))
-		{
-			$k_config[$row['config_name']] = $row['config_value'];
-		}
-		$db->sql_freeresult($result);
+		$k_config[$row['config_name']] = $row['config_value'];
 	}
+	$db->sql_freeresult($result);
+}

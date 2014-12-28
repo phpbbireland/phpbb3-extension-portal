@@ -10,7 +10,6 @@
 
 namespace phpbbireland\portal\acp;
 
-
 class block_variables
 {
 	var $u_action;

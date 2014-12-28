@@ -299,5 +299,3 @@ $template->assign_vars(array(
 ));
 
 // END: Fetch Announcements //
-
-
