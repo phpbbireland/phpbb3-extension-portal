@@ -92,11 +92,10 @@ $list = obtain_users_online();
 
 while ($row = $db->sql_fetchrow($result))
 {
-
-    if (!$row['username'])
-    {
-        continue;
-    }
+	if (!$row['username'])
+	{
+		continue;
+	}
 
 	// hide hidden users //
 	if(in_array($row['user_id'], $list['hidden_users']) and $k_ma_display_logged_in_only)
@@ -106,10 +105,10 @@ while ($row = $db->sql_fetchrow($result))
 
 	$total++;
 
-    if (in_array($row['user_id'], $list['online_users']))
-    {
+	if (in_array($row['user_id'], $list['online_users']))
+	{
 		$is_online = true;
-    }
+	}
 	else
 	{
 		$is_online = false;

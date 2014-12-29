@@ -48,10 +48,10 @@ $result = $db->sql_query_limit($sql, $k_top_topics_max, 0, $block_cache_time);
 while ($row = $db->sql_fetchrow($result))
 {
 
-    if (!$row['topic_title'])
-    {
-        continue;
-    }
+	if (!$row['topic_title'])
+	{
+		continue;
+	}
 
 	if ($auth->acl_gets('f_list', 'f_read', $row['forum_id']))
 	{

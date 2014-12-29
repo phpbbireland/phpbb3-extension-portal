@@ -49,7 +49,7 @@ global $lang, $template, $portal_config, $board_config;
 $template->assign_vars(array(
 	'S_SEARCH'			=> $allow_search,
 	'L_SEARCH_ADV' 		=> $user->lang['SEARCH_ADV'],
-	'L_SEARCH_OPTION' 	=> (!empty($portal_config['search_option_text'])) ? $portal_config['search_option_text'] : $board_config ['sitename'],
+	'L_SEARCH_OPTION' 	=> (!empty($portal_config['search_option_text'])) ? $portal_config['search_option_text'] : $board_config['sitename'],
 	'SITE_NAME'         => $config['sitename'],
 
 	'S_USER_LOGGED_IN'	=> ($user->data['user_id'] != ANONYMOUS) ? true : false,

@@ -11,14 +11,6 @@
 namespace phpbbireland\portal\acp;
 use phpbbireland\portal;
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
 class menus_module
 {
 	var $u_action;
@@ -119,11 +111,26 @@ class menus_module
 		{
 			//case 'head':     get_menu(HEAD_MENUS);    $template->assign_var('S_OPTIONS', 'head'); break;
 			//case 'foot':     get_menu(FOOT_MENUS);    $template->assign_var('S_OPTIONS', 'foot'); break;
-			case 'nav':      $this->get_menu(NAV_MENUS, $module_id);     $template->assign_var('S_OPTIONS', 'nav');  break;
-			case 'sub':      $this->get_menu(SUB_MENUS, $module_id);     $template->assign_var('S_OPTIONS', 'sub');  break;
-			case 'link':     $this->get_menu(LINKS_MENUS, $module_id);   $template->assign_var('S_OPTIONS', 'link'); break;
-			case 'all':      $this->get_menu(ALL_MENUS, $module_id);     $template->assign_var('S_OPTIONS', 'all');  break;
-			case 'unalloc':  $this->get_menu(UNALLOC_MENUS, $module_id); $template->assign_var('S_OPTIONS', 'unalloc'); break;
+			case 'nav':
+				$this->get_menu(NAV_MENUS, $module_id);
+				$template->assign_var('S_OPTIONS', 'nav');
+			break;
+			case 'sub':
+				$this->get_menu(SUB_MENUS, $module_id);
+				$template->assign_var('S_OPTIONS', 'sub');
+			break;
+			case 'link':
+				$this->get_menu(LINKS_MENUS, $module_id);
+				$template->assign_var('S_OPTIONS', 'link');
+			break;
+			case 'all':
+				$this->get_menu(ALL_MENUS, $module_id);
+				$template->assign_var('S_OPTIONS', 'all');
+			break;
+			case 'unalloc':
+				$this->get_menu(UNALLOC_MENUS, $module_id);
+				$template->assign_var('S_OPTIONS', 'unalloc');
+			break;
 
 			case 'edit':
 

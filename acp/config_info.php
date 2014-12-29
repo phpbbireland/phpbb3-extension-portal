@@ -10,14 +10,6 @@
 
 namespace phpbbireland\portal\acp;
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
 class config_info
 {
 	function module()

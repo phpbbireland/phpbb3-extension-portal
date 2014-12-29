@@ -142,9 +142,9 @@ class listener implements EventSubscriberInterface
 	{
 		global $user, $template, $phpbb_container, $phpbb_root_path, $web_path;
 
-        $this->template->assign_vars(array(
-            'U_PORTAL'            => $this->helper->route('phpbbireland/portal', 'portal_base_controller'),
-            'U_INDEX'             => $this->helper->route('phpbb/phpbb', 'index'),
+		$this->template->assign_vars(array(
+			'U_PORTAL'            => $this->helper->route('phpbbireland/portal', 'portal_base_controller'),
+			'U_INDEX'             => $this->helper->route('phpbb/phpbb', 'index'),
 		));
 	}
 

@@ -11,14 +11,6 @@
 namespace phpbbireland\portal\acp;
 //use phpbbireland\portal;
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
 class pages_module
 {
 	var $u_action;

@@ -63,18 +63,17 @@ $result = $db->sql_query_limit($sql, $k_top_posters_to_display, 0, $block_cache_
 
 while ($row = $db->sql_fetchrow($result))
 {
-    if (!$row['username'])
-    {
-        continue;
-    }
+	if (!$row['username'])
+	{
+		continue;
+	}
 
-    $template->assign_block_vars('top_posters', array(
-        'S_SEARCH_ACTION'	=> append_sid("{$phpbb_root_path}search.$phpEx", 'author_id=' . $row['user_id'] . '&amp;sr=posts'),
+	$template->assign_block_vars('top_posters', array(
+		'S_SEARCH_ACTION'	=> append_sid("{$phpbb_root_path}search.$phpEx", 'author_id=' . $row['user_id'] . '&amp;sr=posts'),
 		'USERNAME_FULL'		=> get_username_string('full', $row['user_id'], sgp_checksize($row['username'],15), $row['user_colour']),
-        'POSTER_POSTS'		=> $row['user_posts'],
-        'USER_AVATAR_IMG'	=> get_user_avatar($row['user_avatar'], $row['user_avatar_type'], '16', '16', $user->lang['USER_AVATAR']),
-        //'URL'				=> $row['user_website'],
-        )
-    );
+		'POSTER_POSTS'		=> $row['user_posts'],
+		'USER_AVATAR_IMG'	=> get_user_avatar($row['user_avatar'], $row['user_avatar_type'], '16', '16', $user->lang['USER_AVATAR']),
+		//'URL'				=> $row['user_website'],
+	));
 }
 $db->sql_freeresult($result);

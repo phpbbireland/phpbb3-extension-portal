@@ -177,7 +177,6 @@ function display_forums_categories()
 	}
 	$db->sql_freeresult($result);
 
-
 	// Used to tell whatever we have to create a dummy category or not.
 	$last_catless = true;
 
@@ -292,7 +291,6 @@ function display_forums_categories()
 		{
 			$last_post_subject = $last_post_time = $last_post_url = '';
 		}
-
 
 		$l_post_click_count = ($row['forum_type'] == FORUM_LINK) ? 'CLICKS' : 'POSTS';
 		$post_click_count = ($row['forum_type'] != FORUM_LINK || $row['forum_flags'] & FORUM_FLAG_LINK_TRACK) ? $row['forum_posts'] : '';

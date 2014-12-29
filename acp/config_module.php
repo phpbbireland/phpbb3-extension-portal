@@ -10,14 +10,6 @@
 
 namespace phpbbireland\portal\acp;
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
 class config_module
 {
 	var $u_action;

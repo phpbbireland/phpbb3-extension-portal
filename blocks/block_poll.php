@@ -118,19 +118,19 @@ if (!$b_forum_id)
 	// also allows for direct linking to a post (and the calculation of which
 	// page the post is on and the correct display of viewtopic)
 	$sql_array = array(
-		 'SELECT'	=> 't.*, f.*',
+		'SELECT'	=> 't.*, f.*',
 
-		 'FROM'	  => array(
+		'FROM'	  => array(
 			FORUMS_TABLE	=> 'f',
-		 )
+		)
 	);
 
 	if ($user->data['is_registered'])
 	{
-		 $sql_array['SELECT'] .= ', tw.notify_status';
-		 $sql_array['LEFT_JOIN'] = array();
+		$sql_array['SELECT'] .= ', tw.notify_status';
+		$sql_array['LEFT_JOIN'] = array();
 
-		 $sql_array['LEFT_JOIN'][] = array(
+		$sql_array['LEFT_JOIN'][] = array(
 			'FROM'	=> array(TOPICS_WATCH_TABLE => 'tw'),
 			'ON'	=> 'tw.user_id = ' . $user->data['user_id'] . ' AND t.topic_id = tw.topic_id'
 		 );
@@ -138,12 +138,12 @@ if (!$b_forum_id)
 
 	if (!$b_post_id)
 	{
-		 $sql_array['WHERE'] = "t.topic_id = $b_topic_id";
+		$sql_array['WHERE'] = "t.topic_id = $b_topic_id";
 	}
 	else
 	{
-		 $sql_array['WHERE'] = "p.post_id = $b_post_id AND t.topic_id = p.topic_id" . ((!$auth->acl_get('m_approve', $b_forum_id)) ? ' AND p.post_approved = 1' : '');
-		 $sql_array['FROM'][POSTS_TABLE] = 'p';
+		$sql_array['WHERE'] = "p.post_id = $b_post_id AND t.topic_id = p.topic_id" . ((!$auth->acl_get('m_approve', $b_forum_id)) ? ' AND p.post_approved = 1' : '');
+		$sql_array['FROM'][POSTS_TABLE] = 'p';
 	}
 
 	$sql_array['WHERE'] .= ' AND (f.forum_id = t.forum_id';
@@ -282,7 +282,7 @@ if (!empty($topic_data['poll_start']))
 		{
 			if (in_array($option, $cur_voted_id))
 			{
-			  continue;
+				continue;
 			}
 
 			$sql = 'UPDATE ' . POLL_OPTIONS_TABLE . '
@@ -293,15 +293,15 @@ if (!empty($topic_data['poll_start']))
 
 			if ($user->data['is_registered'])
 			{
-			  $sql_ary = array(
-				 'topic_id'       => (int) $b_topic_id,
-				 'poll_option_id' => (int) $option,
-				 'vote_user_id'   => (int) $user->data['user_id'],
-				 'vote_user_ip'   => (string) $user->ip,
-			  );
+				$sql_ary = array(
+					'topic_id'       => (int) $b_topic_id,
+					'poll_option_id' => (int) $option,
+					'vote_user_id'   => (int) $user->data['user_id'],
+					'vote_user_ip'   => (string) $user->ip,
+				);
 
-			  $sql = 'INSERT INTO  ' . POLL_VOTES_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
-			  $db->sql_query($sql);
+				$sql = 'INSERT INTO  ' . POLL_VOTES_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
+				$db->sql_query($sql);
 			}
 		}
 
@@ -309,20 +309,20 @@ if (!empty($topic_data['poll_start']))
 		{
 			if (!in_array($option, $b_voted_id))
 			{
-			  $sql = 'UPDATE ' . POLL_OPTIONS_TABLE . '
-				 SET poll_option_total = poll_option_total - 1
-				 WHERE poll_option_id = ' . (int) $option . '
-					  AND topic_id = ' . (int) $b_topic_id;
-			  $db->sql_query($sql);
+				$sql = 'UPDATE ' . POLL_OPTIONS_TABLE . '
+					SET poll_option_total = poll_option_total - 1
+					WHERE poll_option_id = ' . (int) $option . '
+						AND topic_id = ' . (int) $b_topic_id;
+				$db->sql_query($sql);
 
-			  if ($user->data['is_registered'])
-			  {
-				 $sql = 'DELETE FROM ' . POLL_VOTES_TABLE . '
-					  WHERE topic_id = ' . (int) $b_topic_id . '
-						 AND poll_option_id = ' . (int) $option . '
-						 AND vote_user_id = ' . (int) $user->data['user_id'];
-				 $db->sql_query($sql);
-			  }
+				if ($user->data['is_registered'])
+				{
+					$sql = 'DELETE FROM ' . POLL_VOTES_TABLE . '
+						WHERE topic_id = ' . (int) $b_topic_id . '
+							AND poll_option_id = ' . (int) $option . '
+							AND vote_user_id = ' . (int) $user->data['user_id'];
+					$db->sql_query($sql);
+				}
 			}
 		}
 

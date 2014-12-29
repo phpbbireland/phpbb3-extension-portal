@@ -155,7 +155,7 @@ for ($i = 0; $i < $menu_count; $i++)
 			break;
 
 			default:
-				 $link_option = '';
+				$link_option = '';
 			break;
 		}
 
