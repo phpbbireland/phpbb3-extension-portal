@@ -10,21 +10,18 @@
 	"authors": [
 		{
 			"name": "Michael O'Toole",
-			"username": "michaelo",
 			"email": "phpbbireland@gmail.com",
 			"homepage": "http://phpbbireland.com",
 			"role": "Lead Developer"
 		},
 		{
 			"name": "John",
-			"username": "Helter",
 			"email": "name@site.com",
 			"homepage": "http://phpbbireland.com",
 			"role": "Developer"
 		},
 		{
 			"name": "Tyler",
-			"username": "Prosk8er",
 			"email": "prosk8er@gotskillslounge.com",
 			"homepage": "http://gotskillslounge.com",
 			"role": "Developer"
