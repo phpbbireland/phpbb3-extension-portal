@@ -10,14 +10,6 @@
 
 namespace phpbbireland\core\helpers;
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
 class k_block
 {
 	const OWNER_PUBLIC		= 0;
