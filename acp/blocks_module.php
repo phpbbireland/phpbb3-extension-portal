@@ -623,7 +623,8 @@ class blocks_module
 
 						if (!file_exists($phpbb_root_path . $var_path . $file))
 						{
-							echo 'No block variable file found in: ' . $phpbb_root_path . $var_path . $file;
+							//need some sort of simple report //
+							//e c h o 'No block variable file found in: ' . $phpbb_root_path . $var_path . $file;
 						}
 
 						include_once($phpbb_root_path . $var_path . $file);
