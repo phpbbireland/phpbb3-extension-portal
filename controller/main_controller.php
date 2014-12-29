@@ -187,7 +187,7 @@ class main_controller implements main_interface
 			'COOKIE_NAME'               => (isset($config['cookie_name'])) ? $config['cookie_name'] : '',
 			'STARGATE_BUILD'            => (isset($config['portal_build'])) ? $config['portal_build'] : '',
 			'STARGATE_VERSION'          => (isset($config['portal_version'])) ? $config['portal_version'] : '',
-			'AVATAR_SMALL_IMG'          => (STARGATE) ? get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], '35', '35') : '',
+			'AVATAR_SMALL_IMG'          => (STARGATE) ? phpbb_get_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], '35', '35') : '',
 			'P_USERNAME'                => (STARGATE) ? $user->data['username'] : '',
 			'P_USERNAME_FULL'           => (STARGATE) ? get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']) : '',
 
@@ -651,7 +651,7 @@ class main_controller implements main_interface
 
 		$template->assign_vars(array(
 			'T_THEME_PATH'            => $phpbb_root_path . 'ext/phpbbireland/portal/style/' . rawurlencode($user->style['style_path']) . '/theme/images/',
-			'AVATAR'                  => get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height']),
+			'AVATAR'                  => phpbb_get_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height']),
 			'BLOCK_WIDTH'             => $blocks_width . 'px',
 			'PORTAL_ACTIVE'           => $config['portal_enabled'],
 			'PORTAL_BUILD'            => $config['portal_build'],

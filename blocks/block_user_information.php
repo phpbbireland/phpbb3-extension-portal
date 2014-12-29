@@ -52,7 +52,7 @@ else
 }
 
 $template->assign_vars(array(
-	'AVATAR'          => get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height'], 'USER_AVATAR', true),
+	'AVATAR'          => phpbb_get_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height'], 'USER_AVATAR', true),
 	'WELCOME_SITE'    => sprintf($user->lang['WELCOME_SITE'], $config['sitename']),
 	'USR_RANK_TITLE'  => $rank_title,
 	'USR_RANK_IMG'    => $rank_img,

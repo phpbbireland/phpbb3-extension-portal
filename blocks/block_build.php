@@ -77,8 +77,8 @@ if ($this_page_name != 'index' && $this_page_name != 'portal')
 
 		if ($total_online_users > $config['record_online_users'])
 		{
-			set_config('record_online_users', $total_online_users, true);
-			set_config('record_online_date', time(), true);
+			$config->set('record_online_users', $total_online_users, true);
+			$config->set('record_online_date', time(), true);
 		}
 
 		$l_online_record = sprintf($user->lang['RECORD_ONLINE_USERS'], $config['record_online_users'], $user->format_date($config['record_online_date'], false, true));

@@ -406,7 +406,7 @@ if (isset($center_block_ary) && $show_center)
 //var_dump($phpbb_root_path . 'ext/phpbbireland/portal/style/' . rawurlencode($user->style['style_path']) . '/theme/images/');
 $template->assign_vars(array(
 	'T_THEME_PATH'            => $phpbb_root_path . 'ext/phpbbireland/portal/style/' . rawurlencode($user->style['style_path']) . '/theme/images/',
-	'AVATAR'				  => get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height']),
+	'AVATAR'				  => phpbb_get_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height']),
 	'BLOCK_WIDTH'			  => $blocks_width . 'px',
 
 	'PORTAL_ACTIVE'			  => $config['portal_enabled'],
