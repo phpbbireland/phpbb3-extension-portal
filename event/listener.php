@@ -20,9 +20,6 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\controller\helper */
 	protected $helper;
 
-	/** @var \phpbb\request\request */
-	protected $request;
-
 	/** @var \phpbb\template\template */
 	protected $template;
 
@@ -36,17 +33,15 @@ class listener implements EventSubscriberInterface
 	* Constructor
 	*
 	* @param \phpbb\controller\helper    $helper    Controller helper object
-	* @param \phpbb\request\request      $request            Request object
 	* @param \phpbb\template\template    $template           Template object
 	* @param \phpbb\user                 $user               User object
 	* @param string                      $php_ext   phpEx
 	* @return \phpbbireland\portal\event\listener
 	* @access public
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
 	{
 		$this->helper = $helper;
-		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
 		$this->php_ext = $php_ext;
@@ -198,7 +193,7 @@ class listener implements EventSubscriberInterface
 	{
 		//var_dump('in: event\main_listener.php : add_portal_blocks()');
 
-		global $auth, $config, $template, $user, $path_helper, $phpbb_root_path, $phpbb_container;
+		global $auth, $config, $request, $template, $user, $path_helper, $phpbb_root_path, $phpbb_container;
 		global $queries, $cached_queries, $total_queries, $k_config, $k_blocks, $k_menus, $k_pages, $k_groups;
 
 		/*
