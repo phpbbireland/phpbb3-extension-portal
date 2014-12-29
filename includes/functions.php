@@ -8,6 +8,14 @@
 *
 */
 
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (!function_exists('obtain_k_config'))
 {
 	function obtain_k_config()

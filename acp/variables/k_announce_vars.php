@@ -8,6 +8,14 @@
 *
 */
 
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 namespace phpbbireland\portal\acp;
 
 global $request, $phpEx, $k_config, $template;

@@ -8,8 +8,6 @@
 *
 */
 
-namespace phpbbireland\portal\acp;
-
 /**
 * @ignore
 */
@@ -17,6 +15,8 @@ if (!defined('IN_PHPBB'))
 {
 	exit;
 }
+
+namespace phpbbireland\portal\acp;
 
 class resources_module
 {

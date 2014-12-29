@@ -7,6 +7,15 @@
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 namespace phpbbireland\portal\includes;
 
 class func

@@ -17,6 +17,10 @@
 /**
 * @ignore
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 if (!function_exists('sgp_get_rand_logo'))
 {
