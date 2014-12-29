@@ -9,7 +9,6 @@
 */
 
 namespace phpbbireland\portal\acp;
-//use phpbbireland\portal;
 
 /**
 * @ignore
@@ -149,7 +148,7 @@ class pages_module
 				if (confirm_box(true))
 				{
 					$sql = 'DELETE FROM ' . K_PAGES_TABLE . '
-						WHERE page_id = ' . (int)$page_id;
+						WHERE page_id = ' . (int) $page_id;
 
 					if (!$result = $db->sql_query($sql))
 					{

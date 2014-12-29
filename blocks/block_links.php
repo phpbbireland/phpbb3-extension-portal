@@ -48,7 +48,7 @@ else if ($k_links_to_display == 0)
 // do we have a dedicated links upload forum? If not don't show the link upload image //
 if (isset($k_config['k_links_forum_id']) && $k_config['k_links_forum_id'] != 0)
 {
-	$links_forum =  append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=post&amp;f=' . (int)$k_config['k_links_forum_id']);
+	$links_forum =  append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=post&amp;f=' . (int) $k_config['k_links_forum_id']);
 }
 else
 {
@@ -57,7 +57,7 @@ else
 
 $imglist = array();
 
-mt_srand((double)microtime()*1000002);
+mt_srand((double) microtime()*1000002);
 $imgs = dir($phpbb_root_path . 'ext/phpbbireland/portal/images/links');
 
 while ($file = $imgs->read())

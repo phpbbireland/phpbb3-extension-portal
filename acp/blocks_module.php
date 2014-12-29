@@ -89,7 +89,7 @@ class blocks_module
 		// bold current row text so things are easier to follow when moving/editing etc... //
 		if (($block) ? $block : 0)
 		{
-			$sql = 'UPDATE ' . K_CONFIG_TABLE . ' SET config_value = ' . (int)$block . ' WHERE config_name = "k_adm_block"';
+			$sql = 'UPDATE ' . K_CONFIG_TABLE . ' SET config_value = ' . (int) $block . ' WHERE config_name = "k_adm_block"';
 			$db->sql_query($sql);
 		}
 		else
@@ -114,7 +114,7 @@ class blocks_module
 				// get current block data using $block var //
 				$sql = "SELECT id, ndx, position
 					FROM " . K_BLOCKS_TABLE . "
-					WHERE id = " . (int)$block;
+					WHERE id = " . (int) $block;
 
 				$result = $db->sql_query_limit($sql, 1);
 				$row = $db->sql_fetchrow($result);
@@ -132,8 +132,8 @@ class blocks_module
 
 				while ($row = $db->sql_fetchrow($result))
 				{
-					$ids[] = (int)$row['id'];
-					$ndxs[] = (int)$row['ndx'];
+					$ids[] = (int) $row['id'];
+					$ndxs[] = (int) $row['ndx'];
 				}
 				$db->sql_freeresult($result);
 
@@ -174,7 +174,7 @@ class blocks_module
 				// get current block data//
 				$sql = "SELECT id, ndx, position
 					FROM " . K_BLOCKS_TABLE . "
-					WHERE id = " . (int)$block;
+					WHERE id = " . (int) $block;
 
 				if (!$result = $db->sql_query_limit($sql, 1))
 				{
@@ -189,8 +189,8 @@ class blocks_module
 				}
 
 				$row = $db->sql_fetchrow($result);
-				$to_move['id'] = (int)$row['id'];
-				$to_move['ndx']  = $temp = (int)$row['ndx'];
+				$to_move['id'] = (int) $row['id'];
+				$to_move['ndx']  = $temp = (int) $row['ndx'];
 
 				// position is char 'L', 'R', 'C' (char) //
 				$position = $row['position'];
@@ -206,7 +206,7 @@ class blocks_module
 
 				// get move_to block data//
 				$sql = "SELECT id, ndx, position FROM " . K_BLOCKS_TABLE . "
-					WHERE ndx =  '" . (int)$temp . "'
+					WHERE ndx =  '" . (int) $temp . "'
 						AND position = '" . $db->sql_escape($position) . "'";
 
 				if (!$result = $db->sql_query_limit($sql, 1))
@@ -216,8 +216,8 @@ class blocks_module
 
 				$row = $db->sql_fetchrow($result);
 
-				$move_to['id'] = (int)$row['id'];
-				$move_to['ndx']  = (int)$row['ndx'];
+				$move_to['id'] = (int) $row['id'];
+				$move_to['ndx']  = (int) $row['ndx'];
 
 				// fix block index if out of wack, reindex and re-run code //
 				if ($move_to['ndx'] != $temp || $move_to['id'] == '')
@@ -228,7 +228,7 @@ class blocks_module
 
 					// get current block data//
 					$sql = "SELECT id, ndx, position FROM " . K_BLOCKS_TABLE . "
-						WHERE id = " . (int)$block;
+						WHERE id = " . (int) $block;
 
 					if (!$result = $db->sql_query_limit($sql, 1))
 					{
@@ -244,8 +244,8 @@ class blocks_module
 
 					$row = $db->sql_fetchrow($result);
 
-					$to_move['id'] = (int)$row['id'];
-					$to_move['ndx']  = (int)$temp = $row['ndx'];
+					$to_move['id'] = (int) $row['id'];
+					$to_move['ndx']  = (int) $temp = $row['ndx'];
 
 					$position = $row['position'];
 
@@ -260,7 +260,7 @@ class blocks_module
 
 					// get move_to block data//
 					$sql = "SELECT id, ndx, position FROM " . K_BLOCKS_TABLE . "
-						WHERE ndx =  '" . (int)$temp . "'
+						WHERE ndx =  '" . (int) $temp . "'
 							AND position = '" . $db->sql_escape($position) . "'";
 
 					if (!$result = $db->sql_query_limit($sql, 1))
@@ -270,8 +270,8 @@ class blocks_module
 
 					$row = $db->sql_fetchrow($result);
 
-					$move_to['id'] = (int)$row['id'];
-					$move_to['ndx']  = (int)$row['ndx'];
+					$move_to['id'] = (int) $row['id'];
+					$move_to['ndx']  = (int) $row['ndx'];
 				}
 
 				if ($mode == 'up')// mod validation note... sql is not repeated!
@@ -601,7 +601,7 @@ class blocks_module
 						'block_cache_time'  => $block_cache_time,
 					);
 
-					$sql = 'UPDATE ' . K_BLOCKS_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . " WHERE id = " . (int)$id;
+					$sql = 'UPDATE ' . K_BLOCKS_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . " WHERE id = " . (int) $id;
 
 					if (!$result = $db->sql_query($sql))
 					{
@@ -628,7 +628,6 @@ class blocks_module
 
 						include_once($phpbb_root_path . $var_path . $file);
 					}
-
 
 					$template->assign_var('BLOCK_REPORT', $user->lang['SAVING']);
 
@@ -701,7 +700,7 @@ class blocks_module
 					trigger_error($user->lang['NO_BLOCK_ID'] . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 
-				$sql = 'SELECT * FROM ' . K_BLOCKS_TABLE . ' WHERE id=' . (int)$block;
+				$sql = 'SELECT * FROM ' . K_BLOCKS_TABLE . ' WHERE id=' . (int) $block;
 
 				if ($result = $db->sql_query($sql))
 				{
@@ -778,7 +777,7 @@ class blocks_module
 				{
 					$sql = 'SELECT title, id, position
 						FROM ' . K_BLOCKS_TABLE . '
-						WHERE id = ' . (int)$block;
+						WHERE id = ' . (int) $block;
 					$result = $db->sql_query($sql);
 
 					$row = $db->sql_fetchrow($result);
@@ -793,7 +792,7 @@ class blocks_module
 					$index_start = $this->get_lowest_ndx($position);
 
 					$sql = "DELETE FROM " . K_BLOCKS_TABLE . "
-						WHERE id = " . (int)$block;
+						WHERE id = " . (int) $block;
 					$db->sql_query($sql);
 
 					// Added function to reindex blocks after a block deletion
@@ -845,7 +844,7 @@ class blocks_module
 								$index_no = 1;
 							}
 
-							$sql = "UPDATE " . K_BLOCKS_TABLE . " SET ndx = '" . (int)$index_no . "' WHERE id = " . (int)$row['id'];
+							$sql = "UPDATE " . K_BLOCKS_TABLE . " SET ndx = '" . (int) $index_no . "' WHERE id = " . (int) $row['id'];
 
 							//reset ndx to 1 when position changes
 							$newpos = $row['position'];
@@ -1083,7 +1082,7 @@ class blocks_module
 
 		if ($id != 0)
 		{
-			$sql = 'SELECT id, view_pages FROM ' . K_BLOCKS_TABLE . ' WHERE id=' . (int)$id;
+			$sql = 'SELECT id, view_pages FROM ' . K_BLOCKS_TABLE . ' WHERE id=' . (int) $id;
 
 			if ($result = $db->sql_query($sql))
 			{
@@ -1120,7 +1119,7 @@ class blocks_module
 	{
 		global $db, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
-		$sql = "SELECT var_file_name FROM " . K_BLOCKS_TABLE . " WHERE id = '" . (int)$id . "'";
+		$sql = "SELECT var_file_name FROM " . K_BLOCKS_TABLE . " WHERE id = '" . (int) $id . "'";
 
 		if ($result = $db->sql_query($sql))
 		{
@@ -1146,7 +1145,7 @@ class blocks_module
 	{
 		global $db, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
-		$sql = "SELECT position FROM " . K_BLOCKS_TABLE . " WHERE id = '" . (int)$my_id . "'";
+		$sql = "SELECT position FROM " . K_BLOCKS_TABLE . " WHERE id = '" . (int) $my_id . "'";
 
 		if ($result = $db->sql_query($sql))
 		{
@@ -1164,7 +1163,7 @@ class blocks_module
 		// Get all the groups
 		$sql = 'SELECT group_name
 			FROM ' . GROUPS_TABLE . '
-			WHERE group_id = ' . (int)$id;
+			WHERE group_id = ' . (int) $id;
 
 		$result = $db->sql_query($sql);
 
@@ -1365,7 +1364,7 @@ class blocks_module
 				$j = $i + 1;
 
 				$sql = "";
-				$sql = "UPDATE " . K_BLOCKS_TABLE . " SET ndx = " . (int)$j . " WHERE id = " . $id_array[$i];
+				$sql = "UPDATE " . K_BLOCKS_TABLE . " SET ndx = " . (int) $j . " WHERE id = " . $id_array[$i];
 
 				if ($result = $db->sql_query($sql))
 				{

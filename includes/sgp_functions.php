@@ -38,7 +38,7 @@ if (!function_exists('sgp_get_rand_logo'))
 			return $user->img('site_logo');
 		}
 
-		mt_srand((double)microtime()*1000001);
+		mt_srand((double) microtime()*1000001);
 
 		//$logos_dir = "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/images/logos';
 		$logos_dir = "{$phpbb_root_path}styles/prosilver/theme/images/logos";
@@ -261,7 +261,7 @@ if (!function_exists('which_group'))
 		// Get group name for this user
 		$sql = 'SELECT group_name
 			FROM ' . GROUPS_TABLE . '
-			WHERE group_id = ' . (int)$id;
+			WHERE group_id = ' . (int) $id;
 
 		$result = $db->sql_query($sql,650);
 
@@ -325,7 +325,7 @@ if (!function_exists('get_user_data'))
 		// Get user info
 		$sql = 'SELECT user_id, username, user_colour
 			FROM ' . USERS_TABLE . '
-			WHERE user_id = ' . (int)$id;
+			WHERE user_id = ' . (int) $id;
 
 		$result = $db->sql_query($sql,10);
 		$row = $db->sql_fetchrow($result);

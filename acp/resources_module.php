@@ -106,7 +106,7 @@ class resources_module
 			case 'delete':
 				for ($i = 0; $i < count($id_list); $i++)
 				{
-					$sql = 'DELETE FROM '. K_RESOURCES_TABLE ." WHERE id = " . (int)$id_list[$i];
+					$sql = 'DELETE FROM '. K_RESOURCES_TABLE ." WHERE id = " . (int) $id_list[$i];
 					if (!$result = $db->sql_query($sql))
 					{
 						trigger_error($user->lang['ERROR_PORTAL_WORDS'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . $user->lang['LINE'] . __LINE__);

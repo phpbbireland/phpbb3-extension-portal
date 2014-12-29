@@ -365,7 +365,7 @@ class main_controller implements main_interface
 			$right = $row['user_right_blocks'];
 			$RB = explode(',', $right);
 
-			$LCR = array_merge((array)$LB, (array)$CB, (array)$RB);
+			$LCR = array_merge((array) $LB, (array) $CB, (array) $RB);
 			$left .= ',';
 			$center .= ',';
 
@@ -401,7 +401,7 @@ class main_controller implements main_interface
 				{
 					$sql = 'UPDATE ' . USERS_TABLE . '
 						SET user_left_blocks = ' . "'" . $db->sql_escape($left) . "'" . ', user_center_blocks = ' . "'" . $db->sql_escape($center) . "'" . ', user_right_blocks = ' . "'" . $db->sql_escape($right) . "'" . '
-						WHERE user_id = ' . (int)$user->data['user_id'];
+						WHERE user_id = ' . (int) $user->data['user_id'];
 					$db->sql_query($sql);
 					// set switch clear cookies now that we have them stored (we use javascript)//
 					$template->assign_vars(array(

@@ -41,7 +41,7 @@ $loop_count = 0;
 $sql = 'SELECT username, user_colour, user_lastvisit
 	FROM ' . USERS_TABLE . '
 	WHERE user_type = ' . USER_IGNORE . '
-	AND user_lastvisit > ' . (int)$after_date . '
+	AND user_lastvisit > ' . (int) $after_date . '
 	ORDER BY user_lastvisit DESC';
 
 $result = $db->sql_query_limit($sql, $k_bots_to_display, 0, $block_cache_time);

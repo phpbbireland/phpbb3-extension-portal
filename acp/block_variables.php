@@ -66,7 +66,7 @@ class block_variables
 		{
 			$sql = "SELECT id, title, var_file_name
 				FROM ". K_BLOCKS_TABLE . "
-				WHERE id = " . (int)$block;
+				WHERE id = " . (int) $block;
 			$result = $db->sql_query($sql);
 
 			$row = $db->sql_fetchrow($result);

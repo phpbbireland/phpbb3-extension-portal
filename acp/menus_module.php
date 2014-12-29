@@ -101,7 +101,7 @@ class menus_module
 		// bold current row text so things are easier to follow when moving/editing etc... //
 		if (($menu) ? $menu : 0)
 		{
-			$sql = 'UPDATE ' . K_CONFIG_TABLE . ' SET config_value = ' . (int)$menu . ' WHERE config_name = "k_adm_block"';
+			$sql = 'UPDATE ' . K_CONFIG_TABLE . ' SET config_value = ' . (int) $menu . ' WHERE config_name = "k_adm_block"';
 			$db->sql_query($sql);
 		}
 		else
@@ -188,7 +188,7 @@ class menus_module
 						'view_groups'  => $view_groups,
 					);
 
-					$sql = 'UPDATE ' . K_MENUS_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . " WHERE m_id = " . (int)$m_id;
+					$sql = 'UPDATE ' . K_MENUS_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . " WHERE m_id = " . (int) $m_id;
 
 					if (!$result = $db->sql_query($sql))
 					{
@@ -250,7 +250,7 @@ class menus_module
 				{
 					$sql = 'SELECT name, m_id
 						FROM ' . K_MENUS_TABLE . '
-						WHERE m_id = ' . (int)$menu;
+						WHERE m_id = ' . (int) $menu;
 					$result = $db->sql_query($sql);
 					$name = (string) $db->sql_fetchfield('name');
 					$id = (int) $db->sql_fetchfield('m_id');
@@ -258,7 +258,7 @@ class menus_module
 
 					$name .= $user->lang['MENU'];
 					$sql = 'DELETE FROM ' . K_MENUS_TABLE . "
-						WHERE m_id = " . (int)$menu;
+						WHERE m_id = " . (int) $menu;
 					$db->sql_query($sql);
 					$db->sql_freeresult($result);
 
@@ -292,7 +292,7 @@ class menus_module
 				// get current menu id //
 				$sql = "SELECT m_id, ndx, menu_type
 					FROM " . K_MENUS_TABLE . "
-					WHERE m_id = " . (int)$menu;
+					WHERE m_id = " . (int) $menu;
 
 				$result = $db->sql_query_limit($sql, 1);
 				$row = $db->sql_fetchrow($result);
@@ -351,12 +351,12 @@ class menus_module
 				if ($mode == 'up')
 				{
 					// sql is not duplicated
-					$sql = "UPDATE " . K_MENUS_TABLE . " SET ndx = " . (int)$prev_ndx . " WHERE m_id = " . (int)$current_id;
+					$sql = "UPDATE " . K_MENUS_TABLE . " SET ndx = " . (int) $prev_ndx . " WHERE m_id = " . (int) $current_id;
 					if (!$result = $db->sql_query($sql))
 					{
 						$error = true;
 					}
-					$sql = "UPDATE " . K_MENUS_TABLE . " SET ndx = " . (int)$current_ndx . " WHERE m_id = " . (int)$prev_id;
+					$sql = "UPDATE " . K_MENUS_TABLE . " SET ndx = " . (int) $current_ndx . " WHERE m_id = " . (int) $prev_id;
 					if (!$result = $db->sql_query($sql))
 					{
 						$error = true;
@@ -365,12 +365,12 @@ class menus_module
 				if ($mode == 'down')
 				{
 					// sql is not duplicated
-					$sql = "UPDATE " . K_MENUS_TABLE . " SET ndx = " . (int)$next_ndx . " WHERE m_id = " . (int)$current_id;
+					$sql = "UPDATE " . K_MENUS_TABLE . " SET ndx = " . (int) $next_ndx . " WHERE m_id = " . (int) $current_id;
 					if (!$result = $db->sql_query($sql))
 					{
 						$error = true;
 					}
-					$sql = "UPDATE " . K_MENUS_TABLE . " SET ndx = " . (int)$current_ndx . " WHERE m_id = " . (int)$next_id;
+					$sql = "UPDATE " . K_MENUS_TABLE . " SET ndx = " . (int) $current_ndx . " WHERE m_id = " . (int) $next_id;
 					if (!$result = $db->sql_query($sql))
 					{
 						$error = true;
@@ -581,7 +581,7 @@ class menus_module
 
 		if ($this_one > UN_ALLOC_MENUS && $this_one < ALL_MENUS) // standard menus defined as 1 to 5 //
 		{
-			$sql = 'SELECT * FROM ' . K_MENUS_TABLE . ' WHERE menu_type = ' . (int)$this_one . ' ORDER BY ndx ASC';
+			$sql = 'SELECT * FROM ' . K_MENUS_TABLE . ' WHERE menu_type = ' . (int) $this_one . ' ORDER BY ndx ASC';
 		}
 		else if ($this_one == ALL_MENUS)
 		{
@@ -589,11 +589,11 @@ class menus_module
 		}
 		else if ($this_one == UN_ALLOC_MENUS)
 		{
-			$sql = 'SELECT * FROM ' . K_MENUS_TABLE . ' WHERE menu_type = ' . (int)$this_one . ' ORDER BY ndx, menu_type ASC';
+			$sql = 'SELECT * FROM ' . K_MENUS_TABLE . ' WHERE menu_type = ' . (int) $this_one . ' ORDER BY ndx, menu_type ASC';
 		}
 		else
 		{
-			$sql = 'SELECT * FROM ' . K_MENUS_TABLE . ' WHERE menu_type=' . (int)$this_one;
+			$sql = 'SELECT * FROM ' . K_MENUS_TABLE . ' WHERE menu_type=' . (int) $this_one;
 		}
 
 		if ($result = $db->sql_query($sql))
@@ -636,7 +636,7 @@ class menus_module
 
 		$sql = 'SELECT *
 			FROM ' . K_MENUS_TABLE . '
-			WHERE m_id=' . (int)$item;
+			WHERE m_id=' . (int) $item;
 
 		if ($result = $db->sql_query($sql))
 		{
@@ -695,7 +695,7 @@ class menus_module
 		global $db, $ndx, $user;
 		$sql = "SELECT *
 			FROM " . K_MENUS_TABLE . "
-			WHERE menu_type = '" . (int)$type . "'
+			WHERE menu_type = '" . (int) $type . "'
 			ORDER by ndx DESC";
 
 		if ($result = $db->sql_query($sql))

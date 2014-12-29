@@ -127,7 +127,7 @@ for ($i = 0; $i < $forum_count; $i++)
 {
 	if ($auth->acl_gets('f_list', 'f_read', $forum_data[$i]['forum_id']))
 	{
-		$valid_forum_ids[] = (int)$forum_data[$i]['forum_id'];
+		$valid_forum_ids[] = (int) $forum_data[$i]['forum_id'];
 	}
 }
 
