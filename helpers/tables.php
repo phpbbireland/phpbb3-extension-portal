@@ -10,14 +10,6 @@
 
 namespace phpbbireland\portal\helpers;
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
 class tables
 {
 	/**
