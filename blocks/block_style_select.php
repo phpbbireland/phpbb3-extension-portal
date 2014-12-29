@@ -40,8 +40,8 @@ $change_db_style = ($allow_style_change && $make_permanent) ? true : false;
 if ($make_permanent == 'true' && $new_style != $current_style && $change_db_style)
 {
 	$sql = "UPDATE " . USERS_TABLE . "
-		SET user_style = " . (int)$new_style . "
-		WHERE user_id = " . (int)$user_id;
+		SET user_style = " . (int) $new_style . "
+		WHERE user_id = " . (int) $user_id;
 	$db->sql_query($sql);
 }
 
