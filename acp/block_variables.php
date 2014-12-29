@@ -52,10 +52,10 @@ class block_variables
 			$submit = ture;
 		}
 
-		$choice = request_variable('switch', '');
-		$block = request_variable('block', 0);
-		$mode	= request_variable('mode', '');
-		$switch = request_variable('switch', '');
+		$choice = $request->variable('switch', '');
+		$block = $request->variable('block', 0);
+		$mode	= $request->variable('mode', '');
+		$switch = $request->variable('switch', '');
 
 		if ($mode = 'config' && $choice == '')
 		{
@@ -83,7 +83,7 @@ class block_variables
 		}
 
 		$block = !empty($block) ? $block : 0;
-		$action = request_variable('action', '');
+		$action = $request->variable('action', '');
 		$submit = (isset($_POST['submit'])) ? true : false;
 
 		// swicth to other var setups 11 March 2010
@@ -131,64 +131,64 @@ class block_variables
 		{
 			case 'save':
 			{
-				$k_allow_acronyms                = request_variable('k_allow_acronyms', 0);
-				$k_allow_rand_avatar             = request_variable('k_allow_rand_avatar', 0);
-				$k_allow_rotating_logos          = request_variable('k_allow_rotating_logos', 1);
-				$k_blocks_display_globally       = request_variable('k_blocks_display_globally', 1);
-				$k_footer_images_allow           = request_variable('k_footer_images_allow', 1);
-				$k_links_forum_id                = request_variable('k_links_forum_id', '');
-				$k_ma_avatar_max_width           = request_variable('k_ma_avatar_max_width', '90');
-				$k_ma_columns                    = request_variable('k_ma_columns', '5');
-				$k_ma_display_logged_in_only     = request_variable('k_ma_display_logged_in_only', '0');
-				$k_ma_max_avatars                = request_variable('k_ma_max_avatars', '0');
-				$k_ma_rows                       = request_variable('k_ma_rows', '1');
-				$k_ma_user_active                = request_variable('k_ma_user_active', '0');
-				$k_ma_user_has_posted            = request_variable('k_ma_user_has_posted', '0');
-				$k_max_block_avatar_height       = request_variable('k_max_block_avatar_height', 0);
-				$k_max_block_avatar_width        = request_variable('k_max_block_avatar_width', 0);
-				$k_max_block_avatar_width        = request_variable('k_max_block_avatar_width', 0);
-				$k_post_types                    = request_variable('k_post_types', '');
-				$k_recent_topics_search_exclude  = request_variable('k_recent_topics_search_exclude', '');
-				$k_quick_reply                   = request_variable('k_quick_reply', 1);
-				$k_smilies_show                  = request_variable('k_smilies_show', 1);
-				$k_tooltips_active               = request_variable('k_tooltips_active', 1);
-				$k_tooltips_which                = request_variable('k_tooltips_which', 0);
-				$k_announce_type                 = request_variable('k_announce_type', '');
-				$k_announce_allow                = request_variable('k_announce_allow', 1);
-				$k_announce_item_max_length      = request_variable('k_announce_item_max_length', 0);
-				$k_announce_to_display           = request_variable('k_announce_to_display', 5);
-				$k_bots_to_display               = request_variable('k_bots_to_display', 10);
-				$k_block_cache_time_default      = request_variable('k_block_cache_time_default', 600);
-				$k_block_cache_time_fast         = request_variable('k_block_cache_time_fast', 10);
-				$k_block_cache_time_short        = request_variable('k_block_cache_time_short', 10);
-				$k_bot_display_allow             = request_variable('k_bot_display_allow', 1);
-				$k_donations_max                 = request_variable('k_donations_max', '100');
-				$k_donations_years               = request_variable('k_donations_years', '2000');
-				$k_last_online_max               = request_variable('k_last_online_max', 5);
-				$k_links_to_display              = request_variable('k_links_to_display', 5);
-				$k_news_type                     = request_variable('k_news_type', '');
-				$k_news_allow                    = request_variable('k_news_allow', 1);
-				$k_news_items_to_display         = request_variable('k_news_items_to_display', 5);
-				$k_news_item_max_length          = request_variable('k_news_item_max_length', 0);
-				$k_recent_topics_to_display      = request_variable('k_recent_topics_to_display', 10);
-				$k_recent_topics_per_forum       = request_variable('k_recent_topics_per_forum', 5);
-				$k_recent_search_days            = request_variable('k_recent_search_days', 7);
-				$k_referrals_to_display          = request_variable('k_referrals_to_display', '');
-				$k_teams                         = request_variable('k_teams', '');
-				$k_teams_display_this_many       = request_variable('k_teams_display_this_many', 1);
-				$k_teampage_memberships          = request_variable('k_teampage_memberships', 0);
-				$k_teams_sort                    = request_variable('k_teams_sort', '');
-				$k_top_downloads_per_forum       = request_variable('k_top_downloads_per_forum', 0);
-				$k_top_downloads_search_days     = request_variable('k_top_downloads_search_days', 0);
-				$k_top_downloads_search_exclude  = request_variable('k_top_downloads_search_exclude', '');
-				$k_top_downloads_to_display      = request_variable('k_top_downloads_to_display', 5);
-				$k_top_downloads_types           = request_variable('k_top_downloads_types', '');
-				$k_top_posters_to_display        = request_variable('k_top_posters_to_display', 5);
-				$k_top_topics_days               = request_variable('k_top_topics_days', 7);
-				$k_top_topics_max                = request_variable('k_top_topics_max', 5);
-				$k_yourtube_link                 = request_variable('k_yourtube_link', '');
-				$k_yourtube_auto                 = request_variable('k_yourtube_auto', 1);
-				$k_yourtube_link_limit           = request_variable('k_yourtube_link_limit', 5);
+				$k_allow_acronyms                = $request->variable('k_allow_acronyms', 0);
+				$k_allow_rand_avatar             = $request->variable('k_allow_rand_avatar', 0);
+				$k_allow_rotating_logos          = $request->variable('k_allow_rotating_logos', 1);
+				$k_blocks_display_globally       = $request->variable('k_blocks_display_globally', 1);
+				$k_footer_images_allow           = $request->variable('k_footer_images_allow', 1);
+				$k_links_forum_id                = $request->variable('k_links_forum_id', '');
+				$k_ma_avatar_max_width           = $request->variable('k_ma_avatar_max_width', '90');
+				$k_ma_columns                    = $request->variable('k_ma_columns', '5');
+				$k_ma_display_logged_in_only     = $request->variable('k_ma_display_logged_in_only', '0');
+				$k_ma_max_avatars                = $request->variable('k_ma_max_avatars', '0');
+				$k_ma_rows                       = $request->variable('k_ma_rows', '1');
+				$k_ma_user_active                = $request->variable('k_ma_user_active', '0');
+				$k_ma_user_has_posted            = $request->variable('k_ma_user_has_posted', '0');
+				$k_max_block_avatar_height       = $request->variable('k_max_block_avatar_height', 0);
+				$k_max_block_avatar_width        = $request->variable('k_max_block_avatar_width', 0);
+				$k_max_block_avatar_width        = $request->variable('k_max_block_avatar_width', 0);
+				$k_post_types                    = $request->variable('k_post_types', '');
+				$k_recent_topics_search_exclude  = $request->variable('k_recent_topics_search_exclude', '');
+				$k_quick_reply                   = $request->variable('k_quick_reply', 1);
+				$k_smilies_show                  = $request->variable('k_smilies_show', 1);
+				$k_tooltips_active               = $request->variable('k_tooltips_active', 1);
+				$k_tooltips_which                = $request->variable('k_tooltips_which', 0);
+				$k_announce_type                 = $request->variable('k_announce_type', '');
+				$k_announce_allow                = $request->variable('k_announce_allow', 1);
+				$k_announce_item_max_length      = $request->variable('k_announce_item_max_length', 0);
+				$k_announce_to_display           = $request->variable('k_announce_to_display', 5);
+				$k_bots_to_display               = $request->variable('k_bots_to_display', 10);
+				$k_block_cache_time_default      = $request->variable('k_block_cache_time_default', 600);
+				$k_block_cache_time_fast         = $request->variable('k_block_cache_time_fast', 10);
+				$k_block_cache_time_short        = $request->variable('k_block_cache_time_short', 10);
+				$k_bot_display_allow             = $request->variable('k_bot_display_allow', 1);
+				$k_donations_max                 = $request->variable('k_donations_max', '100');
+				$k_donations_years               = $request->variable('k_donations_years', '2000');
+				$k_last_online_max               = $request->variable('k_last_online_max', 5);
+				$k_links_to_display              = $request->variable('k_links_to_display', 5);
+				$k_news_type                     = $request->variable('k_news_type', '');
+				$k_news_allow                    = $request->variable('k_news_allow', 1);
+				$k_news_items_to_display         = $request->variable('k_news_items_to_display', 5);
+				$k_news_item_max_length          = $request->variable('k_news_item_max_length', 0);
+				$k_recent_topics_to_display      = $request->variable('k_recent_topics_to_display', 10);
+				$k_recent_topics_per_forum       = $request->variable('k_recent_topics_per_forum', 5);
+				$k_recent_search_days            = $request->variable('k_recent_search_days', 7);
+				$k_referrals_to_display          = $request->variable('k_referrals_to_display', '');
+				$k_teams                         = $request->variable('k_teams', '');
+				$k_teams_display_this_many       = $request->variable('k_teams_display_this_many', 1);
+				$k_teampage_memberships          = $request->variable('k_teampage_memberships', 0);
+				$k_teams_sort                    = $request->variable('k_teams_sort', '');
+				$k_top_downloads_per_forum       = $request->variable('k_top_downloads_per_forum', 0);
+				$k_top_downloads_search_days     = $request->variable('k_top_downloads_search_days', 0);
+				$k_top_downloads_search_exclude  = $request->variable('k_top_downloads_search_exclude', '');
+				$k_top_downloads_to_display      = $request->variable('k_top_downloads_to_display', 5);
+				$k_top_downloads_types           = $request->variable('k_top_downloads_types', '');
+				$k_top_posters_to_display        = $request->variable('k_top_posters_to_display', 5);
+				$k_top_topics_days               = $request->variable('k_top_topics_days', 7);
+				$k_top_topics_max                = $request->variable('k_top_topics_max', 5);
+				$k_yourtube_link                 = $request->variable('k_yourtube_link', '');
+				$k_yourtube_auto                 = $request->variable('k_yourtube_auto', 1);
+				$k_yourtube_link_limit           = $request->variable('k_yourtube_link_limit', 5);
 
 				if ($k_ma_rows <= 0)
 				{

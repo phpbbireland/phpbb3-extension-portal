@@ -27,8 +27,8 @@ $k_links_to_display = $k_config['k_links_to_display'];
 
 if ($request->is_set_post('submit'))
 {
-	$k_links_forum_id = request_variable('k_links_forum_id', '');
-	$k_links_to_display = request_variable('k_links_to_display', 5);
+	$k_links_forum_id = $request->variable('k_links_forum_id', '');
+	$k_links_to_display = $request->variable('k_links_to_display', 5);
 
 	$sgp_functions_admin->sgp_acp_set_config('k_links_forum_id', $k_links_forum_id);
 	$sgp_functions_admin->sgp_acp_set_config('k_links_to_display', $k_links_to_display);

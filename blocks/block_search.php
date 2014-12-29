@@ -27,8 +27,8 @@ $user->add_lang('portal/kiss_search');
 $user->add_lang('search');
 */
 
-$submit = request_variable('submit', false);
-$keywords = request_variable('keywords', '', true);
+$submit = $request->variable('submit', false);
+$keywords = $request->variable('keywords', '', true);
 
 $allow_search = true;
 

@@ -24,10 +24,10 @@ $user->add_lang_ext('phpbbireland/portal', 'blocks/k_news');
 //echo '<pre>'; print_r($k_config);
 if ($request->is_set_post('submit'))
 {
-	$k_news_allow            = request_variable('k_news_allow', 1);
-	$k_news_item_max_length  = request_variable('k_news_item_max_length', 0);
-	$k_news_items_to_display = request_variable('k_news_items_to_display', 5);
-	$k_news_type             = request_variable('k_news_type', 0);
+	$k_news_allow            = $request->variable('k_news_allow', 1);
+	$k_news_item_max_length  = $request->variable('k_news_item_max_length', 0);
+	$k_news_items_to_display = $request->variable('k_news_items_to_display', 5);
+	$k_news_type             = $request->variable('k_news_type', 0);
 /*
 	switch ($k_news_type)
 	{

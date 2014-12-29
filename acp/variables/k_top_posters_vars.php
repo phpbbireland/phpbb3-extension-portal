@@ -26,7 +26,7 @@ $k_top_posters_to_display = $k_config['k_top_posters_to_display'];
 
 if ($request->is_set_post('submit'))
 {
-	$k_top_posters_to_display = request_variable('k_top_posters_to_display', 10);
+	$k_top_posters_to_display = $request->variable('k_top_posters_to_display', 10);
 	$sgp_functions_admin->sgp_acp_set_config('k_top_posters_to_display', $k_top_posters_to_display);
 }
 

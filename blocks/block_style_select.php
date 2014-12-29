@@ -31,8 +31,8 @@ global $user_id, $user, $template, $phpbb_root_path, $phpEx, $db, $k_blocks;
 
 
 $current_style = $user->data['user_style'];		// the current style
-$new_style = request_variable('style', 0);			// selected style
-$make_permanent = request_variable('mp', 'false');	// make style permanent
+$new_style = $request->variable('style', 0);			// selected style
+$make_permanent = $request->variable('mp', 'false');	// make style permanent
 
 $allow_style_change = ($config['override_user_style']) ? false : true;
 $change_db_style = ($allow_style_change && $make_permanent) ? true : false;
@@ -51,8 +51,8 @@ $this_page = explode(".", $user->page['page']);
 
 // rebuild forum and topic (viewforum, viewtopic) //
 $appends = '';
-$fo = request_variable('f', 0);
-$to = request_variable('t', 0);
+$fo = $request->variable('f', 0);
+$to = $request->variable('t', 0);
 
 if ($fo != 0)
 {
@@ -81,7 +81,7 @@ $result = $db->sql_query($sql, $block_cache_time);
 
 while ($row = $db->sql_fetchrow($result))
 {
-	$style = request_variable('style', 0);
+	$style = $request->variable('style', 0);
 
 	if ($style)
 	{

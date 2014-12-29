@@ -51,7 +51,7 @@ else
 	$has_posted = "";
 }
 
-$page = request_variable('page', '');
+$page = $request->variable('page', '');
 
 if (isset($page) && $page == 'avatars')
 {
@@ -136,7 +136,7 @@ if ($per_page <= 0)
 
 $pages = floor($total/$per_page);
 
-$start = request_variable('start', 0);
+$start = $request->variable('start', 0);
 
 
 for ($j = 0; $j < $pages + 1; $j++)
