@@ -63,7 +63,7 @@ $template->assign_block_vars('moderator', array(
 
 $db->sql_freeresult($result);
 
-$forum_id = request_var('f', 0);
+$forum_id = request_variable('f', 0);
 if ($forum_id)
 {
 	$umcp = append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=main&amp;mode=forum_view&amp;f=' . $forum_id);
@@ -72,7 +72,6 @@ else
 {
 	$umcp = "";
 }
-
 
 $template->assign_vars(array(
 	'MOD_MCP_ALLOWED'     => true,

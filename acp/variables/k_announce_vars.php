@@ -24,10 +24,10 @@ $user->add_lang_ext('phpbbireland/portal', 'blocks/k_announcements');
 
 if ($request->is_set_post('submit'))
 {
-	$k_announce_allow           = request_var('k_announce_allow', 1);
-	$k_announce_type            = request_var('k_announce_type', '');
-	$k_announce_item_max_length = request_var('k_announce_item_max_length', 0);
-	$k_announce_to_display      = request_var('k_announce_to_display', 5);
+	$k_announce_allow           = request_variable('k_announce_allow', 1);
+	$k_announce_type            = request_variable('k_announce_type', '');
+	$k_announce_item_max_length = request_variable('k_announce_item_max_length', 0);
+	$k_announce_to_display      = request_variable('k_announce_to_display', 5);
 
 	$sgp_functions_admin->sgp_acp_set_config('k_announce_allow', $k_announce_allow);
 	$sgp_functions_admin->sgp_acp_set_config('k_announce_type', $k_announce_type);

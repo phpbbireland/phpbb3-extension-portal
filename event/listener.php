@@ -268,10 +268,10 @@ class listener implements EventSubscriberInterface
 
 		if (isset($_COOKIE[$cookie_name]))
 		{
-			$cookie_value = request_var($cookie_name, 0, false, true);
+			$cookie_value = request_variable($cookie_name, 0, false, true);
 		}
 
-		$css = request_var('css', 0);
+		$css = request_variable('css', 0);
 		if ($css) // set css //
 		{
 			$user->set_cookie('css', $css, $set_time);

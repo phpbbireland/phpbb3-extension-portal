@@ -29,10 +29,10 @@ $k_recent_search_days           = $k_config['k_recent_search_days'];
 
 if ($request->is_set_post('submit'))
 {
-	$k_recent_topics_to_display      = request_var('k_recent_topics_to_display', 10);
-	$k_recent_topics_per_forum       = request_var('k_recent_topics_per_forum', 5);
-	$k_recent_topics_search_exclude  = request_var('k_recent_topics_search_exclude', '');
-	$k_recent_search_days            = request_var('k_recent_search_days', 7);
+	$k_recent_topics_to_display      = request_variable('k_recent_topics_to_display', 10);
+	$k_recent_topics_per_forum       = request_variable('k_recent_topics_per_forum', 5);
+	$k_recent_topics_search_exclude  = request_variable('k_recent_topics_search_exclude', '');
+	$k_recent_search_days            = request_variable('k_recent_search_days', 7);
 
 	$sgp_functions_admin->sgp_acp_set_config('k_recent_topics_to_display', $k_recent_topics_to_display);
 	$sgp_functions_admin->sgp_acp_set_config('k_recent_topics_per_forum', $k_recent_topics_per_forum);

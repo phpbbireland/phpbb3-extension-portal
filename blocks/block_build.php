@@ -127,8 +127,8 @@ if ($this_page_name != 'index' && $this_page_name != 'portal')
 		}
 	}
 
-	$forum_id = request_var('f', 0);
-	$topic_id = request_var('t', 0);
+	$forum_id = request_variable('f', 0);
+	$topic_id = request_variable('t', 0);
 
 	$s_feed_news = false;
 

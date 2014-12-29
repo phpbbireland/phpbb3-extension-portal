@@ -545,7 +545,7 @@ if (!function_exists('generate_menus'))
 
 		$p_count = count($k_menus);
 
-		$hash = request_var('hash', '');
+		$hash = request_variable('hash', '');
 
 		if (!function_exists('group_memberships'))
 		{

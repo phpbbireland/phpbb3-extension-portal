@@ -50,10 +50,10 @@ if (!class_exists('bbcode'))
 */
 
 // Initial var setup
-$b_forum_id	= request_var('f', '');
-$b_topic_id	= request_var('t', '');
+$b_forum_id	= request_variable('f', '');
+$b_topic_id	= request_variable('t', '');
 
-$b_post_id	= request_var('p', $k_config['k_poll_post_id']);
+$b_post_id	= request_variable('p', $k_config['k_poll_post_id']);
 
 if (!$b_post_id)
 {
@@ -61,16 +61,16 @@ if (!$b_post_id)
 	return;
 }
 
-$b_voted_id	= request_var('vote_id', array('' => 0));
+$b_voted_id	= request_variable('vote_id', array('' => 0));
 
-$b_start = request_var('start', 0);
-$b_view = request_var('view', '');
+$b_start = request_variable('start', 0);
+$b_view = request_variable('view', '');
 
-$b_sort_days = request_var('st', ((!empty($user->data['user_post_show_days'])) ? $user->data['user_post_show_days'] : 0));
-$b_sort_key	= request_var('sk', ((!empty($user->data['user_post_sortby_type'])) ? $user->data['user_post_sortby_type'] : 't'));
-$b_sort_dir	= request_var('sd', ((!empty($user->data['user_post_sortby_dir'])) ? $user->data['user_post_sortby_dir'] : 'a'));
+$b_sort_days = request_variable('st', ((!empty($user->data['user_post_show_days'])) ? $user->data['user_post_show_days'] : 0));
+$b_sort_key	= request_variable('sk', ((!empty($user->data['user_post_sortby_type'])) ? $user->data['user_post_sortby_type'] : 't'));
+$b_sort_dir	= request_variable('sd', ((!empty($user->data['user_post_sortby_dir'])) ? $user->data['user_post_sortby_dir'] : 'a'));
 
-$b_update	 = request_var('update', false);
+$b_update	 = request_variable('update', false);
 
 $s_can_vote = false;
 
@@ -251,7 +251,7 @@ if (!empty($topic_data['poll_start']))
 		// the need to delete cookies to mess with results.
 		if (isset($_COOKIE[$config['cookie_name'] . '_poll_' . $b_topic_id]))
 		{
-			$cur_voted_id = request_var($config['cookie_name'] . '_poll_' . $b_topic_id, 0, false, true);
+			$cur_voted_id = request_variable($config['cookie_name'] . '_poll_' . $b_topic_id, 0, false, true);
 			$cur_voted_id = array_map('intval', $cur_voted_id);
 		}
 	}

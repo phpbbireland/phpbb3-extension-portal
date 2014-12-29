@@ -138,10 +138,10 @@ class main_controller implements main_interface
 
 		if (isset($_COOKIE[$cookie_name]))
 		{
-			$cookie_value = request_var($cookie_name, 0, false, true);
+			$cookie_value = request_variable($cookie_name, 0, false, true);
 		}
 
-		$css = request_var('css', 0);
+		$css = request_variable('css', 0);
 		if ($css) // set css //
 		{
 			$user->set_cookie('css', $css, $set_time);
@@ -381,17 +381,17 @@ class main_controller implements main_interface
 		{
 			if (isset($_COOKIE[$config['cookie_name'] . '_sgp_left']) || isset($_COOKIE[$config['cookie_name'] . '_sgp_center']) || isset($_COOKIE[$config['cookie_name'] . '_sgp_right']) && $use_block_cookies)
 			{
-				$left = request_var($config['cookie_name'] . '_sgp_left', '', false, true);
+				$left = request_variable($config['cookie_name'] . '_sgp_left', '', false, true);
 				$left = str_replace("left[]=", "", $left);
 				$left = str_replace("&amp;", ',', $left);
 				$LBA = explode(',', $left);
 
-				$center = request_var($config['cookie_name'] . '_sgp_center', '', false, true);
+				$center = request_variable($config['cookie_name'] . '_sgp_center', '', false, true);
 				$center = str_replace("center[]=", "", $center);
 				$center = str_replace("&amp;", ',', $center);
 				$CBA = explode(',', $center);
 
-				$right = request_var($config['cookie_name'] . '_sgp_right', '', false, true);
+				$right = request_variable($config['cookie_name'] . '_sgp_right', '', false, true);
 				$right = str_replace("right[]=", "", $right);
 				$right = str_replace("&amp;", ',', $right);
 				$RBA = explode(',', $right);
