@@ -74,7 +74,6 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				'ACP_RESOURCES_TITLE',
 			)),
 
-
 			array('module.add', array(
 				'acp',
 				'ACP_CONFIG_TITLE',
@@ -142,7 +141,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				),
 				$this->table_prefix . 'k_blocks' => array(
 					'COLUMNS' => array(
-						'id'                => array('UINT', NULL, 'auto_increment'),
+						'id'                => array('UINT', null, 'auto_increment'),
 						'ndx'               => array('UINT', '0'),
 						'title'             => array('VCHAR:50', ''),
 						'position'          => array('CHAR:1', 'L'),
@@ -167,7 +166,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				),
 				$this->table_prefix . 'k_menus' => array(
 					'COLUMNS' => array(
-						'm_id'			=> array('UINT', NULL, 'auto_increment'),
+						'm_id'			=> array('UINT', null, 'auto_increment'),
 						'ndx'			=> array('UINT', '0'),
 						'menu_type'		=> array('USINT', '0'),
 						'name'			=> array('VCHAR:50', ''),
@@ -185,14 +184,14 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				),
 				$this->table_prefix . 'k_pages' => array(
 					'COLUMNS' => array(
-						'page_id'	=> array('UINT', NULL, 'auto_increment'),
+						'page_id'	=> array('UINT', null, 'auto_increment'),
 						'page_name'	=> array('VCHAR_UNI:100', ''),
 					),
 					'PRIMARY_KEY'	=> 'page_id',
 				),
 				$this->table_prefix . 'k_resources' => array(
 					'COLUMNS' => array(
-						'id'	=> array('UINT', NULL, 'auto_increment'),
+						'id'	=> array('UINT', null, 'auto_increment'),
 						'word'	=> array('VCHAR:50', ''),
 						'type'	=> array('CHAR:1', 'V'),
 					),
