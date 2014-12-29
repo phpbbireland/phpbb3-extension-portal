@@ -16,7 +16,7 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-global $php_root_path, $db, $user, $config, $k_config, $k_blocks, $phpbb_root_path, $phpEx;
+global $php_root_path, $db, $user, $request, $config, $k_config, $k_blocks, $phpbb_root_path, $phpEx;
 //$phpEx = substr(strrchr(__FILE__, '.'), 1);
 //$this->user->add_lang_ext('phpbbireland/portal', 'kiss_search');
 $user->add_lang_ext('phpbbireland/portal', 'kiss_search');

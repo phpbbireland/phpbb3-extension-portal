@@ -72,7 +72,7 @@ while ($row = $db->sql_fetchrow($result))
 		'S_SEARCH_ACTION'	=> append_sid("{$phpbb_root_path}search.$phpEx", 'author_id=' . $row['user_id'] . '&amp;sr=posts'),
 		'USERNAME_FULL'		=> get_username_string('full', $row['user_id'], sgp_checksize($row['username'],15), $row['user_colour']),
 		'POSTER_POSTS'		=> $row['user_posts'],
-		'USER_AVATAR_IMG'	=> phpbb_get_avatar($row['user_avatar'], $row['user_avatar_type'], '16', '16', $user->lang['USER_AVATAR']),
+		'USER_AVATAR_IMG'	=> get_user_avatar($row['user_avatar'], $row['user_avatar_type'], '16', '16', $user->lang['USER_AVATAR']),
 		//'URL'				=> $row['user_website'],
 	));
 }
