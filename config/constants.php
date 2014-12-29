@@ -29,7 +29,7 @@ define('K_BLOCKS_TABLE',			$table_prefix . 'k_blocks');
 define('K_MENUS_TABLE',				$table_prefix . 'k_menus');
 define('K_PAGES_TABLE',				$table_prefix . 'k_pages');
 define('K_RESOURCES_TABLE',			$table_prefix . 'k_resources');
-
+define('K_LINK_IMAGES_TABLE',		$table_prefix . 'k_link_images');
 define('K_ACRONMYS_TABLE',			$table_prefix . 'k_acronyms');
 define('K_YOUTUBE_TABLE',			$table_prefix . 'k_youtube');
 
