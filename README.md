@@ -2,7 +2,7 @@
 
 Fully integrated portal for phpBB 3.1.x
 
-**Development Status:**  
+**Development Status:** [![Build Status](https://travis-ci.org/phpbbireland/phpbb3-extension-portal.svg)](https://travis-ci.org/phpbbireland/phpbb3-extension-portal)
 
 **Due to illness updates may be delayed**  
 Updated for RC3 please use this repository for testing only,  
