@@ -75,5 +75,3 @@ $lang = array_merge($lang, array(
 	&bull; Mod pages are saved in a comma separated string (no spaces, no trailing comma)...<br />
 	<br />Note: Mod pages must provide necessary code to facilitate blocks (this is easy to add should you desire it)...',
 ));
-
-?>

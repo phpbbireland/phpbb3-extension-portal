@@ -162,4 +162,3 @@ $lang = array_merge($lang, array(
 	'VIEW_BY'     => 'View By',
 	'UP'          => 'Up',
 ));
-?>

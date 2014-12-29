@@ -95,5 +95,3 @@ $lang = array_merge($lang, array(
 	'TITLE_EXPLAIN'	=> 'Method used to pass variables to pages/web pages...<br />The portal replaces the variables with their values automatically.<br />Only variables from $config and $k_config tables are processed...',
 	'TITLE_ADD'		=> 'Add Variable',
 ));
-
-?>

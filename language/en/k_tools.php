@@ -46,5 +46,3 @@ $lang = array_merge($lang, array(
 	'TOOL_OPTIONS'		=> 'Available options',
 	'USER_RESET'		=> 'Reset login attempts for user (users name)',
 ));
-
-?>

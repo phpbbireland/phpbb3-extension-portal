@@ -137,5 +137,3 @@ $lang = array_merge($lang, array(
 $lang = array_merge($lang, array(
 	'CHECK_VERSION'  => 'Check for updates',
 ));
-
-?>

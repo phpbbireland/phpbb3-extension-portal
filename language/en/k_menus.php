@@ -163,5 +163,3 @@ $lang = array_merge($lang, array(
 $lang = array_merge($lang, array(
 	'ACP_MESSAGE_SETTINGS_EXPLAIN'  => 'Here you can set all default settings for private messaging',
 ));
-
-?>

@@ -98,5 +98,3 @@ $lang = array_merge($lang, array(
     'TITLE'                 => 'Portal default configuration',
     'TITLE_EXPLAIN'         => 'Here you can set the portal block default. Items marked with <strong>*</strong> are under construction or for future development.',
 ));
-
-?>

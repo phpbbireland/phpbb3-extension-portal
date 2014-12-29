@@ -463,6 +463,3 @@ $lang = array_merge($lang, array(
 	'K_MA_USER_ACTIVE'               => 'Display only active members',
 	'K_MA_USER_HAS_POSTED'           => 'Include members with no posts',
 ));
-
-
-?>

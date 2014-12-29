@@ -53,4 +53,3 @@ protected $permissions = array(
 		'portal'		=> 'ACL_CAT_PORTAL',
 	);
 */
-?>

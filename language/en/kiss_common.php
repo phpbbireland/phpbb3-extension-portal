@@ -559,4 +559,3 @@ $lang = array_merge($lang, array(
 	// donations
 	'TOTAL_DONATIONS'  => 'Total donations for %s are $%01.2f',
 ));
-
