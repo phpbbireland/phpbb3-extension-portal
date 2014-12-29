@@ -252,7 +252,6 @@ if (!function_exists('truncate_post'))
 			}
 		}
 
-
 		// process up to end bbcode //
 		for ($i = 0; $i < $bbcodes_end[$tmp]; $i++)
 		{

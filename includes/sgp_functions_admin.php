@@ -150,7 +150,6 @@ class sgp_functions_admin
 		{
 			$row = $mod->version_check;
 
-
 			$version = $row->version->major[0] . '.' . $row->version->minor[0] . '.' . $row->version->revision[0];
 
 			$data = array(

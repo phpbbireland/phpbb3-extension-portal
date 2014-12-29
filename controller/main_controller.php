@@ -107,7 +107,6 @@ class main_controller implements main_interface
 		$mod_image_lang_path     = $mod_root_path . 'styles/prosilver/theme/' . $user->data['user_lang'];
 		$js_version = 'jquery-2.0.3.min.js';
 
-
 		if (!class_exists('bbcode'))
 		{
 			include($this->root_path . 'includes/bbcode.' . $this->php_ext);

@@ -109,11 +109,11 @@ class listener implements EventSubscriberInterface
 	{
 		global $user, $template, $phpbb_container, $phpbb_root_path, $web_path;
 
-        //$this->user->add_lang_ext('phpbbireland/portal', 'kiss_common');
+		//$this->user->add_lang_ext('phpbbireland/portal', 'kiss_common');
 
-        $this->template->assign_vars(array(
-            'U_PORTAL'            => $this->helper->route('phpbbireland/portal', 'portal_base_controller'),
-            'U_INDEX'             => $this->helper->route('phpbb/phpbb', 'index'),
+		$this->template->assign_vars(array(
+			'U_PORTAL'            => $this->helper->route('phpbbireland/portal', 'portal_base_controller'),
+			'U_INDEX'             => $this->helper->route('phpbb/phpbb', 'index'),
 
 			'STARGATE'	          => true,
 			'HS'                  => true,
@@ -128,7 +128,6 @@ class listener implements EventSubscriberInterface
 			'U_HOME'              => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
 			'SITE_LOGO_IMG'       => $logo,
 			'SITE_LOGO_IMG_RIGHT' => $logo_right,
-
 		));
 	}
 
@@ -252,10 +251,8 @@ class listener implements EventSubscriberInterface
 
 		include_once($this->includes_path . 'sgp_functions.' . $this->php_ext);
 
-
 		$func = new \phpbbireland\portal\includes\func;
 		$func->block_modules();
-
 
 		if (!function_exists('phpbb_get_user_avatar'))
 		{

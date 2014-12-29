@@ -95,7 +95,6 @@ if (!function_exists('set_k_config'))
 			WHERE config_name = '" . $db->sql_escape($config_name) . "'";
 		$result = $db->sql_query($sql);
 
-
 		if (!$result)
 		//if (!$db->sql_affectedrows() && !isset($k_config[$config_name]))
 		{
@@ -199,7 +198,7 @@ if (!function_exists('k_progress_bar'))
 */
 if (!function_exists('sgp_checksize'))
 {
-	function sgp_checksize($txt,$len)
+	function sgp_checksize($txt, $len)
 	{
 		if (strlen($txt) > $len)
 		{
@@ -240,7 +239,7 @@ if (!function_exists('search_block_func'))
 
 		$template->assign_vars(array(
 			"L_SEARCH_ADV"     => $lang['SEARCH_ADV'],
-			"L_SEARCH_OPTION"  => (!empty($portal_config['search_option_text'])) ? $portal_config['search_option_text'] : $board_config ['sitename'],
+			"L_SEARCH_OPTION"  => (!empty($portal_config['search_option_text'])) ? $portal_config['search_option_text'] : $board_config['sitename'],
 			'U_SEARCH'         => append_sid("{$phpbb_root_path}search.$phpEx", 'keywords=' . urlencode($keywords)),
 		));
 	}
@@ -644,7 +643,7 @@ if (!function_exists('generate_menus'))
 						break;
 
 						default:
-							 $link_option = '';
+							$link_option = '';
 						break;
 					}
 
