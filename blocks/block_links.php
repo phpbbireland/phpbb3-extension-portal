@@ -6,6 +6,7 @@
 * @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
+* Modified for 3.1 Dec 2014, now using database table...
 */
 
 /**
@@ -23,129 +24,28 @@ $phpEx = substr(strrchr(__FILE__, '.'), 1);
 
 $show_all_links = false;
 
-foreach ($k_blocks as $blk)
-{
-	if ($blk['html_file_name'] == 'block_links.html')
-	{
-		$block_cache_time = $blk['block_cache_time'];
-		break;
-	}
-}
-$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['k_block_cache_time_default']);
 
-// retrieve portal config variables
-$k_links_to_display = $k_config['k_links_to_display'];
-
-if ($k_links_to_display > 0 && $k_links_to_display < 6)
+if ($blk['html_file_name'] == 'block_links.html')
 {
-	$show_all_links = false;
-}
-else if ($k_links_to_display == 0)
-{
-	$show_all_links = true;
+	$block_cache_time = $blk['block_cache_time'];
+	break;
 }
 
-// do we have a dedicated links upload forum? If not don't show the link upload image //
-if (isset($k_config['k_links_forum_id']) && $k_config['k_links_forum_id'] != 0)
+$sql = "SELECT *
+	FROM " . K_LINK_IMAGES_TABLE . "
+	WHERE open_in_tab = 1
+		ORDER BY RAND()";
+
+$result = $db->sql_query($sql, $block_cache_time);
+
+
+while ($row = $db->sql_fetchrow($result))
 {
-	$links_forum =  append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=post&amp;f=' . (int) $k_config['k_links_forum_id']);
+	//var_dump($row);
+
+	$template->assign_block_vars('portal_links_row', array(
+		'LINKS_IMG'	=> $phpbb_root_path . 'ext/otoole/portal/images/links/' . $row['image'],
+		'U_LINKS'	=> $row['url'],
+	));
+
 }
-else
-{
-	$links_forum = '';
-}
-
-$imglist = array();
-
-mt_srand((double) microtime()*1000002);
-$imgs = dir($phpbb_root_path . 'ext/phpbbireland/portal/images/links');
-
-while ($file = $imgs->read())
-{
-	if (strpos($file, ".gif") || strpos($file, ".jpg") || strpos($file, ".png"))
-	{
-		$imglist[] = $file;
-	}
-}
-closedir($imgs->handle);
-
-$total_images_found = sizeof($imglist);
-$links_count = 	$total_images_found;
-
-if ($k_links_to_display > $links_count)	// we do not have enough images! so display what we have //
-{
-	$k_links_to_display = $links_count;
-}
-
-$random = mt_rand(0, $links_count);
-
-if ($random >= ($links_count - $k_links_to_display))
-{
-	$random = ($links_count - $k_links_to_display);
-}
-
-// The number of link images to show (scrolled if scroll set in block)... Could be simplified a little...
-if ($show_all_links)
-{
-	for ($i = 0; $i <= $total_images_found -1; $i++)
-	{
-		$image = $imglist[$i];
-
-		if (strpos($image, '.gif'))
-		{
-			$lnk = explode(".gif", $image);
-		}
-		else if (strpos($image, '.png'))
-		{
-			$lnk = explode(".png", $image);
-		}
-		else if (strpos($image, '.jpg'))
-		{
-			$lnk = explode(".jpg", $image);
-		}
-
-		$lnk[0] = str_replace('+','/', $lnk[0]);
-		$lnk[0] = str_replace('@','?', $lnk[0]);
-		$lnk[0] = str_replace('£','+', $lnk[0]);
-
-		$template->assign_block_vars('portal_links_row', array(
-			'LINKS_IMG'	=> $phpbb_root_path . 'ext/phpbbireland/portal/images/links/' . $image,
-			'U_LINKS'	=> $lnk[0],
-		));
-	}
-}
-else
-{
-	for ($i = 0; $i <= $k_links_to_display-1; $i++)
-	{
-		$image = $imglist[$i+$random];
-
-		if (strstr($image, 'gif'))
-		{
-			$lnk = explode(".gif", $image);
-		}
-		else if (strstr($image, 'png'))
-		{
-			$lnk = explode(".png", $image);
-		}
-		else if (strstr($image, 'jpg'))
-		{
-			$lnk = explode(".jpg", $image);
-		}
-
-		$lnk[0] = str_replace('+','/', $lnk[0]);
-		$lnk[0] = str_replace('@','?', $lnk[0]);
-		$lnk[0] = str_replace('£','+', $lnk[0]);
-
-		$template->assign_block_vars('portal_links_row', array(
-			'LINKS_IMG'	=> $phpbb_root_path . 'ext/phpbbireland/portal/images/links/' . $image,
-			'U_LINKS'	=> $lnk[0],
-		));
-	}
-}
-
-$template->assign_vars(array(
-	'SUBMIT_LINK'  => $links_forum,
-	'LINKS_COUNT'  => $k_links_to_display,
-	'TOTAL_LINKS'  => $total_images_found,
-));

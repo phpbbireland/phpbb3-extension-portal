@@ -206,7 +206,6 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 					'user_right_blocks'   => array('VCHAR:255', ''),
 				),
 			),
-			//array('custom', array(array($this, 'seed_db'))),
 		);
 	}
 
