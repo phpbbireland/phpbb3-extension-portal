@@ -13,7 +13,7 @@ class release_1_0_1 extends \phpbb\db\migration\migration
 {
 	static public function depends_on()
 	{
-		return array('\otoole\portal\migrations\v10x\release_1_0_0');
+		return array('\phpbbireland\portal\migrations\v10x\release_1_0_0');
 	}
 
 	public function update_data()
@@ -58,8 +58,8 @@ class release_1_0_1 extends \phpbb\db\migration\migration
 		$links_sql = array(
 			array(
 				'link'			=> 'Kiss Portal',
-				'url'			=> 'www.otoole.com',
-				'image'			=> 'www.otoole.gif',
+				'url'			=> 'www.phpbbireland.com',
+				'image'			=> 'www.phpbbireland.gif',
 				'open_in_tab'	=> '1',
 			),
 			array(
