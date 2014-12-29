@@ -516,7 +516,7 @@ if (!function_exists('generate_menus'))
 	function generate_menus()
 	{
 		global $k_groups, $k_blocks, $k_menus;
-		global $template, $phpbb_root_path, $auth, $user, $phpEx;
+		global $template, $phpbb_root_path, $auth, $user, $phpEx, $request;
 		static $process = 0;
 
 /*
@@ -545,7 +545,7 @@ if (!function_exists('generate_menus'))
 
 		$p_count = count($k_menus);
 
-		$hash = request_variable('hash', '');
+		$hash = $request->variable('hash', '');
 
 		if (!function_exists('group_memberships'))
 		{

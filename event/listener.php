@@ -12,8 +12,54 @@ namespace phpbbireland\portal\event;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+/**
+* Event listener
+*/
 class listener implements EventSubscriberInterface
 {
+	/** @var \phpbb\controller\helper */
+	protected $helper;
+
+	/** @var \phpbb\request\request */
+	protected $request;
+
+	/** @var \phpbb\template\template */
+	protected $template;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/** @var string phpEx */
+	protected $php_ext;
+
+	/**
+	* Constructor
+	*
+	* @param \phpbb\controller\helper    $helper    Controller helper object
+	* @param \phpbb\request\request      $request            Request object
+	* @param \phpbb\template\template    $template           Template object
+	* @param \phpbb\user                 $user               User object
+	* @param string                      $php_ext   phpEx
+	* @return \phpbbireland\portal\event\listener
+	* @access public
+	*/
+	public function __construct(\phpbb\controller\helper $helper, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
+	{
+		$this->helper = $helper;
+		$this->request = $request;
+		$this->template = $template;
+		$this->user = $user;
+		$this->php_ext = $php_ext;
+		$this->page = '';
+	}
+
+	/**
+	* Assign functions defined in this class to event listeners in the core
+	*
+	* @return array
+	* @static
+	* @access public
+	*/
 	static public function getSubscribedEvents()
 	{
 		return array(
@@ -35,35 +81,6 @@ class listener implements EventSubscriberInterface
 		add event to add news ...
 
 	*/
-
-	/* @var \phpbb\controller\helper */
-	protected $helper;
-
-	/* @var \phpbb\template\template */
-	protected $template;
-
-	/* @var \phpbb\user */
-	protected $user;
-
-	/* @var string phpEx */
-	protected $php_ext;
-
-	/**
-	* Constructor
-	*
-	* @param \phpbb\controller\helper    $helper    Controller helper object
-	* @param \phpbb\template             $template  Template object
-	* @param \phpbb\user                 $user      User object
-	* @param string                      $php_ext   phpEx
-	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
-	{
-		$this->helper = $helper;
-		$this->template = $template;
-		$this->user = $user;
-		$this->php_ext = $php_ext;
-		$this->page = '';
-	}
 
 	public function load_language_on_setup($event)
 	{
@@ -268,10 +285,10 @@ class listener implements EventSubscriberInterface
 
 		if (isset($_COOKIE[$cookie_name]))
 		{
-			$cookie_value = request_variable($cookie_name, 0, false, true);
+			$cookie_value = $request->variable($cookie_name, 0, false, true);
 		}
 
-		$css = request_variable('css', 0);
+		$css = $request->variable('css', 0);
 		if ($css) // set css //
 		{
 			$user->set_cookie('css', $css, $set_time);

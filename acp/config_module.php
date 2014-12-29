@@ -32,15 +32,15 @@ class config_module
 		$this->page_title = $user->lang['ACP_CONFIG'];
 		add_form_key('config');
 
-		$action = request_variable('action', '');
-		$mode	= request_variable('mode', '');
-		$generate = request_variable('generate', '');
+		$action = $request->variable('action', '');
+		$mode	= $request->variable('mode', '');
+		$generate = $request->variable('generate', '');
 
 		$data = $this->check_version();
 
 		$submit = (isset($_POST['submit'])) ? true : false;
 
-		$forum_id   = request_variable('f', 0);
+		$forum_id   = $request->variable('f', 0);
 		$forum_data = $errors = array();
 
 		if ($request->is_set_post('submit'))
