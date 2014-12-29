@@ -44,5 +44,3 @@ $lang = array_merge($lang, array(
 	'DONATIONS_MAX'    => 'Maximum number of donations to dispaly',
 	'TOTAL_DONATIONS'  => 'Total donations for %s are $%01.2f',
 ));
-
-?>

@@ -39,19 +39,19 @@ if (empty($lang) || !is_array($lang))
 
 // Poll Mods
 $lang = array_merge($lang, array(
-    'K_POLL_BLOCK_SETTINGS' => 'Poll block variables',
+	'K_POLL_BLOCK_SETTINGS' => 'Poll block variables',
 
-    'K_POLL_OPT'            => 'Option',
-    'K_POLL_OPT_EXPLAIN'    => 'This allows tweaking the html code to better suit the display width.',
-    'K_POLL_SD'             => 'Simple/Detailed',
-    'K_POLL_DETAILED'       => 'Detailed',
-    'K_POLL_SIMPLE'         => 'Simple',
-    'K_POLL_POST_ID'        => 'Post ID to display Poll from',
-    'K_POLL_VIEW'           => 'Poll view (simple or detailed)',
-    'K_POLL_VIEW_EXPLAIN'   => 'Use detailed for centre block, simple of left/right blocks.',
-    'K_POLL_WIDE_EXPLAIN'   => 'This allows tweaking the html code to better suit the display width.',
-    'K_POLL_ACTION'         => 'Action',
-    'K_POLL_WIDE'           => 'Display block options',
+	'K_POLL_OPT'            => 'Option',
+	'K_POLL_OPT_EXPLAIN'    => 'This allows tweaking the html code to better suit the display width.',
+	'K_POLL_SD'             => 'Simple/Detailed',
+	'K_POLL_DETAILED'       => 'Detailed',
+	'K_POLL_SIMPLE'         => 'Simple',
+	'K_POLL_POST_ID'        => 'Post ID to display Poll from',
+	'K_POLL_VIEW'           => 'Poll view (simple or detailed)',
+	'K_POLL_VIEW_EXPLAIN'   => 'Use detailed for centre block, simple of left/right blocks.',
+	'K_POLL_WIDE_EXPLAIN'   => 'This allows tweaking the html code to better suit the display width.',
+	'K_POLL_ACTION'         => 'Action',
+	'K_POLL_WIDE'           => 'Display block options',
 
 	'K_POLL_CNTR'           => 'Centre Block',
 	'K_POLL_LR'             => 'Left or Right Block',

@@ -47,5 +47,3 @@ $lang = array_merge($lang, array(
 	'K_TOP_DOWNLOADS_TYPES'              => 'Attachments to include',
 	'K_TOP_DOWNLOADS_TYPES_EXPLAIN'      => 'Comma separated file extensions to include, example: zip,gif,arc',
 ));
-
-?>

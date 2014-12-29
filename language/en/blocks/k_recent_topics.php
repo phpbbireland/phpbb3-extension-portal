@@ -51,5 +51,3 @@ $lang = array_merge($lang, array(
 	'RECENT_REPLY'          => 'View latest reply...',
 	'BLOCK_RECENT_TOPICS'   => 'Kiss Portal Recent Topics',
 ));
-
-?>

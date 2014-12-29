@@ -49,5 +49,3 @@ $lang = array_merge($lang, array(
 	'K_ANNOUNCE_ALLOW'                   => 'Allow Announcements',
 	'K_ANNOUNCE_ALLOW_EXPLAIN'           => 'Allow announcements to be displayed on portal.',
 ));
-
-?>

@@ -49,5 +49,3 @@ $lang = array_merge($lang, array(
 	'K_NEWS_ALLOW'                   => 'Allow News',
 	'K_NEWS_ALLOW_EXPLAIN'           => 'Allow news items to be displayed on portal.',
 ));
-
-?>
