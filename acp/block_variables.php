@@ -95,7 +95,6 @@ class block_variables
 
 		$template->assign_vars(array( 'S_SWITCH' => $var_file_name ));
 
-
 		if ($submit && !check_form_key($form_key))
 		{
 			trigger_error($user->lang['FORM_INVALID']);

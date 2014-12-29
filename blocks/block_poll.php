@@ -133,7 +133,7 @@ if (!$b_forum_id)
 		$sql_array['LEFT_JOIN'][] = array(
 			'FROM'	=> array(TOPICS_WATCH_TABLE => 'tw'),
 			'ON'	=> 'tw.user_id = ' . $user->data['user_id'] . ' AND t.topic_id = tw.topic_id'
-		 );
+		);
 	}
 
 	if (!$b_post_id)

@@ -195,7 +195,6 @@ class menus_module
 						trigger_error($user->lang['ERROR_PORTAL_MENUS'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . $user->lang['LINE'] . __LINE__);
 					}
 
-
 					$cache->destroy('sql', K_MENUS_TABLE);
 
 					switch ($menu_type)
@@ -428,7 +427,7 @@ class menus_module
 					$view_all      = $request->variable('view_all', 1);
 					$view_groups   = $request->variable('view_groups', '');
 
-					if ($menu_type == NULL || $name == NULL)
+					if ($menu_type == null || $name == null)
 					{
 						// catch all we check menu_type, $name, view)
 						$template->assign_vars(array(

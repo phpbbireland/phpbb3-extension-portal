@@ -42,7 +42,6 @@ class blocks_module
 			$sgp_functions_admin = new sgp_functions_admin();
 		}
 
-
 		$k_config = $cache->get('k_config');
 
 		$user->add_lang_ext('phpbbireland/portal', 'k_blocks');
@@ -554,7 +553,6 @@ class blocks_module
 						}
 					}
 
-
 					if ($html_file_name == '...')
 					{
 						$html_file_name = '';
@@ -564,13 +562,11 @@ class blocks_module
 						$var_file_name = '';
 					}
 
-
 					/*
 					if ($has_vars == 0)
 					{
 						$var_file_name = '';
 					}*/
-
 
 					if ($minimod_based == 0)
 					{
