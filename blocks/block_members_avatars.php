@@ -18,7 +18,7 @@ if (!defined('IN_PHPBB'))
 
 $queries = $cached_queries =  $total_queries = $col_count = $total = 0;
 
-global $k_config, $k_blocks;
+global $k_config, $k_blocks, $request;
 $count = $page_count = $search_type = 0;
 $restrict = '';
 

@@ -42,7 +42,7 @@ class func
 	public function block_modules()
 	{
 		global $phpbb_root_path, $config, $phpEx, $table_prefix;
-		global $db, $user, $avatar_img, $template, $auth;
+		global $db, $user, $avatar_img, $request, $template, $auth;
 		global $k_config, $k_groups, $k_blocks;
 
 		$this->php_ext = 'php';

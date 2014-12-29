@@ -26,7 +26,7 @@ if ($this_page[0] == 'viewtopic' || $this_page[0] == 'ucp')
 
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 
-global $k_config, $b_poll, $config, $phpbb_root_path, $db, $user, $template, $phpEx;
+global $k_config, $b_poll, $config, $phpbb_root_path, $db, $user, $request, $template, $phpEx;
 
 foreach ($k_blocks as $blk)
 {

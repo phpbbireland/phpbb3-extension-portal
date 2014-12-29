@@ -16,7 +16,7 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-global $phpbb_root_path, $phpEx;
+global $request, $phpbb_root_path, $phpEx;
 return; //
 $user->add_lang('mcp');
 

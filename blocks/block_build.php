@@ -16,7 +16,7 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-global $db, $config, $k_config, $template, $SID, $_SID, $user, $auth, $phpEx, $phpbb_root_path;
+global $db, $config, $k_config, $request, $template, $SID, $_SID, $user, $auth, $phpEx, $phpbb_root_path;
 
 $block_cache_time = $k_config['k_block_cache_time_default'];
 $queries = $cached_queries = $total_queries = 0;

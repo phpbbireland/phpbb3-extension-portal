@@ -23,7 +23,7 @@ if ($user->data['user_id'] == ANONYMOUS)
 	return;
 }
 
-global $user_id, $user, $template, $phpbb_root_path, $phpEx, $db, $k_blocks;
+global $user_id, $user, $request, $template, $phpbb_root_path, $phpEx, $db, $k_blocks;
 
 
 //var_dump($user->style['style_path']);

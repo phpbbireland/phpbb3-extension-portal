@@ -25,7 +25,7 @@ if (!STARGATE)
 */
 
 global $phpbb_root_path, $config, $k_config, $phpEx, $user, $table_prefix;
-global $db, $k_blocks, $user, $avatar_img, $template, $auth;
+global $db, $k_blocks, $user, $avatar_img, $request, $template, $auth;
 global $k_groups;
 
 //$style_path_ext = $phpbb_root_path . 'ext/phpbbireland/portal/style/' . $user->user_style;
