@@ -44,7 +44,7 @@ while ($row = $db->sql_fetchrow($result))
 	//var_dump($row);
 
 	$template->assign_block_vars('portal_links_row', array(
-		'LINKS_IMG'	=> $phpbb_root_path . 'ext/otoole/portal/images/links/' . $row['image'],
+		'LINKS_IMG'	=> $phpbb_root_path . 'ext/phpbbireland/portal/images/links/' . $row['image'],
 		'U_LINKS'	=> $row['url'],
 	));
 
