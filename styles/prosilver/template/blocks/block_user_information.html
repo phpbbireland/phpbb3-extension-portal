@@ -3,7 +3,7 @@
 
 	<!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
 
-		<div style="text-align:center;"><img src="{MOD_USER_TEMPLATE_PATH}theme/images/no_avatar.gif" alt="" /></div>
+		<div style="text-align:center;"><img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" /></div>
 		<div label for="username">{L_USERNAME}:</label></div>
 		<div style="text-align:center;"><input type="text" tabindex="1" name="username" id="username" size="20" maxlength="40" value="{USERNAME}" class="inputbox autowidth" /></div>
 		<div label for="password">{L_PASSWORD}:</label></div>
@@ -27,7 +27,7 @@
 
 	<!-- IF S_USER_LOGGED_IN -->
 		<div style="text-align:center;">
-			<!-- IF AVATAR -->{AVATAR}<!-- ELSE --><img src="{MOD_USER_TEMPLATE_PATH}theme/images/no_avatar.gif" alt="" /><!-- ENDIF -->
+			<!-- IF AVATAR -->{AVATAR}<!-- ELSE --><img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" /><!-- ENDIF -->
 		</div>
 
 		<div style="text-align:center;">

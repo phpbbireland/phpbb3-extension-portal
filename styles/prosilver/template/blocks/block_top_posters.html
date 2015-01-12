@@ -11,11 +11,11 @@
 		<!-- BEGIN top_posters -->
 			<div class="trow" style="width:100%;">
 			<!-- IF top_posters.S_ROWS is even -->
-				<span class="tleft bg2" style="padding:0px;"><!-- IF top_posters.USER_AVATAR_IMG -->{top_posters.USER_AVATAR_IMG}<!-- ELSE --><img src="{MOD_COMMON_IMAGES_PATH}no_avatar.gif" width="16" height="16" alt="" /><!-- ENDIF --></span>
+				<span class="tleft bg2" style="padding:0px;"><!-- IF top_posters.USER_AVATAR_IMG -->{top_posters.USER_AVATAR_IMG}<!-- ELSE --><img src="{T_THEME_PATH}/images/no_avatar.gif" width="16" height="16" alt="" /><!-- ENDIF --></span>
 				<span class="tleft bg2" style="padding:1px; width:100%;">{top_posters.USERNAME_FULL}</span>
 				<span class="tleft bg2" style="padding:1px; width:auto; text-align:right; min-width:35px;"><a href="{top_posters.S_SEARCH_ACTION}">{top_posters.POSTER_POSTS}</a></span>
 			<!-- ELSE -->
-				<span class="tleft bg1" style="padding:0px;"><!-- IF top_posters.USER_AVATAR_IMG -->{top_posters.USER_AVATAR_IMG}<!-- ELSE --><img src="{MOD_COMMON_IMAGES_PATH}no_avatar.gif" width="16" height="16" alt="" /><!-- ENDIF --></span>
+				<span class="tleft bg1" style="padding:0px;"><!-- IF top_posters.USER_AVATAR_IMG -->{top_posters.USER_AVATAR_IMG}<!-- ELSE --><img src="{T_THEME_PATH}/images/no_avatar.gif" width="16" height="16" alt="" /><!-- ENDIF --></span>
 				<span class="tleft bg1" style="padding:1px; width:100%;">{top_posters.USERNAME_FULL}</span>
 				<span class="tleft bg1" style="padding:1px; width:auto; text-align:right; min-width:35px; overflow:hidden;"><a href="{top_posters.S_SEARCH_ACTION}">{top_posters.POSTER_POSTS}</a></span>
 			<!-- ENDIF -->
