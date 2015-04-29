@@ -415,10 +415,9 @@ class func
 
 	public function build_block_modules($block_file)
 	{
-		//?var_dump('func.php > build_block_modules('. $block_file . ') - called once for each block!');
 		global $template;
-
-		$template->set_filenames(array('block' => 'blocks/' . $block_file));
+		//$template->set_filenames(array('block' => '/blocks/' . $block_file));
+		$template->set_filenames(array('block' => '@phpbbireland_portal' . '/blocks/' . $block_file));
 		return $template->assign_display('block', true);
 	}
 
