@@ -10,14 +10,6 @@
 
 namespace phpbbireland\portal\includes;
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
 class func
 {
 	/* @var \phpbb\config */
@@ -39,16 +31,25 @@ class func
 	protected $php_ext;
 
 
-	public function block_modules()
+	public function process_block_modules()
 	{
-		global $phpbb_root_path, $config, $phpEx, $table_prefix;
+
+//?var_dump('func.php > process_block_modules() in func.php ... not for portal!!!');
+
+		global $phpbb_root_path, $config, $table_prefix, $helper;
 		global $db, $user, $avatar_img, $request, $template, $auth;
-		global $k_config, $k_groups, $k_blocks;
+		global $k_config, $k_groups, $k_blocks, $page_header;
 
-		$this->php_ext = 'php';
 
-		//var_dump('in: portal.php : block_modules()');
-		//var_dump($k_config['k_block_cache_time_default']);
+		global $phpbb_path_helper;
+		$this->php_ext = $phpbb_path_helper->get_php_ext();
+
+		//var_dump('phpbb set extesion to: ' . $this->php_ext);
+		//$this->php_ext = $php_ext;
+
+//var_dump($config);
+//var_dump($this->config);
+//var_dump($k_config);
 
 		$block_cache_time  = $k_config['k_block_cache_time_default'];
 		$blocks_width 	   = $config['blocks_width'];
@@ -75,7 +76,7 @@ class func
 		$this_page = explode(".", $user->page['page']);
 		$user_id = $user->data['user_id'];
 
-		include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.' . $this->php_ext);
+		include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/kiss_functions.' . $this->php_ext);
 
 		// Grab data for this user //
 		$sql = "SELECT group_id, user_type, user_style, user_avatar, user_avatar_type, username, user_left_blocks, user_center_blocks, user_right_blocks
@@ -103,6 +104,7 @@ class func
 			$center .= ',';
 
 			$all .= $left .= $center .= $right;
+
 		}
 		else
 		{
@@ -178,9 +180,16 @@ class func
 			$arr[$row['id']] = explode(','  , $row['view_pages']);
 		}
 
+/*
+		$this_page_name = $this->get_current_page();
 		$this_page_name = $this_page[1];
 		$this_page_name = str_replace('php/', '', $this_page_name);
+
 		$page_id = get_page_id($this_page_name);
+*/
+		$this_page_name = $this->get_current_page();
+		$page_id = get_page_id($this_page_name);
+
 
 		if ($page_id == 0)
 		{
@@ -195,6 +204,7 @@ class func
 			{
 				if (in_array($page_id, $arr[$active_block['id']]))
 				{
+					//var_dump($filename);
 					include($phpbb_root_path . 'ext/phpbbireland/portal/blocks/' . $filename . '.' . $this->php_ext);
 				}
 			}
@@ -243,7 +253,6 @@ class func
 
 				$arr = explode(',', $view_pages);
 				$grps = explode(",", $block_view_groups);
-
 				$process_block = false;
 				$block_title = get_menu_lang_name($row['title']);
 
@@ -271,19 +280,8 @@ class func
 					//unset($memberships);
 				}
 
-				$this_page_name = $this_page[1];
-				$this_page_name = str_replace('php/', '', $this_page_name);
-				$page_id = get_page_id($this_page_name);
-
-				if ($page_id == 0)
-				{
-					$page_id = $this_page[0];
-					$page_id = get_page_id($this_page[0]);
-				}
-
 				if ($process_block && in_array($page_id, $arr))
 				{
-					//var_dump($html_file_name);
 					switch ($block_position)
 					{
 						case 'L':
@@ -321,6 +319,7 @@ class func
 						break;
 						default:
 					}
+					//var_dump($html_file_name);
 				}
 			}
 		}
@@ -411,13 +410,38 @@ class func
 			'U_STAFF'                 => append_sid("{$phpbb_root_path}memberlist.$this->php_ext", 'mode=leaders'),
 			'U_SEARCH_BOOKMARKS'      => append_sid("{$phpbb_root_path}ucp.$this->php_ext", 'i=main&mode=bookmarks'),
 		));
+
 	}
 
 	public function build_block_modules($block_file)
 	{
+		//?var_dump('func.php > build_block_modules('. $block_file . ') - called once for each block!');
 		global $template;
 
 		$template->set_filenames(array('block' => 'blocks/' . $block_file));
 		return $template->assign_display('block', true);
+	}
+
+	/*
+	* return the current page
+	*/
+
+	public function get_current_page()
+	{
+//?var_dump('func.php > get_current_page()');
+		global $user;
+
+		$this_page = explode(".", $user->page['page']);
+
+		if ($this_page[0] == 'app')
+		{
+			$this_page_name = explode("/", $this_page[1]);
+			return($this_page_name[1]);
+		}
+		else
+		{
+			$this_page_name = $this_page;
+			return($this_page_name[0]);
+		}
 	}
 }

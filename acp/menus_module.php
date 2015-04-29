@@ -32,7 +32,7 @@ class menus_module
 		include_once($phpbb_root_path . 'ext/phpbbireland/portal/config/constants.' . $phpEx);
 		include_once($phpbb_root_path . 'ext/phpbbireland/portal/helpers/tables.' . $phpEx);
 
-		include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.'.$phpEx);
+		include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/kiss_functions.'.$phpEx);
 
 		$this->cache_setup();
 

@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* Kiss Portal extension for the phpBB Forum Software package.
+* @package Kiss Portal extension for the phpBB Forum Software package 1.0.1
 *
 * @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -10,13 +10,18 @@
 
 namespace phpbbireland\portal\controller;
 
-class main_controller implements main_interface
+class main implements main_interface
 {
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \phpbb\controller\helper */
-	protected $helper;
+	/** @var \phpbbireland\portal\controller\helper */
+	protected $controller_helper;
+
+	/**
+	* @var \phpbb\path_helper
+	*/
+	protected $path_helper;
 
 	/* @var \phpbbireland\portal */
 	protected $portal;
@@ -37,7 +42,8 @@ class main_controller implements main_interface
 	* Constructor
 	*
 	* @param \phpbb\config\config                $config             Config object
-	* @param \phpbb\controller\helper            $helper             Controller helper object
+	* @param \phpbb\controller\helper            $controller_helper  Controller helper object
+	* @param \phpbb\path_helper                  $path_helper        phpBB path helper
 	* @param \phpbbireland\portal                $portal             Portal object
 	* @param \phpbb\template\template            $template           Template object
 	* @param \phpbb\user                         $user               User object
@@ -46,15 +52,34 @@ class main_controller implements main_interface
 	* @return \phpbbireland\portal\controller\main
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\template\template $template, \phpbb\user $user, \phpbb\controller\helper $helper, \phpbbireland\portal\portal $portal, $root_path, $php_ext)
+	public function __construct(
+		\phpbb\config\config $config,
+		\phpbbireland\portal\$controller_healper,
+		\phpbb\template\template $template,
+		\phpbb\user $user,
+		\phpbb\controller\helper $helper,
+		\phpbbireland\portal\portal $portal, $root_path, $php_ext)
 	{
+
+		global $portal_root_path;
+
 		$this->config = $config;
-		$this->helper = $helper;
+		$this->controller_helper = $controller_helper;
+		$this->template = $template;
+		$this->user = $user;
+		$this->path_helper = $path_helper;
+		$this->phpbb_root_path = $phpbb_root_path;
+		$this->php_ext = $php_ext;
+/*
+		$this->config = $config;
+		$this->controller_helper = $contoller_helper;
+		$this->path_helper = $path_helper;
 		$this->portal = $portal;
 		$this->template = $template;
 		$this->user = $user;
 		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
+*/
 	}
 
 
@@ -105,7 +130,7 @@ class main_controller implements main_interface
 		$mod_user_template_path  = $mod_root_path . 'styles/prosilver/';
 		$mod_user_jq_path        = $mod_root_path . 'styles/prosilver/template/js/';
 		$mod_image_lang_path     = $mod_root_path . 'styles/prosilver/theme/' . $user->data['user_lang'];
-		$js_version = 'jquery-2.0.3.min.js';
+		$js_version = 'jquery-min.js';
 
 		if (!class_exists('bbcode'))
 		{
@@ -162,7 +187,7 @@ class main_controller implements main_interface
 		$template->assign_vars(array(
 			'U_SITE_HOME'                   => append_sid("{$mod_root_path}portal"),
 			'L_SITE_HOME'                   => $user->lang['PORTAL'],
-			'PORTAL'=> true,
+			'PORTAL'						=> true,
 			'STARGATE'                      => true,
 			'HS'                            => true,
 			'JS_PATH'                       => $mod_root_jq_path,
@@ -193,9 +218,9 @@ class main_controller implements main_interface
 
 			'T_ASSETS_VERSION'          => $config['assets_version'],
 			'T_ASSETS_PATH'             => "{$web_path}assets",
-			'T_THEME_PATH'              => "{$web_path}styles/" . rawurlencode('prosilver') . '/theme',
-			'T_TEMPLATE_PATH'           => "{$web_path}styles/" . rawurlencode('prosilver') . '/template',
-			'T_SUPER_TEMPLATE_PATH'     => "{$web_path}styles/" . rawurlencode('prosilver') . '/template',
+			'T_THEME_PATH'              => "{$web_path}styles/" . rawurlencode('prosiver') . '/theme',
+			'T_TEMPLATE_PATH'           => "{$web_path}styles/" . rawurlencode('prosiver') . '/template',
+			'T_SUPER_TEMPLATE_PATH'     => "{$web_path}styles/" . rawurlencode('prosiver') . '/template',
 			'T_IMAGES_PATH'             => "{$web_path}images/",
 			'T_SMILIES_PATH'            => "{$web_path}{$config['smilies_path']}/",
 			'T_AVATAR_PATH'             => "{$web_path}{$config['avatar_path']}/",
@@ -203,15 +228,15 @@ class main_controller implements main_interface
 			'T_ICONS_PATH'              => "{$web_path}{$config['icons_path']}/",
 			'T_RANKS_PATH'              => "{$web_path}{$config['ranks_path']}/",
 			'T_UPLOAD_PATH'             => "{$web_path}{$config['upload_path']}/",
-			'T_STYLESHEET_LINK'         => "{$web_path}styles/" . rawurlencode('prosilver') . '/theme/stylesheet.css?assets_version=' . $config['assets_version'],
-			'T_STYLESHEET_LANG_LINK'    => "{$web_path}styles/" . rawurlencode('prosilver') . '/theme/' . $user->lang_name . '/stylesheet.css?assets_version=' . $config['assets_version'],
+			'T_STYLESHEET_LINK'         => "{$web_path}styles/" . rawurlencode('prosiver') . '/theme/stylesheet.css?assets_version=' . $config['assets_version'],
+			'T_STYLESHEET_LANG_LINK'    => "{$web_path}styles/" . rawurlencode('prosiver') . '/theme/' . $user->lang_name . '/stylesheet.css?assets_version=' . $config['assets_version'],
 			'T_JQUERY_LINK'             => !empty($config['allow_cdn']) && !empty($config['load_jquery_url']) ? $config['load_jquery_url'] : "{$web_path}assets/javascript/jquery.js?assets_version=" . $config['assets_version'],
 			'S_ALLOW_CDN'               => !empty($config['allow_cdn']),
 
-			'T_THEME_NAME'              => rawurlencode('prosilver'),
+			'T_THEME_NAME'              => rawurlencode('prosiver'),
 			'T_THEME_LANG_NAME'         => $user->data['user_lang'],
-			'T_TEMPLATE_NAME'           => 'prosilver',
-			'T_SUPER_TEMPLATE_NAME'     => rawurlencode((isset($user->style['style_parent_tree']) && $user->style['style_parent_tree']) ? $user->style['style_parent_tree'] : 'prosilver'),
+			'T_TEMPLATE_NAME'           => 'prosiver',
+			'T_SUPER_TEMPLATE_NAME'     => rawurlencode((isset($user->style['style_parent_tree']) && $user->style['style_parent_tree']) ? $user->style['style_parent_tree'] : 'prosiver'),
 			'T_IMAGES'                  => 'images',
 			'T_SMILIES'                 => $config['smilies_path'],
 			'T_AVATAR'                  => $config['avatar_path'],
@@ -698,5 +723,20 @@ class main_controller implements main_interface
 			$k_groups = obtain_k_groups();
 			$k_resources = obtain_k_resources();
 		}
+	}
+
+	public function get_portal_link()
+	{
+		global $user;
+
+		if (strpos($this->user->data['session_page'], '/portal') === false)
+		{
+			$portal_link = $this->controller_helper->route('phpbbireland_portal_main_controller');
+		}
+		else
+		{
+			$portal_link = $this->path_helper->remove_web_root_path($this->controller_helper->route('phpbbireland_portal_main_controller'));
+		}
+		return($portal_link);
 	}
 }

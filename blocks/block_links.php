@@ -9,21 +9,9 @@
 * Modified for 3.1 Dec 2014, now using database table...
 */
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
-global $k_config, $phpbb_root_path, $k_blocks, $template;
-$queries = $cached_queries = 0;
-
-$phpEx = substr(strrchr(__FILE__, '.'), 1);
+global $phpbb_root_path, $template;
 
 $show_all_links = false;
-
 
 if ($blk['html_file_name'] == 'block_links.html')
 {
@@ -41,8 +29,6 @@ $result = $db->sql_query($sql, $block_cache_time);
 
 while ($row = $db->sql_fetchrow($result))
 {
-	//var_dump($row);
-
 	$template->assign_block_vars('portal_links_row', array(
 		'LINKS_IMG'	=> $phpbb_root_path . 'ext/phpbbireland/portal/images/links/' . $row['image'],
 		'U_LINKS'	=> $row['url'],

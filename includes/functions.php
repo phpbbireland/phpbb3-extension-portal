@@ -11,10 +11,6 @@
 /**
 * @ignore
 */
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
 
 if (!function_exists('obtain_k_config'))
 {
@@ -46,7 +42,6 @@ if (!function_exists('obtain_k_config'))
 
 if (!function_exists('obtain_k_menus'))
 {
-
 	function obtain_k_menus()
 	{
 		global $db, $cache, $k_menus, $phpbb_root_path, $phpEx;
@@ -192,7 +187,6 @@ if (!function_exists('obtain_k_groups'))
 
 if (!function_exists('obtain_k_resources'))
 {
-
 	function obtain_k_resources()
 	{
 		global $db, $cache, $k_resources, $phpbb_root_path, $phpEx;

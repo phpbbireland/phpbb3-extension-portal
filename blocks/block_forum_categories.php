@@ -2,66 +2,51 @@
 /**
 *
 * Kiss Portal extension for the phpBB Forum Software package.
-*
 * @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
 
+
+global $user, $phpbb_root_path;
+
+$this->user = $user;
+$this_page = explode(".", $this->user->page['page']);
+
+if ($this_page[0] == 'index')
+{
+	$this_page_name = $this_page[0];
+}
+else
+{
+	$this_page_name = str_replace('php/', '', $this_page[1]);
+}
+
+//if ($this_page_name == 'index' || $this_page_name == 'viewforum' || $this_page_name == 'viewtopic')
+
+if ($this_page_name != 'portal')
+{
+	return;
+}
+
+display_forums_categories();
+
 /**
-* @ignore
+* This code is only processed for the portal page in order to allow displaying
+* of categories, it is not required for normal phpbb pages as the data is
+* available in the data pool (globally)...
+*
+* The function simply reuses phpbb code...
+*
 */
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
-//for bots test //
-//$page_title = $user->lang['BLOCK_CATEGORIES'];
-
-// SGP debug vars. Used to display query loading on a block basis...
-$queries = $cached_queries = $total_queries = 0;
-
-
-global $user;
-
-$this_page = explode(".", $user->page['page']);
-$this_page_name = $this_page[0];
-
-if ($this_page_name == 'viewforum' || $this_page_name == 'viewtopic')
-{
-	display_forums_categories();
-}
-
-/***
-* Validation notes, version: 1.0.22
-*
-* As this block's data can be obtained from block_build.php (which processes
-* the phpBB core for use by the portal page), we do not need to reinvent the
-* wheel, so I removed it.
-*
-* This file is included to ensure all updates overwrite previous file versions...
-*
-* 05 August 2013 updates
-* Have added some code to allow viewtopic/viewforum pages to display categories block
-* The code is only called for these pages, other pages use global data...
-*
-* May need to trim some more code but it works for now... Mike
-***/
-
-/*$template->assign_vars(array(
-	'FORUM_CATEGORIES_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
-));
-*/
-
 function display_forums_categories()
 {
-	// not working 3.1 so return for now
-	return;
 	// A rewrite for phpBB3 display_forums code drastically reduced to provide categories block with data //
 
 	global $db, $auth, $user, $template;
 	global $phpbb_root_path, $phpEx, $config;
+
+	$default_icon = $phpbb_root_path . 'ext/phpbbireland/portal/images/forum_icons/default.png';
 
 	$forum_rows = $subforums = $forum_ids = $active_forum_ary = array(); // $forum_ids_moderator = $forum_moderators = $active_forum_ary = array();
 	$parent_id = $visible_forums = 0;
@@ -185,13 +170,13 @@ function display_forums_categories()
 		// Empty category
 		if ($row['parent_id'] == $root_data['forum_id'] && $row['forum_type'] == FORUM_CAT)
 		{
-			$template->assign_block_vars('forumrowb', array(
+			$template->assign_block_vars('forumrow', array(
 				'S_ID'                  => $cnt,
 				'S_IS_CAT'				=> true,
 				'FORUM_ID'				=> $row['forum_id'],
 				'FORUM_NAME'			=> $row['forum_name'],
 				'FORUM_DESC'			=> generate_text_for_display($row['forum_desc'], $row['forum_desc_uid'], $row['forum_desc_bitfield'], $row['forum_desc_options']),
-				'FORUM_IMAGE_SRC'		=> ($row['forum_image']) ? $phpbb_root_path . $row['forum_image'] : '',
+				'FORUM_IMAGE_SRC'		=> ($row['forum_image']) ? $row['forum_image'] : $default_icon,
 				'U_VIEWFORUM'			=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $row['forum_id']))
 			);
 
@@ -321,7 +306,7 @@ function display_forums_categories()
 			}
 		}
 
-		$template->assign_block_vars('forumrowb', array(
+		$template->assign_block_vars('forumrow', array(
 			'S_ID'              => $cnt,
 			'S_IS_CAT'			=> false,
 			'S_NO_CAT'			=> $catless && !$last_catless,
@@ -332,7 +317,7 @@ function display_forums_categories()
 			'S_LIST_SUBFORUMS'	=> ($row['display_subforum_list']) ? true : false,
 			'S_SUBFORUMS'		=> (sizeof($subforums_list)) ? true : false,
 
-			'FORUM_IMAGE_SRC'	=> ($row['forum_image']) ? $phpbb_root_path . $row['forum_image'] : '',
+			'FORUM_IMAGE_SRC'		=> ($row['forum_image']) ? $row['forum_image'] : $default_icon,
 
 			'FORUM_ID'				=> $row['forum_id'],
 			'FORUM_NAME'			=> $row['forum_name'],
@@ -359,8 +344,16 @@ function display_forums_categories()
 		//echo $cnt . ' ';
 	}
 
+	/*
+		As this code only affects the portal page category block, the option
+		to display 'categories only' is somewhat restricted, that is, it won't
+		affect the block when viewed on other phpbb pages...
+
+		The switch below is hard-coded atm but can be added to acp later...
+	*/
+
 	$template->assign_vars(array(
-		'S_CAT_BLOCK' => true,
+		'S_DISPLAY_CATS_ONLY' => false,
 	));
 }
 

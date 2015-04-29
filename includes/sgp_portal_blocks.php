@@ -3,7 +3,7 @@
 *
 * Kiss Portal extension for the phpBB Forum Software package.
 *
-* @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
+* @copyright (c) 2014 Michael Oâ€™Toole <http://www.phpbbireland.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
@@ -11,18 +11,7 @@
 /**
 * @ignore
 */
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
-// If portal is not active return //
-/*
-if (!STARGATE)
-{
-	return;
-}
-*/
+var_dump('sgp_portal_blocks.php');
 
 global $phpbb_root_path, $config, $k_config, $phpEx, $user, $table_prefix;
 global $db, $k_blocks, $user, $avatar_img, $request, $template, $auth;
@@ -32,8 +21,8 @@ global $k_groups;
 
 // Grab some portal cached data //
 $block_cache_time  = $k_config['k_block_cache_time_default'];
-$blocks_width 	   = $config['blocks_width'];
-$blocks_enabled    = $config['blocks_enabled'];
+$blocks_width 	   = $tis->config['blocks_width'];
+$blocks_enabled    = $this->config['blocks_enabled'];
 $use_block_cookies = (isset($k_config['use_block_cookies'])) ? $k_config['use_block_cookies'] : 0;
 
 //$user->add_lang_ext('phpbbireland/portal', 'common');
@@ -62,6 +51,8 @@ $my_root_path = $phpbb_root_path . 'ext/phpbbireland/portal/';
 
 $this_page = explode(".", $user->page['page']);
 $user_id = $user->data['user_id'];
+
+///var_dump($this_page);
 
 include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.' . $phpEx);
 

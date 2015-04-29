@@ -139,7 +139,7 @@ while ($row = $db->sql_fetchrow($result))
 
 	if ($team_count < $team_max_count || $team_max_count == 0)
 	{
-		$template->assign_block_vars('loop', array(
+		$this->template->assign_block_vars('loop', array(
 			'FIRST'				=> $i++,
 			'S_CHANGE'			=> $change,
 			'GROUP_IMG_PATH'	=> $g_path,
@@ -157,7 +157,7 @@ while ($row = $db->sql_fetchrow($result))
 
 	$store = $group_name;
 
-	$template->assign_vars(array(
+	$this->template->assign_vars(array(
 		'L_TEAM_MAX_COUNT'	=> ($limit_reached) ? sprintf($user->lang['TEAM_MAX_COUNT'], $team_max_count) : '',
 	));
 }

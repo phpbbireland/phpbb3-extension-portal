@@ -2,17 +2,41 @@ imports:
     - { resource: tables.yml }
 
 services:
-    phpbbireland.portal.controller:
-        class: phpbbireland\portal\controller\main_controller
+    phpbbireland.portal.main:
+        class: phpbbireland\portal\controller\main
         arguments:
+            - @config
+            - @controller.helper
+            - @phpbbireland.portal.controller_helper
+            - @template
+            - @user
+            - @path_helper
+            - %core.root_path%
+            - %core.php_ext%
+
+#    phpbbireland.portal.controller_helper:
+#        class: phpbbireland\portal\controller\helper
+#        arguments:
+#            - @auth
+#            - @config
+#            - @template
+#            - @user
+#            - @path_helper
+#            - %core.root_path%
+#            - .%core.php_ext%
+
+    phpbbireland.portal.controller_helper:
+        class: phpbbireland\portal\controller\helper
+        arguments:
+            - @auth
             - @config
             - @template
             - @user
-            - @controller.helper
-            - @phpbbireland.portal
+            - @path_helper
+            - @phpbbireland.portal.helper
             - %core.root_path%
             - %core.php_ext%
-            
+
     phpbbireland.portal:
         class: phpbbireland\portal\portal
         arguments:
@@ -30,15 +54,44 @@ services:
     phpbbireland.portal.listener:
         class: phpbbireland\portal\event\listener
         arguments:
+            - @auth
+            - @config
             - @controller.helper
+            - @path_helper
             - @template
             - @user
             - %core.php_ext%
         tags:
             - { name: event.listener }
 
+
+    phpbbireland.portal.helper:
+        class: phpbbireland\portal\includes\helper
+        arguments:
+            - @phpbbireland.portal.module_collection
+
+    phpbbireland.portal.modules_helper:
+        class: phpbbireland\portal\includes\modules_helper
+        arguments:
+            - @auth
+            - @config
+            - @request
+
     phpbbireland.core.helpers.portal:
         class: phpbbireland\core\helpers\portal
+
+
+    phpbbireland.portal.module_collection:
+        class: phpbb\di\service_collection
+        arguments:
+            - @service_container
+        tags:
+            - { name: service_collection, tag: phpbbireland.portal.module }
+
+    phpbbireland.portal.helper:
+        class: phpbbireland\portal\includes\helper
+        arguments:
+            - @phpbbireland.portal.module_collection
 
     phpbbireland.core.helpers.tables:
         class: phpbbireland\core\helpers\tables

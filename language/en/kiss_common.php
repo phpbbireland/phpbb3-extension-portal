@@ -11,10 +11,7 @@
 /**
 * DO NOT CHANGE
 */
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+
 
 if (empty($lang) || !is_array($lang))
 {
@@ -401,7 +398,7 @@ $lang = array_merge($lang, array(
 	'WIDE_VERSION'			=> 'Wide Version',
 
 	// Use this version to display debug info //
-	'WELCOME_MESSAGE'	=> "Welcome back [you]...<br /><br /><strong>{SITENAME} </strong> is powered by <strong>phpBB</strong> {VERSION} and <strong> the Kiss Portal Engine </strong>{PORTAL_VERSION}.",
+	'WELCOME_MESSAGE'	=> "Welcome back [you]...<br /><br /><strong>{SITENAME} </strong> is powered by <strong>phpBB</strong> {VERSION} and <strong> the Kiss Portal Extension </strong>{PORTAL_VERSION}.",
 
 	// Translators don’t edit "[you]" in next line, it's code... //
 
@@ -545,6 +542,7 @@ $lang = array_merge($lang, array(
 	'USER_INFO'        => 'User Information',
 	'VERSION'          => 'Version',
 	'VIEW'             => 'View',
+	'VIEWING_PORTAL'   => 'On Portal page',
 	'WELCOME'          => 'Welcome',
 	'WIDE'             => 'Wide',
 	'WIDTH'            => 'Width',

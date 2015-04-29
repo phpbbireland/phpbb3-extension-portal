@@ -16,11 +16,8 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-global $php_root_path, $db, $user, $config, $k_config, $k_blocks, $phpbb_root_path;
+global $user, $k_config, $k_blocks, $phpbb_root_path;
 
-$user->add_lang_ext('phpbbireland/portal', 'kiss_common');
-
-$queries = $cached_queries = 0;
 $welcome_image	= $phpbb_root_path . 'ext/phpbbireland/portal/images/welcome.png';
 
 if (file_exists($welcome_image))
@@ -43,9 +40,7 @@ foreach ($k_blocks as $blk)
 }
 $block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
-
-include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.' . $phpEx);
-
+include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/kiss_functions.' . $this->php_ext);
 
 $block_name		= (isset($user->lang['WELCOME']) ? $user->lang['WELCOME'] : '{L_NO_LANG_VALUE}');
 
@@ -53,7 +48,7 @@ $block_details	= $user->lang['WELCOME_MESSAGE'];
 $block_details	= process_for_vars($block_details, true);
 $block_details	= str_replace("[you]", ('<span style="font-weight:bold; color:#' . $user->data['user_colour'] . ';">' . $user->data['username'] . '</span>'), $block_details);
 
-$template->assign_vars( array(
+$this->template->assign_vars( array(
 	'W_TITLE'	=> $block_name,
 	'W_IMAGE'	=> $welcome_image,
 	'U_LINK'	=> $block_link,

@@ -1,22 +1,20 @@
-phpbbireland_base_controller:
-    pattern: /portal
-    defaults: { _controller: phpbbireland.portal.controller:display }
-
-phpbbireland_base_controller:
+phpbbireland_portal_controller:
     pattern: /portal.php
-    defaults: { _controller: phpbbireland.portal.controller:display }
-
-phpbbireland_page_controller:
-    pattern: /portal/page/{page}
-    defaults: { _controller: phpbbireland.portal.controller:display }
-    requirements:
-        page:        \d+
+    defaults: { _controller: phpbbireland.portal.main:display }
 
 
-phpbbireland_redirect_controller:
-    pattern: /rules
-    defaults: { _controller: phpbbireland.portal.controller:rules }
+# Not yet supported #
+#phpbbireland_portal_controller:
+#    pattern: /portal/page/{page}
+#    defaults: { _controller: phpbbireland.portal.main:display, page: "portal" }
+#    requirements:
+#        page:        \d+
 
-phpbbireland_redirect_controller:
+# Redirect to portal by default
+phpbbireland_portal_redirect_controller:
+    pattern: /
+    defaults: { _controller: phpbbireland.portal.main:display }
+
+phpbbireland_portal_redirect_controller:
     pattern: /rules.php
-    defaults: { _controller: phpbbireland.portal.controller:rules }
+    defaults: { _controller: phpbbireland.portal.main:rules }

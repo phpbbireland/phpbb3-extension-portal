@@ -29,7 +29,7 @@ class resources_module
 
 		include_once($phpbb_root_path . 'ext/phpbbireland/portal/config/constants.' . $phpEx);
 
-		include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.'.$phpEx);
+		include($phpbb_root_path . 'ext/phpbbireland/portal/includes/kiss_functions.'.$phpEx);
 
 		if(!function_exists('obtain_k_config'))
 		{

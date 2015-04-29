@@ -34,12 +34,14 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 			array('permission.add', array('a_k_portal')),
 			array('permission.add', array('a_k_tools')),
 			array('permission.add', array('u_k_tools')),
+			array('permission.add', array('u_k_portal')),
 
 			array('permission.role_add', array('new admin role', 'a_', 'portal')),
 
 			array('permission.permission_set', array('ROLE_ADMIN_FULL', 'a_k_portal')),
 			array('permission.permission_set', array('ROLE_ADMIN_FULL', 'a_k_tools')),
 			array('permission.permission_set', array('REGISTERED', 'u_k_tools', 'group')),
+			array('permission.permission_set', array('REGISTERED', 'u_k_portal', 'group')),
 
 			array('module.add', array(
 				'acp',
@@ -235,6 +237,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 			array('permission.remove', array('a_k_portal')),
 			array('permission.remove', array('a_k_tools')),
 			array('permission.remove', array('u_k_tools')),
+			array('permission.remove', array('u_k_portal')),
 		);
 	}
 

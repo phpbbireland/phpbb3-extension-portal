@@ -17,8 +17,17 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 */
 class listener implements EventSubscriberInterface
 {
-	/** @var \phpbb\controller\helper */
-	protected $helper;
+	/** @var \phpbb\auth\auth */
+	protected $auth;
+
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var  */
+	protected $controller_helper;
+
+	/** @var \phpbb\path_helper */
+	protected $path_helper;
 
 	/** @var \phpbb\template\template */
 	protected $template;
@@ -32,16 +41,22 @@ class listener implements EventSubscriberInterface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\controller\helper    $helper    Controller helper object
-	* @param \phpbb\template\template    $template           Template object
-	* @param \phpbb\user                 $user               User object
-	* @param string                      $php_ext   phpEx
+	* @param \phpbb\config\config        $config phpBB config
+	* @param \phpbb\controller\helper    $controller_helper        Controller helper object
+	* @param \phpbb\path_helper          $path_helper   phpBB path helper
+	* @param \phpbb\template\template    $template      Template object
+	* @param \phpbb\user                 $user          User object
+	* @param string                      $php_ext       phpEx
 	* @return \phpbbireland\portal\event\listener
 	* @access public
 	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
+	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\controller\helper $controller_helper, \phpbb\path_helper $path_helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
 	{
-		$this->helper = $helper;
+//?//var_dump('listener.php > constructor');
+		$this->auth = $auth;
+		$this->config = $config;
+		$this->controller_helper = $controller_helper;
+		$this->path_helper = $path_helper;
 		$this->template = $template;
 		$this->user = $user;
 		$this->php_ext = $php_ext;
@@ -57,14 +72,15 @@ class listener implements EventSubscriberInterface
 	*/
 	static public function getSubscribedEvents()
 	{
+//?//var_dump('listener.php > getSubscribedEvents()');
 		return array(
-			'core.user_setup'         => 'load_language_on_setup',
-			//'core.page_header'        => 'add_portal_page_header_link',
-			//'core.page_header'        => 'add_portal_blocks',
-			'core.page_header_after'  =>  'add_portal_blocks',
-			//'core.page_footer'        => 'add_portal_page_footer_link',
-
-			//'core.page_header_after'	=> 'index_page',
+			'core.user_setup'			=> 'load_language_on_setup',
+			//'core.page_header'			=> 'process_blocks_for_phpbb_pages',
+			'core.page_header'			=> 'add_portal_link',
+			//'core.page_header_after'	=> 'add_portal_left_blocks',
+			//'core.page_footer'			=> 'add_portal_right_blocks',
+			//'core.page_copyright_after'	=> 'add_portal_copyright',
+			//'core.page_footer_after'	=> 'add_portal_scripts',
 
 			// ACP event
 			'core.permissions'	=> 'add_categories',
@@ -74,38 +90,23 @@ class listener implements EventSubscriberInterface
 
 	/*
 		add event to add news ...
-
 	*/
 
 	public function load_language_on_setup($event)
 	{
+//?//var_dump('listener.php > load_language_on_setup(...)');
 		$lang_set_ext = $event['lang_set_ext'];
 		$lang_set_ext[] = array(
 			'ext_name' => 'phpbbireland/portal',
 			'lang_set' => 'portal',
 		);
 		$event['lang_set_ext'] = $lang_set_ext;
+		$this->user->add_lang_ext('phpbbireland/portal', 'kiss_common');
 	}
-
-
-	/**
-	* Add administrative permissions to manage board rules
-	*
-	* @param object $event The event object
-	* @return null
-	* @access public
-	*/
-
-/*
-	public function add_categories($event)
-	{
-		$categories = $event[$categories];
-		$categories['portal']	= 'ACL_CAT_PORTAL';
-	}
-*/
 
 	public function add_permission($event)
 	{
+//?//var_dump('listener.php > add_permission(...)');
 		$categories = $event['categories'];
 		$categories['portal'] = 'ACL_CAT_PORTAL';
 		$event['categories'] = $categories;
@@ -117,138 +118,115 @@ class listener implements EventSubscriberInterface
 		$event['permissions'] = $permissions;
 	}
 
-	public function add_portal_page_header_link($event)
+	/**
+	* Add portal link if user is authed to see it
+	*
+	* @return null
+	*/
+	public function add_portal_link($event)
 	{
-		global $user, $template, $phpbb_container, $phpbb_root_path, $web_path;
+//?//var_dump('listener.php > add_portal_link(...)');
+		global $phpbb_root_path;
 
-		//$this->user->add_lang_ext('phpbbireland/portal', 'kiss_common');
+		if (!$this->can_access_portal())
+		{
+			return;
+		}
+
+		$page = '';
+
+		$portal_link = $this->get_portal_link();
+
+		$mod_style_path	= $phpbb_root_path . 'ext/phpbbireland/portal/styles/' . $this->user->style['style_path'] . '/';
+
+		/**
+		*  we need some method of generating blocks for phpBB pages when not on portal page
+		*  if we are on the portal the main controlle does this for us
+		*/
+		$page = $this->page_name();
+
 
 		$this->template->assign_vars(array(
-			'U_PORTAL'            => $this->helper->route('phpbbireland/portal', 'portal_base_controller'),
-			'U_INDEX'             => $this->helper->route('phpbb/phpbb', 'index'),
+			'KISS'					=> true,
 
-			'STARGATE'	          => true,
-			'HS'                  => true,
-			'S_HIGHSLIDE'         => true,
-			'STARGATE_BUILD'      => (isset($config['portal_build'])) ? $config['portal_build'] : '',
-			'STARGATE_VERSION'    => (isset($config['portal_version'])) ? $config['portal_version'] : '',
+			'U_PORTAL'				=> $portal_link,
+			'L_PORTAL'				=> $this->user->lang['PORTAL'],
+			'EXT_TEMPLATE_PATH'		=> $mod_style_path,
+			'PAGE'					=> $page,
+
+			'S_SHOW_RIGHT_BLOCKS'	=> true,
+			'S_SHOW_LEFT_BLOCKS'	=> true,
+		));
+
+		if ($page != 'portal')
+		{
+			$this->process_blocks_for_phpbb_pages();
+		}
+	}
+
+	/**
+	* Add portal link if user is authed to see it
+	*
+	* @return null
+	*/
+
+	public function add_portal_links($event)
+	{
+//?//var_dump('listener.php > add_portal_links(...)');
+		global $phpbb_container, $portal_link;
+
+		$this->template->assign_vars(array(
+			'U_PORTAL'            => $portal_link,
+			'U_INDEX'             => $this->helper->route('phpbb/phpbb', 'index'),
+			'STARGATE_BUILD'      => (isset($this->config['portal_build'])) ? $this->config['portal_build'] : '',
+			'STARGATE_VERSION'    => (isset($this->config['portal_version'])) ? $this->config['portal_version'] : '',
 			'S_SHOW_RIGHT_BLOCKS' => true,
 			'S_SHOW_LEFT_BLOCKS'  => true,
-			'L_PORTAL'            => $user->lang['FORUM_PORTAL'],
-			'U_PORTAL'            => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
-			'U_PORTAL_ARRANGE'    => append_sid("{$phpbb_root_path}portal.$this->php_ext", "arrange=1"),
-			'U_HOME'              => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
+			'L_PORTAL'            => $this->user->lang['FORUM_PORTAL'],
 			'SITE_LOGO_IMG'       => $logo,
 			'SITE_LOGO_IMG_RIGHT' => $logo_right,
+
 		));
 	}
 
-	public function add_page_header_link($event)
+
+	public function add_portal_left_blocks($event)
 	{
-		$this->template->assign_vars(array(
-			'U_PORTAL'  => $this->helper->route('phpbbireland/portal', 'portal_base_controller'),
-		));
+		;
 	}
 
-	public function add_portal_page_footer_link($event)
+	public function add_portal_right_blocks($event)
 	{
-		global $user, $template, $phpbb_container, $phpbb_root_path, $web_path;
-
-		$this->template->assign_vars(array(
-			'U_PORTAL'            => $this->helper->route('phpbbireland/portal', 'portal_base_controller'),
-			'U_INDEX'             => $this->helper->route('phpbb/phpbb', 'index'),
-		));
+		;
 	}
 
-/*
-	public function add_portal_header($event)
+	public function add_portal_scripts($event)
 	{
-		global $user, $phpbb_root_path, $php_ext;
-
-		if ($event['on_page'][1] == 'app')
-		{
-			if (utf8_strpos($event['row']['session_page'], 'controller=portal') !== false)
-			{
-				$event['location_url'] = append_sid($phpbb_root_path . 'app.' . $php_ext, 'controller=portal');
-				$event['location'] = $user->lang['PORTAL'];
-			}
-		}
+		;
 	}
-	public function add_portal_footer($event)
-	{
-		global $user, $phpbb_root_path, $php_ext;
 
-		if ($event['on_page'][1] == 'app')
-		{
-			if (utf8_strpos($event['row']['session_page'], 'controller=portal') !== false)
-			{
-				$event['location_url'] = append_sid($phpbb_root_path . 'app.' . $php_ext, 'controller=portal');
-				$event['location'] = $user->lang['PORTAL'];
-			}
-		}
+	public function index_page($event)
+	{
+		;
 	}
-*/
 
-	public function add_portal_blocks($event)
+	public function process_blocks_for_phpbb_pages()
 	{
-		//var_dump('in: event\main_listener.php : add_portal_blocks()');
+//?var_dump('listerer.php > process_blocks_for_phpbb_pages (on index page)');
 
-		global $auth, $config, $request, $template, $user, $path_helper, $phpbb_root_path, $phpbb_container;
+		global $phpbb_container, $request;
 		global $queries, $cached_queries, $total_queries, $k_config, $k_blocks, $k_menus, $k_pages, $k_groups;
 
-		/*
-		// process for phpbb page only, return if portal page //
-		$this_page = explode(".", $user->page['page']);
-		if ($this_page[1] == 'potal')
+		if (!defined('KISS'))
 		{
-			return;
+			define('KISS', true);
 		}
-		*/
-
-		$this->auth = $auth;
-		$this->config = $config;
-		$this->template = $template;
-		$this->user = $user;
-		$this->path_helper = $path_helper;
-		$this->phpbb_root_path = $phpbb_root_path;
-
-		$this_page = explode(".", $user->page['page']);
-		if ($this_page[0] == 'index')
-		{
-			$this->page = 'index';
-		}
-		else if ($this_page[0] == 'app' && str_replace('php/', '', $this_page[1]) == 'portal')
-		{
-			$this->page = 'portal';
-			return;
-		}
-
-		$board_url = generate_board_url() . '/';
-
-		$phpbb_path_helper = $phpbb_container->get('path_helper');
-		$corrected_path = $phpbb_path_helper->get_web_root_path();
-		$web_path = (defined('PHPBB_USE_BOARD_URL_PATH') && PHPBB_USE_BOARD_URL_PATH) ? $board_url : $corrected_path;
 
 		$this->includes_path = $phpbb_root_path . 'ext/phpbbireland/portal/includes/';
 
-		// manually for now //
-		$user->style['style_path'] = 'prosilver';
+		$mod_root_path	= $phpbb_root_path . 'ext/phpbbireland/portal/';
 
-		// some euired paths //
-		$mod_root_path           = $phpbb_root_path . 'ext/phpbbireland/portal/';
-		$mod_root_image_path     = $mod_root_path . 'images/';
-
-		$mod_root_js_path        = $mod_root_path . 'js/';
-		$mod_root_jq_path        = $mod_root_path . 'js/jquery/';
-		$js_file = $mod_root_jq_path . 'jquery-2.0.3.min.js';
-
-		$mod_root_common_path    = $mod_root_path . 'styles/common/';
-		$mod_common_images_path  = $mod_root_path . 'styles/common/theme/images/';
-		$mod_user_template_path  = $mod_root_path . 'styles/'. $user->style['style_path'] . '/';
-		$mod_user_jq_path        = $mod_root_path . 'styles/'. $user->style['style_path'] . '/template/js/';
-		$mod_image_lang_path     = $mod_root_path . 'styles/'. $user->style['style_path'] . '/theme/' . $user->data['user_lang'];
-
-		if (!$k_config)
+		if (!isset($k_config))
 		{
 			include($phpbb_root_path . 'ext/phpbbireland/portal/includes/functions.' . $this->php_ext);
 			$k_config = obtain_k_config();
@@ -261,22 +239,37 @@ class listener implements EventSubscriberInterface
 
 		$this->includes_path = $phpbb_root_path . 'ext/phpbbireland/portal/includes/';
 
-		include_once($this->includes_path . 'sgp_functions.' . $this->php_ext);
+		include_once($this->includes_path . 'kiss_functions.' . $this->php_ext);
 
-		$func = new \phpbbireland\portal\includes\func;
-		$func->block_modules();
+
+
+// process blocks for pages other than portal michaelo //
+$func = new \phpbbireland\portal\includes\func;
+$func->process_block_modules();
+
+
+
+/* michaelo */
+/**********
+$controller_helper = new \phpbbireland\portal\controller\helper;
+$this->controller_helper->generate_all_block();
+
+$controller_helper = new \phpbbireland\portal\controller\helper;
+$this->controller_helper->generate_all_block();
+if (!($module = $this->controller_helper->get_portal_module($row)))
+$helper = new \phpbbireland\portal\controller\helper;
+*/
+
 
 		if (!function_exists('phpbb_get_user_avatar'))
 		{
 			include($phpbb_root_path . 'includes/functions_display.'. $this->php_ext);
 		}
 
-		$cache_time = (isset($k_config['block_cache_time'])) ? $k_config['block_cache_time'] : '600';
-
 		$set_time = time() + 31536000;
 		$reset_time = time() - 31536000;
 		$cookie_name = $cookie_value = $css = '';
-		$cookie_name = $config['cookie_name'] . '_css';
+		$cookie_name = $this->config['cookie_name'] . '_css';
 
 		if (isset($_COOKIE[$cookie_name]))
 		{
@@ -284,6 +277,7 @@ class listener implements EventSubscriberInterface
 		}
 
 		$css = $request->variable('css', 0);
+
 		if ($css) // set css //
 		{
 			$user->set_cookie('css', $css, $set_time);
@@ -307,89 +301,60 @@ class listener implements EventSubscriberInterface
 			$u_login_logout = append_sid("{$phpbb_root_path}ucp.$this->php_ext", 'mode=login');
 			$l_login_logout = $user->lang['LOGIN'];
 		}
-
-		if (!defined('STARGATE'))
-		{
-			define('STARGATE', true);
-		}
-
-		$this->template->assign_vars(array(
-			'PAGE'                          => $this->page,
-			'STARGATE'                      => true,
-			'HS'                            => true,
-
-			'JS_PATH'                       => $mod_root_jq_path,
-			'JS_JQUERY'                     => $js_file,
-
-			'T_STYLESHEET_PORTAL_COMMON'    => $mod_root_common_path . "/theme/portal_common.css",
-			'U_PORTAL'                      => append_sid("{$mod_root_path}portal"),
-			'U_PORTAL_ARRANGE'              => append_sid("{$mod_root_path}portal.$this->php_ext", "arrange=1"),
-			'U_HOME'                        => append_sid("{$mod_root_path}portal.$this->php_ext"),
-			'SITE_LOGO_IMG'                 => $logo,
-			'SITE_LOGO_IMG_RIGHT'           => $logo_right,
-			'MOD_COMMON_IMAGES_PATH'        => $mod_common_images_path,
-			'MOD_IMAGE_LANG_PATH'           => $mod_image_lang_path,
-			'MOD_ROOT_PATH'                 => $mod_root_path,
-			'MOD_ROOT_IMAGE_PATH'           => $mod_root_image_path,
-			'MOD_ROOT_JQ_PATH'              => $mod_root_jq_path,
-			'MOD_USER_JQ_PATH'              => $mod_user_jq_path,
-			'MOD_USER_TEMPLATE_PATH'        => $mod_user_template_path,
-			'MOD_ROOT_JS_PATH'              => $mod_root_js_path,
-
-			'S_HIGHSLIDE'                   => true,
-			'COOKIE_NAME'                   => (isset($config['cookie_name'])) ? $config['cookie_name'] : '',
-			'STARGATE_BUILD'                => (isset($config['portal_build'])) ? $config['portal_build'] : '',
-			'STARGATE_VERSION'              => (isset($config['portal_version'])) ? $config['portal_version'] : '',
-			'AVATAR_SMALL_IMG'              => (STARGATE) ? get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], '35', '35') : '',
-			'P_USERNAME'                    => (STARGATE) ? $user->data['username'] : '',
-			'P_USERNAME_FULL'               => (STARGATE) ? get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']) : '',
-
-			'T_ASSETS_VERSION'              => $config['assets_version'],
-			'T_ASSETS_PATH'                 => "{$web_path}assets",
-			'T_THEME_PATH'                  => "{$web_path}styles/" . rawurlencode($user->style['style_path']) . '/theme',
-			'T_TEMPLATE_PATH'               => "{$web_path}styles/" . rawurlencode($user->style['style_path']) . '/template',
-			'T_SUPER_TEMPLATE_PATH'         => "{$web_path}styles/" . rawurlencode($user->style['style_path']) . '/template',
-			'T_IMAGES_PATH'                 => "{$web_path}images/",
-			'T_SMILIES_PATH'                => "{$web_path}{$config['smilies_path']}/",
-			'T_AVATAR_PATH'                 => "{$web_path}{$config['avatar_path']}/",
-			'T_AVATAR_GALLERY_PATH'         => "{$web_path}{$config['avatar_gallery_path']}/",
-			'T_ICONS_PATH'                  => "{$web_path}{$config['icons_path']}/",
-			'T_RANKS_PATH'                  => "{$web_path}{$config['ranks_path']}/",
-			'T_UPLOAD_PATH'                 => "{$web_path}{$config['upload_path']}/",
-			'T_STYLESHEET_LINK'             => "{$web_path}styles/" . rawurlencode($user->style['style_path']) . '/theme/stylesheet.css?assets_version=' . $config['assets_version'],
-			'T_STYLESHEET_LANG_LINK'        => "{$web_path}styles/" . rawurlencode($user->style['style_path']) . '/theme/' . $user->lang_name . '/stylesheet.css?assets_version=' . $config['assets_version'],
-			'T_JQUERY_LINK'                 => !empty($config['allow_cdn']) && !empty($config['load_jquery_url']) ? $config['load_jquery_url'] : "{$web_path}assets/javascript/jquery.js?assets_version=" . $config['assets_version'],
-			'S_ALLOW_CDN'                   => !empty($config['allow_cdn']),
-
-			'T_THEME_NAME'                  => rawurlencode($user->style['style_path']),
-			'T_THEME_LANG_NAME'             => $user->data['user_lang'],
-			'T_TEMPLATE_NAME'               => $user->style['style_path'],
-			'T_SUPER_TEMPLATE_NAME'         => rawurlencode((isset($user->style['style_parent_tree']) && $user->style['style_parent_tree']) ? $user->style['style_parent_tree'] : $user->style['style_path']),
-			'T_IMAGES'                      => 'images',
-			'T_SMILIES'                     => $config['smilies_path'],
-			'T_AVATAR'                      => $config['avatar_path'],
-			'T_AVATAR_GALLERY'              => $config['avatar_gallery_path'],
-			'T_ICONS'                       => $config['icons_path'],
-			'T_RANKS'                       => $config['ranks_path'],
-			'T_UPLOAD'                      => $config['upload_path'],
-
-			'U_LOGIN_LOGOUT'                => $u_login_logout,
-			'L_LOGIN_LOGOUT'                => $l_login_logout,
-		));
 	}
-	public function index_page($event)
+
+
+	// get root to portal //
+	public function get_portal_link()
 	{
-		/*
-		if ($event['on_page'][1] == 'app')
+		if (strpos($this->user->data['session_page'], '/portal') === false)
 		{
-			if (strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/index') === 0)
-			{
-
-				//$event['location'] = $this->user->lang('BOARDRULES_VIEWONLINE');
-				$event['location_url'] = $this->controller_helper->route('portal_main_controller');
-			}
+			$portal_link = $this->controller_helper->route('phpbbireland_portal_controller');
 		}
-		*/
+		else
+		{
+			$portal_link = $this->path_helper->remove_web_root_path($this->controller_helper->route('phpbbireland_portal_controller'));
+		}
+		return($portal_link);
 	}
 
+	// check access //
+	protected function can_access_portal()
+	{
+		return $this->auth->acl_get('u_k_portal') && $this->config['portal_enabled'];
+	}
+
+	/**
+	* Show users as viewing the portals on Who Is Online page
+	*
+	* @param object $event The event object
+	* @return null
+	*/
+	public function viewonline_page($event)
+	{
+		if ($event['on_page'][1] == 'app' && strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/portal') === 0)
+		{
+			$event['location'] = $this->user->lang('VIEWING_PORTAL');
+			$event['location_url'] = $this->controller_helper->route('phpbbireland_portal_controller');
+		}
+	}
+
+	// get the current page name //
+	public function page_name()
+	{
+		global $user;
+
+		$this_page = explode(".", $user->page['page']);
+
+		if ($this_page[0] == 'app')
+		{
+			$this_page_name = explode("/", $this_page[1]);
+			return($this_page_name[1]);
+		}
+		else
+		{
+			$this_page_name = $this_page[0];
+			return($this_page_name);
+		}
+	}
 }

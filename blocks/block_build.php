@@ -11,15 +11,14 @@
 /**
 * @ignore
 */
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
 
+//var_dump('in blocks_build.php');
 global $db, $config, $k_config, $request, $template, $SID, $_SID, $user, $auth, $phpEx, $phpbb_root_path;
 
 $block_cache_time = $k_config['k_block_cache_time_default'];
 $queries = $cached_queries = $total_queries = 0;
+
+
 if (empty($user->lang))
 {
 	$user->add_lang('common');
@@ -35,7 +34,11 @@ $this_page = explode(".", $user->page['page']);
 $this_page_name = $this_page[1];
 $this_page_name = str_replace('php/', '', $this_page_name);
 
-if ($this_page_name != 'index' && $this_page_name != 'portal')
+
+//var_dump($this_page_name);
+
+
+if ($this_page_name == 'portal' || $this_page_name == 'index')
 {
 	//$page_title = '';
 	$display_online_list = true;
@@ -279,7 +282,7 @@ if ($this_page_name != 'index' && $this_page_name != 'portal')
 		'P_USERNAME_FULL'		=> (STARGATE) ? get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']) : '',
 	));
 */
-/*
+
 	// The following assigns all _common_ variables that may be used at any point in a template.
 	$template->assign_vars(array(
 		'SITENAME'                      => $config['sitename'],
@@ -408,6 +411,7 @@ if ($this_page_name != 'index' && $this_page_name != 'portal')
 
 		'SITE_LOGO_IMG'			=> $user->img('site_logo'),
 	));
-*/
+
+
 
 }

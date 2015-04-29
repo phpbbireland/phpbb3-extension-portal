@@ -1,7 +1,7 @@
 {
 	"name": "phpbbireland/portal",
 	"type": "phpbb-extension",
-	"description": "Adds a fully integrated portal to your phpBB 3.1.x site",
+	"description": "Adds a fully integrated portal to your phpBB 3.1.3 site",
 	"homepage": "https://github.com/phpbbireland/phpbb3-extension-portal",
 	"version": "1.0.0-dev",
 	"time": "2013-03-16",
@@ -37,7 +37,7 @@
 	"extra": {
 		"display-name": "Kiss Portal Extension",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.1.0,<3.2.*@dev"
+			"phpbb/phpbb": ">=3.1.3"
 		}
 	}
 }

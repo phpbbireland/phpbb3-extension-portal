@@ -1,16 +1,14 @@
 <?php
 /**
 *
-* Kiss Portal extension for the phpBB Forum Software package.
+* @package Kiss Portal extension for the phpBB Forum Software package 1.0.1
 *
 * @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
 
-// this file is not really needed, when empty it can be ommitted
-// however you can override the default methods and add custom
-// installation logic
+// This file is needed for phpBB3 to properly register the extension
 
 namespace phpbbireland\portal;
 

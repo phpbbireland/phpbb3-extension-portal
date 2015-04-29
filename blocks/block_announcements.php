@@ -70,7 +70,7 @@ switch ($k_announce_type)
 	break;
 }
 
-$template->assign_block_vars('welcome_text', array());
+$this->template->assign_block_vars('welcome_text', array());
 
 // Search and return all posts of type announcement including global...
 $sql = 'SELECT
@@ -279,7 +279,7 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 	{
 		foreach ($attachments[$row['post_id']] as $attachment)
 		{
-			$template->assign_block_vars('announce_row.attachment', array(
+			$this->template->assign_block_vars('announce_row.attachment', array(
 				'DISPLAY_ATTACHMENT'	=> $attachment)
 			);
 		}
@@ -292,7 +292,7 @@ unset($rowset, $user_cache);
 
 $message = '';
 
-$template->assign_vars(array(
+$this->template->assign_vars(array(
 	'S_ANNOUNCEMENTS_COUNT_ASKED'		=> sizeof($posts),
 	'S_ANNOUNCEMENTS_COUNT_RETURNED'	=> sizeof($post_list),
 	'ANNOUNCEMENYS_DEBUG'				=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),

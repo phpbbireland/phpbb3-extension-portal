@@ -1,4 +1,3 @@
-
 <script type="text/javascript" src="./ext/phpbbireland/portal/js/portal.js"></script>
 <script type="text/javascript">
 // <![CDATA[
@@ -32,7 +31,7 @@
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-<!-- INCLUDEJS scroller.js -->
+<!-- INCLUDEJS assets/scroller.js -->
 
 
 
@@ -285,3 +284,21 @@ jQuery(document).ready(function(){
 //]]>
 </script>
 <!-- ENDIF -->
+
+
+<!--
+	Fix annoying white flash on page load michaelo 2013
+	set css class flash (flash movie) to display:none as default
+-->
+<script type="text/javascript">
+// <![CDATA[
+	// make sure flash is not displayed //
+	jQuery(".flash").css("display", 'none');
+	jQuery(document).ready(function () {
+		setTimeout(function(){
+			jQuery(".flash").css("display", 'block');
+			//jQuery('.flash').fadeIn(500);
+	}, 500);
+});
+//]]>
+</script>

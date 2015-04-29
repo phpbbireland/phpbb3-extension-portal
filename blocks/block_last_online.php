@@ -8,15 +8,9 @@
 *
 */
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+global $k_config, $k_blocks, $template;
 
-global $k_config, $k_blocks;
+$this->template = $template;
 
 foreach ($k_blocks as $blk)
 {
@@ -27,15 +21,13 @@ foreach ($k_blocks as $blk)
 	}
 }
 $block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['k_block_cache_time_default']);
-
 $k_last_online_max = $k_config['k_last_online_max']; //Numbers of users to show in the last online is configurable via ACP
-
 $queries = $cached_queries = 0;
 
 // Can this user view profiles/memberlist/onlinelist?
 if ($auth->acl_gets('u_viewprofile'))
 {
-	$template->assign_vars(array(
+	$this->template->assign_vars(array(
 		'VIEWONLINE' => true,
 	));
 
@@ -63,10 +55,10 @@ if ($auth->acl_gets('u_viewprofile'))
 		$row['last_visit'] = (!empty($row['session_time'])) ? $row['session_time'] : $row['user_lastvisit'];
 		$last_visit = (!empty($row['session_time'])) ? $row['session_time'] : $row['user_lastvisit'];
 
-		$template->assign_block_vars('last_online', array(
+		$this->template->assign_block_vars('last_online', array(
 			'USERNAME_FULL'		=> get_username_string('full', $row['user_id'], sgp_checksize($row['username'],15), $row['user_colour']),
 			//'ONLINE_TIME'		=> (empty($last_visit)) ? ' - ' : $user->format_date($last_visit),
-			'ONLINE_TIME'      => (empty($last_visit)) ? ' - ' : $user->format_date($last_visit, '|d M Y|, H:i'),
+			'ONLINE_TIME'		=> (empty($last_visit)) ? ' - ' : $user->format_date($last_visit, '|d M Y|, H:i'),
 			'USER_AVATAR_IMG'	=> get_user_avatar($row['user_avatar'], $row['user_avatar_type'], '16', '16'),
 			'U_REGISTER'		=> 'append_sid("{$phpbb_root_path}ucp.$phpEx", mode=register)',
 		));
