@@ -125,7 +125,6 @@ class listener implements EventSubscriberInterface
 	*/
 	public function add_portal_link($event)
 	{
-//?//var_dump('listener.php > add_portal_link(...)');
 		global $phpbb_root_path;
 
 		if (!$this->can_access_portal())
@@ -212,9 +211,7 @@ class listener implements EventSubscriberInterface
 
 	public function process_blocks_for_phpbb_pages()
 	{
-//?var_dump('listerer.php > process_blocks_for_phpbb_pages (on index page)');
-
-		global $phpbb_container, $request;
+		global $phpbb_container, $request, $phpbb_root_path;
 		global $queries, $cached_queries, $total_queries, $k_config, $k_blocks, $k_menus, $k_pages, $k_groups;
 
 		if (!defined('KISS'))
