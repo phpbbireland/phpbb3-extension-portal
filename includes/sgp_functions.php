@@ -358,9 +358,9 @@ if (!function_exists('portal_block_template'))
 
 		// Set template filename
 		$template->set_filenames(array('block' => 'blocks/' . $block_file));
+
 		//$template->set_filenames(array('block' => $phpbb_root_path .  'ext/phpbbireland/portal/styles/prosilver/template/blocks/' . $block_file));
 
-//var_dump($template->assign_display('block', true));
 		// Return templated data
 		return $template->assign_display('block', true);
 	}
@@ -397,16 +397,21 @@ if (!function_exists('get_page_id'))
 	{
 		global $db, $user, $k_pages;
 
-		foreach ($k_pages as $page)
+		if (is_array($k_pages))
 		{
-			if ($page['page_name'] == $this_page_name)
+			foreach ($k_pages as $page)
 			{
-				//echo 'page ' . $this_page_name . '<br />';
-				//echo 'id  ' . $page['page_id'] . '<br />';
-				return($page['page_id']);
+				if ($page['page_name'] == $this_page_name)
+				{
+					return($page['page_id']);
+				}
 			}
 		}
-		return(0);
+		else
+		{
+			var_dump('Not array');
+			var_dump($k_pages);
+		}
 
 	}
 }

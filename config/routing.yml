@@ -11,9 +11,9 @@ phpbbireland_portal_controller:
 #        page:        \d+
 
 # Redirect to portal by default
-phpbbireland_portal_redirect_controller:
-    pattern: /
-    defaults: { _controller: phpbbireland.portal.main:display }
+#phpbbireland_portal_redirect_controller:
+#    pattern: /
+#    defaults: { _controller: phpbbireland.portal.main:display }
 
 phpbbireland_portal_redirect_controller:
     pattern: /rules.php

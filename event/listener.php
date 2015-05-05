@@ -211,7 +211,7 @@ class listener implements EventSubscriberInterface
 
 	public function process_blocks_for_phpbb_pages()
 	{
-		global $phpbb_container, $request, $phpbb_root_path;
+		global $phpbb_container, $request, $phpbb_root_path, $user;
 		global $queries, $cached_queries, $total_queries, $k_config, $k_blocks, $k_menus, $k_pages, $k_groups;
 
 		if (!defined('KISS'))

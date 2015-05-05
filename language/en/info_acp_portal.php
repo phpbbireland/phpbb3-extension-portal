@@ -265,4 +265,8 @@ $lang = array_merge($lang, array(
 	'PORTAL_CONFIG'			=> 'Portal config',
 	'ACP_PORTAL_CONFIG'		=> 'Configure portal',
 	'BLOCK_LAYOUT_RESET'    => 'All members layouts have been cleared/reset...',
+
+// modules ucp
+	'UCP_PORTAL'			=> 'Portal',
+	'UCP_PORTAL_TITLE'		=> 'Portal Options',
 ));

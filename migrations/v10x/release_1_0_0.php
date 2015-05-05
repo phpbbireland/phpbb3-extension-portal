@@ -120,6 +120,25 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				),
 			)),
 
+
+			array('module.add', array(
+				'ucp',
+				'0',
+				'UCP_PORTAL_TITLE',
+			)),
+
+			array('module.add', array(
+				'ucp',
+				'UCP_PORTAL_TITLE',
+				array(
+					'module_basename'	=> '\phpbbireland\portal\ucp\portal_module',
+					'modes'				=> array('info', 'arrange', 'edit', 'delete', 'width'),
+					'module_auth'		=> 'u_k_tools',
+				),
+			)),
+
+
+
 			array('config.add', array('portal_mod_version', '1.0.0')),
 
 			array('custom', array(array($this, 'seed_db'))),
