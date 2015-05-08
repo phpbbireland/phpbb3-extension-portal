@@ -47,11 +47,15 @@ $lang = array_merge($lang, array(
 	'ADD_PAGE'					=> 'Add page',
 	'ADDING_PAGES'				=> 'Page added... ',
 	'CONFIG_PAGES'				=> 'Config pages',
-	'DELETE_FROM_LIST'			=> 'Delete this page from list?',
+	'DELETE_FROM_LIST'			=> 'Remove this page from list?',
 	'ERROR_PORTAL_PAGES'		=> 'Error! deleting this page from database list',
 	'FOLDER_ADDED'              => 'Mod directories list updated...',
 	'ID'						=> 'ID',
-	'LAND'                      => 'Set the default page to load on logout.<br />Please note, when you login, you will be<br />returned to the page you logged in from.',
+	'LAND'                      => 'Set the default page to load on logout.<br />
+	Please note, when you login,<br />
+	you will be returned to the page you logged in from.<br /><br />
+	phpBB 3.1 will the above behaviour',
+
 	'LANDING_PAGE'				=> 'Landing page',
 	'LANDING_PAGE_EXPLAIN'		=> 'Return to this page after successful login.',
 	'LANDING_PAGE_SET'			=> 'Landing page set',
@@ -61,17 +65,15 @@ $lang = array_merge($lang, array(
 	'MOD_FOLDERS_EXPLAIN'       => 'Example: gallery, facebook, other (Submit to add to dropdown)',
 	'NO_FILES_FOUND'			=> 'The dropdown is unavailable as there are no files to add...',
 	'NO_MOD_FOLDER'             => 'The folder you are trying to add could not be found: root/',
-	'PAGE_NAME'					=> 'Current phpBB pages',
-	'PAGE_NAME_EXPLAIN'			=> 'Blocks can be displayed on these pages.',
+
+	'PAGE_INFO'					=> '&bull; PAGE: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>List current pages where blocks can be displayed.<br />',
+	'PAGE_INFO2'				=> '&bull; REMOVE: &nbsp;&nbsp; Pressing the delete icon, will delete the associated page from the list.<br />',
+	'PAGE_INFO3'				=> '&bull; LANDING PAGE: Not implemented for phpBB 3.1 atm.<br /><br />',
 	'PAGE_NEW_FILENAME'			=> 'Add this file (page) to the list',
 	'PAGE_NEW_FILENAME_EXPLAIN'	=> 'Select file (page) from the dropdown and hit Submit...',
 	'REMOVING_PAGES'			=> 'Page removed... ',
 	'SWITCHING'					=> 'Switching to k_pages',
 	'TRAILING_COMMA'            => 'Removed tailing comma from Mod folder list...',
 	'TITLE_PAGES'               => 'phpBB pages',
-	'TITLE_EXPLAIN_PAGES'		=> '&bull; Blocks can be displayed on valid pages including phpBB, Mod and Web pages...<br />
-	&bull; To facilitate this action we provide a method to add additional pages (files) from root/mod_directory.<br />
-	&bull; Once a page is added, it will become available in the block layout.<br />
-	&bull; Mod pages are saved in a comma separated string (no spaces, no trailing comma)...<br />
-	<br />Note: Mod pages must provide necessary code to facilitate blocks (this is easy to add should you desire it)...',
+	'TITLE_EXPLAIN_PAGES'		=> '<br />Blocks can be displayed on valid pages including phpBB, Extension and Web pages...',
 ));

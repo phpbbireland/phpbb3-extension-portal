@@ -9,6 +9,7 @@
 */
 
 namespace phpbbireland\portal\acp;
+use phpbbireland\portal;
 
 /**
 * @ignore
@@ -22,7 +23,7 @@ class pages_module
 {
 	var $u_action;
 
-	function main($page_id, $mode)
+	function main($module_id, $mode)
 	{
 		global $db, $user, $auth, $template, $cache, $request;
 		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx, $k_config, $table_prefix, $cache;
@@ -44,11 +45,13 @@ class pages_module
 		$this->page_title = $user->lang['ACP_PAGES'];
 		add_form_key('pages');
 
+
 		if (!class_exists('sgp_functions_admin'))
 		{
-			include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.' . $phpEx);
+			require($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.' . $phpEx);
 			$sgp_functions_admin = new sgp_functions_admin();
 		}
+
 
 		$mode = $request->variable('mode', '');
 		$page_id = $request->variable('page_id', 0);
@@ -66,7 +69,7 @@ class pages_module
 				$mode = '';
 				trigger_error('FORM_INVALID');
 			}
-			$submit = ture;
+			$submit = true;
 		}
 
 		if ($tag_id != '')
@@ -79,14 +82,14 @@ class pages_module
 			case 'config':
 				$template->assign_var('MESSAGE', $user->lang['SWITCHING']);
 
-				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_vars&amp;mode=config&amp;switch=k_pages'));
+				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_vars&amp;mode=config&amp;switch=k_pages"));
 			break;
 
 			default:
 			break;
 		}
 
-		if ($submit && !check_form_key($form_key))
+		if ($submit && !check_form_key('pages'))
 		{
 			$submit = false;
 			$mode = '';
@@ -100,7 +103,7 @@ class pages_module
 			// trap trailing commas in mod pages //
 			if ($mod_pages && $mod_pages[strlen($mod_pages) - 1] == ',')
 			{
-				trigger_error($user->lang['TRAILING_COMMA'] . adm_back_link(append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_pages&amp;mode=manage")), E_USER_WARNING);
+				trigger_error($user->lang['TRAILING_COMMA'] . adm_back_link(append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage")), E_USER_WARNING);
 			}
 
 			//  We check to see  the mod folder exists, if not return... //
@@ -118,7 +121,7 @@ class pages_module
 					{
 						$submit = false;
 						$mod_pages = '';
-						trigger_error($user->lang['NO_MOD_FOLDER'] . $folder . adm_back_link(append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_pages&amp;mode=manage")), E_USER_WARNING);
+						trigger_error($user->lang['NO_MOD_FOLDER'] . $folder . adm_back_link(append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage")), E_USER_WARNING);
 					}
 				}
 
@@ -127,15 +130,15 @@ class pages_module
 					'MESSAGE'  => $user->lang['FOLDER_ADDED'],
 				));
 			}
-			sgp_acp_set_config('k_mod_folders', $mod_pages);
+			$sgp_functions_admin->sgp_acp_set_config('k_mod_folders', $mod_pages);
 		}
 
 		$template->assign_vars(array(
-			'U_BACK'    => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_pages&amp;mode=manage"),
-			'U_ADD'     => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_pages&amp;mode=add"),
-			'U_MANAGE'  => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_pages&amp;mode=manage"),
-			'S_OPT'     => 'S_MANAGE',
-			'S_PAGE'    => isset($k_config['k_landing_page']) ? $k_config['k_landing_page'] : 'portal',
+			'U_BACK'        => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage"),
+			'U_ADD'         => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=add"),
+			'U_MANAGE'      => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage"),
+			'S_OPT'         => 'S_MANAGE',
+			'S_PAGE'        => isset($k_config['k_landing_page']) ? $k_config['k_landing_page'] : 'portal',
 			'IMG_PATH_ACP'	=> $img_path_acp,
 		));
 
@@ -162,7 +165,7 @@ class pages_module
 						'MESSAGE'  => $user->lang['REMOVING_PAGES'] . $page_name,
 					));
 
-					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_pages&amp;mode=manage'));
+					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage"));
 					break;
 				}
 				else
@@ -176,7 +179,7 @@ class pages_module
 
 				$template->assign_var('MESSAGE', $user->lang['ACTION_CANCELLED']);
 
-				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_pages&amp;mode=manage'));
+				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage"));
 
 			break;
 
@@ -193,7 +196,7 @@ class pages_module
 							'S_OPTION' => 'processing', // not lang var
 							'MESSAGE'  => sprintf($user->lang['ERROR_PAGE'], $tag_id),
 						));
-						meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_pages&amp;mode=manage'));
+						meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage"));
 						return;
 					}
 
@@ -208,7 +211,7 @@ class pages_module
 
 					$db->sql_query('INSERT INTO ' . K_PAGES_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_array));
 
-					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_pages&amp;mode=manage'));
+					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage"));
 
 					$template->assign_vars(array(
 						'S_OPTION' => 'processing', // not lang var
@@ -224,7 +227,7 @@ class pages_module
 
 				$page_name = get_page_filename($page_id);
 
-				sgp_acp_set_config('k_landing_page', $page_name, 1);
+				$sgp_functions_admin->sgp_acp_set_config('k_landing_page', $page_name, 1);
 
 				$template->assign_vars(array(
 					'S_OPTION' => 'processing',
@@ -234,7 +237,7 @@ class pages_module
 				$cache->destroy('k_config');
 				$cache->destroy('sql', K_CONFIG_TABLE);
 
-				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_pages&amp;mode=manage'));
+				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage"));
 			break;
 
 			case 'config':
@@ -256,7 +259,7 @@ class pages_module
 function get_pages_data()
 {
 	global $db, $template, $phpbb_admin_path, $phpEx, $k_config;
-	global $current_pages;
+	global $current_pages, $module_id;
 
 	$sql = 'SELECT *
 		FROM ' . K_PAGES_TABLE ;
@@ -270,9 +273,9 @@ function get_pages_data()
 		$template->assign_block_vars('phpbbpages', array(
 			'S_PAGE_ID'     => $row['page_id'],
 			'S_PAGE_NAME'   => $row['page_name'],
-			'U_EDIT'        => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_pages&amp;mode=edit&amp;page_id=" . $row['page_id']),
-			'U_DELETE'      => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_pages&amp;mode=delete&amp;page_id=" . $row['page_id']),
-			'U_LAND'        => append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_pages&amp;mode=land&amp;page_id=" . $row['page_id']),
+			'U_EDIT'        => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=edit&amp;page_id=" . $row['page_id']),
+			'U_DELETE'      => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=delete&amp;page_id=" . $row['page_id']),
+			'U_LAND'        => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=land&amp;page_id=" . $row['page_id']),
 		));
 	}
 	$db->sql_freeresult($result);
@@ -289,7 +292,7 @@ function get_pages_data()
 */
 function get_all_available_files()
 {
-	global $phpbb_root_path, $phpEx, $template, $dirslist, $db, $user, $k_config, $phpbb_admin_path;
+	global $phpbb_root_path, $phpEx, $template, $dirslist, $db, $user, $k_config, $phpbb_admin_path, $module_id;
 
 	include($phpbb_root_path . 'ext/phpbbireland/portal/includes/kiss_functions.'.$phpEx);
 
@@ -341,7 +344,7 @@ function get_all_available_files()
 
 				if (!file_exists($phpbb_root_path . $folder))
 				{
-					trigger_error($user->lang['NO_MOD_FOLDER'] . $folder . adm_back_link(append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_pages&amp;mode=manage")), E_USER_WARNING);
+					trigger_error($user->lang['NO_MOD_FOLDER'] . $folder . adm_back_link(append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage")), E_USER_WARNING);
 				}
 
 				$dirs = dir($phpbb_root_path . $folder);

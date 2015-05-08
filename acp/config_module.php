@@ -94,7 +94,7 @@ class config_module
 			{
 				$config->set('blocks_width',	$request->variable('blocks_width', 180));
 				$config->set('blocks_enabled',	$request->variable('blocks_enabled', 1));
-				$config->set('portal_build',	$request->variable('portal_build', 301100));
+				$config->set('portal_build',	$request->variable('portal_build', ''));
 
 				$mode='reset';
 
