@@ -7,6 +7,10 @@
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
+global $phpbb_root_path, $phpEx;
+
+$this->php_ext = $phpEx;
+$this->phpbb_root_path = $phpbb_root_path;
 
 include_once($this->phpbb_root_path . 'ext/phpbbireland/portal/includes/kiss_functions.' . $this->php_ext);
 
