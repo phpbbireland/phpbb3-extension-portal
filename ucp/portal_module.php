@@ -48,9 +48,9 @@ class portal_module
 		include_once($phpbb_root_path . 'ext/phpbbireland/portal/helpers/tables.' . $phpEx);
 		include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/kiss_functions.'.$phpEx);
 
-		$preview  = (!empty($_POST['preview'])) ? true : false;
-		$submit   = (!empty($_POST['submit'])) ? true : false;
-		$delete   = (!empty($_POST['delete'])) ? true : false;
+		$preview  = $request->variable('preview', false);
+		$submit   = $request->variable('submit', false);
+		$delete   = $request->variable('dlete', false);
 
 		$error = $data = array();
 		$s_hidden_fields = '';
@@ -65,7 +65,7 @@ class portal_module
 
 		$row = get_current_block_layout($user_id);
 
-		$reset_blocks = request_var('reset_blocks', false);
+		$reset_blocks = $request->variable('reset_blocks', false);
 
 		switch ($mode)
 		{
@@ -127,9 +127,9 @@ class portal_module
 
 			if ($mode == 'edit')
 			{
-				$user_left_blocks = request_var('left_blocks', '');
-				$user_center_blocks = request_var('center_blocks', '');
-				$user_right_blocks = request_var('right_blocks', '');
+				$user_left_blocks = $request->variable('left_blocks', '');
+				$user_center_blocks = $request->variable('center_blocks', '');
+				$user_right_blocks = $request->variable('right_blocks', '');
 
 				$sql = "UPDATE " . USERS_TABLE . "
 					SET user_left_blocks = '" . $db->sql_escape($user_left_blocks) . "',
