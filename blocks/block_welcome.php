@@ -40,7 +40,7 @@ foreach ($k_blocks as $blk)
 }
 $block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
-include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/kiss_functions.' . $this->php_ext);
+include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.' . $this->php_ext);
 
 $block_name		= (isset($user->lang['WELCOME']) ? $user->lang['WELCOME'] : '{L_NO_LANG_VALUE}');
 

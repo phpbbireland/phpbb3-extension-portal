@@ -50,7 +50,6 @@ class tables
 		{
 			return $table_prefix . $this->tables[$table_name];
 		}
-		//throw new \phpbbireland\portal\exception('Table [' . $owner . '] not found');
-		echo 'Not found [' . $table_prefix . $table_name . ']<br />';
+		throw new \phpbbireland\portal\exception('Table [' . $table_name . '] not found');
 	}
 }

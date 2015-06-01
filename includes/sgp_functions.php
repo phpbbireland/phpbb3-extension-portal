@@ -409,8 +409,7 @@ if (!function_exists('get_page_id'))
 		}
 		else
 		{
-			var_dump('Not array');
-			var_dump($k_pages);
+			throw new \phpbbireland\portal\exception('Not in array [' . $this_page_name . ']');
 		}
 
 	}

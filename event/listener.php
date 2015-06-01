@@ -236,7 +236,7 @@ class listener implements EventSubscriberInterface
 
 		$this->includes_path = $phpbb_root_path . 'ext/phpbbireland/portal/includes/';
 
-		include_once($this->includes_path . 'kiss_functions.' . $this->php_ext);
+		include_once($this->includes_path . 'sgp_functions.' . $this->php_ext);
 
 
 

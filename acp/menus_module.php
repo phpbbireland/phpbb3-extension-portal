@@ -31,8 +31,7 @@ class menus_module
 
 		include_once($phpbb_root_path . 'ext/phpbbireland/portal/config/constants.' . $phpEx);
 		include_once($phpbb_root_path . 'ext/phpbbireland/portal/helpers/tables.' . $phpEx);
-
-		include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/kiss_functions.'.$phpEx);
+		include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.'.$phpEx);
 
 		$this->cache_setup();
 
@@ -44,21 +43,21 @@ class menus_module
 			$sgp_functions_admin = new sgp_functions_admin();
 		}
 
+		/*
 		$k_config = $cache->get('k_config');
-		//var_dump($module_id);
 		$sgp_functions_admin->sgp_acp_set_config('base', $module_id);
-
-		// fix module_id and links //
 		if ($mode != 'edit' && $mode != 'delete' && $mode != 'up' && $mode != 'down')
 		{
 			//$sgp_functions_admin->sgp_acp_set_config('base', $this->u_action);
 		}
+		*/
 
 		$user->add_lang_ext('phpbbireland/portal', 'k_menus');
 		$user->add_lang_ext('phpbbireland/portal', 'k_variables');
 
 		$this->tpl_name = 'acp_menus';
 		$this->page_title = $user->lang['ACP_MENUS'];
+
 		add_form_key('menus');
 
 		if ($request->is_set_post('submit'))
@@ -72,14 +71,6 @@ class menus_module
 			$submit = true;
 		}
 
-		// Do not write values if there is an error
-		/*
-		if (sizeof($error))
-		{
-			$mode = '';
-			$submit = false;
-		}
-		*/
 
 		// Can not use append_sid here, the $block_id is assigned to the html but unknow to this code //
 		// Would require I add a form element and use $request->variable to retrieve it //
@@ -95,8 +86,24 @@ class menus_module
 
 		$mode     = $request->variable('mode', '');
 		$menu     = $request->variable('menu', 0);
-		$menuitem = $request->variable('menuitem', '');
-		$menutype = $request->variable('menutype', '');
+		$menuitem = $request->variable('menuitem', '', false);
+		$type     = $request->variable('type', '', false);
+
+		if($submit)
+		{
+			if($mode == 'nav' || $mode == 'sub' || $mode == 'link')
+			{
+				$mode = 'add';
+			}
+		}
+		else
+		{
+			if($mode == 'nav' || $mode == 'sub' || $mode == 'link')
+			{
+				$store = $mode;
+			}
+		}
+
 
 		// bold current row text so things are easier to follow when moving/editing etc... //
 		if (($menu) ? $menu : 0)
@@ -117,8 +124,6 @@ class menus_module
 
 		switch ($mode)
 		{
-			//case 'head':     get_menu(HEAD_MENUS);    $template->assign_var('S_OPTIONS', 'head'); break;
-			//case 'foot':     get_menu(FOOT_MENUS);    $template->assign_var('S_OPTIONS', 'foot'); break;
 			case 'nav':
 				$this->get_menu(NAV_MENUS, $module_id);
 				$template->assign_var('S_OPTIONS', 'nav');
@@ -209,7 +214,6 @@ class menus_module
 						break;
 						case 5: $mode= 'link';
 						break;
-
 						default: $mode = $mode;
 						break;
 					}
@@ -252,11 +256,11 @@ class menus_module
 						FROM ' . K_MENUS_TABLE . '
 						WHERE m_id = ' . (int) $menu;
 					$result = $db->sql_query($sql);
-					$name = (string) $db->sql_fetchfield('name');
-					$id = (int) $db->sql_fetchfield('m_id');
-					$db->sql_freeresult($result);
 
-					$name .= $user->lang['MENU'];
+					$name = (string) $db->sql_fetchfield('name');
+					$db->sql_freeresult($result);
+					$name .= ' ' . $user->lang['MENU'];
+
 					$sql = 'DELETE FROM ' . K_MENUS_TABLE . "
 						WHERE m_id = " . (int) $menu;
 					$db->sql_query($sql);
@@ -265,13 +269,13 @@ class menus_module
 					$template->assign_var('L_MENU_REPORT', $name . $user->lang['DELETED'] . '<br />');
 					$cache->destroy('sql', K_MENUS_TABLE);
 
-					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=all"));
+					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=" . $type));
 					return;
 				}
 				else
 				{
 					confirm_box (false, $user->lang['CONFIRM_OPERATION_MENUS'], build_hidden_fields(array(
-						'i'       => $id,
+						'i'       => $module_id,
 						'mode'    => $mode,
 						'action'  => 'delete',
 					)));
@@ -279,7 +283,8 @@ class menus_module
 
 				$template->assign_var('L_MENU_REPORT', $user->lang['ACTION_CANCELLED']);
 
-				meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=all"));
+				meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=" . $type));
+
 			break;
 
 			case 'up':
@@ -469,8 +474,26 @@ class menus_module
 
 					$cache->destroy('sql', K_MENUS_TABLE);
 
+
+
+					switch ($menu_type)
+					{
+						case 1: $mode = 'nav';
+						break;
+						case 2: $mode = 'sub';
+						break;
+						case 3: $mode= 'head';
+						break;
+						case 3: $mode= 'foot';
+						break;
+						case 5: $mode= 'link';
+						break;
+						default: $mode = $mode;
+						break;
+					}
+
 					//fix for the different menus...
-					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=" . $store));
+					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=" . $mode));
 
 					$template->assign_var('L_MENU_REPORT', $user->lang['MENU_CREATED']);
 
@@ -487,7 +510,7 @@ class menus_module
 					$template->assign_vars(array(
 						'S_MENU_ICON' => 'acp.png',
 						'S_OPTIONS'   => 'add',
-						'S_MENU_TYPE' => $menutype,
+						'S_MENU_TYPE' => $type,
 					));
 
 					return;
@@ -577,7 +600,7 @@ class menus_module
 	public function get_menu($this_one, $module_id)
 	{
 		global $db, $phpbb_root_path, $phpEx, $template, $request;
-		global $phpbb_admin_path, $phpEx;
+		global $phpbb_admin_path, $phpEx, $mode;
 
 		if ($this_one > UN_ALLOC_MENUS && $this_one < ALL_MENUS) // standard menus defined as 1 to 5 //
 		{
@@ -618,7 +641,7 @@ class menus_module
 					'U_EDIT'    => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=edit&amp;menu=" . $row['m_id']),
 					'U_UP'      => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=up&amp;menu=" . $row['m_id']),
 					'U_DOWN'    => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=down&amp;menu=" . $row['m_id']),
-					'U_DELETE'  => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=delete&amp;menu=" . $row['m_id']),
+					'U_DELETE'  => append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=delete&amp;menu=" . $row['m_id'] . "&amp;type=" . $mode),
 				));
 			}
 			$db->sql_freeresult($result);

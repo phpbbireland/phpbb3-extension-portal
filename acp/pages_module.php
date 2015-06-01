@@ -294,7 +294,7 @@ function get_all_available_files()
 {
 	global $phpbb_root_path, $phpEx, $template, $dirslist, $db, $user, $k_config, $phpbb_admin_path, $module_id;
 
-	include($phpbb_root_path . 'ext/phpbbireland/portal/includes/kiss_functions.'.$phpEx);
+	include($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.'.$phpEx);
 
 	$page_name = '';
 	$dirslist = $store = ' ';

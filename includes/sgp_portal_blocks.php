@@ -11,7 +11,6 @@
 /**
 * @ignore
 */
-var_dump('sgp_portal_blocks.php');
 
 global $phpbb_root_path, $config, $k_config, $phpEx, $user, $table_prefix;
 global $db, $k_blocks, $user, $avatar_img, $request, $template, $auth;

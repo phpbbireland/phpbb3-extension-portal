@@ -76,7 +76,7 @@ class func
 		$this_page = explode(".", $user->page['page']);
 		$user_id = $user->data['user_id'];
 
-		include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/kiss_functions.' . $this->php_ext);
+		include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.' . $this->php_ext);
 
 		// Grab data for this user //
 		$sql = "SELECT group_id, user_type, user_style, user_avatar, user_avatar_type, username, user_left_blocks, user_center_blocks, user_right_blocks

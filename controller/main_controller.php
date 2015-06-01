@@ -685,7 +685,7 @@ class main implements main_interface
 			'U_INDEX'                 => append_sid("{$phpbb_root_path}index.$this->php_ext"),
 			///'U_PORTAL'                => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
 			//'U_PORTAL'                => append_sid("{$phpbb_root_path}portal"),
-			//'U_PORTAL_ARRANGE'        => append_sid("{$phpbb_root_path}portal.$this->php_ext", "arrange=1"),
+			'U_PORTAL_ARRANGE'        => append_sid("{$phpbb_root_path}portal.$this->php_ext", "arrange=1"),
 			'U_STAFF'                 => append_sid("{$phpbb_root_path}memberlist.$this->php_ext", 'mode=leaders'),
 			'U_SEARCH_BOOKMARKS'      => append_sid("{$phpbb_root_path}ucp.$this->php_ext", 'i=main&mode=bookmarks'),
 		));

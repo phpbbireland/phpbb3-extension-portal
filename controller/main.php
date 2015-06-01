@@ -291,7 +291,7 @@ class main //implements main_interface
 		$my_root_path = $this->phpbb_root_path . 'ext/phpbbireland/portal/';
 
 		include_once($this->phpbb_root_path . 'ext/phpbbireland/portal/config/constants.' . $this->php_ext);
-		include_once($this->phpbb_root_path . 'ext/phpbbireland/portal/includes/kiss_functions.' . $this->php_ext);
+		include_once($this->phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.' . $this->php_ext);
 
 
 		// Each member can have a different block layouts, so grab data using user_id //
