@@ -54,7 +54,7 @@ class main implements main_interface
 	*/
 	public function __construct(
 		\phpbb\config\config $config,
-		\phpbbireland\portal\$controller_healper,
+		\phpbbireland\portal\$controller_helper,
 		\phpbb\template\template $template,
 		\phpbb\user $user,
 		\phpbb\controller\helper $helper,
