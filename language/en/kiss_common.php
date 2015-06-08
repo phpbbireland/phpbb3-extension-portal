@@ -233,6 +233,7 @@ $lang = array_merge($lang, array(
 	'NO_BLOCK_ID'		=> 'Missing ID?',
 	'NO_BOT_DATA'		=> 'No bot data to display',
 	'NO_COMMENTS'		=> 'No comments to display.',
+	'NO_FILENAME'       => 'No file name',
 	'NO_ID_GIVEN'		=> 'No id supplied<br />',
 	'NO_LANG_VALUE'		=> 'Missing language value',
 	'NO_MODS'			=> 'No mods assigned.',
@@ -398,7 +399,7 @@ $lang = array_merge($lang, array(
 	'WIDE_VERSION'			=> 'Wide Version',
 
 	// Use this version to display debug info //
-	'WELCOME_MESSAGE'	=> "Welcome back [you]...<br /><br /><strong>{SITENAME} </strong> is powered by <strong>phpBB</strong> {VERSION} and <strong> the Kiss Portal Extension </strong>{PORTAL_VERSION}.",
+	'WELCOME_MESSAGE'	=> "Welcome back [you]...<br />{WM}<br /><strong>{SITENAME} </strong> is powered by <strong>phpBB</strong> {VERSION} and <strong> the Kiss Portal Extension </strong>{PORTAL_VERSION}.",
 
 	// Translators don’t edit "[you]" in next line, it's code... //
 

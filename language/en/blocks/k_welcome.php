@@ -40,5 +40,5 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'K_WELCOME_MESSAGE_TITLE'   => 'Welcome Block Variables',
 	'K_WELCOME_MESSAGE'         => "Welcome message",
-	'K_WELCOME_MESSAGE_EXPLAIN' => 'You can embed some variables too... (see portal resource module for details).',
+	'K_WELCOME_MESSAGE_EXPLAIN' => 'The main welcome message is stored in kiss_common.php (language file) and can be altered to suit. You can add up to 250 characters here... You can include phpBB and Portal variables (they will parsed).',
 ));

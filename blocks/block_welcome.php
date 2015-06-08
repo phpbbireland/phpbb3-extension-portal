@@ -18,6 +18,8 @@ if (!defined('IN_PHPBB'))
 
 global $user, $k_config, $k_blocks, $phpbb_root_path;
 
+$k_welcome_message = (isset($k_config['k_welcome_message']) ? $k_config['k_welcome_message'] : '');
+
 $welcome_image	= $phpbb_root_path . 'ext/phpbbireland/portal/images/welcome.png';
 
 if (file_exists($welcome_image))
@@ -44,7 +46,12 @@ include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.
 
 $block_name		= (isset($user->lang['WELCOME']) ? $user->lang['WELCOME'] : '{L_NO_LANG_VALUE}');
 
+// if welcome message has not been set in ACP > BLOCKS > Welcome Blocks, use default //
+//$block_details	= (isset($k_welcome_message) && $k_welcome_message != ''  ? $k_welcome_message : $user->lang['WELCOME_MESSAGE']);
+
 $block_details	= $user->lang['WELCOME_MESSAGE'];
+$block_details = str_replace('{WM}', $k_welcome_message, $block_details);
+
 $block_details	= process_for_vars($block_details, true);
 $block_details	= str_replace("[you]", ('<span style="font-weight:bold; color:#' . $user->data['user_colour'] . ';">' . $user->data['username'] . '</span>'), $block_details);
 
