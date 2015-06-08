@@ -56,7 +56,7 @@ $lang = array_merge($lang, array(
 
 // Portal Block Names + add your block name language variables here! //
 $lang = array_merge($lang, array(
-	'ACP_SMALL'         => 'Admin CP',
+	'ADMIN_CP'          => 'Admin CP',
 	'BOARD_MINI_NAV'    => 'Sub Nav',
 	'BOARD_STYLE'       => 'Board Style',
 	'BOARD_NAV'         => 'Board Navigation',

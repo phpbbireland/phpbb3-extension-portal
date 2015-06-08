@@ -38,7 +38,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'ACP_FILE_BACKUP'		=> 'Backup files',
 	'ACP_MINI'				=> 'Admin',
-	'ACP_SMALL'				=> 'ACP',
+	'ACP_SHORT'				=> 'ACP',
 	'ACRO_1'				=> 'Stargate Portal (aka Kiss Portal), the original phpBB3 portal &copy; Michael O’Toole 2005-2011',
 	'ACRO_2'				=> 'Kiss Portal Engine (Stargate Portal without frills)... &copy; Michael O’Toole 2011',
 	'ACRO_3'				=> 'Probably the best forum software ever...',

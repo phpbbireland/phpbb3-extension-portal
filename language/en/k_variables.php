@@ -212,7 +212,7 @@ $lang = array_merge($lang, array(
 
 // Portal Block Names + add your block name language variables here! //
 $lang = array_merge($lang, array(
-	'ACP_SMALL'                => 'Admin CP',
+	'ACP_SHORT'                => 'Admin CP',
 	'ANNOUNCEMENTS'            => 'Announcements',
 	'BIRTHDAY'                 => 'Birthday',
 	'BLOCK_CACHE_TIME_RECENT'  => 'Recent topics cache time',

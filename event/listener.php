@@ -26,6 +26,8 @@ class listener implements EventSubscriberInterface
 	/** @var  */
 	protected $controller_helper;
 
+	protected $helper;
+
 	/** @var \phpbb\path_helper */
 	protected $path_helper;
 
@@ -50,12 +52,19 @@ class listener implements EventSubscriberInterface
 	* @return \phpbbireland\portal\event\listener
 	* @access public
 	*/
-	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\controller\helper $controller_helper, \phpbb\path_helper $path_helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
+	public function __construct(
+		\phpbb\auth\auth $auth,
+		\phpbb\config\config $config,
+		\phpbb\controller\helper $controller_helper, $helper,
+		\phpbb\path_helper $path_helper,
+		\phpbb\template\template $template,
+		\phpbb\user $user, $php_ext)
 	{
-//?//var_dump('listener.php > constructor');
+		///var_dump('listener.php > constructor');
 		$this->auth = $auth;
 		$this->config = $config;
 		$this->controller_helper = $controller_helper;
+		$this->helper = $helper;
 		$this->path_helper = $path_helper;
 		$this->template = $template;
 		$this->user = $user;
@@ -72,7 +81,7 @@ class listener implements EventSubscriberInterface
 	*/
 	static public function getSubscribedEvents()
 	{
-//?//var_dump('listener.php > getSubscribedEvents()');
+		///var_dump('listener.php > getSubscribedEvents()');
 		return array(
 			'core.user_setup'			=> 'load_language_on_setup',
 			//'core.page_header'			=> 'process_blocks_for_phpbb_pages',
@@ -94,7 +103,7 @@ class listener implements EventSubscriberInterface
 
 	public function load_language_on_setup($event)
 	{
-//?//var_dump('listener.php > load_language_on_setup(...)');
+		///var_dump('listener.php > load_language_on_setup(...)');
 		$lang_set_ext = $event['lang_set_ext'];
 		$lang_set_ext[] = array(
 			'ext_name' => 'phpbbireland/portal',
@@ -106,7 +115,7 @@ class listener implements EventSubscriberInterface
 
 	public function add_permission($event)
 	{
-//?//var_dump('listener.php > add_permission(...)');
+		///var_dump('listener.php > add_permission(...)');
 		$categories = $event['categories'];
 		$categories['portal'] = 'ACL_CAT_PORTAL';
 		$event['categories'] = $categories;
@@ -125,6 +134,7 @@ class listener implements EventSubscriberInterface
 	*/
 	public function add_portal_link($event)
 	{
+		///var_dump('listener.php > add_portal_links');
 		global $phpbb_root_path;
 
 		if (!$this->can_access_portal())
@@ -135,6 +145,9 @@ class listener implements EventSubscriberInterface
 		$page = '';
 
 		$portal_link = $this->get_portal_link();
+		$portal_link = str_replace('/app.php', '', $portal_link);
+
+		///var_dump('listener->get_portal_links' . '= ' . $portal_link);
 
 		$mod_style_path	= $phpbb_root_path . 'ext/phpbbireland/portal/styles/' . $this->user->style['style_path'] . '/';
 
@@ -147,12 +160,10 @@ class listener implements EventSubscriberInterface
 
 		$this->template->assign_vars(array(
 			'KISS'					=> true,
-
 			'U_PORTAL'				=> $portal_link,
 			'L_PORTAL'				=> $this->user->lang['PORTAL'],
 			'EXT_TEMPLATE_PATH'		=> $mod_style_path,
 			'PAGE'					=> $page,
-
 			'S_SHOW_RIGHT_BLOCKS'	=> true,
 			'S_SHOW_LEFT_BLOCKS'	=> true,
 		));
@@ -171,7 +182,7 @@ class listener implements EventSubscriberInterface
 
 	public function add_portal_links($event)
 	{
-//?//var_dump('listener.php > add_portal_links(...)');
+		///var_dump('listener.php > add_portal_links(...)');
 		global $phpbb_container, $portal_link;
 
 		$this->template->assign_vars(array(
@@ -234,29 +245,16 @@ class listener implements EventSubscriberInterface
 			$k_resources = obtain_k_resources();
 		}
 
+
+		/* this is the ideal code as all calls to generate portal data can be handled by one file however the template files are not found with this method?
+		$this->helper->run_initial_tasks();
+		$this->helper->generate_all_block();
+		*/
+
 		$this->includes_path = $phpbb_root_path . 'ext/phpbbireland/portal/includes/';
-
 		include_once($this->includes_path . 'sgp_functions.' . $this->php_ext);
-
-
-
-// process blocks for pages other than portal michaelo //
-$func = new \phpbbireland\portal\includes\func;
-$func->process_block_modules();
-
-
-
-/* michaelo */
-/**********
-$controller_helper = new \phpbbireland\portal\controller\helper;
-$this->controller_helper->generate_all_block();
-
-$controller_helper = new \phpbbireland\portal\controller\helper;
-$this->controller_helper->generate_all_block();
-if (!($module = $this->controller_helper->get_portal_module($row)))
-$helper = new \phpbbireland\portal\controller\helper;
-*/
-
+		$func = new \phpbbireland\portal\includes\func;
+		$func->process_block_modules();
 
 		if (!function_exists('phpbb_get_user_avatar'))
 		{

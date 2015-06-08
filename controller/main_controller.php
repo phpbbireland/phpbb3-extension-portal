@@ -54,7 +54,7 @@ class main implements main_interface
 	*/
 	public function __construct(
 		\phpbb\config\config $config,
-		\phpbbireland\portal\$controller_helper,
+		\phpbbireland\portal\$controller_healper,
 		\phpbb\template\template $template,
 		\phpbb\user $user,
 		\phpbb\controller\helper $helper,
@@ -683,7 +683,7 @@ class main implements main_interface
 			'USER_NAME'               => $user->data['username'],
 			'USERNAME_FULL'           => get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']),
 			'U_INDEX'                 => append_sid("{$phpbb_root_path}index.$this->php_ext"),
-			///'U_PORTAL'                => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
+			'U_PORTAL'                => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
 			//'U_PORTAL'                => append_sid("{$phpbb_root_path}portal"),
 			'U_PORTAL_ARRANGE'        => append_sid("{$phpbb_root_path}portal.$this->php_ext", "arrange=1"),
 			'U_STAFF'                 => append_sid("{$phpbb_root_path}memberlist.$this->php_ext", 'mode=leaders'),
@@ -693,6 +693,7 @@ class main implements main_interface
 
 	public function build_block_modules($block_file)
 	{
+		///var_dump('main_controller.php > build_block_modules(' . $block_file . ') - called for each block!');
 		$this->template->set_filenames(array('block' => 'blocks/' . $block_file));
 		return $this->template->assign_display('block', true);
 	}

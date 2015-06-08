@@ -851,7 +851,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 			array(
 				'ndx'			=> '17',
 				'menu_type'		=> '1',
-				'name'			=> 'ACP',
+				'name'			=> 'Admin CP',
 				'link_to'		=> 'adm/index.php',
 				'extern'		=> '0',
 				'append_sid'	=> '1',
