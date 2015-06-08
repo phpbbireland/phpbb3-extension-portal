@@ -613,7 +613,6 @@ class blocks_module
 						$var_path = 'ext/phpbbireland/portal/acp/variables/';
 
 						$file = $var_file_name;
-
 						$file = str_replace('.html', '.php', $file);
 
 						if ($file == 'k_the_teams_vars.php')
@@ -623,8 +622,7 @@ class blocks_module
 
 						if (!file_exists($phpbb_root_path . $var_path . $file))
 						{
-							//need some sort of simple report //
-							//e c h o 'No block variable file found in: ' . $phpbb_root_path . $var_path . $file;
+							trigger_error('NO_FILENAME' . $phpbb_root_path . $var_path . $file);
 						}
 
 						include_once($phpbb_root_path . $var_path . $file);

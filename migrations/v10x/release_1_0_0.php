@@ -417,7 +417,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				'type'			=> 'H',
 				'active'		=> '1',
 				'html_file_name'=> 'block_welcome.html',
-				'var_file_name'	=> '',
+				'var_file_name'	=> 'k_welcome_vars.html',
 				'img_file_name'	=> 'welcome.png',
 				'view_all'		=> '1',
 				'view_groups'	=> '0',
