@@ -255,18 +255,17 @@ $lang = array_merge($lang, array(
 	'ACP_BLOCKS_TITLE'		=> 'Blocks',
 	'ACP_MENUS_TITLE'		=> 'Menus',
 	'ACP_PAGES_TITLE'		=> 'Pages',
+	'ACP_PORTAL_CONFIG'		=> 'Configure portal',
 	'ACP_RESOURCES_TITLE'	=> 'Resources',
-
+	'BLOCK_LAYOUT_RESET'    => 'All members layouts have been cleared/reset...',
 
 	'K_PORTAL_ENABLED'		=> 'Enable portal',
 	'K_PORTAL_BUILD'		=> 'Portal build',
 	'K_BLOCKS_ENABLED'		=> 'Enable blocks',
 	'K_BLOCKS_WIDTH'		=> 'Block width',
 	'PORTAL_CONFIG'			=> 'Portal config',
-	'ACP_PORTAL_CONFIG'		=> 'Configure portal',
-	'BLOCK_LAYOUT_RESET'    => 'All members layouts have been cleared/reset...',
+
 
 // modules ucp
-	'UCP_PORTAL'			=> 'Portal',
 	'UCP_PORTAL_TITLE'		=> 'Portal Options',
 ));
