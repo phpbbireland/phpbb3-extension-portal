@@ -1,9 +1,9 @@
 <div class="block_data">
-	<form method="post" action="{S_LOGIN_ACTION}" class="headerspace">
+	<form method="post" action="{S_LOGIN_ACTION}" id="login" class="headerspace">
 
 	<!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
 
-		<div style="text-align:center;"><img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" /></div>
+		<div style="text-align:center;"><img src="{EXT_TEMPLATE_PATH}/theme/images/no_avatar.gif" alt="" /></div>
 		<div label for="username">{L_USERNAME}:</label></div>
 		<div style="text-align:center;"><input type="text" tabindex="1" name="username" id="username" size="20" maxlength="40" value="{USERNAME}" class="inputbox autowidth" /></div>
 		<div label for="password">{L_PASSWORD}:</label></div>
@@ -27,7 +27,7 @@
 
 	<!-- IF S_USER_LOGGED_IN -->
 		<div style="text-align:center;">
-			<!-- IF AVATAR -->{AVATAR}<!-- ELSE --><img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" /><!-- ENDIF -->
+			<!-- IF AVATAR -->{AVATAR}<!-- ELSE --><img src="{EXT_TEMPLATE_PATH}/theme/images/no_avatar.gif" alt="" /><!-- ENDIF -->
 		</div>
 
 		<div style="text-align:center;">
@@ -39,7 +39,7 @@
 		</div>
 		<div style="text-align:center; padding:3px;"><!-- IF S_USER_LOGGED_IN -->{LAST_VISIT_DATE}<!-- ELSE -->{CURRENT_TIME}<!-- ENDIF --></div>
 		<div style="text-align:center; padding:3px;"><a href="{U_SEARCH_SELF}">{L_SEARCH_SELF}</a></div>
-		<div style="text-align:center; padding:3px;"><a href="{U_LOGIN_LOGOUT}"><img src="{T_THEME_PATH}/images/icon_logout.gif" width="12" height="13" alt="{L_LOGIN_LOGOUT}" /> {L_LOGIN_LOGOUT}</a></div>
+		<div style="text-align:center; padding:3px;"><a href="{U_LOGIN_LOGOUT}"><img src="{EXT_TEMPLATE_PATH}/theme/images/icon_logout.gif" width="12" height="13" alt="{L_LOGIN_LOGOUT}" /> {L_LOGIN_LOGOUT}</a></div>
 	<!-- ENDIF -->
 	{S_LOGIN_REDIRECT}
 	</form>

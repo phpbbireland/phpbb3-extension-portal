@@ -147,7 +147,7 @@ $func->process_block_modules();
 
 		$web_path = (defined('PHPBB_USE_BOARD_URL_PATH') && PHPBB_USE_BOARD_URL_PATH) ? $board_url : $corrected_path;
 
-		$mod_style_path	= $this->phpbb_root_path . 'ext/phpbbireland/portal/styles/' . $this->user->style['style_path'] . '/';
+		//$mod_style_path	= $this->phpbb_root_path . 'ext/phpbbireland/portal/styles/' . $this->user->style['style_path'];
 
 		if (!class_exists('bbcode'))
 		{
@@ -164,9 +164,9 @@ $func->process_block_modules();
 
 		$this->get_portal_cache();
 
-		$this->template->assign_vars(array(
-			'EXT_TEMPLATE_PATH'    => $mod_style_path,
-		));
+		//$this->template->assign_vars(array(
+		//	'EXT_TEMPLATE_PATH'    => $mod_style_path,
+		//));
 
 		// Generate logged in/logged out status
 		if ($this->user->data['user_id'] != ANONYMOUS)
@@ -216,8 +216,8 @@ $func->process_block_modules();
 		));
 
 		$this->template->set_filenames(array(
-			'body' => 'rules.html')
-		);
+			'body' => 'rules.html'
+		));
 
 		page_footer();
 

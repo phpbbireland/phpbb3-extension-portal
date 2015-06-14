@@ -34,7 +34,7 @@ class func
 	public function process_block_modules()
 	{
 
-		///var_dump('func.php > process_block_modules() in func.php ... used by index');
+		//var_dump('func.php > process_block_modules()');
 
 		global $phpbb_root_path, $config, $table_prefix, $helper;
 		global $db, $user, $avatar_img, $request, $template, $auth;
@@ -62,16 +62,16 @@ class func
 
 		// if styles use large block images change path to images //
 		$block_image_path = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/block/';
-		$big_image_path = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/large/';
-		$my_root_path = $phpbb_root_path . 'ext/phpbbireland/portal/';
-		$mod_style_path	= $phpbb_root_path . 'ext/phpbbireland/portal/styles/' . $user->style['style_path'] . '/';
+		$big_image_path   = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/large/';
 
 		$this_page = explode(".", $user->page['page']);
 		$user_id = $user->data['user_id'];
 
-
+		$theme = rawurlencode($user->style['style_path']);
 		$template->assign_vars(array(
-			'EXT_TEMPLATE_PATH'	=> $mod_style_path,
+			'EXT_TEMPLATE_PATH'		=> $phpbb_root_path . 'ext/phpbbireland/portal/styles/' . $theme,
+			'EXT_IMAGE_PATH'		=> $phpbb_root_path . 'ext/phpbbireland/portal/images/',
+			'MOD_IMAGE_LANG_PATH'	=> $phpbb_root_path . 'ext/phpbbireland/portal/styles/' . $theme . '/theme/' . $user->data['user_lang'] . '/',
 		));
 
 		include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.' . $this->php_ext);
@@ -181,6 +181,8 @@ class func
 		$this_page_name = $this->get_current_page();
 		$page_id = get_page_id($this_page_name);
 
+		//var_dump('RETURNED: ' . $this_page_name . ' ID: ' . $page_id);
+
 
 		if ($page_id == 0)
 		{
@@ -195,7 +197,7 @@ class func
 			{
 				if (in_array($page_id, $arr[$active_block['id']]))
 				{
-					///var_dump($filename);
+					//var_dump('process_block_modules > foreach returned' . $filename);
 					include($phpbb_root_path . 'ext/phpbbireland/portal/blocks/' . $filename . '.' . $this->php_ext);
 				}
 			}
@@ -375,7 +377,7 @@ class func
 		//unset($center_block_ary);
 
 		$template->assign_vars(array(
-			'T_THEME_PATH'            => $phpbb_root_path . 'ext/phpbbireland/portal/style/' . rawurlencode($user->style['style_path']) . '/theme/images/',
+			'ASSETS_PATH'            => $phpbb_root_path . 'ext/phpbbireland/portal/styles/' . rawurlencode($user->style['style_path']) . '/template/assets/',
 			'AVATAR'                  => get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height']),
 			'BLOCK_WIDTH'             => $blocks_width . 'px',
 			'PORTAL_ACTIVE'           => $config['portal_enabled'],
@@ -394,12 +396,21 @@ class func
 			'S_CONTENT_FLOW_END'      => ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
 			'USER_NAME'               => $user->data['username'],
 			'USERNAME_FULL'           => get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']),
+
 			'U_INDEX'                 => append_sid("{$phpbb_root_path}index.$this->php_ext"),
-			///'U_PORTAL'                => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
-			//'U_PORTAL'                => append_sid("{$phpbb_root_path}portal"),
-			//'U_PORTAL_ARRANGE'        => append_sid("{$phpbb_root_path}portal.$this->php_ext", "arrange=1"),
+			'U_PORTAL'                => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
 			'U_STAFF'                 => append_sid("{$phpbb_root_path}memberlist.$this->php_ext", 'mode=leaders'),
 			'U_SEARCH_BOOKMARKS'      => append_sid("{$phpbb_root_path}ucp.$this->php_ext", 'i=main&mode=bookmarks'),
+
+			'PORTAL_HEADER_BLOCKS'    => false,
+			'PORTAL_FOOTER_BLOCKS'    => false,
+
+			'U_PORTAL_ARRANGE'        => append_sid("{$phpbb_root_path}portal.$this->php_ext", "arrange=1"),
+			'S_ARRANGE'               => false,
+			'HIDE_IMG'		=> '<img src="ext/phpbbireland/portal/images/hide.png"  alt="' . $user->lang['SHOWHIDE'] . '" title="' . $user->lang['SHOWHIDE'] . '" height="16" width="14" />',
+			'MOVE_IMG'		=> '<img src="ext/phpbbireland/portal/images/move.png"  alt="' . $user->lang['MOVE'] . '" title="' . $user->lang['MOVE'] . '" height="16" width="14" />',
+			'SHOW_IMG'		=> '<img src="ext/phpbbireland/portal/images/show.png"  alt="' . $user->lang['SHOW'] . '" title="' . $user->lang['SHOW'] . '" height="16" width="14" />',
+
 		));
 
 	}

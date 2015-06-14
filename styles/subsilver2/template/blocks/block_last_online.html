@@ -1,28 +1,29 @@
 <!-- IDTAG starts block_last_online.html 4 November 2008 copyright phpbbireland.com 2008 -->
 <div class="block_data">
 <!-- IF VIEWONLINE -->
-	<div>
+	<div style="clear:both;">
 		<span style="position: relative; float:left; text-align:left; width:70%;"><b>{L_USERNAME}</b></span>
 		<span style="position: relative; float:right; text-align:right; width:30%;"><b>{L_ONLINE}</b></span>
 	</div>
-	<div class="top_poster">
+
 	<!-- BEGIN last_online -->
-		<span class="bg2" style="position: relative; float:left; text-align:left; width:100%; padding:0; font-size: 9px;" >
-			<!-- IF last_online.USER_AVATAR_IMG -->
-				{last_online.USER_AVATAR_IMG}
-			<!-- ELSE -->
-				<img src="{T_THEME_PATH}/images/no_avatar.gif" width="16" height="16" alt="" />
-			<!-- ENDIF -->
-			{last_online.USERNAME_FULL}
-		</span>
-		<span class="bg3" style="position: relative; float:left; text-align:center; width:100%; padding-bottom:3px; font-size: 9px;">
-			{last_online.ONLINE_TIME}
-		</span>
-		<br style="clear:both;" />
-	<!-- END last_online -->
-	<br />
+	<div class="tcontainer" style="padding:1px; margin:0;">
+		<div class="trow" style="width:100%;">
+			<span class="tleft bg2" style="width:25px; vertical-align:middle; padding:0px;">
+				<!-- IF last_online.USER_AVATAR_IMG -->
+					{last_online.USER_AVATAR_IMG}
+				<!-- ELSE -->
+					<img src="{EXT_TEMPLATE_PATH}/theme/images/no_avatar.gif" width="16" height="16" alt="" />
+				<!-- ENDIF -->
+			</span>
+			<span class="tleft bg2" style="width: auto; padding:1px;">{last_online.USERNAME_FULL}</span>
+			<span class="tleft bg2" style="width: 160px; padding:1px; font-size: 10px; text-align: right; overflow: hidden;">{last_online.ONLINE_TIME}</span>
+		</div>
 	</div>
+	<!-- END last_online -->
+
 <!-- ENDIF -->
+
 <!-- IF NO_VIEWONLINE_R -->
 	<div style="text-align:center;">
           <strong>{L_NO_VIEW_USERS_R}</strong>
