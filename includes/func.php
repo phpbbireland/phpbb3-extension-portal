@@ -183,7 +183,6 @@ class func
 
 		//var_dump('RETURNED: ' . $this_page_name . ' ID: ' . $page_id);
 
-
 		if ($page_id == 0)
 		{
 			$page_id = $this_page[0];

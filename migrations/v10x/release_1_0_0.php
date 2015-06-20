@@ -116,7 +116,6 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				),
 			)),
 
-
 			array('module.add', array(
 				'ucp',
 				'0',
@@ -132,8 +131,6 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 					'module_auth'		=> 'u_k_tools',
 				),
 			)),
-
-
 
 			array('config.add', array('portal_mod_version', '1.0.0')),
 

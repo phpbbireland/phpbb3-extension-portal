@@ -157,7 +157,6 @@ class listener implements EventSubscriberInterface
 		*/
 		$page = $this->page_name();
 
-
 		$this->template->assign_vars(array(
 			'KISS'					=> true,
 			'U_PORTAL'				=> $portal_link,
@@ -244,7 +243,6 @@ class listener implements EventSubscriberInterface
 			$k_groups = obtain_k_groups();
 			$k_resources = obtain_k_resources();
 		}
-
 
 		/* this is the ideal code as all calls to generate portal data can be handled by one file however the template files are not found with this method?
 		$this->helper->run_initial_tasks();

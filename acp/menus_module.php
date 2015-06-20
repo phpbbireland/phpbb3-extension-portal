@@ -71,7 +71,6 @@ class menus_module
 			$submit = true;
 		}
 
-
 		// Can not use append_sid here, the $block_id is assigned to the html but unknow to this code //
 		// Would require I add a form element and use $request->variable to retrieve it //
 
@@ -103,7 +102,6 @@ class menus_module
 				$store = $mode;
 			}
 		}
-
 
 		// bold current row text so things are easier to follow when moving/editing etc... //
 		if (($menu) ? $menu : 0)
@@ -473,8 +471,6 @@ class menus_module
 					$db->sql_query('INSERT INTO ' . K_MENUS_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_array));
 
 					$cache->destroy('sql', K_MENUS_TABLE);
-
-
 
 					switch ($menu_type)
 					{

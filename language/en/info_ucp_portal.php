@@ -79,5 +79,3 @@ $lang = array_merge($lang, array(
 
 	'UCP_PORTAL_TITLE'	=> 'Portal Options',
 ));
-
-?>

@@ -45,13 +45,11 @@ class pages_module
 		$this->page_title = $user->lang['ACP_PAGES'];
 		add_form_key('pages');
 
-
 		if (!class_exists('sgp_functions_admin'))
 		{
 			require($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions_admin.' . $phpEx);
 			$sgp_functions_admin = new sgp_functions_admin();
 		}
-
 
 		$mode = $request->variable('mode', '');
 		$page_id = $request->variable('page_id', 0);
