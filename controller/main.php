@@ -134,12 +134,6 @@ class main //implements main_interface
 		$this->controller_helper->run_initial_tasks();
 		$this->controller_helper->generate_all_block();
 
-/*
-// process blocks for pages other than portal michaelo //
-$func = new \phpbbireland\portal\includes\func;
-$func->process_block_modules();
-*/
-
 		$phpbb_path_helper = $phpbb_container->get('path_helper');
 		$corrected_path = $phpbb_path_helper->get_web_root_path();
 

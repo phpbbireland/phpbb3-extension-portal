@@ -264,7 +264,7 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 
 	if ($k_config['k_allow_acronyms'])
 	{
-		$message = sgp_local_acronyms($message);
+//3.1.5		$message = sgp_local_acronyms($message);
 	}
 
 	$posts[$i]['store'] = $store;

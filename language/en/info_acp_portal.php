@@ -255,7 +255,9 @@ $lang = array_merge($lang, array(
 	'ACP_BLOCKS_TITLE'		=> 'Blocks',
 	'ACP_MENUS_TITLE'		=> 'Menus',
 	'ACP_PAGES_TITLE'		=> 'Pages',
+	'ACP_VARS_TITLE'		=> 'Variables',
 	'ACP_PORTAL_CONFIG'		=> 'Configure portal',
+	'ACP_VARS_CONFIG'       => 'Manage variables',
 	'ACP_RESOURCES_TITLE'	=> 'Resources',
 	'BLOCK_LAYOUT_RESET'    => 'All members layouts have been cleared/reset...',
 

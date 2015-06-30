@@ -17,7 +17,6 @@ class config_info
 		return array(
 			'filename'	=> '\phpbbireland\portal\acp\config_module',
 			'title'		=> 'ACP_PORTAL_TITLE',
-			'version'	=> '1.0.0',
 			'modes'		=> array(
 				'config_portal'	=> array('title' => 'ACP_PORTAL_CONFIG', 'auth' => 'ext_phpbbireland/portal && acl_a_k_portal',	'cat' => array('ACP_CONFIG')),
 			),

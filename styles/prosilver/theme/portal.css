@@ -134,7 +134,7 @@ clear:both;
     margin: 0px 2px;
 	border: solid 1px #C7C3BF;
 	border-radius: 5px;
-	background-image: url("{MOD_USER_TEMPLATE_PATH}images/ppb.gif");
+	background-image: url("{EXT_TEMPLATE_PATH}theme/images/ppb.gif");
 }
 
 
@@ -143,7 +143,7 @@ clear:both;
 	background-position: 0 50%;
 	background-repeat: no-repeat;
 	padding: 1px 0 0 17px;
-	background-image: url("{MOD_USER_TEMPLATE_PATH}images/icon_home.gif");
+	background-image: url("{EXT_TEMPLATE_PATH}theme/images/icon_home.gif");
 }
 
 .rtl .icon-portal {

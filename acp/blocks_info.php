@@ -17,7 +17,6 @@ class blocks_info
 		return array(
 			'filename'	=> '\phpbbireland\portal\acp\blocks_module',
 			'title'		=> 'ACP_BLOCKS_TITLE',
-			'version'	=> '1.0.0',
 			'modes'		=> array(
 				'add'		=> array('title' => 'ACP_K_BLOCKS_ADD',         'auth' => 'ext_phpbbireland/portal && acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS')),
 				'edit'		=> array('title' => 'ACP_K_BLOCKS_EDIT',        'auth' => 'ext_phpbbireland/portal && acl_a_k_portal', 'cat' => array('ACP_K_BLOCKS'), 'display' => false),

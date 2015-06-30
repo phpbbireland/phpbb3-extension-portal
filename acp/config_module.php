@@ -9,14 +9,7 @@
 */
 
 namespace phpbbireland\portal\acp;
-
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+//use phpbbireland\portal;
 
 class config_module
 {

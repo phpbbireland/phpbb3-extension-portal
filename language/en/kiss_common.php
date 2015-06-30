@@ -39,22 +39,16 @@ $lang = array_merge($lang, array(
 	'ACP_FILE_BACKUP'		=> 'Backup files',
 	'ACP_MINI'				=> 'Admin',
 	'ACP_SHORT'				=> 'ACP',
-	'ACRO_1'				=> 'Stargate Portal (aka Kiss Portal), the original phpBB3 portal &copy; Michael O’Toole 2005-2011',
-	'ACRO_2'				=> 'Kiss Portal Engine (Stargate Portal without frills)... &copy; Michael O’Toole 2011',
-	'ACRO_3'				=> 'Probably the best forum software ever...',
 	'ADD_SMILIES'			=> 'Add smilies',
-
 	'ALL_COMMON'			=> 'All common vars are now available to all block code',
 	'ARRANGE_ON'			=> 'Arrange Blocks',
 	'ARRANGE_OFF'			=> 'Save block layouts',
 	'ATTACH_SIG'			=> 'Attach your signature',
-
 	'AUTO_LOGIN'			=> 'Auto Login',
 	'AUTOPLAY_OFF'			=> 'Autoplay is off...',
 	'AUTOPLAY_ON'			=> 'Autoplay is on...',
 	'AVATAR_PAGE'           => 'Members Avatars',
 	'AVATAR_SQL_TYPE'       => 'Type: ',
-
 	'AVA_LOGGED_IN'         => 'Logged in members only.',
 	'AVA_ACTIVE'            => 'Active members only.',
 
@@ -93,13 +87,11 @@ $lang = array_merge($lang, array(
 	'BLOCK_TOP_TOPICS'			=> 'Kiss Portal Top Topics',
 	'BLOCK_WEB_PAGES'			=> 'Kiss Portal Web Pages',
 	'BLOCK_WEB_TEAM'			=> 'Kiss Portal Web Team',
-
 	'BOARD_DEFAULT_STYLE'   => 'Default Style',
 	'CHAT_LINK'				=> 'Online Chat',
 	'CLICK_TO_ENLARGE'		=> 'Click to enlarge',
 	'CLICK_TO_EXPAND'		=> 'Click to expand/contract',
 	'CLOSE_VIDEO'			=> 'Close video',
-
 	'COLOR_DARK_RED' 		=> 'Dark Red',
 	'COLOR_RED' 			=> 'Red',
 	'COLOR_ORANGE' 			=> 'Orange',
@@ -114,7 +106,6 @@ $lang = array_merge($lang, array(
 	'COLOR_VIOLET' 			=> 'Violet',
 	'COLOR_WHITE' 			=> 'White',
 	'COLOR_BLACK' 			=> 'Black',
-
 	'COPY_RIGHT_BOTTOM'				=> 'Support Site & Affiliates',
 	'COULD_NOT_ADD_BLOCK'			=> 'Error! Could not add block!',
 	'COULD_NOT_EDIT_BLOCK'			=> 'Error! Could not edit block',
@@ -124,14 +115,12 @@ $lang = array_merge($lang, array(
 	'COULD_NOT_QUERY_K_MODULES'		=> 'Error! Could not query portal k_modules table',
 	'COULD_NOT_UPDATE_K_MODULES'	=> 'Error! Could not update k_modules table',
 	'COULD_NOT_RESET_BLOCKS'        => 'Error! Could not reset block positions',
-	'CURRENT_STYLE'			=> 'Current Style Information',
-	'CURRENTLY_DISABLED'	=> 'Code is currently disable pending updates',
-
-	'DISABLE_BBCODE'		=> 'Disable BBCode',
-	'DISABLE_MAGIC_URL'		=> 'Don’t automatically parse URLs',
-	'DISABLE_SMILIES'		=> 'Disable smilies',
-	'DONT_HAVE_ACCOUNT' 	=> 'We are a free and open<br />community, all are welcome.<br />',
-
+	'CURRENT_STYLE'					=> 'Current Style Information',
+	'CURRENTLY_DISABLED'			=> 'Code is currently disable pending updates',
+	'DISABLE_BBCODE'				=> 'Disable BBCode',
+	'DISABLE_MAGIC_URL'				=> 'Don’t automatically parse URLs',
+	'DISABLE_SMILIES'				=> 'Disable smilies',
+	'DONT_HAVE_ACCOUNT' 			=> 'We are a free and open<br />community, all are welcome.<br />',
 	'ERROR_PORTAL_MODULE'			=> 'Error! Could not query portal modules information: ',
 	'ERROR_PORTAL_ANNOUNCE'			=> 'Error! Could not query announcements information',
 	'ERROR_PORTAL_BLOCKS'			=> 'Error! Could not retrieve Block data',
@@ -173,43 +162,30 @@ $lang = array_merge($lang, array(
 	'FONT_SIZE'				=> 'Font size',
 	'FONT_SMALL'			=> 'Small',
 	'FONT_TINY'				=> 'Tiny',
-
 	'FORUM_PORTAL'			=> 'Portal',
 	'FORUM_RULES'			=> 'Forum Rules',
 	'FULL_SEARCH'			=> 'Full Search: ',
-
 	'GOTO_BOTTOM_IMG' 		=> 'Go to Bottom',
 	'GOTO_DEV_SITE'			=> 'Go to Dev Site',
 	'GOTO_TOP_IMG' 			=> 'Go to Top',
-
 	'HIDE_BLOCKS'           => 'Hide blocks*',
 	'HTTP_HOST'             => 'Host',
-
 	'ICON_ANNOUNCEMENT'			=> 'Announcement',
 	'ICONS_EXPLAIN'         	=> 'Icons explain',
 	'ICON_ANNOUNCEMENT_UNREAD'	=> 'Announcement unread',
 	'IN_HOUSE_DESIGNS'			=> 'In House Designs',
-
-	'INDEX_OF_FORUMS'		=> 'Index of forums',
-
-	'IRC_TITLE'				=> 'Stargate Portal IRC Popup',
-
-	'K_RECENT_SEARCH_DAYS'  => 'Search: %s days',
-
-	'K_QUICK_REPLY'			=> 'Kiss Simple Quick Reply',
-
-	'K_TOP_DL_PER_FORUM'	=> '',
-	'LOCAL_TIME'			=> 'Local Time',
-
-	'POST_LIMITED_TO'       => '...<br /><br /><b>[<i>Post limited to: %s characters</i>]</b>',
-
-	'LINKS_FORUM'			=> 'Submit A Link',
-	'LINKS_FORUM_REQU'		=> 'Post your request here... approval required... you must create a forum for links upload!',
-	'LOG_ME_IN_SHORT'   	=> 'Remember Login',
-	'LOGOUT_REDIRECT_P'		=> 'You have logged out... returning to portal',
-
+	'INDEX_OF_FORUMS'			=> 'Index of forums',
+	'IRC_TITLE'					=> 'Stargate Portal IRC Popup',
+	'K_RECENT_SEARCH_DAYS'		=> 'Search: %s days',
+	'K_QUICK_REPLY'				=> 'Kiss Simple Quick Reply',
+	'K_TOP_DL_PER_FORUM'		=> '',
+	'LINKS_FORUM'				=> 'Submit A Link',
+	'LINKS_FORUM_REQU'			=> 'Post your request here... approval required... you must create a forum for links upload!',
+	'LOCAL_TIME'				=> 'Local Time',
+	'LOG_ME_IN_SHORT'   		=> 'Remember Login',
+	'LOGOUT_REDIRECT_P'			=> 'You have logged out... returning to portal',
+	'POST_LIMITED_TO'			=> '...<br /><br /><b>[<i>Post limited to: %s characters</i>]</b>',
 	'MAKE_PERMANENT'			=> 'If check, the style chosen will be set as your default style!',
-
 	'MEMBER_INFO'				=> 'Members Info',
 	'MERITS'					=> 'Merits',
 	'MESSAGE_BODY_EXPLAIN'		=> 'Type your message here...',
@@ -219,10 +195,8 @@ $lang = array_merge($lang, array(
 	'MISSING_FILE_OR_FOLDER'	=> 'Missing file/folder: %s',
 	'MISSING_FOLDER'			=> 'Could not find the specified directory: (%s)',
 	'MORE_SMILIES'				=> 'View more smilies',
-
 	'MP3_POPUP'			=> 'Popup Player',
 	'MP3_PLAYER'		=> 'SGP MP3 Player',
-
 	'NEWS_BREAKING'		=> 'Breaking News... ',
 	'NEWS_FLASH_GLOBAL'	=> 'Global News Flash... ',
 	'NEWS_FLASH_LOCAL'	=> 'Local News Flash... ',
@@ -248,16 +222,13 @@ $lang = array_merge($lang, array(
 	'NO_VIEW_USERS_R'	=> 'You are not authorized to view the online users list.',
 	'NO_VIEW_USERS_A'	=> 'In order to view the online list you have to be registered and logged in.',
 
-	'NO_TOP_DOWNLOADS_TOPICS'    => 'No Attachments found',
-
+	'NO_TOP_DOWNLOADS_TOPICS'	=> 'No Attachments found',
 	'NOT_PROCESSED_FOR_PAGE'	=> 'Not processed for this page',
 	'NUMBER_OF_FORUMS'			=> 'Number of Forums',
 
 	'OF_TYPE'				=> ' of type: ',
-
 	'ONLINE_USERS'			=> 'Online Users',
 	'ONLINE_USERS_SHOW'		=> '[ View Online List ]',
-
 	'PERFORMED_BY'			=> 'Performed by',
 	'PLURAL'				=> 'S',
 	'POSTED_BY'				=> 'Posted by',
@@ -265,16 +236,13 @@ $lang = array_merge($lang, array(
 	'POSTERS_COMMENT'		=> '%1$s’s comments: %2$s.',
 	'PORTAL_DEVELOPMENT'	=> 'Portal Development',
 	'PHP_SUPPORT_SITES' 	=> 'php Support Sites',
-
 	'POST_BY_AUTHOR'		=> 'Author:',
 	'POST_NEWS_UNREAD'		=> 'News unread',
-
 	'POSTED_MINE'			=> 'Posted Mine',
 	'POST_BY_POSTER'		=> 'by',
 	'PORTED_BY'				=> 'Ported by',
 	'PORTAL_DEBUG_QUERIES'	=> 'Q = %d, C = %d, T = %d',
 	'PORTAL_DEBUG_RUNTOT'	=> 'Running: %d',
-
 	'POST_IMG'				=> 'Post',
 	'POST_NEWS'				=> 'News',
 	'POST_NEWS_GLOBAL'		=> 'Global News',
@@ -291,34 +259,14 @@ $lang = array_merge($lang, array(
 	'POST_IMAGES_EXPLAIN'	=> 'Post Icons',
 	'POLL_BLOCK'			=> 'Poll Block',
 	'PROFILE_SMALL'			=> 'UCP',
-
 	'QUICK_STATISTICS'		=> 'Site Statistics',
 	'QUICK_REPLY'			=> 'Quick Reply',
 	'QUICK_REPLY_NO'		=> 'Hide Quick Reply',
-
 	'TOTAL_DOWNLOADS_COUNT' => 'Top total downloads',
 	'SEARCH_TYPE'           => 'Attachment types',
-
-	'UCF_MOD'					=> 'A valid location is required for this Mod',
-	'UCP_SMALL'					=> 'UCP',
-
-	'UPDATING'					=> 'Processing...',
-	'UNDER_CONSTRUCTION'		=> 'Under construction...',
-
-	'UPLOAD_LINK'				=> 'Post Link',
-
-	'USED_BY'					=> '%d user%s, use%s this style',
-	'USERS_CURRENT_STYLE'		=> 'Your current style is',
-	'USER_COUNTRY_FLAG'			=> 'Country Flag',
-	'USER_COUNTRY_FLAG_EXPLAIN'	=> 'Full mod requires <strong>Location</strong> data above (Google Map).',
-	'USER_REAL_NAME'			=> 'Real Name',
-	'USER_REAL_NAME_EXPLAIN'	=> 'Users first name',
-	'USERS_STYLE'				=> 'Current Style',
 	'RAND_BANNER'			=> 'Portal Random Banner',
-
 	'READ_ARTICLE'			=> 'Read Full Article',
 	'READ_FULL'				=> 'Read full message',
-
 	'REGISTRATION'       	=> '<b>Click here to Register</b>',
 	'RE-INDEXING BLOCKS'	=> 'Notice! Please re-index the blocks (this is a normal maintenance process when block get out of sequence)',
 	'RETURN_INDEX'			=> '%s Return to the portal page%s',
@@ -356,7 +304,6 @@ $lang = array_merge($lang, array(
 	'SUBMIT_LINK'				=> 'Submit Link',
 	'SUBMITTED_BY'				=> 'Submitted By',
 	'SWPYVL'					=> 'Stargate Web Pages: youtube video links',
-
 	'TEAM_MAX_COUNT'			=> '(limiting: %s per team)',
 	'TEMPORARILY_HIDE_BLOCKS'	=> 'Temporarily Hide Blocks',
 	'THEME_INFO'				=> 'Theme Information',
@@ -365,7 +312,6 @@ $lang = array_merge($lang, array(
 	'THIS_MEANS_YOU'			=> 'you ;-)',
 	'TIME_BEING'				=> 'Use refresh in ACP for time being...',
 	'TIMEX'						=> 'Time %s',
-
 	'TITLE_LEGEND'				=> 'Title Legend',
 	'T_LIMITS'					=> 'limit ',
 	'TO_DAY'					=> 'Date: %s',
@@ -374,8 +320,19 @@ $lang = array_merge($lang, array(
 	'TOPICS_PER_FORUM_DISPLAY'	=> ' topics per forum',
 	'TOTAL_AVATARS'             => 'Total avatars',
 	'TOTAL_STYLES'				=> 'Total available styles',
-
-	'UNDER_CONSTRUCTION'	=> "<strong>The page you requested is currently under construction...</strong><br /><br />Please use the 'Back' button to return to previous page.",
+	'UCF_MOD'					=> 'A valid location is required for this Mod',
+	'UCP_SMALL'					=> 'UCP',
+	'UPDATING'					=> 'Processing...',
+	'UNDER_CONSTRUCTION'		=> 'Under construction...',
+	'UPLOAD_LINK'				=> 'Post Link',
+	'USED_BY'					=> '%d user%s, use%s this style',
+	'USERS_CURRENT_STYLE'		=> 'Your current style is',
+	'USER_COUNTRY_FLAG'			=> 'Country Flag',
+	'USER_COUNTRY_FLAG_EXPLAIN'	=> 'Full mod requires <strong>Location</strong> data above (Google Map).',
+	'USER_REAL_NAME'			=> 'Real Name',
+	'USER_REAL_NAME_EXPLAIN'	=> 'Users first name',
+	'USERS_STYLE'				=> 'Current Style',
+	'UNDER_CONSTRUCTION'		=> "<strong>The page you requested is currently under construction...</strong><br /><br />Please use the 'Back' button to return to previous page.",
 
 	'VIDEO_COMMENTS'		=> 'Comments',
 	'VIDEO_POSTER'			=> 'Posted by',
@@ -398,22 +355,18 @@ $lang = array_merge($lang, array(
 	'WIDE_VERSION'			=> 'Wide Version',
 
 	// Use this version to display debug info //
-	'WELCOME_MESSAGE'	=> "Welcome back [you]...<br />{WM}<br /><strong>{SITENAME} </strong> is powered by <strong>phpBB</strong> {VERSION} and <strong> the Kiss Portal Extension </strong>{PORTAL_VERSION}.",
-
 	// Translators don’t edit "[you]" in next line, it's code... //
-
+	'WELCOME_MESSAGE'	=> "Welcome back [you]...<br />{WM}<br /><strong>{SITENAME} </strong> is powered by <strong>phpBB</strong> {VERSION} and <strong> the Kiss Portal Extension </strong>{PORTAL_VERSION}.",
 	'WELCOME_TO_MOD'        => 'Welcome to',
 
-	'YOUTUBE'				=> 'Youtube',
-	'YOUTUBE_PAGE'			=> 'Youtube Page',
-	'COMMENT'				=> 'Comment',
-	'VIDEO_WHO'				=> 'Artist',
-	'YOUTUBE_LINK_LIMIT'	=> 'Number of video to display (0 = no limit)',
-	'YOUTUBE_LIMIT'			=> 'limited to %d videos',
 	'AUTOPLAY_ON'			=> 'Autoplay is on...',
 	'AUTOPLAY_OFF'			=> 'Autoplay is off...',
-	'YOUTUBE_LINK_LIMIT'	=> 'Number of video to display (0 = no limit)',
+	'COMMENT'				=> 'Comment',
+	'YOUTUBE'				=> 'Youtube',
+	'YOUTUBE_PAGE'			=> 'Youtube Page',
+	'VIDEO_WHO'				=> 'Artist',
 	'YOUTUBE_LIMIT'			=> 'limited to %d videos',
+	'YOUTUBE_LINK_LIMIT'	=> 'Number of video to display (0 = no limit)',
 ));
 
 // optional style width
@@ -556,4 +509,13 @@ $lang = array_merge($lang, array(
 
 	// donations
 	'TOTAL_DONATIONS'  => 'Total donations for %s are $%01.2f',
+));
+
+// acronyms and highlighted phrases/text *do not include acronyms in other acronyms* //
+$lang = array_merge($lang, array(
+	'ACRO_PHPBB'	=> 'The leading opensource forum software...',
+	'ACRO_SGP'		=> 'Stargate Portal (aka Kiss Portal), the original phpBB3 portal &copy; Michael O’Toole 2005-2011',
+	'ACRO_KPE'		=> 'Kiss Portal Extension (Stargate/Kiss Portal for 3.1)... &copy; Michael O’Toole 2014',
+	'ACRO_KISS'		=> 'Keep It Simple Stupid',
+	'HI_KISS_PORTAL_EXTENSION'	=> 'Kiss Portal Extension (Stargate/Kiss Portal for 3.1)... &copy; Michael O’Toole 2014',
 ));

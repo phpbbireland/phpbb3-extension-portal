@@ -28,22 +28,28 @@ if (!defined('IN_PHPBB'))
 /***
 * stargate hardcoded acronyms function, replaces acronyms. Started: 14 February 2007
 * Fix: 10 January 2011
+* In 3.1 we do this in listener but for now we need ths code for other blocks...
 */
+
+/* 3.1.5 not needed now, done in listener???
+
 if (!function_exists('sgp_local_acronyms'))
 {
 	function sgp_local_acronyms($message)
 	{
+		return($message);
+
 		global $user;
-		$you = $user->lang['THIS_MEANS_YOU'];
+		//$you = $user->lang['THIS_MEANS_YOU'];
 
 		// process single word acronyms first...
-		$message = str_replace("[phpBB3]", '<acronym title="' . $user->lang['ACRO_3'] . '"> phpBB3 </acronym>', $message);
-		$message = str_replace("[Stargate Portal]", '<acronym title="' . $user->lang['ACRO_1'] . '"> Stargate Portal </acronym>', $message);
-		$message = str_replace("[Kiss Portal Engine]", '<acronym title="' . $user->lang['ACRO_2'] . '"> Kiss Portal Engine </acronym>', $message);
+		$message = str_replace("phpBB3", '<acronym title="' . $user->lang['ACRO_3'] . '"> phpBB3 </acronym>', $message);
+		$message = str_replace("Kiss Portal Extension", '<acronym title="' . $user->lang['ACRO_2'] . '"> Kiss Portal Extension </acronym>', $message);
 
 		return($message);
 	}
 }
+*/
 
 
 /***

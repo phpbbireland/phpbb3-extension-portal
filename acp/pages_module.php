@@ -9,15 +9,7 @@
 */
 
 namespace phpbbireland\portal\acp;
-use phpbbireland\portal;
-
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+//use phpbbireland\portal;
 
 class pages_module
 {
@@ -233,7 +225,7 @@ class pages_module
 				));
 
 				$cache->destroy('k_config');
-				$cache->destroy('sql', K_CONFIG_TABLE);
+				$cache->destroy('sql', K_VARS_TABLE);
 
 				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage"));
 			break;

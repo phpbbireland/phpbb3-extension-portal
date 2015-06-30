@@ -41,7 +41,7 @@ $lang = array_merge($lang, array(
 	'TITLE_MAIN'   => 'General Portal Variable',
 	'TITLE_BLOCK'  => 'Portal Block Variable',
 	'TITLE_EXPLAIN_MAIN'  => 'Setting for variables used by general portal blocks...',
-	'TITLE_EXPLAIN_BLOCK' => '&bull; Blocks can contain variables (normally stored in the K_CONFIG_TABLE).
+	'TITLE_EXPLAIN_BLOCK' => '&bull; Blocks can contain variables (normally stored in the K_VARS_TABLE).
 	<br />&bull; Each block can have an associated html file (to set the variables), these are located in adm/style/k_block_vars folder.<br />&bull; If you add your own block variables, you need to include the html file to display and edit these variables.',
 
 	'NEWS_SETTINGS'       => 'News Settings',
@@ -151,7 +151,7 @@ $lang = array_merge($lang, array(
 	'USE_COOKIES_EXPLAIN'       => 'Use cookies to store block location and visibility',
 	'PORTAL_LOGOS'              => 'Site Logo',
 	'RAND_LOGOS'                => 'Random Site Logo',
-	'RAND_LOGOS_EXPLAIN'        => 'The portal will use random logos if they exist. <br />Simply add several images to your styles (theme/images/logos directory).',
+	'RAND_LOGOS_EXPLAIN'        => 'Use random logos if they exist. Simply add several images to your extension styles (theme/images/logos directory).',
 
 	'K_TOP_POSTERS_TO_DISPLAY'                   => 'Number of top posters to display',
 	'K_TOP_POSTERS_TO_DISPLAY_EXPLAIN'           => 'Set the number of top posters to display in Top Posters Block',
@@ -313,7 +313,7 @@ $lang = array_merge($lang, array(
 	'ACRONYM_MEANING'        => 'Enter the full meaning',
 	'ADD_NEW_WORD'           => 'Add word',
 	'ALLOW_ACRONYMS'         => 'Process Local Acronyms (built in) in posts',
-	'ALLOW_ACRONYMS_EXPLAIN' => 'Local Acronyms in post will not be processed if disable here...',
+	'ALLOW_ACRONYMS_EXPLAIN' => 'Local Acronyms in posts will not be processed if disable here...',
 	'CONFIG_ACRONYMS'        => 'Configure',
 	'DELETE'                 => 'To delete words, simply remove them',
 	'DELETE_CURRENT'         => 'Remove',
@@ -431,9 +431,9 @@ $lang = array_merge($lang, array(
 
 // Random avatars
 $lang = array_merge($lang, array(
-	'RANDOM_AVATARS'         => 'Random avatar mod',
-	'ALLOW_ACRONYMS'         => 'Allow random avatars',
-	'ALLOW_ACRONYMS_EXPLAIN' => 'Allow the portal to use a random avatar if user has no avatar and avatars are allowed.',
+	'RANDOM_AVATARS'       => 'Random avatar mod',
+	'ALLOW_AVATAR'         => 'Allow random avatars',
+	'ALLOW_AVATAR_EXPLAIN' => 'Use a random avatar if user has no avatar and avatars are allowed.',
 ));
 
 // SGP Teams Block 15 March 2011

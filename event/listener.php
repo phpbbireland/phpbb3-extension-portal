@@ -60,7 +60,8 @@ class listener implements EventSubscriberInterface
 		\phpbb\template\template $template,
 		\phpbb\user $user, $php_ext)
 	{
-		///var_dump('listener.php > constructor');
+		//var_dump('listener.php > constructor');
+
 		$this->auth = $auth;
 		$this->config = $config;
 		$this->controller_helper = $controller_helper;
@@ -78,18 +79,17 @@ class listener implements EventSubscriberInterface
 	* @return array
 	* @static
 	* @access public
+	* Don't use var_dump here if debugging...
 	*/
 	static public function getSubscribedEvents()
 	{
-		///var_dump('listener.php > getSubscribedEvents()');
 		return array(
-			'core.user_setup'			=> 'load_language_on_setup',
-			//'core.page_header'			=> 'process_blocks_for_phpbb_pages',
-			'core.page_header'			=> 'add_portal_link',
-			//'core.page_header_after'	=> 'add_portal_left_blocks',
-			//'core.page_footer'			=> 'add_portal_right_blocks',
-			//'core.page_copyright_after'	=> 'add_portal_copyright',
-			//'core.page_footer_after'	=> 'add_portal_scripts',
+			'core.user_setup'	=> 'load_language_on_setup',
+			'core.page_header'	=> 'add_portal_link',
+			'core.page_footer'	=> 'add_portal_final',
+			'core.posting_modify_message_text'  => 'process_for_acronyms',
+
+			//build for 'index_body_stat_blocks_after' set path to images and process code for 3 footer blocks if required//
 
 			// ACP event
 			'core.permissions'	=> 'add_categories',
@@ -97,13 +97,10 @@ class listener implements EventSubscriberInterface
 		);
 	}
 
-	/*
-		add event to add news ...
-	*/
-
 	public function load_language_on_setup($event)
 	{
-		///var_dump('listener.php > load_language_on_setup(...)');
+		//var_dump('listener.php > load_language_on_setup(...)');
+
 		$lang_set_ext = $event['lang_set_ext'];
 		$lang_set_ext[] = array(
 			'ext_name' => 'phpbbireland/portal',
@@ -115,15 +112,16 @@ class listener implements EventSubscriberInterface
 
 	public function add_permission($event)
 	{
-		///var_dump('listener.php > add_permission(...)');
+		// not being called ???
+		//var_dump('listener.php > add_permission(...)');
+
 		$categories = $event['categories'];
 		$categories['portal'] = 'ACL_CAT_PORTAL';
 		$event['categories'] = $categories;
 
 		$permissions = $event['permissions'];
 		$permissions['a_k_portal'] = array('lang' => 'ACL_A_PORTAL', 'cat' => 'portal');
-		$permissions['a_k_tools'] = array('lang' => 'ACL_A_TOOLS', 'cat' => 'portal');
-		$permissions['u_k_tools'] = array('lang' => 'ACL_U_TOOLS', 'cat' => 'portal');
+		$permissions['u_k_portal'] = array('lang' => 'ACL_U_PORTAL', 'cat' => 'portal');
 		$event['permissions'] = $permissions;
 	}
 
@@ -134,7 +132,8 @@ class listener implements EventSubscriberInterface
 	*/
 	public function add_portal_link($event)
 	{
-		///var_dump('listener.php > add_portal_links');
+		//var_dump('listener.php > add_portal_links');
+
 		global $phpbb_root_path;
 
 		if (!$this->can_access_portal())
@@ -146,22 +145,12 @@ class listener implements EventSubscriberInterface
 
 		$portal_link = $this->get_portal_link();
 		$portal_link = str_replace('/app.php', '', $portal_link);
-
-		///var_dump('listener->get_portal_links' . '= ' . $portal_link);
-
-		$mod_style_path	= $phpbb_root_path . 'ext/phpbbireland/portal/styles/' . $this->user->style['style_path'] . '/';
-
-		/**
-		*  we need some method of generating blocks for phpBB pages when not on portal page
-		*  if we are on the portal the main controlle does this for us
-		*/
 		$page = $this->page_name();
 
 		$this->template->assign_vars(array(
 			'KISS'					=> true,
 			'U_PORTAL'				=> $portal_link,
 			'L_PORTAL'				=> $this->user->lang['PORTAL'],
-			'EXT_TEMPLATE_PATH'		=> $mod_style_path,
 			'PAGE'					=> $page,
 			'S_SHOW_RIGHT_BLOCKS'	=> true,
 			'S_SHOW_LEFT_BLOCKS'	=> true,
@@ -179,48 +168,29 @@ class listener implements EventSubscriberInterface
 	* @return null
 	*/
 
-	public function add_portal_links($event)
+	public function add_portal_final($event)
 	{
-		///var_dump('listener.php > add_portal_links(...)');
-		global $phpbb_container, $portal_link;
+		//var_dump('listener.php > add_portal_links(...)');
+
+		global $phpbb_container, $phpbb_root_path, $portal_link;
+
+		include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.' . $this->php_ext);
+		$logo_left = $logo_right = $logo = sgp_get_rand_logo();
 
 		$this->template->assign_vars(array(
-			'U_PORTAL'            => $portal_link,
-			'U_INDEX'             => $this->helper->route('phpbb/phpbb', 'index'),
 			'STARGATE_BUILD'      => (isset($this->config['portal_build'])) ? $this->config['portal_build'] : '',
 			'STARGATE_VERSION'    => (isset($this->config['portal_version'])) ? $this->config['portal_version'] : '',
-			'S_SHOW_RIGHT_BLOCKS' => true,
-			'S_SHOW_LEFT_BLOCKS'  => true,
-			'L_PORTAL'            => $this->user->lang['FORUM_PORTAL'],
 			'SITE_LOGO_IMG'       => $logo,
-			'SITE_LOGO_IMG_RIGHT' => $logo_right,
-
+			'SITE_LOGO_IMG_RIGHT' => $logo_right,  // may contain site and & description
+			'SITENAME'            => '',           // hide site name if required
+			'SITE_DESCRIPTION'    => '',           // hide site description if required
 		));
-	}
-
-
-	public function add_portal_left_blocks($event)
-	{
-		;
-	}
-
-	public function add_portal_right_blocks($event)
-	{
-		;
-	}
-
-	public function add_portal_scripts($event)
-	{
-		;
-	}
-
-	public function index_page($event)
-	{
-		;
 	}
 
 	public function process_blocks_for_phpbb_pages()
 	{
+		//var_dump('listener.php > process_blocks_for_phpbb_pages');
+
 		global $phpbb_container, $request, $phpbb_root_path, $user;
 		global $queries, $cached_queries, $total_queries, $k_config, $k_blocks, $k_menus, $k_pages, $k_groups;
 
@@ -230,8 +200,6 @@ class listener implements EventSubscriberInterface
 		}
 
 		$this->includes_path = $phpbb_root_path . 'ext/phpbbireland/portal/includes/';
-
-		$mod_root_path	= $phpbb_root_path . 'ext/phpbbireland/portal/';
 
 		if (!isset($k_config))
 		{
@@ -244,62 +212,18 @@ class listener implements EventSubscriberInterface
 			$k_resources = obtain_k_resources();
 		}
 
-		/* this is the ideal code as all calls to generate portal data can be handled by one file however the template files are not found with this method?
-		$this->helper->run_initial_tasks();
-		$this->helper->generate_all_block();
-		*/
-
 		$this->includes_path = $phpbb_root_path . 'ext/phpbbireland/portal/includes/';
 		include_once($this->includes_path . 'sgp_functions.' . $this->php_ext);
 		$func = new \phpbbireland\portal\includes\func;
 		$func->process_block_modules();
-
-		if (!function_exists('phpbb_get_user_avatar'))
-		{
-			include($phpbb_root_path . 'includes/functions_display.'. $this->php_ext);
-		}
-
-		$set_time = time() + 31536000;
-		$reset_time = time() - 31536000;
-		$cookie_name = $cookie_value = $css = '';
-		$cookie_name = $this->config['cookie_name'] . '_css';
-
-		if (isset($_COOKIE[$cookie_name]))
-		{
-			$cookie_value = $request->variable($cookie_name, 0, false, true);
-		}
-
-		$css = $request->variable('css', 0);
-
-		if ($css) // set css //
-		{
-			$user->set_cookie('css', $css, $set_time);
-		}
-		else if ($cookie_value) // cookie set so use it //
-		{
-			$css = $cookie_value;
-		}
-
-		$logo_right = $logo = sgp_get_rand_logo();
-		$logo_right  = str_replace('logos', 'logos/right_images', $logo);
-
-		// Generate logged in/logged out status
-		if ($user->data['user_id'] != ANONYMOUS)
-		{
-			$u_login_logout = append_sid("{$phpbb_root_path}ucp.$this->php_ext", 'mode=logout', true, $user->session_id);
-			$l_login_logout = sprintf($user->lang['LOGOUT_USER'], $user->data['username']);
-		}
-		else
-		{
-			$u_login_logout = append_sid("{$phpbb_root_path}ucp.$this->php_ext", 'mode=login');
-			$l_login_logout = $user->lang['LOGIN'];
-		}
 	}
 
 
 	// get root to portal //
 	public function get_portal_link()
 	{
+		//var_dump('listener.php > get_portal_link()');
+
 		if (strpos($this->user->data['session_page'], '/portal') === false)
 		{
 			$portal_link = $this->controller_helper->route('phpbbireland_portal_controller');
@@ -314,6 +238,7 @@ class listener implements EventSubscriberInterface
 	// check access //
 	protected function can_access_portal()
 	{
+		//var_dump('listener.php > can_access_portal()');
 		return $this->auth->acl_get('u_k_portal') && $this->config['portal_enabled'];
 	}
 
@@ -325,6 +250,9 @@ class listener implements EventSubscriberInterface
 	*/
 	public function viewonline_page($event)
 	{
+		// not being called //
+		//var_dump('listener.php > viewonline_page');
+
 		if ($event['on_page'][1] == 'app' && strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/portal') === 0)
 		{
 			$event['location'] = $this->user->lang('VIEWING_PORTAL');
@@ -339,6 +267,8 @@ class listener implements EventSubscriberInterface
 
 		$this_page = explode(".", $user->page['page']);
 
+		//var_dump('listener.php > page_name() = ' . $this_page[0]);
+
 		if ($this_page[0] == 'app')
 		{
 			$this_page_name = explode("/", $this_page[1]);
@@ -348,6 +278,32 @@ class listener implements EventSubscriberInterface
 		{
 			$this_page_name = $this_page[0];
 			return($this_page_name);
+		}
+	}
+
+	/**
+	* Hardcoded acronyms & key words highlighter ...
+	*
+	* @param object $event The event object
+	* @return null
+	*/
+
+	public function process_for_acronyms($event)
+	{
+		global $user;
+
+		$message = $event['message_parser']->message;
+
+		// use kiss_common.php language file > acronyms and highlighted phrases/text //
+		if ($event['preview'] || $event['submit'])
+		{
+			$message = str_replace("Kiss Portal Extension", '<acronym title="' . $user->lang['HI_KISS_PORTAL_EXTENSION'] . '">Kiss Portal Extension</acronym>', $message);
+			$message = str_replace("phpBB", '<acronym title="' . $user->lang['ACRO_PHPBB'] . '">phpBB</acronym>', $message);
+			$message = str_replace("SGP", '<acronym title="' . $user->lang['ACRO_SGP'] . '">SGP</acronym>', $message);
+			$message = str_replace("KPE", '<acronym title="' . $user->lang['ACRO_KPE'] . '">KPE</acronym>', $message);
+			$message = str_replace("KISS", '<acronym title="' . $user->lang['ACRO_KISS'] . '">KISS</acronym>', $message);
+
+			$event['message_parser']->message = $message;
 		}
 	}
 }

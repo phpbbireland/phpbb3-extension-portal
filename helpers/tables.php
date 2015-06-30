@@ -27,6 +27,7 @@ class tables
 	public function __construct()
 	{
 		$k_config    = 'k_config';
+		$k_vars      = 'k_vars';
 		$k_blocks    = 'k_blocks';
 		$k_menus     = 'k_menus';
 		$k_pages     = 'k_pages';
@@ -34,11 +35,11 @@ class tables
 
 		$this->tables = array(
 			'k_config'	    => $k_config,
+			'k_vars'        => $k_vars,
 			'k_blocks'		=> $k_blocks,
 			'k_pages'		=> $k_pages,
 			'k_menus'		=> $k_menus,
 			'k_resources'	=> $k_resources,
-
 		);
 	}
 

@@ -46,7 +46,8 @@ class portal
 		\phpbb\user $user,
 		\phpbb\content_visibility $content_visibility,
 		\phpbb\controller\helper $helper, $root_path, $php_ext)
-	{
+		{
+
 		$this->auth = $auth;
 		$this->cache = $cache;
 		$this->config = $config;

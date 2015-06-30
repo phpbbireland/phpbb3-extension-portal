@@ -17,7 +17,6 @@ class menus_info
 		return array(
 			'filename'	=> '\phpbbireland\portal\acp\menus_module',
 			'title'		=> 'ACP_MENUS_TITLE',
-			'version'	=> '1.0.0',
 			'modes'		=> array(
 				'add'       => array('title' => 'ACP_K_MENU_ADD',         'auth' => 'ext_phpbbireland/portal && acl_a_k_portal', 'cat' => array('ACP_K_MENUS')),
 				'nav'       => array('title' => 'ACP_K_MENU_MAIN',        'auth' => 'ext_phpbbireland/portal && acl_a_k_portal', 'cat' => array('ACP_K_MENUS')),

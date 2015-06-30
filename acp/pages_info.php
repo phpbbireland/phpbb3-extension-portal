@@ -17,7 +17,6 @@ class pages_info
 		return array(
 			'filename' => '\phpbbireland\portal\acp\pages_module',
 			'title'    => 'ACP_PAGES_TITLE',
-			'version'  => '1.0.0',
 			'modes'    => array(
 				'add'    => array('title' => 'ACP_K_PAGES_ADD',	   'auth' => 'ext_phpbbireland/portal && acl_a_k_portal', 'cat' => array('ACP_K_PAGES'), 'display' => false),
 				'delete' => array('title' => 'ACP_K_PAGES_DELETE', 'auth' => 'ext_phpbbireland/portal && acl_a_k_portal', 'cat' => array('ACP_K_PAGES'), 'display' => false),

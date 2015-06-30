@@ -3,7 +3,7 @@
 
 <form id="acp_k_vars" method="post" action="{U_ACTION}">
 
-<!-- IF S_OPT  == config -->
+<!-- IF S_OPT  == 'manage' -->
 <h1>{L_VARS_FOUND}: {S_SWITCH}</h1>
 <p>{L_TITLE_EXPLAIN_BLOCK}</p>
 
@@ -44,7 +44,7 @@
 <fieldset>
 	<legend>{L_RANDOM_AVATARS}</legend>
 	<dl>
-		<dt><label for="k_allow_rand_avatar">{L_ALLOW_ACRONYMS}:</label><br /><span>{L_ALLOW_ACRONYMS_EXPLAIN}</span></dt>
+		<dt><label for="k_allow_rand_avatar">{L_ALLOW_AVATAR}:</label><br /><span>{L_ALLOW_AVATAR_EXPLAIN}</span></dt>
 		<dd>
 		<label><input type="radio" class="radio" name="k_allow_rand_avatar" value="1"<!-- IF S_K_ALLOW_RAND_AVATAR --> checked="checked" id="k_allow_rand_avatar"<!-- ENDIF --> />{L_YES}</label>
 		<label><input type="radio" class="radio" name="k_allow_rand_avatar" value="0"<!-- IF not S_K_ALLOW_RAND_AVATAR --> checked="checked" id="k_allow_rand_avatar"<!-- ENDIF --> />{L_NO}</label>

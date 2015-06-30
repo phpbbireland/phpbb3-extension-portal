@@ -71,6 +71,11 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				'ACP_PORTAL_TITLE',
 				'ACP_RESOURCES_TITLE',
 			)),
+			array('module.add', array(
+				'acp',
+				'ACP_PORTAL_TITLE',
+				'ACP_VARS_TITLE',
+			)),
 
 			array('module.add', array(
 				'acp',
@@ -117,6 +122,15 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 			)),
 
 			array('module.add', array(
+				'acp',
+				'ACP_VARS_TITLE',
+				array(
+					'module_basename' => '\phpbbireland\portal\acp\vars_module',
+					'modes'           => array('manage'),
+				),
+			)),
+
+			array('module.add', array(
 				'ucp',
 				'0',
 				'UCP_PORTAL_TITLE',
@@ -128,7 +142,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				array(
 					'module_basename'	=> '\phpbbireland\portal\ucp\portal_module',
 					'modes'				=> array('info', 'arrange', 'edit', 'delete', 'width'),
-					'module_auth'		=> 'u_k_tools',
+					'module_auth'		=> 'u_k_portal',
 				),
 			)),
 
@@ -152,6 +166,13 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 					'PRIMARY_KEY'	=> 'config_name',
 					'KEYS'			=> array('is_dynamic'	=> array('INDEX', 'is_dynamic'),
 					),
+				),
+				$this->table_prefix . 'k_vars' => array(
+					'COLUMNS' => array(
+						'config_name'		=> array('VCHAR', ''),
+						'config_value'		=> array('VCHAR', ''),
+					),
+					'PRIMARY_KEY'	=> 'config_name',
 				),
 				$this->table_prefix . 'k_blocks' => array(
 					'COLUMNS' => array(
@@ -232,6 +253,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				$this->table_prefix . 'k_menus',
 				$this->table_prefix . 'k_pages',
 				$this->table_prefix . 'k_resources',
+				$this->table_prefix . 'k_vars',
 			),
 			'drop_columns' => array(
 				$this->table_prefix . 'users' => array(
@@ -1000,7 +1022,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 		);
 		$this->db->sql_multi_insert($this->table_prefix . 'k_pages', $pages_sql);
 
-		$config_sql = array(
+		$vars_sql = array(
 			array(
 				'config_name'	=> 'k_announce_allow',
 				'config_value'	=> '1',
@@ -1171,6 +1193,6 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 			),
 
 		);
-		$this->db->sql_multi_insert($this->table_prefix . 'k_config', $config_sql);
+		$this->db->sql_multi_insert($this->table_prefix . 'k_vars', $vars_sql);
 	}
 }

@@ -26,7 +26,6 @@ if (!function_exists('sgp_get_rand_logo'))
 {
 	function sgp_get_rand_logo()
 	{
-		// initalise variables //
 		global $user, $phpbb_root_path, $k_config;
 		$rand_logo = "";
 		$imglist = "";
@@ -40,13 +39,9 @@ if (!function_exists('sgp_get_rand_logo'))
 
 		mt_srand((double) microtime()*1000001);
 
-		//$logos_dir = "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/images/logos';
-		$logos_dir = "{$phpbb_root_path}styles/prosilver/theme/images/logos";
+		$logos_dir = $phpbb_root_path . 'ext/phpbbireland/portal/styles/' . rawurlencode($user->style['style_path']) . '/theme/images/logos';
 
 		$handle = @opendir($logos_dir);
-
-		// for logo in default directory
-		//@$handle=opendir('images/logos');
 
 		if (!$handle) // no handle so we don't have logo directory or we are attempting to login to ACP so we need to return the default logo //
 		{
@@ -75,9 +70,6 @@ if (!function_exists('sgp_get_rand_logo'))
 
 		$rand_logo .= '<img src="' . $logos_dir . '/' . $image . '" alt="" /><br />';
 
-		// uncomment next line if template assignment is required //
-		//$template->assign_vars(array('RAND_LOGO' => $rand_logo));
-
 		return ($rand_logo);
 	}
 }
@@ -94,7 +86,7 @@ if (!function_exists('set_k_config'))
 
 		$k_config = $cache->get('k_config');
 
-		$sql = 'UPDATE ' . K_CONFIG_TABLE . "
+		$sql = 'UPDATE ' . K_VARS_TABLE . "
 			SET config_value = '" . $db->sql_escape($config_value) . "'
 			WHERE config_name = '" . $db->sql_escape($config_name) . "'";
 		$result = $db->sql_query($sql);
@@ -102,7 +94,7 @@ if (!function_exists('set_k_config'))
 		if (!$result)
 		//if (!$db->sql_affectedrows() && !isset($k_config[$config_name]))
 		{
-			$sql = 'INSERT INTO ' . K_CONFIG_TABLE . ' ' . $db->sql_build_array('INSERT', array(
+			$sql = 'INSERT INTO ' . K_VARS_TABLE . ' ' . $db->sql_build_array('INSERT', array(
 				'config_name'   => $config_name,
 				'config_value'  => $config_value,
 				'is_dynamic'    => ($is_dynamic) ? 1 : 0));

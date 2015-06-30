@@ -9,15 +9,7 @@
 */
 
 namespace phpbbireland\portal\acp;
-use phpbbireland\portal;
-
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+//use phpbbireland\portal;
 
 class menus_module
 {
@@ -106,13 +98,13 @@ class menus_module
 		// bold current row text so things are easier to follow when moving/editing etc... //
 		if (($menu) ? $menu : 0)
 		{
-			$sql = 'UPDATE ' . K_CONFIG_TABLE . ' SET config_value = ' . (int) $menu . ' WHERE config_name = "k_adm_block"';
+			$sql = 'UPDATE ' . K_VARS_TABLE . ' SET config_value = ' . (int) $menu . ' WHERE config_name = "k_adm_block"';
 			$db->sql_query($sql);
 		}
 		else
 		{
 			$sql = 'SELECT config_name, config_value
-				FROM ' . K_CONFIG_TABLE . "
+				FROM ' . K_VARS_TABLE . "
 				WHERE config_name = 'k_adm_block'";
 			$result = $db->sql_query($sql);
 			$row = $db->sql_fetchrow($result);
@@ -560,8 +552,8 @@ class menus_module
 		if (($k_config = $cache->get('k_config')) !== false)
 		{
 			$sql = 'SELECT config_name, config_value
-				FROM ' . K_CONFIG_TABLE . '
-				WHERE is_dynamic = 1';
+				FROM ' . K_VARS_TABLE . '
+				WHERE 1';
 			$result = $db->sql_query($sql);
 
 			while ($row = $db->sql_fetchrow($result))
@@ -574,18 +566,18 @@ class menus_module
 		{
 			$k_config = $cached_k_config = array();
 
-			$sql = 'SELECT config_name, config_value, is_dynamic
-				FROM ' . K_CONFIG_TABLE;
+			$sql = 'SELECT config_name, config_value
+				FROM ' . K_VARS_TABLE;
 			$result = $db->sql_query($sql);
 
 			while ($row = $db->sql_fetchrow($result))
 			{
-				if (!$row['is_dynamic'])
-				{
+				//if (!$row['is_dynamic'])
+				//{
 					$cached_k_config[$row['config_name']] = $row['config_value'];
-				}
-				else
-				$k_config[$row['config_name']] = $row['config_value'];
+				//}
+				//else
+				//$k_config[$row['config_name']] = $row['config_value'];
 			}
 			$db->sql_freeresult($result);
 

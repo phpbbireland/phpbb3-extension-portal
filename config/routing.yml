@@ -2,6 +2,10 @@ phpbbireland_portal_controller:
     pattern: /portal.php
     defaults: { _controller: phpbbireland.portal.main:display }
 
+#phpbbireland_portal_controller:
+#    pattern: /portal.php&arrange=1
+#    defaults: { _controller: phpbbireland.portal.main:display }
+
 
 # Not yet supported #
 #phpbbireland_portal_controller:

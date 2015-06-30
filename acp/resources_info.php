@@ -17,7 +17,6 @@ class resources_info
 		return array(
 			'filename' => '\phpbbireland\portal\acp\resources_module',
 			'title'    => 'ACP_RESOURCES_TITLE',
-			'version'  => '1.0.0',
 			'modes'    => array(
 				'select' => array('title' => 'ACP_K_RESOURCES', 'auth' => 'ext_phpbbireland/portal && acl_a_k_portal', 'cat' => array('ACP_K_TOOLS')),
 			),
