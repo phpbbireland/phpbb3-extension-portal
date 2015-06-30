@@ -1,0 +1,108 @@
+.block_inner_wrap {
+	background-color: #F5F5F5;
+	margin-left: -6px;
+	margin-right: -6px;
+    margin-bottom: 6px;
+	margin-top: -6px;
+    padding: 12px;
+	padding-top: 0px;
+	padding-bottom:0px;
+
+    background: 
+	url({EXT_TEMPLATE_PATH/theme/}/images/box/blue/6.gif) top right repeat-y, #F5F5F5
+	url({EXT_TEMPLATE_PATH/theme/}/images/box/blue/4.gif) top left repeat-y;
+}
+
+
+div.block_outer_wrap, div.forumbgy, div.panely-wrapper {
+    background: 
+	url({EXT_TEMPLATE_PATH/theme/}/images/box/blue/9.gif) bottom right no-repeat, 
+	url({EXT_TEMPLATE_PATH/theme/}/images/box/blue/7.gif) bottom left no-repeat, 
+	url({EXT_TEMPLATE_PATH/theme/}/images/box/blue/3.gif) top right no-repeat, 
+	url({EXT_TEMPLATE_PATH/theme/}/images/box/blue/1.gif) top left no-repeat, 
+	url({EXT_TEMPLATE_PATH/theme/}/images/box/blue/8.gif) bottom left repeat-x, 
+	url({EXT_TEMPLATE_PATH/theme/}/images/box/blue/2.gif) top left repeat-x;
+    padding: 6px;
+	margin-bottom: 17px;
+}
+
+/*.scroll_outer { background:transparent }*/
+
+.block_header {
+ line-height:100%;
+ padding: 10px 0 0 8px;
+ font-weight: bold;
+ text-align:center;
+ color:#FFF;
+ text-shadow:#000 2px 2px 1px;
+ position:relative;
+ height: 28px;
+ width:100%;
+ white-space: nowrap;
+ font-size:12px;
+}
+
+
+#center { width:100%; max-width:600px; }
+#center { width:100%; max-width:430px; }
+#center { width:auto; max-width:430px; } /* looks best */
+
+
+
+
+
+@media screen and (max-width:370px ) {
+	* { max-width: 370px; }
+	body { width: 370px; padding: 5px; overflow-x:hidden; }
+
+	#phpbb, #page-body { max-width: 370px; }
+	#pcontainer_ { width: 330px; }
+	#site-description { width: 100%; }
+
+	.headerbar { margin:1px; }
+	.headerbar img { max-width: 360px;}
+	.navbar { margin:1px;  background-repeat: repeat; }
+	.nav, .navbar, .page-header { max-width: 370px; }
+
+	.navbar.sgp-corners.top { max-width: 370px; }
+
+	.linklist.rightside {display:none;}
+	.rightside.arrange {display:none;}
+	.icon-ucp { background-image: none; }
+	ul.topiclist dt { width:auto; width: 50%;}
+
+	#search-box {
+		display: none;
+	}
+
+	#wrap {
+		padding:0;
+		min-width: 350px;
+		max-width: 350px;
+	}
+
+	#left {
+		float: left;
+		min-width: 433px;
+		max-width: 433px;
+		padding-left:8px;
+	}
+
+	#center {
+		float: left;
+		min-width: 433px;
+		max-width: 433px;
+		padding-left:8px;
+	}
+
+	#right {
+		float: left;
+		min-width: 433px;
+		max-width: 433px;
+		padding-left:8px;
+	}
+
+	.l_block_vert_gap { padding-right: 0; padding-left: 0; }
+	.r_block_vert_gap { padding-right: 0; padding-left: 0; }
+
+}

@@ -1,0 +1,43 @@
+
+<!-- BEGIN right_block_files -->
+	<div id="<!-- IF S_ARRANGE -->BLOCK_<!-- ENDIF -->B{right_block_files.RIGHT_BLOCK_ID}">
+		{$BLOCK_START}
+			{$HEADER_START}
+				<span style="text-align:{S_CONTENT_FLOW_BEGIN};">{right_block_files.RIGHT_BLOCK_TITLE}</span>
+				<span id="B_B{right_block_files.RIGHT_BLOCK_ID}">
+					<!-- IF not S_ARRANGE -->
+					<span class="brimage"><img src="{right_block_files.RIGHT_BLOCK_IMG}" alt="" /></span>
+					<!-- ENDIF -->
+				</span>
+				<!-- IF S_ARRANGE -->
+					<a href="javascript:ShowHide('B{right_block_files.RIGHT_BLOCK_ID}','B_B{right_block_files.RIGHT_BLOCK_ID}','BLOCKB_B{right_block_files.RIGHT_BLOCK_ID}');">
+						<span class="bhide">{HIDE_IMG}<span>
+					</a>
+					<span class="bmove">{MOVE_IMG}</span>
+				<!-- ENDIF -->
+			{$HEADER_END}
+			<div class="box_new" id="<!-- IF not S_ARRANGE -->BLOCK_<!-- ENDIF -->B{right_block_files.RIGHT_BLOCK_ID}">
+				{$BODY_START}
+					<!-- IF right_block_files.RIGHT_BLOCK_SCROLL -->
+						<!-- IF not S_ARRANGE --><!-- DO NOT EDIT THE NEXT LINE UNLESS YOU KNOW WHAT YOU ARE DOING -->
+						<div class="scroll_outer" id="B{right_block_files.RIGHT_BLOCK_ID}_outer" onmouseover="do_speed(this, event)" onmousemove="do_speed(this, event)" onmouseout="set_defaults(this, event)"><div class="scroll_inner" id="B{right_block_files.RIGHT_BLOCK_ID}_inner">{right_block_files.RIGHT_BLOCKS}</div></div>
+						<!-- ELSE -->
+						{L_SCROLLING_BLOCKS_DISABLED}
+						<!-- ENDIF -->
+					<!-- ELSE -->
+					{right_block_files.RIGHT_BLOCKS}
+					<!-- ENDIF -->
+				{$BODY_END}
+			</div>
+			{$BLOCK_FOOTER}
+		{$BLOCK_END}
+		<script type="text/javascript">
+			// <![CDATA[
+				if(GetCookie('BLOCKB_B{right_block_files.RIGHT_BLOCK_ID}') == '2')
+				{
+					ShowHide('B{right_block_files.RIGHT_BLOCK_ID}','B_B{right_block_files.RIGHT_BLOCK_ID}','BLOCKB_B{right_block_files.RIGHT_BLOCK_ID}');
+				}
+			// ]]>
+		</script>
+	</div>
+<!-- END right_block_files -->

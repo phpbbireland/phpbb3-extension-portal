@@ -1,0 +1,9 @@
+.stylewidth {
+	width: 70%;
+	min-width: 1000px;
+	margin: 0;
+	padding: 0;
+	margin-left: auto;
+	margin-right: auto;
+	clear:both;
+}

@@ -1,0 +1,34 @@
+
+<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
+<div id="<!-- IF S_ARRANGE -->BLOCK_<!-- ENDIF -->{left_block_files.LEFT_BLOCK_ID}">
+	<div class="block_outer_wrap">
+		<div class="inner"><span class=""><span></span></span>
+			<div class="block_header <!-- IF S_ARRANGE -->handle<!-- ENDIF -->">
+				<div class="block_title" style="text-align:{S_CONTENT_FLOW_BEGIN};">
+					{L_BIRTHDAYS} <img class="bsw_mini_img" src="{T_THEME_PATH}/images/portal/mini_birthday.gif" height="12" width="14" alt="{L_BIRTHDAYS}" />
+				</div>
+			</div>
+			<div class="block_inner_wrap" id="<!-- IF not S_ARRANGE -->BLOCK_<!-- ENDIF -->{left_block_files.LEFT_BLOCK_ID}">
+				<div class="sgp-corners-inside">
+					<div class="xbox" style="text-align:left; width:100%; margin-top: -5px; margin-bottom: -5px;">
+						<span style="float:left; padding:3px; padding-top:10px;"><img src="{T_THEME_PATH}/images/portal/birthday.gif" alt="{L_BIRTHDAYS}" /></span>
+						<div style="margin-left:55px; border-left: solid 1px #B7B7B6;">
+							<div class="row1" style="padding: 5px; min-height:44px; margin-right:-1px">
+								<!-- IF BIRTHDAY_LIST -->{L_CONGRATULATIONS}: <b>{BIRTHDAY_LIST}</b><!-- ELSE --><br />{L_NO_BIRTHDAYS}...<!-- ENDIF -->
+							</div>
+						</div>
+					</div>
+				</div>
+			<span class="corners-bottom"><span></span></span></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	// <![CDATA[
+		if(GetCookie('BLOCK_{left_block_files.LEFT_BLOCK_ID}') == '2')
+		{
+			ShowHide('{left_block_files.LEFT_BLOCK_ID}','_{left_block_files.LEFT_BLOCK_ID}','BLOCK_{left_block_files.LEFT_BLOCK_ID}');
+		}
+	// ]]>
+	</script>
+</div>
+<!-- ENDIF -->

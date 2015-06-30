@@ -1,0 +1,56 @@
+<!-- IF PORTAL_MESSAGE -->
+	<div class="panel sgp-corners">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+				<div class="block_header"><div class="portal_message">{PORTAL_MESSAGE}</div></div>
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+<!-- ENDIF -->
+
+<!-- IDTAG START portal_layout_center 18 May 2011 -->
+
+<!-- BEGIN center_block_files -->
+	<div style="margin-top:3px;" id="<!-- IF S_ARRANGE -->BLOCK_<!-- ENDIF -->B{center_block_files.CENTER_BLOCK_ID}">
+		{$HEADER_START_FORUM}
+			<div class="xblock_header <!-- IF S_ARRANGE -->handle<!-- ENDIF -->">
+
+				<div class="block_title" style="text-align:{S_CONTENT_FLOW_BEGIN}; margin-top: -2px;">{center_block_files.CENTER_BLOCK_TITLE}&nbsp;</div>
+
+				<span id="B_B{center_block_files.CENTER_BLOCK_ID}">
+					<!-- IF not S_ARRANGE -->
+						<span class="bcimage"><img src="{center_block_files.CENTER_BLOCK_IMG}" alt = "" /></span>
+					<!-- ENDIF -->
+				</span>
+
+				<!-- IF S_ARRANGE -->
+					<span class="bmove">{MOVE_IMG}</span>
+					<a href="javascript:ShowHide('B{center_block_files.CENTER_BLOCK_ID}','B_B{center_block_files.CENTER_BLOCK_ID}','BLOCKB_B{center_block_files.CENTER_BLOCK_ID}');">
+						<span class="bchide">{HIDE_IMG}</span>
+					</a>
+				<!-- ENDIF -->
+			</div>
+
+			<div class="box sgp-corners-inside" id="<!-- IF not S_ARRANGE -->BLOCK_<!-- ENDIF -->B{center_block_files.CENTER_BLOCK_ID}">
+				<!-- IF center_block_files.CENTER_BLOCK_SCROLL and not DISABLE_RT_SCROLL -->
+					<!-- IF not S_ARRANGE -->
+						<div class="scroll_outer" height="{center_block_files.CENTER_BLOCK_HEIGHT}" id="B{center_block_files.CENTER_BLOCK_ID}_outer" onmouseover="do_speed(this, event)" onmousemove="do_speed(this, event)" onmouseout="set_defaults(this, event)"><div class="scroll_inner" id="B{center_block_files.CENTER_BLOCK_ID}_inner">{center_block_files.CENTER_BLOCKS}</div></div>
+					<!-- ELSE -->
+						{L_SCROLLING_BLOCKS_DISABLED}
+					<!-- ENDIF -->
+				<!-- ELSE -->
+					{center_block_files.CENTER_BLOCKS}
+				<!-- ENDIF -->
+			</div>
+		{$HEADER_END_FORUM}
+		<script type="text/javascript">
+		// <![CDATA[
+			if(GetCookie('BLOCKB_B{center_block_files.CENTER_BLOCK_ID}') == '2')
+			{
+				ShowHide('B{center_block_files.CENTER_BLOCK_ID}','B_B{center_block_files.CENTER_BLOCK_ID}','BLOCKB_B{center_block_files.CENTER_BLOCK_ID}');
+			}
+		// ]]>
+		</script>
+	</div>
+<!-- END center_block_files -->
+<!-- IDTAG END portal_layout_center 18 May 2011 -->
