@@ -10,7 +10,7 @@ Fully integrated portal for phpBB 3.1.x
     • Note, the process of updating many files at one time, make commenting impractical.
     • Added a sample style (Olympus).  
   
-*If you have already installed and want to update, please disable the extension, remove it and reinstall as the latest updates adds a database table and changes others... A complete reinstall in the only way to ensure everything works.*
+*If you have already installed and want to update, please disable the extension, remove it (Delete Data) and reinstall as the latest updates add an extra database table and may changes others... A complete reinstall in the only way to ensure everything works.*
 ...  
 
 Mike
