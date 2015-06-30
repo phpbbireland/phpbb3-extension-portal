@@ -163,7 +163,7 @@ function display_forums_categories()
 			// Do not list redirects in LINK Forums as Posts.
 			if ($row['forum_type'] != FORUM_LINK)
 			{
-				$forum_rows[$parent_id]['forum_posts'] += $row['forum_posts'];
+				$forum_rows[$parent_id]['forum_posts_approved'] += $row['forum_posts_approved'];
 			}
 		}
 	}
