@@ -23,7 +23,7 @@
 
 	function switchMarks(status)
 	{
-		for (var i=0; i < document.acp_blocks.length; i++)
+		for (var i = 0; i < document.acp_blocks.length; i++)
 		{
 			if (document.acp_blocks.elements[i].type == 'checkbox')
 			{
@@ -108,7 +108,7 @@
 <h1>{L_BLOCKS_TITLE}</h1>
 <p>{L_BLOCKS_TITLE_EXPLAIN}</p>
 
-<form id="acp_blocks" method="post" action="{U_ACTION}">
+<form id="acp_blocks" name="acp_blocks" method="post" action="{U_ACTION}">
 
 <!-- IF S_OPTIONS  == 'manage' || S_OPTIONS  == 'l' || S_OPTIONS  == 'r' || S_OPTIONS  == 'c' -->
 <table cellspacing="1" border="0">
@@ -271,8 +271,8 @@
 	<dl>
 		<dt><a href="{U_MANAGE_PAGES}" type="button" name="allpages" class="button1">{L_MANAGE_PAGES}</a></dt>
 		<dd style="float: left;">
-			<input type="button" name="mark_all" value="{L_MARK_ALL}" class="button1" onclick="switchMarks(true, '');" />&nbsp;
-			<input type="button" name="unmark_all" value="{L_UNMARK_ALL}" class="button1" onclick="switchMarks(false,'');" />&nbsp;
+			<input type="button" name="mark_all" value="{L_MARK_ALL}" class="button1" onclick="switchMarks(true);" />&nbsp;
+			<input type="button" name="unmark_all" value="{L_UNMARK_ALL}" class="button1" onclick="switchMarks(false);" />&nbsp;
 		</dd>
 	</dl>
 	<hr />
@@ -445,8 +445,8 @@
 	<dl>
 		<dt></dt>
 		<dd style="float: left;">
-			<input type="button" name="mark_all" value="{L_MARK_ALL}" class="button1" onclick="switchMarks(true, '');" />&nbsp;
-			<input type="button" name="unmark_all" value="{L_UNMARK_ALL}" class="button1" onclick="switchMarks(false,'');" />&nbsp;
+			<input type="button" name="mark_all" value="{L_MARK_ALL}" class="button1" onclick="switchMarks(true);" />&nbsp;
+			<input type="button" name="unmark_all" value="{L_UNMARK_ALL}" class="button1" onclick="switchMarks(false);" />&nbsp;
 		</dd>
 	</dl>
 

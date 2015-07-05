@@ -41,7 +41,7 @@ class blocks_module
 
 		$this->tpl_name = 'acp_blocks';
 		$this->page_title = $user->lang['ACP_BLOCKS'];
-		add_form_key('blocks');
+		add_form_key('acp_blocks');
 
 		if ($request->is_set_post('submit'))
 		{
