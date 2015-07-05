@@ -45,7 +45,7 @@ class blocks_module
 
 		if ($request->is_set_post('submit'))
 		{
-			if (!check_form_key('blocks'))
+			if (!check_form_key('acp_blocks'))
 			{
 				$submit = false;
 				$mode = '';
@@ -156,7 +156,7 @@ class blocks_module
 
 					//$cache->destroy('sql', $k_blocks);
 
-					meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=". $mode));
+					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=". $mode));
 					//meta_refresh(1, ($k_config['base']) ? $k_config['base'] : $this->u_action);
 					return;
 				}
@@ -325,7 +325,7 @@ class blocks_module
 
 						$template->assign_var('BLOCK_REPORT', $message .'<br />');
 
-						meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=add"));
+						meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=add"));
 						return;
 					}
 
@@ -402,7 +402,7 @@ class blocks_module
 
 					//$cache->destroy('sql', $k_blocks);
 
-					meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage"));
+					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage"));
 					return;
 				}
 				else
