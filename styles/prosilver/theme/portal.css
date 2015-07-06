@@ -163,3 +163,142 @@ div.rules_page
 }
 
 .flash {display:none;}
+
+
+
+
+
+
+
+
+
+/* support Responsive Web Design  24 March 2013 Mike ipad?*/
+
+@media screen and (max-width:960px) {
+
+	* { max-width: 960px; }
+	body { max-width: 960px; width: 940px; padding: 1px; overflow-x:hidden; }
+
+	#phpbb, #page-body { margin: 3px; padding: 0; }
+	.nav, .navbar, .page-header { max-width: 920px; }
+	#pcontainer_ { width: 920px;}
+
+	.headerbar {  max-width: 940px; margin:1px; }
+	.headerbar img { max-width: 940px; }
+
+
+	.navbar.sgp-corners.top { max-width:940px; }
+
+	ul.navlinks img { display:none; }
+	.rightside.arrange {display:none;}
+
+	#site-description { width: 100%; }
+
+	#search-box {
+		margin-top: -50px;
+	}
+
+	#wrap {
+		padding:0;
+		width: 930px;
+		min-width: 930px;
+	}
+
+	#left {
+		float: left;
+		width:98%;
+		min-width: 98%;
+		max-width: 98%;
+		padding-left:8px;
+	}
+
+	#center {
+		float: left;
+		width:98%;
+		min-width: 98%;
+		max-width: 98%;
+		padding-left:8px;
+	}
+
+	#right {
+		float: left;
+		width:98%;
+		min-width: 98%;
+		max-width: 98%;
+		padding-left:8px;
+	}
+
+	.l_block_vert_gap { padding-right: 0; padding-left: 0; }
+	.r_block_vert_gap { padding-right: 0; padding-left: 0; }
+}
+
+
+
+
+/* support Responsive Web Design 24 March 2013 Mike ? mobile */
+
+@media screen and (max-width:480px ) {
+
+	* { max-width: 480px; }
+	img {max-width: 320px;}
+	#page-width, .stylewidth {width: 460px; margin:0px; padding: 0px; }
+
+	body { width: 470px; padding: 5px; overflow-x:hidden; }
+
+	#phpbb, #page-body { max-width: 460px; }
+
+	.nav, .navbar, .page-header { max-width: 436px; }
+
+	#pcontainer_ { width: 440px; }
+
+	.headerbar {  max-width: 440px; margin:1px; }
+	.headerbar img { max-width: 300px; }
+
+	.navbar.sgp-corners.top { max-width:460px; }
+	ul.navlinks img { display:none; }
+	.rightside.arrange {display:none;}
+
+	#site-description { width: 100%; }
+
+
+	#search-box {
+		margin-top: -50px;
+	}
+
+	#wrap_top { float:left; width: 450px; margin-top: -25px;}
+
+	#wrap {
+		padding:0;
+		width: 450px;
+		min-width: 450px;
+	}
+
+	#left {
+		float: left;
+
+		width:430px;
+		min-width: 430px;
+		max-width: 430px;
+		padding-left: 5px;
+	}
+
+	#center {
+		float: left;
+		width:425px;
+		min-width: 425px;
+		max-width: 425px;
+		padding-left:8px;
+	}
+
+	#right {
+		float: left;
+
+		width:430px;
+		min-width: 430px;
+		max-width: 430px;
+		padding-left:5px;
+	}
+
+	.l_block_vert_gap { padding-right: 0; padding-left: 0; }
+	.r_block_vert_gap { padding-right: 0; padding-left: 0; }
+}

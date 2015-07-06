@@ -52,14 +52,7 @@ class listener implements EventSubscriberInterface
 	* @return \phpbbireland\portal\event\listener
 	* @access public
 	*/
-	public function __construct(
-		\phpbb\auth\auth $auth,
-		\phpbb\config\config $config,
-		\phpbb\controller\helper $controller_helper, $helper,
-		\phpbb\path_helper $path_helper,
-		\phpbb\template\template $template,
-		\phpbb\user $user, $php_ext)
-	{
+	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\controller\helper $controller_helper, $helper, \phpbb\path_helper $path_helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext) {
 		//var_dump('listener.php > constructor');
 
 		$this->auth = $auth;

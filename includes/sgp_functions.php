@@ -9,6 +9,27 @@
 */
 
 /*
+  sgp_get_rand_logo()
+  set_k_config()
+  k_progress_bar()
+  sgp_checksize()
+  smiley_sort()
+  search_block_func()
+  which_group()
+  process_for_vars()
+  get_user_data()
+  portal_block_template()
+  process_for_admin_bbcodes()
+  get_page_id()
+  get_menu_lang_name()
+  s_get_vars_array()
+  s_get_vars()
+  get_link_from_image_name()
+  generate_menus()
+
+*/
+
+/*
 * A couple of functions rescued from functions.php
 * @copyright (c) 2007 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU License
@@ -297,7 +318,7 @@ if (!function_exists('process_for_vars'))
 // Stargate Random Banner mod //
 if (!function_exists('get_user_data'))
 {
-	function get_user_data($what = '', $id)
+	function get_user_data($id, $what = '')
 	{
 		global $db, $template, $user;
 
