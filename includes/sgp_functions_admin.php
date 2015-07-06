@@ -10,14 +10,6 @@
 
 namespace phpbbireland\portal\acp;
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
 class sgp_functions_admin
 {
 	public function sgp_acp_set_config($config_name, $config_value)

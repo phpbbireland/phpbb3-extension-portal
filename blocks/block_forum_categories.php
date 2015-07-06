@@ -7,12 +7,6 @@
 *
 */
 
-/**
-* may require work for 3.1 version...
-*
-**/
-
-
 global $user, $phpbb_root_path;
 
 $this->user = $user;

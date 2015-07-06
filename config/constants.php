@@ -1,11 +1,4 @@
 <?php
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
 
 global $table_prefix, $phpbb_root_path;
 

@@ -9,7 +9,6 @@
 */
 
 namespace phpbbireland\portal\acp;
-//use phpbbireland\portal;
 
 class blocks_module
 {

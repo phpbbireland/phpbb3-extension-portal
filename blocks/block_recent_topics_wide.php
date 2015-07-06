@@ -8,14 +8,6 @@
 *
 */
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 
 $auth->acl($user->data);

@@ -9,6 +9,7 @@
 */
 
 namespace phpbbireland\portal\ucp;
+
 use phpbbireland\portal;
 
 /**
