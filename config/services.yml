@@ -67,8 +67,8 @@ services:
             - @config
             - @request
 
-    phpbbireland.core.helpers.portal:
-        class: phpbbireland\core\helpers\portal
+    phpbbireland.portal.helpers.portal:
+        class: phpbbireland\portal\helpers\portal
 
 
     phpbbireland.portal.module_collection:
@@ -83,8 +83,8 @@ services:
         arguments:
             - @phpbbireland.portal.module_collection
 
-    phpbbireland.core.helpers.tables:
-        class: phpbbireland\core\helpers\tables
+    phpbbireland.portal.helpers.tables:
+        class: phpbbireland\portal\helpers\tables
         arguments:
             - %tables.phpbbireland.k_config%
             - %tables.phpbbireland.k_blocks%
@@ -92,7 +92,7 @@ services:
             - %tables.phpbbireland.k_menus%
             - %tables.phpbbireland.k_resources%
 
-    phpbbireland.blocks_collection:
+    phpbbireland.portal.blocks_collection:
         class: phpbb\di\service_collection
         arguments:
             - @service_container
