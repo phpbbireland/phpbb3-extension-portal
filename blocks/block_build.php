@@ -12,6 +12,11 @@
 * @ignore
 */
 
+if (!defined('IN_PHPBB'))
+{
+   exit;
+}
+
 //var_dump('in blocks_build.php');
 global $db, $config, $k_config, $request, $template, $SID, $_SID, $user, $auth, $phpEx, $phpbb_root_path;
 

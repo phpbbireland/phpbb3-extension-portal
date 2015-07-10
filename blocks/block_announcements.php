@@ -295,7 +295,7 @@ $message = '';
 $this->template->assign_vars(array(
 	'S_ANNOUNCEMENTS_COUNT_ASKED'		=> sizeof($posts),
 	'S_ANNOUNCEMENTS_COUNT_RETURNED'	=> sizeof($post_list),
-	'ANNOUNCEMENYS_DEBUG'				=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
+	//'ANNOUNCEMENYS_DEBUG'				=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 
 // END: Fetch Announcements //

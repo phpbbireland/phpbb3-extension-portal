@@ -3,7 +3,7 @@
 *
 * Kiss Portal extension for the phpBB Forum Software package.
 *
-* @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
+* @copyright (c) 2014 Michael Oâ€™Toole <http://www.phpbbireland.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
@@ -156,4 +156,30 @@ class sgp_functions_admin
 		}
 		return(null);
 	}
+
+	public function get_link_images()
+	{
+		global $db, $template, $k_config, $phpbb_root_path;
+
+		$i = 0;
+
+		$sql = "SELECT *
+			FROM " . K_LINK_IMAGES_TABLE . "
+			WHERE active = 1";
+
+		$result = $db->sql_query($sql, 10);//$block_cache_time);
+
+
+		while ($row = $db->sql_fetchrow($result))
+		{
+			$template->assign_block_vars('link_images_row', array(
+				'LINK_IMAGE'	=> $phpbb_root_path . 'ext/phpbbireland/portal/images/links/' . $row['image'],
+				'LINK_URL'		=> $row['url'],
+				'LINK_LINK'		=> $row['link'],
+				'TLINK'		=> $i++,
+			));
+
+		}
+	}
+
 }

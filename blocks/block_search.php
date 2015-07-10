@@ -8,6 +8,11 @@
 *
 */
 
+if (!defined('IN_PHPBB'))
+{
+   exit;
+}
+
 global $php_root_path, $user, $request, $config, $k_config, $k_blocks, $phpbb_root_path;
 global $portal_config, $board_config;
 

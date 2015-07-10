@@ -63,5 +63,5 @@ $template->assign_vars(array(
 	'NO_DATA'				=> ($loop_count == 0) ? true : false,
 	'BOT_TRACKER'			=> sprintf($user->lang['BOT_TRACKER'], $k_bots_to_display),
 	'S_BOT_TRACKER_SHOW'	=> ($k_bot_display_allow) ? true : false,
-	'BOT_TRACKER_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
+	//'BOT_TRACKER_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));

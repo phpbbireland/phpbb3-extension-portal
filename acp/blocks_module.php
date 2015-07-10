@@ -3,7 +3,7 @@
 *
 * Kiss Portal extension for the phpBB Forum Software package.
 *
-* @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
+* @copyright (c) 2014 Michael Oâ€™Toole <http://www.phpbbireland.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
@@ -727,6 +727,8 @@ class blocks_module
 					'BLOCK_CACHE_TIME' => $row['block_cache_time'],
 					'S_BLOCK_VAR'      => ($row['var_file_name']) ? $row['var_file_name'] : '',
 				));
+
+				$sgp_functions_admin->get_link_images();
 
 				// get all groups and fill array //
 				$this->get_all_pages($block);

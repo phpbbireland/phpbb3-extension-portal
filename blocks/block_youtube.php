@@ -71,7 +71,7 @@ while ($row = $db->sql_fetchrow($result))
 		break;
 	}
 
-	$usr_name_full = get_user_data('full', $row['video_poster_id']);
+	$usr_name_full = get_user_data($row['video_poster_id'], 'full');
 
 	$template->assign_block_vars('video_loop_row', array(
 		'VIDEO_CAT'			=> $row['video_category'],

@@ -8,6 +8,11 @@
 *
 */
 
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 
 $auth->acl($user->data);
@@ -147,7 +152,7 @@ $post_time_days = time() - 86400 * $k_recent_search_days;
 
 // New code //
 $sql_array = array(
-	'SELECT'		=> 'p.post_id, t.*, p.post_edit_time, p.post_subject, p.post_text, p.post_time, p.bbcode_bitfield, p.bbcode_uid, f.forum_desc, u.user_avatar, u.user_avatar_type, f.forum_name',
+	'SELECT'		=> 'p.post_id, t.*, p.post_edit_time, p.post_subject, p.post_text, p.post_time, p.bbcode_bitfield, p.bbcode_uid, f.forum_desc, u.user_avatar, u.user_avatar_type, u.user_avatar_height, u.user_avatar_width, f.forum_name',
 
 	'FROM'			=> array(FORUMS_TABLE => 'f'),
 
@@ -277,8 +282,22 @@ for ($i = 0; $i < $display_this_many; $i++)
 		$this_post_time = $user->format_date($row[$i]['post_time']);
 	}
 
+
+	$avatar_data = array(
+		'avatar' => $row[$i]['user_avatar'],
+		'avatar_width' => $row[$i]['user_avatar_width'],
+		'avatar_height' => $row[$i]['user_avatar_height'],
+		'avatar_type' => $row[$i]['user_avatar_type'],
+	);
+
+	// resize image to 15x15 //
+	$ava = phpbb_get_avatar($avatar_data, $user->lang['USER_AVATAR'], false);
+	$ava = str_replace('width="' . $row[$i]['user_avatar_height'] . '"', 'width="15"', $ava);
+	$ava = str_replace('height="' . $row[$i]['user_avatar_width'] . '"', 'height="15"', $ava);
+
 	$template->assign_block_vars($style_row . 'recent_topic_row', array(
-		'AVATAR_SMALL_IMG'	=> get_user_avatar($row[$i]['user_avatar'], $row[$i]['user_avatar_type'], '15', '15'),
+		//'AVATAR_SMALL_IMG'	=> get_user_avatar($row[$i]['user_avatar'], $row[$i]['user_avatar_type'], '15', '15'),
+		'AVATAR_SMALL_IMG'	=> $ava,
 		'FORUM_W'			=> $forum_name,
 		'LAST_POST_IMG_W'	=> $user->img('icon_topic_newest', 'VIEW_LATEST_POST'),
 		//'LAST_POST_IMG_W'	=> $next_img,
@@ -315,5 +334,5 @@ $template->assign_vars(array(
 	'S_COUNT_RECENT'		=> ($i > 0) ? true : false,
 	'RECENT_SEARCH_TYPE'	=> sprintf($user->lang['K_RECENT_SEARCH_DAYS'], $k_recent_search_days),
 	'S_FULL_LEGEND'			=> ($k_post_types) ? true : false,
-	'RECENT_TOPICS_WIDE_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
+	//'RECENT_TOPICS_WIDE_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));

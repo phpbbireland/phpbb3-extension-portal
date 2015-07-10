@@ -8,6 +8,10 @@
 *
 */
 
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 if (!defined('POST_TOPIC_URL'))
 {
@@ -145,7 +149,7 @@ else
 
 // New code //
 $sql_array = array(
-	'SELECT'		=> 'distinct p.post_id, t.topic_id, t.topic_time, t.topic_title, t.forum_id, t.topic_last_post_time, t.topic_last_post_id, t.topic_last_poster_id, t.topic_last_poster_name, t.topic_last_poster_colour, t.topic_type, t.topic_attachment, f.forum_name, p.post_edit_time, p.post_subject, p.post_text, p.post_time, p.bbcode_bitfield, p.bbcode_uid, f.forum_desc, u.user_avatar, u.user_avatar_type, a.topic_id, a.download_count, a.extension, a.is_orphan',
+	'SELECT'		=> 'distinct p.post_id, t.topic_id, t.topic_time, t.topic_title, t.forum_id, t.topic_last_post_time, t.topic_last_post_id, t.topic_last_poster_id, t.topic_last_poster_name, t.topic_last_poster_colour, t.topic_type, t.topic_attachment, f.forum_name, p.post_edit_time, p.post_subject, p.post_text, p.post_time, p.bbcode_bitfield, p.bbcode_uid, f.forum_desc, u.user_avatar,  u.user_avatar_width, u.user_avatar_height, u.user_avatar_type, a.topic_id, a.download_count, a.extension, a.is_orphan',
 
 	'FROM'			=> array(FORUMS_TABLE => 'f'),
 
@@ -261,10 +265,23 @@ for ($i = 0; $i < $display_this_many; $i++)
 		break;
 	}
 
+	$avatar_data = array(
+		'avatar' => $row['user_avatar'],
+		'avatar_width' => $row['user_avatar_width'],
+		'avatar_height' => $row['user_avatar_height'],
+		'avatar_type' => $row['user_avatar_type'],
+	);
+
+	// resize image to 15x15 //
+	$ava = phpbb_get_avatar($avatar_data, $user->lang['USER_AVATAR'], false);
+
+	$ava = str_replace('width="' . $row['user_avatar_height'] . '"', 'width="16"', $ava);
+	$ava = str_replace('height="' . $row['user_avatar_width'] . '"', 'height="16"', $ava);
+
 	$template->assign_block_vars('top_downloads_row', array(
 		'NUM'               => $i + 1,
 		'ATT_COUNT'         => $row[$i]['download_count'],
-		'AVATAR_SMALL_IMG'	=> get_user_avatar($row[$i]['user_avatar'], $row[$i]['user_avatar_type'], '15', '15'),
+		'AVATAR_SMALL_IMG'	=> $ava,
 		'FORUM_W'			=> $forum_name,
 		'LAST_POST_IMG_W'	=> $user->img('icon_topic_newest', 'VIEW_LATEST_POST'),
 		'LAST_POST_IMG_W'	=> $next_img,

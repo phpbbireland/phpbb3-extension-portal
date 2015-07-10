@@ -379,9 +379,19 @@ class func
 		}
 		//unset($center_block_ary);
 
+
+		$avatar_data = array(
+			'avatar' => $user->data['user_avatar'],
+			'avatar_width' => $user->data['user_avatar_width'],
+			'avatar_height' => $user->data['user_avatar_height'],
+			'avatar_type' => $user->data['user_avatar_type'],
+		);
+
+
 		$template->assign_vars(array(
 			'ASSETS_PATH'            => $phpbb_root_path . 'ext/phpbbireland/portal/styles/' . rawurlencode($user->style['style_path']) . '/template/assets/',
-			'AVATAR'                  => get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height']),
+			//'AVATAR'                  => get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height']),
+			'AVATAR'                  => phpbb_get_avatar($avatar_data, $user->lang['USER_AVATAR'], false),
 			'BLOCK_WIDTH'             => $blocks_width . 'px',
 			'PORTAL_ACTIVE'           => $config['portal_enabled'],
 			'PORTAL_BUILD'            => $config['portal_build'],

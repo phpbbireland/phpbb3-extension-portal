@@ -9,6 +9,11 @@
 * Modified for 3.1 Dec 2014, now using database table...
 */
 
+if (!defined('IN_PHPBB'))
+{
+   exit;
+}
+
 global $phpbb_root_path, $template;
 
 $show_all_links = false;

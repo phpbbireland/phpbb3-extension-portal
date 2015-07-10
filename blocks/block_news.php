@@ -322,7 +322,7 @@ $template->assign_vars(array(
 	'S_NEWS_COUNT' 			=> sizeof($posts),
 	'S_NEWS_COUNT_RETURNED' => sizeof($post_list),
 
-	'NEWS_ADVANCED_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
+	//'NEWS_ADVANCED_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 
 // END: Fetch News //

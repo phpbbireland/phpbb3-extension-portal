@@ -53,4 +53,7 @@ $lang = array_merge($lang, array(
 	'K_LINK_FORUM_ID_EXPLAIN'            => 'Places a link at the bottom of the Link Block to direct members to a designated links upload forum, should one exist.',
 	'K_LINKS_SCROLL_DIRECTION'           => 'Scroll Direction',
 	'K_LINKS_SCROLL_DIRECTION_EXPLAIN'   => 'Scroll 0 = Up or 1 = Down',
+
+	'LINK_IMAGE'	=> 'Image to use',
+	'LINK_SITE'		=> 'Link to Site',
 ));

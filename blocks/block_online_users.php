@@ -8,6 +8,11 @@
 *
 */
 
+if (!defined('IN_PHPBB'))
+{
+   exit;
+}
+
 global $auth, $user, $config, $template;
 
 $this->config = $config;
@@ -39,8 +44,8 @@ if ($this->config['load_online'] && $this->config['load_online_time'] && $displa
 
 	if ($total_online_users > $this->config['record_online_users'])
 	{
-		set_config('record_online_users', $total_online_users, true);
-		set_config('record_online_date', time(), true);
+		$config->set('record_online_users', $total_online_users, true);
+		$config->set('record_online_date', time(), true);
 	}
 
 	$l_online_record = $user->lang('RECORD_ONLINE_USERS', (int) $this->config['record_online_users'], $user->format_date($this->config['record_online_date'], false, true));

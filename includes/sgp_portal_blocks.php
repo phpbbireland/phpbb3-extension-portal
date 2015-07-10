@@ -388,10 +388,20 @@ if (isset($center_block_ary) && $show_center)
 		));
 	}
 }
+
+
+$avatar_data = array(
+	'avatar' => $row['user_avatar'],
+	'avatar_width' => $row['user_avatar_width'],
+	'avatar_height' => $row['user_avatar_height'],
+	'avatar_type' => $row['user_avatar_type'],
+);
+$ava = phpbb_get_avatar($avatar_data, $user->lang['USER_AVATAR'], false);
+
 //var_dump($phpbb_root_path . 'ext/phpbbireland/portal/style/' . rawurlencode($user->style['style_path']) . '/theme/images/');
 $template->assign_vars(array(
 	'T_THEME_PATH'            => $phpbb_root_path . 'ext/phpbbireland/portal/style/' . rawurlencode($user->style['style_path']) . '/theme/images/',
-	'AVATAR'				  => get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height']),
+	'AVATAR'				  => $ava,
 	'BLOCK_WIDTH'			  => $blocks_width . 'px',
 
 	'PORTAL_ACTIVE'			  => $config['portal_enabled'],
