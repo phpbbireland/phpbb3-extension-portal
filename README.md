@@ -4,6 +4,8 @@ Fully integrated portal for phpBB 3.1.x
 
 **Development Status:** [![Build Status](https://travis-ci.org/phpbbireland/phpbb3-extension-portal.svg)](https://travis-ci.org/phpbbireland/phpbb3-extension-portal)
 
+Only three errors and two of these are probably all right but one doesn't provide any iformation so I can't yet find it...  
+
 ## Tested with phpBB 3.1.5
     • No file updates required for 3.1.5
     • Quite a few updates to the portal code including some additions to the code and minor fixes...
