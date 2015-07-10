@@ -35,6 +35,11 @@
 * @license http://opensource.org/licenses/gpl-license.php GNU License
 */
 
+if (!defined('IN_PHPBB'))
+{
+   exit;
+}
+
 if (!function_exists('sgp_get_rand_logo'))
 {
 	function sgp_get_rand_logo()

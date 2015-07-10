@@ -17,6 +17,10 @@
 * word_replace()
 */
 
+if (!defined('IN_PHPBB'))
+{
+   exit;
+}
 
 /***
 * phpbb pregs quote reused

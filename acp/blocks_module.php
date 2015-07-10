@@ -10,6 +10,11 @@
 
 namespace phpbbireland\portal\acp;
 
+if (!defined('IN_PHPBB'))
+{
+   exit;
+}
+
 class blocks_module
 {
 	var $u_action;

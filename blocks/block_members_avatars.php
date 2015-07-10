@@ -3,7 +3,7 @@
 *
 * Kiss Portal extension for the phpBB Forum Software package.
 *
-* @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
+* @copyright (c) 2014 Michael Oâ€™Toole <http://www.phpbbireland.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
@@ -125,7 +125,8 @@ while ($row = $db->sql_fetchrow($result))
 		'col_count'         => $col_count,
 		'is_online'         => ($is_online) ? 1 : 0,
 		'username_full'     => get_username_string('full', $row['user_id'], sgp_checksize($row['username'],15), $row['user_colour']),
-		'member_avatar_img' => ($row['user_avatar'] != '') ? get_user_avatar($row['user_avatar'], $row['user_avatar_type'], $row['user_avatar_width'], $row['user_avatar_height']) : '',
+		//'member_avatar_img' => ($row['user_avatar'] != '') ? get_user_avatar($row['user_avatar'], $row['user_avatar_type'], $row['user_avatar_width'], $row['user_avatar_height']) : '',
+		'member_avatar_img' => ($row['user_avatar'] != '') ? phpbb_get_avatar($row['user_avatar'], $user->lang['USER_AVATAR'] ) : '',
 	);
 }
 

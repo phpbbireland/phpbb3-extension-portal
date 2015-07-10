@@ -11,21 +11,21 @@
 /**
 * @ignore
 */
+
+if (!defined('IN_PHPBB'))
+{
+   exit;
+}
+
 ///var_dump('sgp_portal_blocks.php');
 
-global $phpbb_root_path, $config, $k_config, $phpEx, $user, $table_prefix;
-global $db, $k_blocks, $user, $avatar_img, $request, $template, $auth;
-global $k_groups;
-
-//$style_path_ext = $phpbb_root_path . 'ext/phpbbireland/portal/style/' . $user->user_style;
+global $phpbb_root_path, $config, $k_config, $phpEx, $db, $user, $request, $template, $auth, $k_groups;
 
 // Grab some portal cached data //
 $block_cache_time  = $k_config['k_block_cache_time_default'];
-$blocks_width 	   = $tis->config['blocks_width'];
+$blocks_width 	   = $this->config['blocks_width'];
 $blocks_enabled    = $this->config['blocks_enabled'];
 $use_block_cookies = (isset($k_config['use_block_cookies'])) ? $k_config['use_block_cookies'] : 0;
-
-//$user->add_lang_ext('phpbbireland/portal', 'common');
 
 // if block disabled, generate message and return... //
 if (!$blocks_enabled)
@@ -46,13 +46,9 @@ $block_image_path = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_ima
 $big_image_path = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/large/';
 $my_root_path = $phpbb_root_path . 'ext/phpbbireland/portal/';
 
-//$user->add_lang('portal/kiss_block_variables');
-/////$user->add_lang_ext('phpbbireland/portal', 'kiss_block_variables');
-
 $this_page = explode(".", $user->page['page']);
 $user_id = $user->data['user_id'];
 
-///var_dump($this_page);
 
 include_once($phpbb_root_path . 'ext/phpbbireland/portal/includes/sgp_functions.' . $phpEx);
 
@@ -266,11 +262,11 @@ if ($active_blocks)
 		$this_page_name = str_replace('php/', '', $this_page_name);
 		$page_id = get_page_id($this_page_name);
 
-if ($page_id == 0)
-{
-	$page_id = $this_page[0];
-	$page_id = get_page_id($this_page[0]);
-}
+		if ($page_id == 0)
+		{
+			$page_id = $this_page[0];
+			$page_id = get_page_id($this_page[0]);
+		}
 
 		if ($process_block && in_array($page_id, $arr))
 		{
@@ -359,8 +355,6 @@ if (isset($center_block_ary) && $show_center)
 	{
 		// As it is not always possible to display all data as intended in a narrow block (left or right blocks) we automatically load a wide layout if it exists //
 		// We check the default template folder and the SGP common folder templates //
-
-
 
 ///// 3.1
 		//$my_file_wide = "{$style_path_ext}" . $user->theme['template_path'] . '/template/blocks/' . $value;

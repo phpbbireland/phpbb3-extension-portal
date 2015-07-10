@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_PHPBB'))
+{
+   exit;
+}
+
 global $table_prefix, $phpbb_root_path;
 
 define('WELCOME_MESSAGE', 1);
