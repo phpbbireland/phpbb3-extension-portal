@@ -1,0 +1,789 @@
+/*
+  17 January 2011
+  This code contains all css classes common to all styles...
+  The file is loaded automatically, vars set in functions.php, called in 
+  portal_common/portal_header.html. Note, each styles portal.css file can
+  over-ride these tags/classes...
+
+  Do not define colours here...
+--------------------------------------------------------------------------- */
+
+/* bbcode...
+ ------------------------------------ */ 
+.bbb-bold, .bbb-bold a{ 
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-bold.gif"); 
+  width:22px; height:22px; 
+}
+.bbb-bold:hover{ 
+  background-position: 0px -23px;}
+.bbb-quote, .bbb-italic, .bbb-italic a{ 
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-italic.gif");
+  width:22px; height:22px;
+}
+.bbb-italic:hover{ 
+  background-position: 0px -23px;
+}
+.bbb-quote, .bbb-quote a{ 
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-quote.gif"); 
+  width:22px; height:22px;
+}
+.bbb-quote:hover{ 
+  background-position: 0px -23px;
+}
+.bbb-code, .bbb-code a{ 
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-code.gif");
+  width:22px; height:22px;
+}
+.bbb-code:hover{ 
+  background-position: 0px -23px;
+}
+.bbb-list, .bbb-list a{ 
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-list.gif");
+  width:22px; height:22px;
+}
+.bbb-list:hover{ 
+  background-position: 0px -23px;
+}
+.bbb-flash, .bbb-flash a{ 
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-flash.gif"); 
+  width:22px; height:22px;
+}
+.bbb-flash:hover{ 
+  background-position: 0px -23px;
+}
+.bbb-image, .bbb-image a{ 
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-image.gif"); 
+  width:22px; height:22px;
+}
+.bbb-image:hover{ 
+  background-position: 0px -23px;
+}
+.bbb-url, .bbb-url a{ 
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-url.gif");
+  width:22px; height:22px;
+}
+.bbb-url:hover{ 
+  background-position: 0px -23px;
+}
+.bbb-under_line, .bbb-under_line a { 
+  background:transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-under_line.gif");
+  width:22px; height:22px;
+}
+.bbb-under_line:hover{ 
+  background-position: 0px -23px;
+}
+.bbb-align_center, .bbb-align_center a { 
+  background: transparent;
+  border:none;
+  background-image: url("./../../../images/bbcode/bbb-icon-align_center.gif");
+  width:22px; height:22px;
+}
+.bbb-align_center:hover{
+  background-position: 0px -23px;
+}
+.bbb-align_left, .bbb-align_left a { 
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-align_left.gif");
+  width:22px; height:22px;
+}
+.bbb-align_left:hover{
+  background-position: 0px -23px;
+}
+.bbb-align_right, .bbb-align_right a {
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-align_right.gif");
+  width:22px; height:22px;
+}
+.bbb-align_right:hover {
+  background-position: 0px -23px;
+}
+.bbb-ordered_list, .bbb-ordered_list a {
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-ordered_list.gif");
+  width:22px; height:22px;
+}
+.bbb-ordered_list:hover{
+  background-position: 0px -23px;
+}
+.bbb-add_list_item, .bbb-add_list_item a {
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-add_list_item.gif"); 
+  width:22px; height:22px;
+}
+.bbb-add_list_item:hover {
+  background-position: 0px -23px;
+}
+.bbb-note, .bbb-note a{
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-note.gif");
+  width:22px; height:22px;
+}
+.bbb-note:hover {
+  background-position: 0px -23px;
+}
+.bbb-spoiler, .bbb-spoiler a{
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-spoiler.gif");
+  width:22px; height:22px;
+}
+.bbb-spoiler:hover{
+  background-position: 0px -23px;
+}
+.bbb-tab, .bbb-tab a{
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-tab.gif");
+  width:22px; height:22px;
+}
+.bbb-tab:hover{
+  background-position: 0px -23px;
+}
+.bbb-sup, .bbb-sup a{
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-sup.gif");
+  width:22px; height:22px;
+}
+.bbb-sup:hover{
+  background-position: 0px -23px;
+}
+.bbb-sub, .bbb-sub a{
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-sub.gif");
+  width:22px; height:22px;
+}
+.bbb-sub:hover{
+  background-position: 0px -23px;
+}
+.bbb-strike, .bbb-strike a{
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-strike.gif");
+  width:22px; height:22px;
+}
+.bbb-strike:hover {
+  background-position: 0px -23px;
+}
+.bbb-link, .bbb-link a{
+  background: transparent; 
+  border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-link.gif");
+  width:22px; height:22px;
+}
+.bbb-link:hover {
+  background-position: 0px -23px;
+}
+.rollover, .rollover a {
+  display: inline; 
+  float:left;
+}
+.rollover a:hover {
+  background-position: 0 -23px;
+}
+.bbb-icon-spacer {
+  background: transparent; border:none; 
+  background-image: url("./../../../images/bbcode/bbb-icon-spacer.gif"); 
+  width:3px; height:22px;
+}
+button {border: solid 3px;}
+
+
+/* Code of the random video block 13 January 2011
+ ------------------------------------------------ */ 
+.video_back {
+  margin: 0 auto;
+  text-align:center;
+  width:640px; height:390px;
+  background: url(images/one_video.png) top left repeat;
+  border-radius: 10px;
+}
+
+.video_info {
+  background: #D8D8D8;
+  margin: 0 auto;
+  padding: 5px;
+  text-align:center;
+  width:430px; height:70px;
+  border-radius: 10px;
+}
+
+/*  Code to restrict image sizes in posts etc...
+  If you need to restrict for other pages add the css tag here...
+ ---------------------------------------------------------------------- */
+.content img { max-width:600px; }
+.postbody img { max-width:600px; }
+
+
+/* acronyms/local_acronym classes common to all styles...
+   Styles can override colours etc in their own portal.css file...
+   If the classes are not defines, we use this default code...
+ ---------------------------------------------------------------------- */ 
+
+abbr, acronym, local_acronym {
+  font-weight: bold;
+  cursor: help;
+}
+
+.acronym {
+  background:#FFFFCC
+}
+
+acronym, local_acronym{
+  font-style:italic;
+  font-weight:bold;
+  border-bottom:1px #BD5121 dashed ;
+  color:#459B37;
+  cursor: help;
+}
+local_acronym{
+  font-style:italic;
+  font-weight:bold;
+  border-bottom:1px #BD5121 dashed ;
+  color:#A20000;
+  cursor: help;
+  text-decoration: none;
+}
+
+/*
+ ---------------------------------------------------------------------- */
+.bsw_b_img {
+  float:left;
+  width:33px;
+  height:33px;
+  margin-top:10px;
+  margin-bottom:10px;
+  background: url("MOD_COMMON_IMAGES_PATH}images/portal/birthdays.gif") top left no-repeat;
+  padding-right:15px;
+}
+.bsw_s_img {
+  float:left;
+  width:33px;
+  height:33px;
+  margin-top:10px;
+  margin-bottom:10px;
+  padding-right:15px;
+  background: url("{MOD_COMMON_IMAGES_PATH}images/portal/statistics.gif") top left no-repeat;
+}
+.bsw_w_img {
+  float:left;
+  width:33px;
+  height:33px;
+  margin-top:30px;
+  padding-right:10px;
+  margin-bottom:10px;
+  background: url("{MOD_COMMON_IMAGES_PATH}images/portal/whosonline.gif") top left no-repeat;
+}
+.bsw_content { 
+  margin-left:45px;
+  padding:5px;
+  padding-left:0px;
+  min-height:40px;
+}
+
+.bsw_mini_img {margin-top: -2px;}
+
+
+/* small images used in categories block
+  ---------------------------------------------------------------------- */
+.smallimage {
+  width:25px; 
+  height:25px; 
+  float:left;
+  margin-right:5px; margin-bottom:5px;
+  position:relative;
+}
+
+
+/* round corners code
+ ---------------------------------------------------------------------- */
+.sgp-corners {
+  border-radius: 7px;
+}
+.sgp_corners_tl {
+  border-top-left-radius: 6px;
+}
+.sgp_corners_tr {
+  border-top-right-radius: 6px;
+}
+.sgp_corners_bl {
+  border-bottom-left-radius: 6px;
+}
+.sgp_corners_br {
+  border-bottom-right-radius: 6px;
+}
+
+.sgp-corners-top {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.sgp-corners-2 {
+  border-radius: 3px;
+  border: solid 1px #000; 
+  padding:4px; 
+  padding-bottom: 0px; 
+  padding-top: 0px; 
+}
+
+
+/* sdMenu Stu
+ -------------------------------------- */
+div.sdmenu div {
+  overflow: hidden;
+  font-weight: bold;
+}
+div.sdmenu div.collapsed {
+  height: 18px;
+}
+div.sdmenu span {
+  display: block;
+  padding: 2px 6px;
+  cursor: default;
+}
+.sub_heading {
+  color: #A7A7AD;
+  font-size:12px;
+  font-family: Comic Sans MS, Sans-Serif;
+  font-weight: bold;
+  padding-top:5px;
+  padding-bottom:5px;
+  text-align:left;
+}
+
+/* NeXur's bable translation block
+ -------------------------------------- */
+.translate_head {
+  text-align:center;
+  color: #2E5B82;
+  padding:5px;
+}
+div.trans div a.current {
+  background : #ccc;
+}
+div.trans div a:hover {
+  background : #ECECEC url("{MOD_COMMON_IMAGES_PATH}images/linkarrow.gif") no-repeat right center;
+  color: #DE1717;
+  text-decoration: none;
+}
+div.trans div a {
+  width:97%;
+  padding:2px;
+  background: #fff;
+  display: block;
+  color: #2E5B82;
+}
+.translate_reset {
+  text-align:center;
+  padding-top:5px;
+}
+
+
+/* scroll Stu
+ -------------------------------------- */
+div.scroll_outer {
+  z-index: 1;
+  position: relative;
+  overflow: hidden;
+}
+div.scroll_inner {
+  position: absolute;
+  z-index: 2;
+  height:auto;
+  width:100%;
+}
+
+/* Johnnytheone Header Menus
+ -------------------------------------- */
+#menuwrapper {
+  border-bottom: 1px solid #B4C6DB;
+  width: 100%;
+  margin-top: 2px;
+  background-image: url('{MOD_COMMON_IMAGES_PATH}images/cellpic_nav.gif');
+  background-repeat: repeat-x;
+}
+
+/* Set the width of the menu elements at second level. Leaving first level flexible. */
+#header-nav li li {
+  width: 200px;
+}
+
+/* Unless you know what you do, do not touch this */
+#header-nav, #header-nav ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+#header-nav ul {
+  position: absolute;
+  top: auto;
+  display: none;
+}
+#header-nav ul ul {
+  margin-top: 1px;
+  margin-left: -1px;
+  left: 100%;
+  top: 0px;
+}
+#header-nav li {
+  margin-left: -1px;
+  float: left;
+}
+#header-nav li li {
+  margin-left: 0px;
+  margin-top: -1px;
+  float: none;
+  position: relative;
+}
+
+.clear {
+  clear:both;
+}
+
+/* announcements & news 
+ ------------------------- */
+.announce_box, .news_box {
+  float:right;
+  margin-top: 20px;
+}
+.news, .announce {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.news_header {
+  font-weight:bold;
+  width:100%;
+  padding-top:1px;
+}
+.news_footer {
+  width:100%;
+  clear:both;
+}
+.news_body {
+  clear:both;
+ }
+.news_reply {
+  width:50%;
+  float:right;
+  text-align: right;
+  height: 20px;
+}
+.news_poster {
+  width:50%;
+  float:left;
+  text-align: left;
+  height: 20px;
+}
+.news_title {
+  width:70%;
+  float:left;
+  text-align:left;
+  font-size:1.2em;
+}
+.news_time {
+  width:30%;
+  float:right;
+  text-align:right;
+}
+
+.divider_bottom_line {
+  border-bottom: solid 1px #78A6CC;
+}
+
+/* Fixes that are common to all styles 
+ -----------------------------------------------*/
+.flags {
+  vertical-align: middle !important; 
+  position: relative; 
+  float:right;
+}
+
+/* li fix for new and announcements
+ ---------------------------*/
+.news li, .news ol, .news ul {
+  margin: 0 0 0 1em;
+}
+.announce li, .announce ol, .announce ul {
+  margin: 0 0 0 1em;
+}
+
+dl.codebox {
+  width: auto; 
+  max-width: 800px;
+}
+
+/* New layout, no tables
+ ------------------------------- */
+
+#p_header_, #p_footer_ {
+  display: block;
+  width: 100%;
+  margin: auto;
+  margin-top:5px;
+  margin-bottom:5px;
+}
+
+#p_container_ {
+  width: 100%;
+  margin: auto;
+  padding:0;
+  display: table;
+}
+
+#p_row_  {
+  display: table-row;
+}
+
+#left, #right, #center  {
+  display: table-cell;
+  vertical-align:top;
+}
+
+
+.tcontainer {
+  width: 100%;
+  margin: auto;
+  padding:0;
+  display: table;
+}
+.trow {
+  display: table-row;
+}
+.tleft  {
+  display: table-cell;
+  vertical-align:top;
+  text-align:left;
+}
+.tcenter  {
+  display: table-cell;
+  vertical-align:top;
+  text-align:center;
+}
+.tright  {
+  display: table-cell;
+  vertical-align:top;
+  text-align: right;
+}
+
+/* classes for K2 mods here */
+table.table1 .flag { text-align: center; width: 30px; }
+
+/* wrapper css */
+.ximg {
+  width: 120px;
+  height: 90px;
+}
+.ximg img{
+  width: 30px;
+  height: 22px;
+}
+
+.wrapper {
+  border-radius: 5px;
+  border: solid 2px #12A2EA;
+  background: #ECF3F7 none repeat-x 0 0;
+  margin-bottom: 4px;
+  padding: 5px;
+  clear: both;
+}
+
+.youtube1 {
+  padding:1px; 
+  padding-top:2px; 
+  padding-bottom:2px; 
+  width:25%;
+}
+.youtube2 {
+  padding:1px; 
+  padding-top:6px;
+}
+
+
+/*---*/
+.cat_image {
+  text-align:center; 
+  padding-bottom:12px; 
+  margin-bottom:4px; 
+  min-height:22px;
+}
+
+/**
+* Font sizes re visited
+***/
+
+.block_data {font-size:11px;}
+.menu_item a {font-size: 11px;}
+.font_10 {font-size:10px;}
+.font_11 {font-size:11px;}
+.font_12 {font-size:12px;}
+
+
+.clearboth {
+  width:100%;
+  height:0px;
+  margin:5px;
+  clear: both;
+}
+
+.highlightbox {
+  font-family: Monaco, 'Andale Mono', 'Courier New', Courier, monospace;
+  font-size: 0.9em;
+  font-style: normal;
+  line-height: 1.3em;
+  background: #FFF;
+  border: 1px solid #C9D2D8;
+  padding: 1px 3px;
+  color: #2E8B57;
+  display: inline;
+  border-radius: 3px;
+}
+
+.php_highlight {
+  border-radius: 3px;
+  border: solid 1px #000; 
+  padding:4px; 
+  padding-bottom: 0px; 
+  padding-top: 0px; 
+}
+
+
+/**
+* block hide left/right css 12 November 2011
+**/
+.blocks_hide_show_gap { margin-top: 2px; margin-bottom:2px }
+.left_blocks_col_show {margin-bottom: 0px; margin-top: 3px;}
+.right_blocks_col_show {margin-bottom: 0px; margin-top: 3px;}
+
+/**
+* block arrane/hide css Dec 2011
+**/
+
+.bmove {
+  float:right; margin-top:-12px; padding-right: 2px; cursor: move;
+}
+
+.bhide, .blimage, .brimage, .bcimage, .bchide {
+  float:right; margin-top:-12px; padding-right: 2px;
+}
+
+.gadd {
+	text-align:center;
+	margin: 0 auto;
+}
+.link_images {margin: 0px auto;}
+
+.phpbb .codebox {max-width: inherit}
+
+.l_block_vert_gap { padding-right:15px; }
+.r_block_vert_gap { padding-left:15px; }
+
+/*
+@font-face {
+	font-family: 'ArbatDi';
+	src: url('index_htm_files/arbat.eot');
+	src: local('arbat Regular'), local('arbat'), url('index_htm_files/arbat.ttf') format('truetype');
+}
+*/
+@font-face {
+   font-family: ArbatDi;
+   font-style:  normal;
+   font-weight: normal;
+   src: url('fonts/ARBATDI1.eot');
+}
+
+
+
+/*
+@media screen and (max-width:480px)
+{
+	* { max-width: 480px; }
+	body { overflow-x:hidden;}
+
+	#pcontainer_ { width: 480px; }
+
+	.headerbar img {max-width: 100px;}
+	
+	#search-box
+	{
+		display: none;
+	}
+
+	#wrap
+	{
+		padding:0;
+		margin:0;
+		margin-left: auto;
+		margin-right: auto;
+		min-width: 440px;
+	}
+
+	#left
+	{
+		float: left;
+		min-width: 440px;
+		padding-left:10px;
+
+		margin: 0;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	#center
+	{
+		float: left;
+		width: 440px;
+		padding-left:10px;
+
+		margin:0;
+		margin-left: auto;
+		margin-right: auto;
+
+	}
+
+	#right
+	{
+		float: left;
+		min-width: 440px;
+		padding-left:10px;
+
+		margin: 0;
+		margin-left: auto;
+		margin-right: auto;
+
+	}
+
+	.l_block_vert_gap { padding-right: 0; padding-left: 0; }
+	.r_block_vert_gap { padding-right: 0; padding-left: 0; }
+
+	img  { max-width: 300px; }
+}
+*/
+
+.portal_footer_images {
+ padding: 2px;
+ margin: 4px;
+}

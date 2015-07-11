@@ -1,0 +1,140 @@
+<!-- Comment:
+     We do not process the block move/arrange unless user select this option...
+     This prevents js reports and ensures the scroll work correctly... Added: 09 March 2008 Mike.
+-->
+
+<!-- IF S_ARRANGE -->
+<script type="text/javascript">
+// <![CDATA[
+	var _left;
+	var _right;
+	var _center;
+	var _header;
+	var _footer;
+
+	$_left = GetCookie('{COOKIE_NAME}_sgp_left');
+	$_center = GetCookie('{COOKIE_NAME}_sgp_center');
+	$_right = GetCookie('{COOKIE_NAME}_sgp_right');
+	$_header = GetCookie('{COOKIE_NAME}_sgp_header');
+	$_footer = GetCookie('{COOKIE_NAME}_sgp_footer');
+
+	SetCookie('{COOKIE_NAME}_sgp_block_cache', '0');
+
+	Sortable.create("left",
+		{tag:'div',dropOnEmpty:true,handle:'handle',containment:["left","center","right","header","footer"],constraint:false,
+		onChange:
+			function()
+			{
+				$_left = $('leftdebug').innerHTML = Sortable.serialize('left');
+				$_center = $('centerdebug').innerHTML = Sortable.serialize('center');
+				$_right = $('rightdebug').innerHTML = Sortable.serialize('right');
+				$_header = $('headerdebug').innerHTML = Sortable.serialize('header');
+				$_right = $('footerdebug').innerHTML = Sortable.serialize('footer');
+				SetCookie('{COOKIE_NAME}_sgp_left', $_left);
+				SetCookie('{COOKIE_NAME}_sgp_center', $_center);
+				SetCookie('{COOKIE_NAME}_sgp_right', $_right);
+				SetCookie('{COOKIE_NAME}_sgp_header', $_header);
+				SetCookie('{COOKIE_NAME}_sgp_footer', $_footer);
+			}
+		});
+	Sortable.create("center",
+		{tag:'div',dropOnEmpty:true,handle:'handle',containment:["left","center","right","header","footer"],constraint:false,
+		onChange:
+			function()
+			{
+				$_left = $('leftdebug').innerHTML = Sortable.serialize('left');
+				$_center = $('centerdebug').innerHTML = Sortable.serialize('center');
+				$_right = $('rightdebug').innerHTML = Sortable.serialize('right');
+				$_header = $('headerdebug').innerHTML = Sortable.serialize('header');
+				$_right = $('footerdebug').innerHTML = Sortable.serialize('footer');
+				SetCookie('{COOKIE_NAME}_sgp_left', $_left);
+				SetCookie('{COOKIE_NAME}_sgp_center', $_center);
+				SetCookie('{COOKIE_NAME}_sgp_right', $_right);
+				SetCookie('{COOKIE_NAME}_sgp_header', $_header);
+				SetCookie('{COOKIE_NAME}_sgp_footer', $_footer);
+			}
+		});
+	Sortable.create("right",
+		{tag:'div',dropOnEmpty:true,handle:'handle',containment:["left","center","right","header","footer"],constraint:false,
+		onChange:
+			function()
+			{
+				$_left = $('leftdebug').innerHTML = Sortable.serialize('left');
+				$_center = $('centerdebug').innerHTML = Sortable.serialize('center');
+				$_right = $('rightdebug').innerHTML = Sortable.serialize('right');
+				$_header = $('headerdebug').innerHTML = Sortable.serialize('header');
+				$_right = $('footerdebug').innerHTML = Sortable.serialize('footer');
+				SetCookie('{COOKIE_NAME}_sgp_left', $_left);
+				SetCookie('{COOKIE_NAME}_sgp_center', $_center);
+				SetCookie('{COOKIE_NAME}_sgp_right', $_right);
+				SetCookie('{COOKIE_NAME}_sgp_header', $_header);
+				SetCookie('{COOKIE_NAME}_sgp_footer', $_footer);
+			}
+		});
+
+	Sortable.create("header",
+		{tag:'div',dropOnEmpty:true,handle:'handle',containment:["left","center","right","header","footer"],constraint:false,
+		onChange:
+			function()
+			{
+				$_left = $('leftdebug').innerHTML = Sortable.serialize('left');
+				$_center = $('centerdebug').innerHTML = Sortable.serialize('center');
+				$_right = $('rightdebug').innerHTML = Sortable.serialize('right');
+				$_header = $('headerdebug').innerHTML = Sortable.serialize('header');
+				$_right = $('footerdebug').innerHTML = Sortable.serialize('footer');
+				SetCookie('{COOKIE_NAME}_sgp_left', $_left);
+				SetCookie('{COOKIE_NAME}_sgp_center', $_center);
+				SetCookie('{COOKIE_NAME}_sgp_right', $_right);
+				SetCookie('{COOKIE_NAME}_sgp_header', $_header);
+				SetCookie('{COOKIE_NAME}_sgp_footer', $_footer);
+			}
+		});
+	Sortable.create("footer",
+		{tag:'div',dropOnEmpty:true,handle:'handle',containment:["left","center","right","header","footer"],constraint:false,
+		onChange:
+			function()
+			{
+				$_left = $('leftdebug').innerHTML = Sortable.serialize('left');
+				$_center = $('centerdebug').innerHTML = Sortable.serialize('center');
+				$_right = $('rightdebug').innerHTML = Sortable.serialize('right');
+				$_header = $('headerdebug').innerHTML = Sortable.serialize('header');
+				$_right = $('footerdebug').innerHTML = Sortable.serialize('footer');
+				SetCookie('{COOKIE_NAME}_sgp_left', $_left);
+				SetCookie('{COOKIE_NAME}_sgp_center', $_center);
+				SetCookie('{COOKIE_NAME}_sgp_right', $_right);
+				SetCookie('{COOKIE_NAME}_sgp_header', $_header);
+				SetCookie('{COOKIE_NAME}_sgp_footer', $_footer);
+			}
+		});
+// ]]>
+</script>
+	<!-- DO NOT DELETE THIS CODE -->
+	<div style="display:none;">
+		<pre id="leftdebug"></pre>
+		<pre id="centerdebug"></pre>
+		<pre id="rightdebug"></pre>
+		<pre id="headerdebug"></pre>
+		<pre id="footerdebug"></pre>
+	</div>
+<!-- ENDIF -->
+
+<!-- IF not S_ARRANGE -->
+<script type="text/javascript">
+// <![CDATA[
+	SetCookie('{COOKIE_NAME}_sgp_block_cache', '300');
+ // ]]>
+</script>
+<!-- ENDIF -->
+
+<!-- IF S_CLEAR_CACHE -->
+<script type="text/javascript">
+// <![CDATA[
+	SetCookie('{COOKIE_NAME}_sgp_block_cache', '0');
+	SetCookie('{COOKIE_NAME}_sgp_left', '', 0);
+	SetCookie('{COOKIE_NAME}_sgp_center', '', 0);
+	SetCookie('{COOKIE_NAME}_sgp_right', '', 0);
+	SetCookie('{COOKIE_NAME}_sgp_header', '', 0);
+	SetCookie('{COOKIE_NAME}_sgp_footer', '', 0);
+ // ]]>
+</script>
+<!-- ENDIF -->
