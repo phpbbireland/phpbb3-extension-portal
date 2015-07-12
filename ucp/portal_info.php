@@ -19,11 +19,11 @@ class portal_info
 			'title'     => 'UCP_PORTAL_TITLE',
 			'version'   => '1.1.0',
 			'modes'     => array(
-				'info'     => array('title' => 'UCP_K_BLOCKS_INFO',    'auth' => '', 'cat' => array('UCP_K_BLOCKS')),
-				'arrange'  => array('title' => 'UCP_K_BLOCKS_ARRANGE', 'auth' => '', 'cat' => array('UCP_K_BLOCKS')),
-				'edit'     => array('title' => 'UCP_K_BLOCKS_EDIT',    'auth' => '', 'cat' => array('UCP_K_BLOCKS')),
-				'delete'   => array('title' => 'UCP_K_BLOCKS_DELETE',  'auth' => '', 'cat' => array('UCP_K_BLOCKS')),
-				'width'    => array('title' => 'UCP_K_BLOCKS_WIDTH',   'auth' => '', 'cat' => array('UCP_K_BLOCKS')),
+				'info'     => array('title' => 'UCP_K_BLOCKS_INFO',    'auth' => 'ext_phpbbireland/portal', 'cat' => array('UCP_K_BLOCKS')),
+				'arrange'  => array('title' => 'UCP_K_BLOCKS_ARRANGE', 'auth' => 'ext_phpbbireland/portal', 'cat' => array('UCP_K_BLOCKS')),
+				'edit'     => array('title' => 'UCP_K_BLOCKS_EDIT',    'auth' => 'ext_phpbbireland/portal', 'cat' => array('UCP_K_BLOCKS')),
+				'delete'   => array('title' => 'UCP_K_BLOCKS_DELETE',  'auth' => 'ext_phpbbireland/portal', 'cat' => array('UCP_K_BLOCKS')),
+				'width'    => array('title' => 'UCP_K_BLOCKS_WIDTH',   'auth' => 'ext_phpbbireland/portal', 'cat' => array('UCP_K_BLOCKS')),
 			),
 		);
 	}

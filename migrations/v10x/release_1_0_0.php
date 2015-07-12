@@ -142,7 +142,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				array(
 					'module_basename'	=> '\phpbbireland\portal\ucp\portal_module',
 					'modes'				=> array('info', 'arrange', 'edit', 'delete', 'width'),
-					'module_auth'		=> 'u_k_portal',
+					'module_auth'		=> 'acl_u_k_portal',
 				),
 			)),
 
@@ -269,9 +269,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 			array('config.remove', array('blocks_width')),
 
 			array('permission.remove', array('a_k_portal')),
-//			array('permission.remove', array('a_k_tools')),
 			array('permission.remove', array('u_k_portal')),
-//			array('permission.remove', array('u_k_tools')),
 		);
 	}
 
