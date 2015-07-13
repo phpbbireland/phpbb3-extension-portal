@@ -26,7 +26,6 @@ else
 	$this_page_name = str_replace('php/', '', $this_page[1]);
 }
 
-//if ($this_page_name == 'index' || $this_page_name == 'viewforum' || $this_page_name == 'viewtopic')
 
 if ($this_page_name != 'portal')
 {
@@ -40,7 +39,7 @@ display_forums_categories();
 * of categories, it is not required for normal phpbb pages as the data is
 * available in the data pool (globally)...
 *
-* The function simply reuses phpbb code...
+* The function simply reuses phpbb code but will be updated when block code is rewrittten as classes
 *
 */
 function display_forums_categories()
@@ -363,48 +362,3 @@ function display_forums_categories()
 	));
 }
 
-/**
-* Returns forum parents as an array. Get them from forum_data if available, or update the database otherwise
-*/
-
-if (!function_exists('get_forum_parents'))
-{
-	function get_forum_parents(&$forum_data)
-	{
-		global $db;
-
-		$forum_parents = array();
-
-		if ($forum_data['parent_id'] > 0)
-		{
-			if ($forum_data['forum_parents'] == '')
-			{
-				$sql = 'SELECT forum_id, forum_name, forum_type
-					FROM ' . FORUMS_TABLE . '
-					WHERE left_id < ' . $forum_data['left_id'] . '
-						AND right_id > ' . $forum_data['right_id'] . '
-					ORDER BY left_id ASC';
-				$result = $db->sql_query($sql);
-
-				while ($row = $db->sql_fetchrow($result))
-				{
-					$forum_parents[$row['forum_id']] = array($row['forum_name'], (int) $row['forum_type']);
-				}
-				$db->sql_freeresult($result);
-
-				$forum_data['forum_parents'] = serialize($forum_parents);
-
-				$sql = 'UPDATE ' . FORUMS_TABLE . "
-					SET forum_parents = '" . $db->sql_escape($forum_data['forum_parents']) . "'
-					WHERE parent_id = " . $forum_data['parent_id'];
-				$db->sql_query($sql);
-			}
-			else
-			{
-				$forum_parents = unserialize($forum_data['forum_parents']);
-			}
-		}
-
-		return $forum_parents;
-	}
-}

@@ -93,7 +93,7 @@ while ($row = $db->sql_fetchrow($result))
 	}
 	++$style_count;
 
-	$style_select .= '<option value="' . $url . '"' . ($row['style_id'] == $user->data['user_style'] ? ' selected="selected"' : '') . '>' . htmlspecialchars(sgp_checksize ($row['style_name'], 16)) . '</option>';
+	$style_select .= '<option value="' . $url . '"' . ($row['style_id'] == $user->data['user_style'] ? ' selected="selected"' : '') . '>' . strip_tags(sgp_checksize ($row['style_name'], 16)) . '</option>';
 }
 $db->sql_freeresult($result);
 
