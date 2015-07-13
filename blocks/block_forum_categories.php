@@ -40,7 +40,7 @@ display_forums_categories();
 * available in the data pool (globally)...
 *
 * The function simply reuses phpbb code but will be updated when block code is rewrittten as classes
-*
+* Will use dependency injection later
 */
 function display_forums_categories()
 {
