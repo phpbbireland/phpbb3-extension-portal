@@ -201,8 +201,9 @@ function get_current_block_layout($id)
 	if ($result = $db->sql_query($sql))
 	{
 		$row = $db->sql_fetchrow($result);
+		$db->sql_freeresult($result);
 	}
-	$db->sql_freeresult($result);
+
 	return($row);
 }
 
@@ -268,6 +269,6 @@ function get_default_block_layout($id)
 				}
 			}
 		}
+		$db->sql_freeresult($result);
 	}
-	$db->sql_freeresult($result);
 }
