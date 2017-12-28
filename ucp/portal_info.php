@@ -17,7 +17,6 @@ class portal_info
 		return array(
 			'filename'	=> '\phpbbireland\portal\ucp\portal_module',
 			'title'     => 'UCP_PORTAL_TITLE',
-			'version'   => '1.1.0',
 			'modes'     => array(
 				'info'     => array('title' => 'UCP_K_BLOCKS_INFO',    'auth' => 'ext_phpbbireland/portal && acl_u_k_portal', 'cat' => array('UCP_K_BLOCKS')),
 				'arrange'  => array('title' => 'UCP_K_BLOCKS_ARRANGE', 'auth' => 'ext_phpbbireland/portal && acl_u_k_portal', 'cat' => array('UCP_K_BLOCKS')),
