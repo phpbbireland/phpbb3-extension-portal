@@ -1,6 +1,6 @@
 ##portal
 
-## problem with updating files, have to do it manually, so files are not updated yet, this will take so time...
+## Have an issue updating from remote, have to do it manually, so files are not all updated yet, this will take so time...
 
 Fully integrated portal for phpBB 3.3.x
 
