@@ -29,6 +29,19 @@ class config_module
 		$generate = $request->variable('generate', '');
 
 		$data = $this->check_version();
+		/*
+		  NB (July 2023) need to add remote address for updates to allow changing should it move...
+		  In the mean time, add defaults to portal config page and config in DB...
+		  ...
+		  if remote file is not available use some defaults...
+		*/
+		if(!$data) 
+		{
+			$data['download'][0] = '0';
+			$data['version'] = '1.0.0';
+			$data['title'][0] = 'Not set';
+			$data['announcement'][0] = 'None';
+		}
 
 		$submit = (isset($_POST['submit'])) ? true : false;
 
@@ -53,9 +66,9 @@ class config_module
 			$template->assign_vars(array(
 				'MOD_ANNOUNCEMENT'     => $data['announcement'][0],
 				'MOD_CURRENT_VERSION'  => $config['portal_version'],
-				'MOD_DOWNLOAD'         => $data['download'][0],
-				'MOD_LATEST_VERSION'   => $data['version'],
-				'MOD_TITLE'            => $data['title'][0],
+				'MOD_DOWNLOAD'         => isset($data['download'][0]) ? $data['download'][0] : '',
+				'MOD_LATEST_VERSION'   => isset($data['version']) ? $data['version'] : '',
+				'MOD_TITLE'            => isset($data['title'][0]) ? $data['title'][0] : '',
 				'S_UP_TO_DATE'         => ($data['version'] > $config['portal_version']) ? false : true,
 			));
 
