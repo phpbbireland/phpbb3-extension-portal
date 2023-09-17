@@ -46,7 +46,7 @@ class vars_module
 		}
 
 		$choice = $request->variable('switch', '');
-		$block = $request->variable('block', 0);
+		$block = $request->variable('block', 1);	// no block with id - 0
 		$mode	= $request->variable('mode', '');
 		$switch = $request->variable('switch', '');
 
@@ -62,17 +62,23 @@ class vars_module
 				WHERE id = " . (int) $block;
 			$result = $db->sql_query($sql);
 
-			$row = $db->sql_fetchrow($result);
+			if ($row = $db->sql_fetchrow($result))
+			{
+				$title = strtoupper($row['title']);
+				$title = str_replace(' ','_', $row['title']);
 
-			$title = strtoupper($row['title']);
-			$title = str_replace(' ','_', $row['title']);
+				$block_id = $row['id'];
+				$var_file_name = $row['var_file_name'];
 
-			$block_id = $row['id'];
-			$var_file_name = $row['var_file_name'];
+				$db->sql_freeresult($result);
+				$sgp_functions_admin->get_all_groups();
+				$sgp_functions_admin->get_teams_sort();
+			}
+			else
+			{
+					$var_file_name = 'No block variables set...';
+			}
 
-			$db->sql_freeresult($result);
-			$sgp_functions_admin->get_all_groups();
-			$sgp_functions_admin->get_teams_sort();
 		}
 
 		$block = !empty($block) ? $block : 0;
