@@ -158,7 +158,7 @@ class blocks_module
 						'BLOCK_REPORT'   => $user->lang['BLOCKS_AUTO_REINDEXED'],
 					));
 
-					//$cache->destroy('sql', $k_blocks);
+					$cache->destroy('sql', 	K_BLOCKS_TABLE);
 
 					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=". $mode));
 					//meta_refresh(1, ($k_config['base']) ? $k_config['base'] : $this->u_action);
@@ -313,7 +313,7 @@ class blocks_module
 					$mode = 'manage';
 				}
 
-				//$cache->destroy('sql', $k_blocks);
+				$cache->destroy('sql', 	K_BLOCKS_TABLE);
 
 				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=". $mode));
 
@@ -404,7 +404,7 @@ class blocks_module
 						$template->assign_var('BLOCK_REPORT', $title . $message . '<br />');
 					}
 
-					//$cache->destroy('sql', $k_blocks);
+					$cache->destroy('sql', 	K_BLOCKS_TABLE);
 
 					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage"));
 					return;
@@ -626,7 +626,7 @@ class blocks_module
 
 					$template->assign_var('BLOCK_REPORT', $user->lang['SAVING']);
 
-					//$cache->destroy('sql', $k_blocks);
+					$cache->destroy('sql', 	K_BLOCKS_TABLE);
 
 					$this->delete_this_block_cached_file($html_file_name);
 
@@ -797,7 +797,7 @@ class blocks_module
 
 					$template->assign_var('BLOCK_REPORT', $title . $user->lang['BLOCK_DELETED'] . '<br />');
 
-					//$cache->destroy('sql', $k_blocks);
+					$cache->destroy('sql', 	K_BLOCKS_TABLE);
 
 					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage"));
 
@@ -862,7 +862,7 @@ class blocks_module
 						'BLOCK_REPORT' => $user->lang['BLOCKS_REINDEXED'],
 					));
 
-					//$cache->destroy('sql', $k_blocks);
+					$cache->destroy('sql', 	K_BLOCKS_TABLE);
 
 					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}&amp;mode=manage"));
 
@@ -987,7 +987,7 @@ class blocks_module
 				}
 
 				$template->assign_var('BLOCK_REPORT', $user->lang['BLOCK_LAYOUT_RESET']);
-				meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}"));
+				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i={$module_id}"));
 				return;
 
 			case 'config':
