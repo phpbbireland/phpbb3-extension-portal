@@ -2,8 +2,6 @@
 
 Fully integrated portal for phpBB 3.3.x
 
-**Development Status:** [![Build Status](https://travis-ci.org/phpbbireland/portal.svg)](https://travis-ci.org/phpbbireland/portal)
-
 ## Tested with phpBB 3.3.10
     • Quite a few updates to the portal code including some additions to the code and minor fixes...
     • Note, the process of updating many files at one time, make commenting impractical.
