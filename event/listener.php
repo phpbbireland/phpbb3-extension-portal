@@ -23,7 +23,7 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var  */
+	/** @var */
 	protected $controller_helper;
 
 	protected $helper;
@@ -43,12 +43,12 @@ class listener implements EventSubscriberInterface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\config\config        $config phpBB config
-	* @param \phpbb\controller\helper    $controller_helper        Controller helper object
-	* @param \phpbb\path_helper          $path_helper   phpBB path helper
-	* @param \phpbb\template\template    $template      Template object
-	* @param \phpbb\user                 $user          User object
-	* @param string                      $php_ext       phpEx
+	* @param \phpbb\config\config				$config phpBB config
+	* @param \phpbb\controller\helper			$controller_helper		Controller helper object
+	* @param \phpbb\path_helper					$path_helper			phpBB path helper
+	* @param \phpbb\template\template			$template				Template object
+	* @param \phpbb\user						$user					User object
+	* @param string								$php_ext				phpEx
 	* @return \phpbbireland\portal\event\listener
 	* @access public
 	*/
@@ -77,16 +77,15 @@ class listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return array(
-			'core.user_setup'	=> 'load_language_on_setup',
-			'core.page_header'	=> 'add_portal_link',
-			'core.page_footer'	=> 'add_portal_final',
+			'core.user_setup'					=> 'load_language_on_setup',
+			'core.page_header'					=> 'add_portal_link',
+			'core.page_footer'					=> 'add_portal_final',
 			'core.posting_modify_message_text'  => 'process_for_acronyms',
-
 			//build for 'index_body_stat_blocks_after' set path to images and process code for 3 footer blocks if required//
 
 			// ACP event
-			'core.permissions'	=> 'add_categories',
-			'core.permissions'	=> 'add_permission',
+			'core.permissions'					=> 'add_categories',
+			'core.permissions'					=> 'add_permission',
 		);
 	}
 
@@ -94,28 +93,25 @@ class listener implements EventSubscriberInterface
 	{
 		//var_dump('listener.php > load_language_on_setup(...)');
 
-		$lang_set_ext = $event['lang_set_ext'];
-		$lang_set_ext[] = array(
+		$lang_set_ext	= $event['lang_set_ext'];
+		$lang_set_ext[]	= array(
 			'ext_name' => 'phpbbireland/portal',
 			'lang_set' => 'portal',
 		);
 		$event['lang_set_ext'] = $lang_set_ext;
-		$this->user->add_lang_ext('phpbbireland/portal', 'kiss_common');
 	}
 
 	public function add_permission($event)
 	{
-		// not being called ???
-		//var_dump('listener.php > add_permission(...)');
+		$this->user->add_lang_ext('phpbbireland/portal', 'permissions_portal');
 
-		$categories = $event['categories'];
-		$categories['portal'] = 'ACL_CAT_PORTAL';
-		$event['categories'] = $categories;
-
-		$permissions = $event['permissions'];
-		$permissions['a_k_portal'] = array('lang' => 'ACL_A_PORTAL', 'cat' => 'portal');
-		$permissions['u_k_portal'] = array('lang' => 'ACL_U_PORTAL', 'cat' => 'portal');
-		$event['permissions'] = $permissions;
+		$categories					= $event['categories'];
+		$categories['portal']		= 'ACL_CAT_PORTAL';
+		$event['categories']		= $categories;
+		$permissions				= $event['permissions'];
+		$permissions['a_k_portal']	= array('lang' => 'ACL_A_PORTAL', 'cat' => 'portal');
+		$permissions['u_k_portal']	= array('lang' => 'ACL_U_PORTAL', 'cat' => 'portal');
+		$event['permissions']		= $permissions;
 	}
 
 	/**
@@ -136,9 +132,9 @@ class listener implements EventSubscriberInterface
 
 		$page = '';
 
-		$portal_link = $this->get_portal_link();
-		$portal_link = str_replace('/app.php', '', $portal_link);
-		$page = $this->page_name();
+		$portal_link	= $this->get_portal_link();
+		$portal_link	= str_replace('/app.php', '', $portal_link);
+		$page			= $this->page_name();
 
 		$this->template->assign_vars(array(
 			'KISS'					=> true,
@@ -171,12 +167,12 @@ class listener implements EventSubscriberInterface
 		$logo_left = $logo_right = $logo = sgp_get_rand_logo();
 
 		$this->template->assign_vars(array(
-			'STARGATE_BUILD'      => (isset($this->config['portal_build'])) ? $this->config['portal_build'] : '',
-			'STARGATE_VERSION'    => (isset($this->config['portal_version'])) ? $this->config['portal_version'] : '',
-			'SITE_LOGO_IMG'       => $logo,
-			'SITE_LOGO_IMG_RIGHT' => $logo_right,  // may contain site and & description
-			'SITENAME'            => '',           // hide site name if required
-			'SITE_DESCRIPTION'    => '',           // hide site description if required
+			'STARGATE_BUILD'		=> (isset($this->config['portal_build'])) ? $this->config['portal_build'] : '',
+			'STARGATE_VERSION'		=> (isset($this->config['portal_version'])) ? $this->config['portal_version'] : '',
+			'SITE_LOGO_IMG'			=> $logo,
+			'SITE_LOGO_IMG_RIGHT'	=> $logo_right,		// may contain site and & description
+			'SITENAME'				=> '',				// hide site name if required
+			'SITE_DESCRIPTION'		=> '',				// hide site description if required
 		));
 	}
 
@@ -248,8 +244,8 @@ class listener implements EventSubscriberInterface
 
 		if ($event['on_page'][1] == 'app' && strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/portal') === 0)
 		{
-			$event['location'] = $this->user->lang('VIEWING_PORTAL');
-			$event['location_url'] = $this->controller_helper->route('phpbbireland_portal_controller');
+			$event['location']		= $this->user->lang('VIEWING_PORTAL');
+			$event['location_url']	= $this->controller_helper->route('phpbbireland_portal_controller');
 		}
 	}
 
@@ -287,7 +283,7 @@ class listener implements EventSubscriberInterface
 
 		$message = $event['message_parser']->message;
 
-		// use kiss_common.php language file > acronyms and highlighted phrases/text //
+		// use portal.php language file > acronyms and highlighted phrases/text //
 		if ($event['preview'] || $event['submit'])
 		{
 			$message = str_replace("Kiss Portal Extension", '<acronym title="' . $user->lang['HI_KISS_PORTAL_EXTENSION'] . '">Kiss Portal Extension</acronym>', $message);
