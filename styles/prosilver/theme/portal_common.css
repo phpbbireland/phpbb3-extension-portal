@@ -277,7 +277,7 @@ local_acronym{
   height:33px;
   margin-top:10px;
   margin-bottom:10px;
-  background: url("MOD_COMMON_IMAGES_PATH}images/portal/birthdays.gif") top left no-repeat;
+  background: url("./images/portal/birthdays.gif") top left no-repeat;
   padding-right:15px;
 }
 .bsw_s_img {
@@ -287,7 +287,7 @@ local_acronym{
   margin-top:10px;
   margin-bottom:10px;
   padding-right:15px;
-  background: url("{MOD_COMMON_IMAGES_PATH}images/portal/statistics.gif") top left no-repeat;
+  background: url("./images/portal/statistics.gif") top left no-repeat;
 }
 .bsw_w_img {
   float:left;
@@ -296,7 +296,7 @@ local_acronym{
   margin-top:30px;
   padding-right:10px;
   margin-bottom:10px;
-  background: url("{MOD_COMMON_IMAGES_PATH}images/portal/whosonline.gif") top left no-repeat;
+  background: url("./images/portal/images/whosonline.gif") top left no-repeat;
 }
 .bsw_content { 
   margin-left:45px;
@@ -787,3 +787,7 @@ table.table1 .flag { text-align: center; width: 30px; }
  padding: 2px;
  margin: 4px;
 }
+
+span.pimg.cat_images { clear:both; float:left }
+
+.small_avatar img { max-height: 16px; width: auto }
