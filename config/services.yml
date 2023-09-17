@@ -2,55 +2,55 @@ imports:
     - { resource: tables.yml }
 
 services:
-    phpbbireland.portal.main:
+    phpbbireland.portal.controller:
         class: phpbbireland\portal\controller\main
         arguments:
-            - @config
-            - @controller.helper
-            - @phpbbireland.portal.controller_helper
-            - @template
-            - @user
-            - @path_helper
-            - %core.root_path%
-            - %core.php_ext%
+            - '@config'
+            - '@controller.helper'
+            - '@phpbbireland.portal.controller_helper'
+            - '@template'
+            - '@user'
+            - '@path_helper'
+            - '%core.root_path%'
+            - '%core.php_ext%'
 
     phpbbireland.portal.controller_helper:
         class: phpbbireland\portal\controller\helper
         arguments:
-            - @auth
-            - @config
-            - @template
-            - @user
-            - @path_helper
-            - @phpbbireland.portal.helper
-            - %core.root_path%
-            - %core.php_ext%
+            - '@auth'
+            - '@config'
+            - '@template'
+            - '@user'
+            - '@path_helper'
+            - '@phpbbireland.portal.helper'
+            - '%core.root_path%'
+            - '%core.php_ext%'
 
     phpbbireland.portal:
         class: phpbbireland\portal\portal
         arguments:
-            - @auth
-            - @cache
-            - @config
-            - @request
-            - @template
-            - @user
-            - @content.visibility
-            - @controller.helper
-            - %core.root_path%
-            - %core.php_ext%
+            - '@auth'
+            - '@cache'
+            - '@config'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@content.visibility'
+            - '@controller.helper'
+            - '%core.root_path%'
+            - '%core.php_ext%'
 
     phpbbireland.portal.listener:
         class: phpbbireland\portal\event\listener
         arguments:
-            - @auth
-            - @config
-            - @controller.helper
-            - @phpbbireland.portal.controller_helper
-            - @path_helper
-            - @template
-            - @user
-            - %core.php_ext%
+            - '@auth'
+            - '@config'
+            - '@controller.helper'
+            - '@phpbbireland.portal.controller_helper'
+            - '@path_helper'
+            - '@template'
+            - '@user'
+            - '%core.php_ext%'
         tags:
             - { name: event.listener }
 
@@ -58,14 +58,14 @@ services:
     phpbbireland.portal.helper:
         class: phpbbireland\portal\includes\helper
         arguments:
-            - @phpbbireland.portal.module_collection
+            - '@phpbbireland.portal.module_collection'
 
     phpbbireland.portal.modules_helper:
         class: phpbbireland\portal\includes\modules_helper
         arguments:
-            - @auth
-            - @config
-            - @request
+            - '@auth'
+            - '@config'
+            - '@request'
 
     phpbbireland.portal.helpers.portal:
         class: phpbbireland\portal\helpers\portal
@@ -74,28 +74,40 @@ services:
     phpbbireland.portal.module_collection:
         class: phpbb\di\service_collection
         arguments:
-            - @service_container
+            - '@service_container'
         tags:
             - { name: service_collection, tag: phpbbireland.portal.module }
 
     phpbbireland.portal.helper:
         class: phpbbireland\portal\includes\helper
         arguments:
-            - @phpbbireland.portal.module_collection
+            - '@phpbbireland.portal.module_collection'
 
     phpbbireland.portal.helpers.tables:
         class: phpbbireland\portal\helpers\tables
         arguments:
-            - %tables.phpbbireland.k_config%
-            - %tables.phpbbireland.k_blocks%
-            - %tables.phpbbireland.k_pages%
-            - %tables.phpbbireland.k_menus%
-            - %tables.phpbbireland.k_resources%
+            - '%tables.phpbbireland.k_config%'
+            - '%tables.phpbbireland.k_blocks%'
+            - '%tables.phpbbireland.k_pages%'
+            - '%tables.phpbbireland.k_menus%'
+            - '%tables.phpbbireland.k_resources%'
 
     phpbbireland.portal.blocks_collection:
         class: phpbb\di\service_collection
         arguments:
-            - @service_container
+            - '@service_container'
         tags:
             - { name: service_collection, tag: phpbbireland.blocks }
 
+    phpbbireland.portal.blocks:
+        class: phpbbireland\portal\blocks
+        arguments:
+            - '@auth'
+            - '@cache'
+            - '@config'
+            - '@template'
+            - '@dbal.conn'
+            - '@request'
+            - '@user'
+            - '%core.root_path%'
+            - '%core.php_ext%'
