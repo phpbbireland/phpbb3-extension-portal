@@ -16,7 +16,8 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-global $user, $k_config, $k_blocks, $phpbb_root_path;
+global $user, $k_config, $k_blocks, $phpbb_root_path, $template;
+$this->template = $template;
 
 $k_welcome_message = (isset($k_config['k_welcome_message']) ? $k_config['k_welcome_message'] : '');
 
@@ -24,7 +25,7 @@ $welcome_image	= $phpbb_root_path . 'ext/phpbbireland/portal/images/welcome.png'
 
 if (file_exists($welcome_image))
 {
-	$block_link = 'portal.php';
+	$block_link = 'portal';
 }
 else
 {
