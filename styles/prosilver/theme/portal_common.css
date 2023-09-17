@@ -296,7 +296,7 @@ local_acronym{
   margin-top:30px;
   padding-right:10px;
   margin-bottom:10px;
-  background: url("./images/portal/images/whosonline.gif") top left no-repeat;
+  background: url("./images/whosonline.gif") top left no-repeat;
 }
 .bsw_content { 
   margin-left:45px;
@@ -386,7 +386,7 @@ div.trans div a.current {
   background : #ccc;
 }
 div.trans div a:hover {
-  background : #ECECEC url("{MOD_COMMON_IMAGES_PATH}images/linkarrow.gif") no-repeat right center;
+  background : #ECECEC url("./images/linkarrow.gif") no-repeat right center;
   color: #DE1717;
   text-decoration: none;
 }
@@ -423,7 +423,7 @@ div.scroll_inner {
   border-bottom: 1px solid #B4C6DB;
   width: 100%;
   margin-top: 2px;
-  background-image: url('{MOD_COMMON_IMAGES_PATH}images/cellpic_nav.gif');
+  background-image: url('./images/cellpic_nav.gif');
   background-repeat: repeat-x;
 }
 
