@@ -1,7 +1,7 @@
 parameters:
-    tables.phpbbireland.k_config: %core.table_prefix%k_config
-    tables.phpbbireland.k_blocks: %core.table_prefix%k_blocks
-    tables.phpbbireland.k_menus: %core.table_prefix%k_menus
-    tables.phpbbireland.k_pages: %core.table_prefix%k_pages
-    tables.phpbbireland.k_resources: %core.table_prefix%k_resources
-    tables.phpbbireland.k_vars: %core.table_prefix%k_vars
+    tables.phpbbireland.k_config: '%core.table_prefix%k_config'
+    tables.phpbbireland.k_blocks: '%core.table_prefix%k_blocks'
+    tables.phpbbireland.k_menus: '%core.table_prefix%k_menus'
+    tables.phpbbireland.k_pages: '%core.table_prefix%k_pages'
+    tables.phpbbireland.k_resources: '%core.table_prefix%k_resources'
+    tables.phpbbireland.k_vars: '%core.table_prefix%k_vars'
