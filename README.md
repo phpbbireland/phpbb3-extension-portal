@@ -1,10 +1,10 @@
-#portal
+##portal
+
+## problem with updating files, have to do it manually, so files are not updated yet, this will take so time...
 
 Fully integrated portal for phpBB 3.3.x
 
 **Development Status:** [![Build Status](https://travis-ci.org/phpbbireland/portal.svg)](https://travis-ci.org/phpbbireland/portal)
-
-No more travis errors but no pass?
 
 ## Tested with phpBB 3.3.10
     • Quite a few updates to the portal code including some additions to the code and minor fixes...
