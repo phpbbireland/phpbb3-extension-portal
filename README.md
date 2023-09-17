@@ -6,14 +6,13 @@ Fully integrated portal for phpBB 3.3.x
     • Quite a few updates to the portal code including some additions to the code and minor fixes...
     • Note, the process of updating many files at one time, make commenting impractical.
   
-**Tutorials:**  
-I intend to add some new Youtube videos on how to set up and use the Portal (you may find some old videos which are still relavent).  
+**Tutorials:**  (there are some old youtube videos that may still be useful / relavent).  
 
     • Managing Portal Block in ACP (TBA)  
     • Managing Menus in ACP (TBA)  
     • Block visibility (group assess) TBA      
     • Creating Custom Blocks (TBA)  
-    • Arrange Blocks (yet to be implemented for 3.1) (https://www.youtube.com/watch?v=pkEWG6yq4as)  
+    • Arrange Blocks (yet to be implemented for 3.1) [Arrange Blocks](https://www.youtube.com/watch?v=pkEWG6yq4as).
 
 ## Installation:
     • Copy the entire contents from the unzipped folder to "phpBB/ext/phpbbireland/portal/".
