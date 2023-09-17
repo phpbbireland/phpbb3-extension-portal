@@ -50,8 +50,9 @@ if (!function_exists('sgp_get_rand_logo'))
 		$imgs ="";
 
 		// Random logos are disabled config, so return default logo //
-		if ($k_config['k_allow_rotating_logos'] == 0)
+		if(isset($k_config))
 		{
+			if ($k_config['k_allow_rotating_logos'] == 0)
 			return $user->img('site_logo');
 		}
 
@@ -339,6 +340,7 @@ if (!function_exists('get_user_data'))
 
 		$result = $db->sql_query($sql,10);
 		$row = $db->sql_fetchrow($result);
+
 		$db->sql_freeresult($result);
 
 		switch ($what)
@@ -533,19 +535,6 @@ if (!function_exists('generate_menus'))
 		global $template, $phpbb_root_path, $auth, $user, $phpEx, $request;
 		static $process = 0;
 
-/*
-		define('WELCOME_MESSAGE', 1);
-		define('UN_ALLOC_MENUS', 0);
-		define('NAV_MENUS', 1);
-		define('SUB_MENUS', 2);
-		define('HEAD_MENUS', 3);
-		define('FOOT_MENUS', 4);
-		define('LINKS_MENUS', 5);
-		define('ALL_MENUS', 90);
-		define('UNALLOC_MENUS', 99);
-		define('OPEN_IN_TAB', 1);
-		define('OPEN_IN_WINDOW', 2);
-*/
 		$menu_image_path = $phpbb_root_path . 'ext/phpbbireland/portal/images/block_images/menu/';
 
 		// process all menus at once //
@@ -710,7 +699,7 @@ if (!function_exists('generate_menus'))
 		$template->assign_vars(array(
 			'S_USER_LOGGED_IN'	=> ($user->data['user_id'] != ANONYMOUS) ? true : false,
 			'U_INDEX'			=> append_sid("{$phpbb_root_path}index.$phpEx"),
-			'U_PORTAL'			=> append_sid("{$phpbb_root_path}portal.$phpEx"),
+			'U_PORTAL'			=> append_sid("{$phpbb_root_path}portal"),
 		));
 	}
 }
