@@ -3,7 +3,7 @@
 *
 * Kiss Portal extension for the phpBB Forum Software package.
 *
-* @copyright (c) 2014 Michael O’Toole <http://www.phpbbireland.com>
+* @copyright (c) 2014 Michael O'Toole <http://michaelo2l.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
@@ -655,7 +655,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				'ndx'			=> '2',
 				'menu_type'		=> '1',
 				'name'			=> 'Portal',
-				'link_to'		=> 'portal.php',
+				'link_to'		=> 'portal',
 				'extern'		=> '0',
 				'append_sid'	=> '0',
 				'append_uid'	=> '0',
@@ -781,7 +781,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 				'ndx'			=> '11',
 				'menu_type'		=> '1',
 				'name'			=> 'Rules',
-				'link_to'		=> 'rules.php',
+				'link_to'		=> 'rules',
 				'extern'		=> '0',
 				'append_sid'	=> '0',
 				'append_uid'	=> '0',
