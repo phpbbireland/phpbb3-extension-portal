@@ -112,15 +112,20 @@ class helper
 	{
 		///var_dump('helper.php > generate_all_block()');
 
-		global $db, $k_config;
+		global $db, $k_config, $request;
 
-		static $page_id = 0;
-		$page = '';
+		$id = $request->variable('style', 0);
 
-		$blocks_width 	   = $this->config['blocks_width'];
-		$blocks_enabled    = $this->config['blocks_enabled'];
-		$block_cache_time  = $k_config['k_block_cache_time_default'];
-		$use_block_cookies = (isset($k_config['use_block_cookies'])) ? $k_config['use_block_cookies'] : 0;
+		if($id)
+		{
+			return;
+		}
+
+		$page				= '';
+		$blocks_width		= $this->config['blocks_width'];
+		$blocks_enabled		= $this->config['blocks_enabled'];
+		$block_cache_time	= (isset($k_config['k_block_cache_time_default'])) ? $k_config['k_block_cache_time_default'] : 600; // default cache time
+		$use_block_cookies	= (isset($k_config['use_block_cookies'])) ? $k_config['use_block_cookies'] : 0;
 
 		if (!$blocks_enabled)
 		{
@@ -157,7 +162,7 @@ class helper
 	*/
 	public function get_portal_link()
 	{
-		//var_dump('helper.php > get_portal_link()');
+		var_dump('helper.php > get_portal_link()');
 		if (strpos($this->user->data['session_page'], '/portal') === false)
 		{
 			$portal_link = $this->controller_helper->route('phpbbireland_portal_controller');
@@ -203,7 +208,9 @@ class helper
 		///var_dump('helper.php > run_initial_tasks()');
 
 		$this->includes_path = $this->phpbb_root_path . 'ext/phpbbireland/portal/includes/';
-		$mod_root_path	= $this->phpbb_root_path . 'ext/phpbbireland/portal/';
+
+		//$mod_root_path	= $this->phpbb_root_path . 'ext/phpbbireland/portal/';
+		//var_dump($mod_root_path);
 
 		// Check permissions
 		$this->check_permission();
@@ -232,4 +239,5 @@ class helper
 			return($this_page_name);
 		}
 	}
+
 }
