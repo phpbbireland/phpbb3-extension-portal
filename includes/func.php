@@ -30,12 +30,8 @@ class func
 	/* @var string phpEx */
 	protected $php_ext;
 
-
 	public function process_block_modules()
 	{
-
-		//var_dump('func.php > process_block_modules()');
-
 		global $phpbb_root_path, $config, $table_prefix, $helper;
 		global $db, $user, $avatar_img, $request, $template, $auth;
 		global $k_config, $k_groups, $k_blocks, $page_header;
@@ -181,9 +177,31 @@ class func
 			$active_blocks[] = $row;
 			$arr[$row['id']] = explode(','  , $row['view_pages']);
 		}
+		$db->sql_freeresult($result);
 
 		$this_page_name = $this->get_current_page();
-		$page_id = get_page_id($this_page_name);
+
+		$id = $request->variable('style', 0);
+
+		if ($id)
+		{
+			if (strstr($this_page_name, 'portal'))
+			{
+				$page_id = get_page_id('portal');
+			}
+			else if (strstr($this_page_name, 'index'))
+			{
+				$page_id = get_page_id('index');
+			}
+			else
+			{
+				$page_id = get_page_id($this_page_name);
+			}
+		}
+		else
+		{
+			$page_id = get_page_id($this_page_name);
+		}
 
 		//var_dump('RETURNED: ' . $this_page_name . ' ID: ' . $page_id);
 
@@ -205,7 +223,6 @@ class func
 				}
 			}
 		}
-		$db->sql_freeresult($result);
 
 		if (!function_exists('group_memberships'))
 		{
@@ -411,14 +428,14 @@ class func
 			'USERNAME_FULL'           => get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']),
 
 			'U_INDEX'                 => append_sid("{$phpbb_root_path}index.$this->php_ext"),
-			'U_PORTAL'                => append_sid("{$phpbb_root_path}portal.$this->php_ext"),
+			'U_PORTAL'                => append_sid("{$phpbb_root_path}portal"),
 			'U_STAFF'                 => append_sid("{$phpbb_root_path}memberlist.$this->php_ext", 'mode=leaders'),
 			'U_SEARCH_BOOKMARKS'      => append_sid("{$phpbb_root_path}ucp.$this->php_ext", 'i=main&mode=bookmarks'),
 
 			'PORTAL_HEADER_BLOCKS'    => false,
 			'PORTAL_FOOTER_BLOCKS'    => false,
 
-			'U_PORTAL_ARRANGE'        => append_sid("{$phpbb_root_path}portal.$this->php_ext", "arrange=1"),
+			'U_PORTAL_ARRANGE'        => append_sid("{$phpbb_root_path}portal", "arrange=1"),
 			'S_ARRANGE'               => false,
 			'HIDE_IMG'		=> '<img src="ext/phpbbireland/portal/images/hide.png"  alt="' . $user->lang['SHOWHIDE'] . '" title="' . $user->lang['SHOWHIDE'] . '" height="16" width="14" />',
 			'MOVE_IMG'		=> '<img src="ext/phpbbireland/portal/images/move.png"  alt="' . $user->lang['MOVE'] . '" title="' . $user->lang['MOVE'] . '" height="16" width="14" />',
@@ -440,7 +457,6 @@ class func
 	*/
 	public function get_current_page()
 	{
-		///var_dump('func.php > get_current_page()');
 		global $user;
 
 		$this_page = explode(".", $user->page['page']);
@@ -455,5 +471,12 @@ class func
 			$this_page_name = $this_page;
 			return($this_page_name[0]);
 		}
+	}
+
+	public function mod_path()
+	{
+		$mod_root_path	= $this->phpbb_root_path . 'ext/phpbbireland/portal/';
+
+		return($mod_root_path);
 	}
 }
