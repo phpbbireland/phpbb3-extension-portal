@@ -12,7 +12,8 @@ Fully integrated portal for phpBB 3.3.x
     • Managing Menus in ACP (TBA)  
     • Block visibility (group assess) TBA      
     • Creating Custom Blocks (TBA)  
-    • Arrange Blocks (yet to be implemented for 3.1) [Arrange Blocks](https://www.youtube.com/watch?v=pkEWG6yq4as).
+    • Arrange Blocks (yet to be implemented for 3.1)
+Video - [Arranging Blocks](https://www.youtube.com/watch?v=pkEWG6yq4as)
 
 ## Installation:
     • Copy the entire contents from the unzipped folder to "phpBB/ext/phpbbireland/portal/".
