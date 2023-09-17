@@ -66,6 +66,6 @@ if ($this->config['load_online'] && $this->config['load_online_time'] && $displa
 		'S_DISPLAY_SEARCH'		=> (!$this->config['load_search']) ? 0 : (isset($auth) ? ($auth->acl_get('u_search') && $auth->acl_getf_global('f_search')) : 1),
 		'S_DISPLAY_PM'			=> ($this->config['allow_privmsg'] && !empty($user->data['is_registered']) && ($auth->acl_get('u_readpm') || $auth->acl_get('u_sendpm'))) ? true : false,
 		'S_DISPLAY_MEMBERLIST'	=> (isset($auth)) ? $auth->acl_get('u_viewprofile') : 0,
-
+//'MOD_IMAGE_PATH'	=> $phpbb_root_path . "./images/portal",
 	));
 }
