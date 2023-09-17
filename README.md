@@ -1,4 +1,4 @@
-**working on update for phpBB 3.3.10 see branch 3.3.10
+**working on update for phpBB 3.3.10 see branch 3.3.10**
 
 #phpbb3-extension-portal
 
