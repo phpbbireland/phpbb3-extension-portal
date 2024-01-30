@@ -1,4 +1,4 @@
-**No longer current, depreciated... **
+**No longer current, depreciated**
 
 **Security Updates**
 Please use jQuery 3.5.0 or later
